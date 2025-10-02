@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio • Dive Deep</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Elegant cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(200, 220, 240, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Depth meter */
+        .depth-meter {
+            position: fixed;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .depth-line {
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(to bottom, 
+                rgba(180, 200, 220, 0.4) 0%,
+                rgba(140, 160, 200, 0.3) 50%,
+                rgba(180, 140, 120, 0.4) 100%);
+            position: relative;
+        }
+
+        .depth-marker {
+            position: absolute;
+            right: -4px;
+            width: 8px;
+            height: 8px;
+            background: rgba(200, 220, 240, 0.6);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .depth-marker:hover {
+            transform: scale(1.8);
+            background: rgba(220, 240, 255, 0.9);
+            box-shadow: 0 0 15px rgba(200, 220, 240, 0.6);
+        }
+
+        .depth-marker.active {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.5);
+        }
+
+        .depth-label {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .depth-marker:hover .depth-label {
+            opacity: 1;
+        }
+
+        /* Sound toggle */
+        .sound-toggle {
+            position: fixed;
+            top: 3rem;
+            right: 3rem;
+            z-index: 1000;
+            background: rgba(10, 20, 35, 0.5);
+            border: 1px solid rgba(200, 220, 240, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sound-toggle:hover {
+            border-color: rgba(200, 220, 240, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .sound-toggle.active {
+            color: rgba(200, 220, 240, 1);
+            border-color: rgba(200, 220, 240, 0.4);
+        }
+
+        /* Section base */
+        .ocean-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 3rem;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(200, 220, 240, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        /* SURFACE SECTION */
+        .surface {
+            background: linear-gradient(to bottom, 
+                #c8dce8 0%,
+                #8ba5b5 25%,
+                #5a7a8f 50%,
+                #3d5866 75%,
+                #1e3442 100%);
+        }
+
+        .title-area {
+            text-align: center;
+            z-index: 10;
+            animation: fade-in 2s ease-out;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .depth-indicator {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.3rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-size: 7rem;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05rem;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.2rem;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+        }
+
+        .scroll-prompt {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            animation: pulse-gentle 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-gentle {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* TWILIGHT ZONE */
+        .twilight {
+            background: linear-gradient(to bottom,
+                #1e3442 0%,
+                #142838 25%,
+                #0d1d2e 50%,
+                #081524 75%,
+                #040d1a 100%);
+        }
+
+        .fish-shape {
+            position: absolute;
+            opacity: 0.15;
+            animation: swim-across 25s linear infinite;
+        }
+
+        @keyframes swim-across {
+            0% {
+                left: -10%;
+            }
+            100% {
+                left: 110%;
+            }
+        }
+
+        .projects-container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            text-align: center;
+            color: rgba(200, 220, 240, 0.9);
+            margin-bottom: 6rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .project-item {
+            margin-bottom: 10rem;
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 4rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .project-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-item:nth-child(even) {
+            grid-template-columns: 1fr 150px;
+        }
+
+        .project-ornament {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ornament-ring {
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(180, 200, 220, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        .ornament-ring:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotate-slow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .ornament-glow {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, 
+                rgba(180, 200, 220, 0.4) 0%,
+                rgba(140, 160, 200, 0.2) 50%,
+                transparent 70%);
+            border-radius: 50%;
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .project-content {
+            padding: 2rem 0;
+        }
+
+        .project-item:nth-child(even) .project-content {
+            order: -1;
+        }
+
+        .project-number {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: rgba(180, 200, 220, 0.5);
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(220, 235, 245, 0.95);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05rem;
+            line-height: 1.2;
+        }
+
+        .project-description {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.7);
+            line-height: 1.8;
+            letter-spacing: 0.02rem;
+        }
+
+        /* ABYSS */
+        .abyss {
+            background: linear-gradient(to bottom,
+                #040d1a 0%,
+                #020610 30%,
+                #01030c 60%,
+                #000000 100%);
+        }
+
+        .jewel-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: jewel-pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes jewel-pulse {
+            0%, 100% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        .resume-container {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .resume-section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .resume-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .resume-title {
+            font-size: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(186, 164, 212, 0.9);
+            margin-bottom: 3rem;
+            letter-spacing: 0.1rem;
+            text-align: center;
+        }
+
+        .resume-card {
+            background: rgba(10, 5, 20, 0.3);
+            border: 1px solid rgba(147, 112, 219, 0.15);
+            border-radius: 2px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .resume-card:hover {
+            border-color: rgba(186, 164, 212, 0.3);
+            background: rgba(10, 5, 20, 0.4);
+        }
+
+        .resume-card h4 {
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(206, 190, 220, 0.95);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .resume-card p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(186, 164, 212, 0.7);
+            line-height: 1.8;
+            margin-top: 0.8rem;
+            letter-spacing: 0.02rem;
+        }
+
+        .resume-card strong {
+            color: rgba(206, 190, 220, 0.9);
+            font-weight: 400;
+        }
+
+        /* TRENCH */
+        .trench {
+            background: #000000;
+        }
+
+        .thermal-glow {
+            position: absolute;
+            bottom: 0;
+            width: 100px;
+            height: 300px;
+            background: linear-gradient(to top,
+                rgba(180, 120, 80, 0.3) 0%,
+                rgba(200, 140, 90, 0.15) 40%,
+                transparent 100%);
+            filter: blur(30px);
+            animation: thermal-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes thermal-pulse {
+            0%, 100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .bio-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, 
+                rgba(120, 200, 180, 0.8) 0%,
+                rgba(100, 180, 160, 0.4) 40%,
+                transparent 70%);
+            border-radius: 50%;
+            animation: bio-twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes bio-twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+
+        .contact-container {
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-form {
+            background: rgba(5, 5, 10, 0.5);
+            border: 1px solid rgba(180, 140, 120, 0.2);
+            border-radius: 2px;
+            padding: 4rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(200, 160, 140, 0.8);
+            margin-bottom: 1rem;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            border-bottom: 1px solid rgba(180, 140, 120, 0.3);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.8rem 0;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: rgba(200, 160, 140, 0.7);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(180, 140, 120, 0.4);
+            border-radius: 30px;
+            color: rgba(200, 160, 140, 0.9);
+            padding: 1rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .submit-btn:hover {
+            background: rgba(180, 140, 120, 0.1);
+            border-color: rgba(200, 160, 140, 0.7);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(180, 140, 120, 0.2);
+        }
+
+        .contact-info p {
+            color: rgba(180, 140, 120, 0.6);
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin: 1.2rem 0;
+        }
+
+        @media (max-width: 968px) {
+            .main-title {
+                font-size: 4rem;
+            }
+
+            .project-item {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+            }
+
+            .project-item:nth-child(even) .project-content {
+                order: 0;
+            }
+
+            .depth-meter,
+            .sound-toggle {
+                right: 1.5rem;
+            }
+
+            .ocean-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .contact-form {
+                padding: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+
+    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
+
+    <div class="depth-meter">
+        <div class="depth-line">
+            <div class="depth-marker" style="top: 0;" onclick="scrollToSection('surface')">
+                <div class="depth-label">Welcome</div>
+            </div>
+            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('twilight')">
+                <div class="depth-label">Projects</div>
+            </div>
+            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('abyss')">
+                <div class="depth-label">Resume</div>
+            </div>
+            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('trench')">
+                <div class="depth-label">Contact</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SURFACE -->
+    <section class="ocean-section surface" id="surface">
+        <div class="title-area">
+            <div class="depth-indicator">— WELCOME —</div>
+            <h1 class="main-title">Marina DiPonio</h1>
+            <p class="subtitle">Project Manager • Game Developer • Player Experience Designer</p>
+            <p class="scroll-prompt">Scroll to Descend</p>
+        </div>
+    </section>
+
+    <!-- TWILIGHT ZONE -->
+    <section class="ocean-section twilight" id="twilight">
+        <!-- Fish shapes -->
+        <svg class="fish-shape" style="top: 15%; width: 80px; height: 40px;" viewBox="0 0 80 40">
+            <ellipse cx="40" cy="20" rx="30" ry="12" fill="rgba(200, 220, 240, 0.15)"/>
+        </svg>
+        <svg class="fish-shape" style="top: 50%; width: 60px; height: 30px; animation-duration: 30s; animation-delay: 5s;" viewBox="0 0 60 30">
+            <ellipse cx="30" cy="15" rx="22" ry="9" fill="rgba(200, 220, 240, 0.15)"/>
+        </svg>
+        <svg class="fish-shape" style="top: 75%; width: 70px; height: 35px; animation-duration: 28s; animation-delay: 10s;" viewBox="0 0 70 35">
+            <ellipse cx="35" cy="17.5" rx="26" ry="10" fill="rgba(200, 220, 240, 0.15)"/>
+        </svg>
+
+        <div class="projects-container">
+            <h2 class="section-title">Projects</h2>
+
+            <div class="project-item">
+                <div class="project-ornament">
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-glow"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">01</div>
+                    <h3 class="project-title">Tick Tock Trivia</h3>
+                    <p class="project-description">
+                        🏆 Best in Show Award Winner • A fast-paced party trivia game where every second counts. 
+                        Players face off in multiple-choice questions while managing a tension meter and racing against 
+                        Springo the Jack-in-the-Box timer. Features ChatGPT integration for dynamic themed trivia, 
+                        playful scrapbook-style 2D aesthetics, and accessibility-first design. Cross-platform support 
+                        for Windows, macOS, and WebGL. 
+                        <a href="https://marskies.itch.io/tick-tock-trivia" target="_blank" style="color: rgba(180, 200, 220, 0.9);">Play Game</a> | 
+                        <a href="https://www.behance.net/gallery/221393629/Tick-Tock-Trivia" target="_blank" style="color: rgba(180, 200, 220, 0.9);">View Case Study</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-ornament">
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-glow"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">02</div>
+                    <h3 class="project-title">Cosmic Catch</h3>
+                    <p class="project-description">
+                        🏆 Most Innovative Award Winner • A theoretical rhythm-fishing game concept where a star-powered 
+                        mermaid pop idol uses her voice to lure cosmic fish from the stars. Players perform on-beat arrow 
+                        inputs to catch creatures and fill a glowing space moon pool aquarium. Features chunky, colorful 
+                        2D pixel art inspired by Chillquarium and Stardew Valley, blending cozy gameplay with performance-based 
+                        challenge. Developed during UF's Create-A-Thon.
+                        <a href="https://marskies.itch.io/cosmic-catch" target="_blank" style="color: rgba(180, 200, 220, 0.9);">View Concept</a> | 
+                        <a href="https://www.behance.net/gallery/235381691/Cosmic-Catch-Post-Mortem" target="_blank" style="color: rgba(180, 200, 220, 0.9);">Read Post-Mortem</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-ornament">
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-glow"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">03</div>
+                    <h3 class="project-title">Website Design Project</h3>
+                    <p class="project-description">
+                        Coming soon • A comprehensive website design showcasing modern UI/UX principles, 
+                        responsive layouts, and accessible design practices. This project demonstrates expertise in 
+                        visual design, user flow optimization, and contemporary web aesthetics. 
+                        Full case study and live demo arriving in 3 days.
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-ornament">
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-ring"></div>
+                    <div class="ornament-glow"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">04</div>
+                    <h3 class="project-title">Nutrition Tracking App</h3>
+                    <p class="project-description">
+                        In Development • An independent mobile application designed to help users track nutrition, 
+                        set health goals, and maintain mindful eating habits. Focused on intuitive data visualization, 
+                        personalized insights, and seamless user experience. Combining player experience design principles 
+                        with health and wellness to create an engaging, supportive tool for daily nutrition management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABYSS -->
+    <section class="ocean-section abyss" id="abyss">
+        <div class="jewel-glow" style="top: 20%; left: 15%; background: radial-gradient(circle, rgba(147, 112, 219, 0.4) 0%, transparent 70%);"></div>
+        <div class="jewel-glow" style="top: 60%; right: 20%; background: radial-gradient(circle, rgba(80, 200, 120, 0.3) 0%, transparent 70%);"></div>
+
+        <div class="resume-container">
+            <h2 class="section-title">Resume</h2>
+
+            <div class="resume-section">
+                <h3 class="resume-title">Education</h3>
+                <div class="resume-card">
+                    <h4>BA Digital Arts & Sciences — University of Florida</h4>
+                    <p>2024-Present | Digital Institute</p>
+                    <p>President's List, Dean's List</p>
+                    <p>Gator User Design Club, BADAS Mentorship Club (Mentee/Mentor), BADAS Society, Catholic Campus Ministry</p>
+                </div>
+                <div class="resume-card">
+                    <h4>AA — University of North Florida</h4>
+                    <p>2023-2024</p>
+                    <p>President's List, Dean's List</p>
+                    <p>Hicks Honors College, Virtual Reality Club, Catholic Campus Ministry</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3 class="resume-title">Experience</h3>
+                <div class="resume-card">
+                    <h4>UX Researcher — University of Florida</h4>
+                    <p>June 2025-Present</p>
+                    <p>Directed usability testing to evaluate UF's club software platform. Audited accessibility to uncover user pain points and inclusivity gaps. Developed Figma-based prototypes to communicate research-backed solutions.</p>
+                </div>
+                <div class="resume-card">
+                    <h4>Leasing & Marketing Associate — Contemporary Management Concepts</h4>
+                    <p>March 2025-August 2025</p>
+                    <p>Achieved top leasing performance in June 2025 by streamlining lead tracking and CRM engagement. Orchestrated social media campaigns, generating 6,332 views and over 60% follower interaction in one month. Collaborated with corporate marketing to ensure visual and messaging consistency across platforms.</p>
+                </div>
+                <div class="resume-card">
+                    <h4>Customer Experience Intern — ICE Mortgage Technology</h4>
+                    <p>June 2024-August 2024</p>
+                    <p>Boosted survey response rates by 333% through personalized outreach and timing strategies. Audited digital platforms for WCAG 2.1 compliance, driving accessibility enhancements. Synthesized employee feedback into strategic UX recommendations and presentation materials.</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3 class="resume-title">Skills</h3>
+                <div class="resume-card">
+                    <p><strong>User Research:</strong> Usability Testing, Digital Accessibility, WCAG 2.1 Compliance</p>
+                    <p><strong>Design Tools:</strong> Figma, Adobe Creative Suite, Prototyping</p>
+                    <p><strong>Core Competencies:</strong> Visual Design, Strategic Thinking, Data-Driven Decision Making</p>
+                    <p><strong>Soft Skills:</strong> Communication, Collaboration, Empathy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRENCH -->
+    <section class="ocean-section trench" id="trench">
+        <div class="thermal-glow" style="left: 10%;"></div>
+        <div class="thermal-glow" style="left: 35%; animation-delay: 1.5s;"></div>
+        <div class="thermal-glow" style="right: 15%; animation-delay: 0.8s;"></div>
+
+        <div class="bio-dot" style="top: 20%; left: 25%;"></div>
+        <div class="bio-dot" style="top: 35%; right: 30%; animation-delay: 1s;"></div>
+        <div class="bio-dot" style="top: 50%; left: 15%; animation-delay: 2s;"></div>
+        <div class="bio-dot" style="top: 65%; right: 20%; animation-delay: 0.5s;"></div>
+        <div class="bio-dot" style="top: 80%; left: 40%; animation-delay: 1.5s;"></div>
+
+        <div class="contact-container">
+            <h2 class="section-title">Contact</h2>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+
+            <div class="contact-info">
+                <p>marinadiponio@proton.me</p>
+                <p>linkedin.com/in/marinadiponio</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const sections = document.querySelectorAll('.ocean-section');
+            sections.forEach(section => {
+                for (let i = 0; i < 10; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.width = Math.random() * 4 + 2 + 'px';
+                    particle.style.height = particle.style.width;
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = Math.random() * 15 + 20 + 's';
+                    particle.style.animationDelay = Math.random() * 10 + 's';
+                    section.appendChild(particle);
+                }
+            });
+        }
+        createParticles();
+
+        // Sound toggle
+        let soundOn = false;
+        function toggleSound() {
+            soundOn = !soundOn;
+            const toggle = document.querySelector('.sound-toggle');
+            toggle.textContent = soundOn ? 'Sound On' : 'Sound Off';
+            toggle.classList.toggle('active');
+        }
+
+        // Smooth scroll to sections
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Update active depth marker
+        window.addEventListener('scroll', () => {
+            const sections = ['surface', 'twilight', 'abyss', 'trench'];
+            const markers = document.querySelectorAll('.depth-marker');
+            
+            let currentSection = 0;
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    currentSection = index;
+                }
+            });
+
+            markers.forEach((marker, index) => {
+                if (index === currentSection) {
+                    marker.classList.add('active');
+                } else {
+                    marker.classList.remove('active');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-item, .resume-section').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('To make this form functional:\n\n1. Use Formspree (formspree.io)\n2. Use EmailJS (emailjs.com)\n3. Use Netlify Forms\n\nFor Formspree: Add action="https://formspree.io/f/YOUR_ID" method="POST" to the form tag');
+            return false;
+        }
+    </script>
+</body>
+</html>
