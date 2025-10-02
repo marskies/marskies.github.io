@@ -658,6 +658,9 @@
     <div class="custom-cursor"></div>
 
     <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
+    <audio id="oceanAudio" loop>
+    <source src="underwaterambiance.mp3" type="audio/mpeg">
+</audio>
 
     <div class="depth-meter">
         <div class="depth-line">
@@ -910,13 +913,24 @@
         createParticles();
 
         // Sound toggle
-        let soundOn = false;
-        function toggleSound() {
-            soundOn = !soundOn;
-            const toggle = document.querySelector('.sound-toggle');
-            toggle.textContent = soundOn ? 'Sound On' : 'Sound Off';
-            toggle.classList.toggle('active');
-        }
+let soundOn = false;
+const audio = document.getElementById('oceanAudio');
+audio.volume = 0.4; // Adjust volume (0.0 to 1.0)
+
+function toggleSound() {
+    soundOn = !soundOn;
+    const toggle = document.querySelector('.sound-toggle');
+    
+    if (soundOn) {
+        toggle.textContent = 'Sound On';
+        toggle.classList.add('active');
+        audio.play();
+    } else {
+        toggle.textContent = 'Sound Off';
+        toggle.classList.remove('active');
+        audio.pause();
+    }
+}
 
         // Smooth scroll to sections
         function scrollToSection(sectionId) {
