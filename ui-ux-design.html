@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Design • Marina DiPonio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom,
+                #1e3442 0%,
+                #142838 25%,
+                #0d1d2e 50%,
+                #081524 75%,
+                #040d1a 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 4rem 2rem;
+        }
+
+        .return-btn {
+            position: fixed;
+            top: 3rem;
+            left: 3rem;
+            background: rgba(10, 20, 35, 0.7);
+            border: 1px solid rgba(200, 220, 240, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: inline-block;
+            z-index: 1000;
+        }
+
+        .return-btn:hover {
+            border-color: rgba(200, 220, 240, 0.6);
+            background: rgba(10, 20, 35, 0.9);
+            transform: translateX(-5px);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-size: 4rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.95);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.6);
+            letter-spacing: 0.1rem;
+        }
+
+        .projects-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: rgba(90, 122, 143, 0.15);
+            border: 2px solid rgba(90, 122, 143, 0.3);
+            border-radius: 10px;
+            padding: 3rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            filter: saturate(0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1) 0%, rgba(129, 212, 250, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-card:hover {
+            filter: saturate(1);
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(100, 181, 246, 0.6);
+            background: rgba(100, 181, 246, 0.1);
+            box-shadow: 0 20px 60px rgba(100, 181, 246, 0.3);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-number {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(180, 200, 220, 0.5);
+            letter-spacing: 0.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .project-card:hover .project-number {
+            color: rgba(100, 181, 246, 0.9);
+        }
+
+        .project-title {
+            font-size: 2.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(200, 220, 240, 0.7);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05rem;
+            transition: color 0.5s ease;
+        }
+
+        .project-card:hover .project-title {
+            color: rgba(220, 240, 255, 1);
+        }
+
+        .project-preview {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.5);
+            line-height: 1.8;
+            transition: color 0.5s ease;
+        }
+
+        .project-card:hover .project-preview {
+            color: rgba(200, 220, 240, 0.9);
+        }
+
+        @media (max-width: 968px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .return-btn {
+                top: 1.5rem;
+                left: 1.5rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="return-btn">← Return</a>
+
+    <div class="page-header">
+        <h1 class="page-title">UI/UX Design</h1>
+        <p class="page-subtitle">Crafting intuitive and engaging experiences</p>
+    </div>
+
+    <div class="projects-grid">
+        <div class="project-card" onclick="window.location.href='ticktock-trivia.html'">
+            <div class="project-number">PROJECT 01</div>
+            <h3 class="project-title">Tick Tock Trivia</h3>
+            <p class="project-preview">
+                🏆 Best in Show • Fast-paced party trivia game featuring playful scrapbook-style 2D 
+                aesthetics, ChatGPT integration for dynamic trivia, and accessibility-first design. 
+                Cross-platform support for Windows, macOS, and WebGL.
+            </p>
+        </div>
+
+        <div class="project-card" onclick="window.location.href='cosmic-catch.html'">
+            <div class="project-number">PROJECT 02</div>
+            <h3 class="project-title">Cosmic Catch</h3>
+            <p class="project-preview">
+                🏆 Most Innovative • Rhythm-fishing game concept blending music and collection mechanics. 
+                Features chunky pixel art inspired by Chillquarium and Stardew Valley, creating a cozy 
+                yet cosmic player experience.
+            </p>
+        </div>
+
+        <div class="project-card" onclick="window.location.href='website-design.html'">
+            <div class="project-number">PROJECT 03</div>
+            <h3 class="project-title">Website Design Project</h3>
+            <p class="project-preview">
+                Coming soon • Comprehensive website design showcasing modern UI/UX principles, responsive 
+                layouts, and accessible design practices. Demonstrates expertise in visual design, user 
+                flow optimization, and contemporary web aesthetics.
+            </p>
+        </div>
+
+        <div class="project-card" onclick="window.location.href='nutrition-app.html'">
+            <div class="project-number">PROJECT 04</div>
+            <h3 class="project-title">Nutrition Tracking App</h3>
+            <p class="project-preview">
+                In Development • Mobile application designed to help users track nutrition and maintain 
+                mindful eating habits. Focused on intuitive data visualization, personalized insights, 
+                and seamless user experience combining player experience design with health and wellness.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
