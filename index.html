@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* Elegant cursor */
+        /* Custom cursor */
         .custom-cursor {
             position: fixed;
             width: 20px;
@@ -237,7 +237,7 @@
             }
         }
 
-        /* TWILIGHT ZONE */
+        /* TWILIGHT ZONE - CATEGORIES */
         .twilight {
             background: linear-gradient(to bottom,
                 #1e3442 0%,
@@ -247,22 +247,7 @@
                 #040d1a 100%);
         }
 
-        .fish-shape {
-            position: absolute;
-            opacity: 0.15;
-            animation: swim-across 25s linear infinite;
-        }
-
-        @keyframes swim-across {
-            0% {
-                left: -10%;
-            }
-            100% {
-                left: 110%;
-            }
-        }
-
-        .projects-container {
+        .categories-container {
             width: 100%;
             max-width: 1200px;
             position: relative;
@@ -279,7 +264,7 @@
             letter-spacing: 0.1rem;
         }
 
-        .project-item {
+        .category-item {
             margin-bottom: 10rem;
             display: grid;
             grid-template-columns: 150px 1fr;
@@ -288,18 +273,27 @@
             opacity: 0;
             transform: translateY(40px);
             transition: all 0.8s ease;
+            cursor: pointer;
         }
 
-        .project-item.visible {
+        .category-item.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .project-item:nth-child(even) {
+        .category-item:nth-child(even) {
             grid-template-columns: 1fr 150px;
         }
 
-        .project-ornament {
+        .category-item:hover .category-content {
+            transform: translateX(10px);
+        }
+
+        .category-item:nth-child(even):hover .category-content {
+            transform: translateX(-10px);
+        }
+
+        .category-ornament {
             width: 150px;
             height: 150px;
             position: relative;
@@ -355,15 +349,16 @@
             }
         }
 
-        .project-content {
+        .category-content {
             padding: 2rem 0;
+            transition: transform 0.3s ease;
         }
 
-        .project-item:nth-child(even) .project-content {
+        .category-item:nth-child(even) .category-content {
             order: -1;
         }
 
-        .project-number {
+        .category-number {
             font-size: 0.75rem;
             font-weight: 300;
             color: rgba(180, 200, 220, 0.5);
@@ -372,7 +367,7 @@
             text-transform: uppercase;
         }
 
-        .project-title {
+        .category-title {
             font-size: 2.5rem;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
@@ -382,7 +377,7 @@
             line-height: 1.2;
         }
 
-        .project-description {
+        .category-description {
             font-size: 1rem;
             font-weight: 300;
             color: rgba(200, 220, 240, 0.7);
@@ -619,10 +614,19 @@
         }
 
         .contact-info p {
-            color: rgba(180, 140, 120, 0.6);
             font-size: 0.9rem;
             font-weight: 300;
             margin: 1.2rem 0;
+        }
+
+        .contact-info a {
+            color: rgba(180, 140, 120, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: rgba(200, 160, 140, 1);
         }
 
         @media (max-width: 968px) {
@@ -630,12 +634,12 @@
                 font-size: 4rem;
             }
 
-            .project-item {
+            .category-item {
                 grid-template-columns: 1fr !important;
                 gap: 2rem;
             }
 
-            .project-item:nth-child(even) .project-content {
+            .category-item:nth-child(even) .category-content {
                 order: 0;
             }
 
@@ -657,10 +661,11 @@
 <body>
     <div class="custom-cursor"></div>
 
-    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
     <audio id="oceanAudio" loop>
-    <source src="underwaterambiance.mp3" type="audio/mpeg">
-</audio>
+        <source src="underwaterambiance.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
 
     <div class="depth-meter">
         <div class="depth-line">
@@ -689,103 +694,62 @@
         </div>
     </section>
 
-    <!-- TWILIGHT ZONE -->
+    <!-- TWILIGHT ZONE - CATEGORIES -->
     <section class="ocean-section twilight" id="twilight">
-        <!-- Fish shapes -->
-        <svg class="fish-shape" style="top: 15%; width: 80px; height: 40px;" viewBox="0 0 80 40">
-            <ellipse cx="40" cy="20" rx="30" ry="12" fill="rgba(200, 220, 240, 0.15)"/>
-        </svg>
-        <svg class="fish-shape" style="top: 50%; width: 60px; height: 30px; animation-duration: 30s; animation-delay: 5s;" viewBox="0 0 60 30">
-            <ellipse cx="30" cy="15" rx="22" ry="9" fill="rgba(200, 220, 240, 0.15)"/>
-        </svg>
-        <svg class="fish-shape" style="top: 75%; width: 70px; height: 35px; animation-duration: 28s; animation-delay: 10s;" viewBox="0 0 70 35">
-            <ellipse cx="35" cy="17.5" rx="26" ry="10" fill="rgba(200, 220, 240, 0.15)"/>
-        </svg>
+        <div class="categories-container">
+            <h2 class="section-title">Project Categories</h2>
 
-        <div class="projects-container">
-            <h2 class="section-title">Projects</h2>
-
-            <div class="project-item">
-                <div class="project-ornament">
+            <div class="category-item" onclick="window.location.href='user-research.html'">
+                <div class="category-ornament">
                     <div class="ornament-ring"></div>
                     <div class="ornament-ring"></div>
                     <div class="ornament-glow"></div>
                 </div>
-                <div class="project-content">
-                    <div class="project-number">01</div>
-                    <h3 class="project-title">Tick Tock Trivia</h3>
-                    <p class="project-description">
-                        🏆 Best in Show Award Winner • A fast-paced party trivia game where every second counts. 
-                        Players face off in multiple-choice questions while managing a tension meter and racing against 
-                        Springo the Jack-in-the-Box timer. Features ChatGPT integration for dynamic themed trivia, 
-                        playful scrapbook-style 2D aesthetics, and accessibility-first design. Cross-platform support 
-                        for Windows, macOS, and WebGL. 
-                        <a href="https://marskies.itch.io/tick-tock-trivia" target="_blank" style="color: rgba(180, 200, 220, 0.9);">Play Game</a> | 
-                        <a href="https://www.behance.net/gallery/221393629/Tick-Tock-Trivia" target="_blank" style="color: rgba(180, 200, 220, 0.9);">View Case Study</a>
+                <div class="category-content">
+                    <div class="category-number">01</div>
+                    <h3 class="category-title">User Research</h3>
+                    <p class="category-description">
+                        Usability testing, accessibility audits, and data-driven insights that 
+                        uncover user pain points and drive meaningful design solutions.
                     </p>
                 </div>
             </div>
 
-            <div class="project-item">
-                <div class="project-ornament">
+            <div class="category-item" onclick="window.location.href='project-management.html'">
+                <div class="category-ornament">
                     <div class="ornament-ring"></div>
                     <div class="ornament-ring"></div>
                     <div class="ornament-glow"></div>
                 </div>
-                <div class="project-content">
-                    <div class="project-number">02</div>
-                    <h3 class="project-title">Cosmic Catch</h3>
-                    <p class="project-description">
-                        🏆 Most Innovative Award Winner • A theoretical rhythm-fishing game concept where a star-powered 
-                        mermaid pop idol uses her voice to lure cosmic fish from the stars. Players perform on-beat arrow 
-                        inputs to catch creatures and fill a glowing space moon pool aquarium. Features chunky, colorful 
-                        2D pixel art inspired by Chillquarium and Stardew Valley, blending cozy gameplay with performance-based 
-                        challenge. Developed during UF's Create-A-Thon.
-                        <a href="https://marskies.itch.io/cosmic-catch" target="_blank" style="color: rgba(180, 200, 220, 0.9);">View Concept</a> | 
-                        <a href="https://www.behance.net/gallery/235381691/Cosmic-Catch-Post-Mortem" target="_blank" style="color: rgba(180, 200, 220, 0.9);">Read Post-Mortem</a>
+                <div class="category-content">
+                    <div class="category-number">02</div>
+                    <h3 class="category-title">Project Management</h3>
+                    <p class="category-description">
+                        Leading cross-functional teams, coordinating timelines, and delivering 
+                        projects that balance creative vision with strategic execution.
                     </p>
                 </div>
             </div>
 
-            <div class="project-item">
-                <div class="project-ornament">
+            <div class="category-item" onclick="window.location.href='ui-ux-design.html'">
+                <div class="category-ornament">
                     <div class="ornament-ring"></div>
                     <div class="ornament-ring"></div>
                     <div class="ornament-glow"></div>
                 </div>
-                <div class="project-content">
-                    <div class="project-number">03</div>
-                    <h3 class="project-title">Website Design Project</h3>
-                    <p class="project-description">
-                        Coming soon • A comprehensive website design showcasing modern UI/UX principles, 
-                        responsive layouts, and accessible design practices. This project demonstrates expertise in 
-                        visual design, user flow optimization, and contemporary web aesthetics. 
-                        Full case study and live demo arriving in 3 days.
-                    </p>
-                </div>
-            </div>
-
-            <div class="project-item">
-                <div class="project-ornament">
-                    <div class="ornament-ring"></div>
-                    <div class="ornament-ring"></div>
-                    <div class="ornament-glow"></div>
-                </div>
-                <div class="project-content">
-                    <div class="project-number">04</div>
-                    <h3 class="project-title">Nutrition Tracking App</h3>
-                    <p class="project-description">
-                        In Development • An independent mobile application designed to help users track nutrition, 
-                        set health goals, and maintain mindful eating habits. Focused on intuitive data visualization, 
-                        personalized insights, and seamless user experience. Combining player experience design principles 
-                        with health and wellness to create an engaging, supportive tool for daily nutrition management.
+                <div class="category-content">
+                    <div class="category-number">03</div>
+                    <h3 class="category-title">UI/UX Design</h3>
+                    <p class="category-description">
+                        Crafting intuitive interfaces and engaging player experiences through 
+                        thoughtful design, prototyping, and iterative refinement.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABYSS -->
+    <!-- ABYSS - RESUME -->
     <section class="ocean-section abyss" id="abyss">
         <div class="jewel-glow" style="top: 20%; left: 15%; background: radial-gradient(circle, rgba(147, 112, 219, 0.4) 0%, transparent 70%);"></div>
         <div class="jewel-glow" style="top: 60%; right: 20%; background: radial-gradient(circle, rgba(80, 200, 120, 0.3) 0%, transparent 70%);"></div>
@@ -840,7 +804,7 @@
         </div>
     </section>
 
-    <!-- TRENCH -->
+    <!-- TRENCH - CONTACT -->
     <section class="ocean-section trench" id="trench">
         <div class="thermal-glow" style="left: 10%;"></div>
         <div class="thermal-glow" style="left: 35%; animation-delay: 1.5s;"></div>
@@ -880,9 +844,9 @@
             </form>
 
             <div class="contact-info">
-    <p><a href="mailto:marinadiponio@proton.me" style="color: rgba(180, 140, 120, 0.8); text-decoration: none; transition: color 0.3s;">marinadiponio@proton.me</a></p>
-    <p><a href="https://linkedin.com/in/marinadiponio" target="_blank" style="color: rgba(180, 140, 120, 0.8); text-decoration: none; transition: color 0.3s;">linkedin.com/in/marinadiponio</a></p>
-</div>
+                <p><a href="mailto:marinadiponio@proton.me">marinadiponio@proton.me</a></p>
+                <p><a href="https://linkedin.com/in/marinadiponio" target="_blank">linkedin.com/in/marinadiponio</a></p>
+            </div>
         </div>
     </section>
 
@@ -913,24 +877,24 @@
         createParticles();
 
         // Sound toggle
-let soundOn = false;
-const audio = document.getElementById('oceanAudio');
-audio.volume = 0.4; // Adjust volume (0.0 to 1.0)
+        let soundOn = false;
+        const audio = document.getElementById('oceanAudio');
+        audio.volume = 0.4;
 
-function toggleSound() {
-    soundOn = !soundOn;
-    const toggle = document.querySelector('.sound-toggle');
-    
-    if (soundOn) {
-        toggle.textContent = 'Sound On';
-        toggle.classList.add('active');
-        audio.play();
-    } else {
-        toggle.textContent = 'Sound Off';
-        toggle.classList.remove('active');
-        audio.pause();
-    }
-}
+        function toggleSound() {
+            soundOn = !soundOn;
+            const toggle = document.querySelector('.sound-toggle');
+            
+            if (soundOn) {
+                toggle.textContent = 'Sound On';
+                toggle.classList.add('active');
+                audio.play();
+            } else {
+                toggle.textContent = 'Sound Off';
+                toggle.classList.remove('active');
+                audio.pause();
+            }
+        }
 
         // Smooth scroll to sections
         function scrollToSection(sectionId) {
@@ -977,7 +941,7 @@ function toggleSound() {
             });
         }, observerOptions);
 
-        document.querySelectorAll('.project-item, .resume-section').forEach(item => {
+        document.querySelectorAll('.category-item, .resume-section').forEach(item => {
             observer.observe(item);
         });
 
