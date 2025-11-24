@@ -656,6 +656,103 @@
             color: rgba(200, 160, 140, 1);
         }
 
+        /* Success popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-overlay.show {
+            display: flex;
+        }
+
+        .popup {
+            background: linear-gradient(135deg, #1e3442 0%, #0d1d2e 100%);
+            border: 2px solid rgba(100, 181, 246, 0.4);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: popupSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes popupSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .popup-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: checkmark 0.5s ease 0.2s both;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(0deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .popup h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #64b5f6;
+            margin-bottom: 1rem;
+        }
+
+        .popup p {
+            font-size: 1.1rem;
+            color: #b3e5fc;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .popup-close {
+            background: transparent;
+            border: 1px solid rgba(100, 181, 246, 0.4);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            color: rgba(100, 181, 246, 0.9);
+            font-size: 0.9rem;
+            font-weight: 400;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .popup-close:hover {
+            background: rgba(100, 181, 246, 0.1);
+            border-color: rgba(100, 181, 246, 0.7);
+        }
+
         @media (max-width: 968px) {
             .main-title {
                 font-size: 4rem;
@@ -861,25 +958,25 @@
         <div class="contact-container">
             <h2 class="section-title">Contact</h2>
 
-<form class="contact-form" action="https://formspree.io/f/mwpznrlr" method="POST">
-    <div class="form-group">
+            <form class="contact-form" action="https://formspree.io/f/mwpznrlr" method="POST" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
                 </div>
 
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" required>
+                    <input type="text" id="subject" name="subject" required>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" required></textarea>
+                    <textarea id="message" name="message" required></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn">Send Message</button>
@@ -891,6 +988,16 @@
             </div>
         </div>
     </section>
+
+    <!-- Success Popup -->
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup">
+            <div class="popup-icon">✓</div>
+            <h2>Message Sent!</h2>
+            <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+            <button class="popup-close" onclick="closePopup()">Close</button>
+        </div>
+    </div>
 
     <script>
         // Custom cursor
@@ -997,7 +1104,43 @@
             observer.observe(item);
         });
 
-        
+        // Form submission with popup
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+
+            // Submit to Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success popup
+                    document.getElementById('successPopup').classList.add('show');
+                    // Reset form
+                    form.reset();
+                } else {
+                    alert('Oops! There was a problem submitting your form. Please try again.');
+                }
+            }).catch(error => {
+                alert('Oops! There was a problem submitting your form. Please try again.');
+            });
+        }
+
+        function closePopup() {
+            document.getElementById('successPopup').classList.remove('show');
+        }
+
+        // Close popup when clicking outside
+        document.getElementById('successPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
     </script>
 </body>
 </html>
