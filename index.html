@@ -861,8 +861,8 @@
         <div class="contact-container">
             <h2 class="section-title">Contact</h2>
 
-            <form class="contact-form" onsubmit="handleSubmit(event)">
-                <div class="form-group">
+<form class="contact-form" action="https://formspree.io/f/mwpznrlr" method="POST">
+    <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" required>
                 </div>
@@ -997,12 +997,7 @@
             observer.observe(item);
         });
 
-        // Form submission
-        function handleSubmit(e) {
-            e.preventDefault();
-            alert('To make this form functional:\n\n1. Use Formspree (formspree.io)\n2. Use EmailJS (emailjs.com)\n3. Use Netlify Forms\n\nFor Formspree: Add action="https://formspree.io/f/YOUR_ID" method="POST" to the form tag');
-            return false;
-        }
+        
     </script>
 </body>
 </html>
