@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarTea Website • Marina DiPonio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom,
+                #1e3442 0%,
+                #142838 25%,
+                #0d1d2e 50%,
+                #081524 75%,
+                #040d1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Depth meter for project pages */
+        .depth-meter {
+            position: fixed;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .depth-line {
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(to bottom, 
+                rgba(180, 200, 220, 0.4) 0%,
+                rgba(140, 160, 200, 0.3) 50%,
+                rgba(180, 140, 120, 0.4) 100%);
+            position: relative;
+        }
+
+        .depth-marker {
+            position: absolute;
+            right: -4px;
+            width: 8px;
+            height: 8px;
+            background: rgba(200, 220, 240, 0.6);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .depth-marker:hover {
+            transform: scale(1.8);
+            background: rgba(220, 240, 255, 0.9);
+            box-shadow: 0 0 15px rgba(200, 220, 240, 0.6);
+        }
+
+        .depth-marker.active {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.5);
+        }
+
+        .depth-label {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .depth-marker:hover .depth-label {
+            opacity: 1;
+        }
+
+        /* Top navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 20, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(200, 220, 240, 0.2);
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(200, 220, 240, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            border-color: rgba(200, 220, 240, 0.6);
+            background: rgba(10, 20, 35, 0.8);
+            transform: translateX(-3px);
+        }
+
+        .nav-btn.next:hover {
+            transform: translateX(3px);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        /* Content */
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 3rem 4rem;
+        }
+
+        .project-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 4.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            color: rgba(220, 240, 255, 0.95);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.6);
+            letter-spacing: 0.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: rgba(200, 220, 240, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: rgba(220, 240, 255, 0.9);
+        }
+
+        /* Content sections */
+        .content-section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 120px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(200, 220, 240, 0.95);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.8);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Image bubble placeholders */
+        .image-bubble {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(100, 181, 246, 0.1);
+            border: 2px solid rgba(100, 181, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-bubble.float-right {
+            float: right;
+            margin: 0 0 2rem 3rem;
+        }
+
+        .image-bubble.float-left {
+            float: left;
+            margin: 0 3rem 2rem 0;
+        }
+
+        .image-bubble::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%);
+            animation: bubble-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes bubble-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .image-placeholder {
+            font-size: 0.9rem;
+            color: rgba(200, 220, 240, 0.6);
+            text-align: center;
+            z-index: 1;
+            letter-spacing: 0.1rem;
+        }
+
+        /* Links */
+        .project-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .project-link {
+            background: transparent;
+            border: 1px solid rgba(100, 181, 246, 0.4);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            color: rgba(100, 181, 246, 0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(100, 181, 246, 0.1);
+            border-color: rgba(100, 181, 246, 0.7);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 968px) {
+            .top-nav {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-center {
+                order: -1;
+            }
+
+            .project-content {
+                padding: 12rem 1.5rem 3rem;
+            }
+
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-meta {
+                gap: 1.5rem;
+            }
+
+            .image-bubble {
+                width: 250px;
+                height: 250px;
+            }
+
+            .image-bubble.float-right,
+            .image-bubble.float-left {
+                float: none;
+                margin: 2rem auto;
+            }
+
+            .depth-meter {
+                right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="learn-to-leap.html" class="nav-btn">← Previous Project</a>
+        <div class="nav-center">
+            <a href="ui-ux-design.html" class="nav-btn">← Return to Category</a>
+        </div>
+        <a href="yuumi-chan.html" class="nav-btn next">Next Project →</a>
+    </nav>
+
+    <!-- Depth Meter -->
+    <div class="depth-meter">
+        <div class="depth-line">
+            <div class="depth-marker active" style="top: 0;" onclick="scrollToSection('introduction')">
+                <div class="depth-label">Introduction</div>
+            </div>
+            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('design-process')">
+                <div class="depth-label">Design Process</div>
+            </div>
+            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('my-role')">
+                <div class="depth-label">My Role</div>
+            </div>
+            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('learned')">
+                <div class="depth-label">What I Learned</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <!-- Header -->
+        <div class="project-header">
+            <h1 class="project-title">StarTea</h1>
+            <p class="project-subtitle">Wellness Brand Website Design</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Project Manager, UX Researcher, Content Strategist</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">1 Month (Sept–Oct 2025)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Team Size</div>
+                    <div class="meta-value">3 Members</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Tools</div>
+                    <div class="meta-value">Figma, User Interviews, WCAG Testing</div>
+                </div>
+            </div>
+
+            <div class="project-links">
+                <a href="#" target="_blank" class="project-link">View Figma Prototype</a>
+                <a href="#" target="_blank" class="project-link">View Behance Case Study</a>
+            </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <section class="content-section" id="introduction">
+            <h2 class="section-title">Introduction</h2>
+            
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[StarTea Logo:<br>Brand Identity]</p>
+            </div>
+            
+            <p class="section-text">
+                StarTea is a wellness brand offering teas, supplements, and herbal blends designed for mindful living. Our team was tasked with creating a digital presence that would capture the brand's essence—modern yet timeless, calming yet engaging—while demonstrating advanced UI/UX design process for our portfolios.
+            </p>
+            
+            <p class="section-text">
+                The project centered on building a complete website ecosystem: Homepage introducing the brand's story and featured products, About page communicating brand values, Shop/Products showcasing collections with detailed descriptions, a Wellness Blog for tips and articles, and Contact with newsletter signup for community building.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Homepage Mockup:<br>Desktop View]</p>
+            </div>
+
+            <p class="section-text">
+                Working with Isabella Alfonso (Lead Designer) and David Etherage (Contributor), I served as Project Manager while also leading UX research, content strategy, and accessibility compliance. Our target audience—wellness-conscious individuals ages 18-40 seeking balance and natural products—shaped every design decision we made.
+            </p>
+        </section>
+
+        <!-- Design Process Section -->
+        <section class="content-section" id="design-process">
+            <h2 class="section-title">Design Process</h2>
+            
+            <div class="image-bubble float-left">
+                <p class="image-placeholder">[Competitive Analysis:<br>5 Wellness Sites]</p>
+            </div>
+            
+            <p class="section-text">
+                We launched with comprehensive competitive analysis, examining five existing wellness brand websites to identify industry patterns and opportunities for differentiation. This research informed our moodboard development and initial style directions, establishing the visual language that would make StarTea feel both professional and approachable.
+            </p>
+            
+            <p class="section-text">
+                User research formed the backbone of our process. I drafted interview questions, recruited six participants (two per team member), and conducted two in-depth interviews exploring wellness shopping behaviors, website expectations, and emotional responses to different design approaches. From these conversations, I synthesized findings and developed personas representing our core user segments.
+            </p>
+
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[User Personas:<br>Research Findings]</p>
+            </div>
+
+            <p class="section-text">
+                With research insights guiding us, Isabella sketched the sitemap while our team collaboratively planned content for each page. I developed wireframes focusing on information architecture and user flow, then transitioned into content creation—drafting all page copy with a tone that balanced relaxation with professionalism, exactly what our personas responded to most positively.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Hi-Fi Mockups:<br>Product Pages]</p>
+            </div>
+
+            <p class="section-text">
+                Isabella transformed our wireframes into high-fidelity designs with a cohesive design system covering colors, typography, and component libraries. I conducted thorough accessibility checks against WCAG guidelines, ensuring the site would be welcoming to all users. Our usability testing with six participants (two per team member) validated the design while revealing opportunities for refinement.
+            </p>
+        </section>
+
+        <!-- My Role Section -->
+        <section class="content-section" id="my-role">
+            <h2 class="section-title">My Role</h2>
+            
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[Project Timeline:<br>Task Breakdown]</p>
+            </div>
+            
+            <p class="section-text">
+                As Project Manager, I created the one-page project plan outlining our vision, timeline, and success criteria. I maintained our schedule across five phases—Kickoff, Research & Wireframes, Design, Prototype & Testing, and Final Wrap-Up—ensuring each team member understood their responsibilities and deadlines.
+            </p>
+            
+            <p class="section-text">
+                My UX research contributions included drafting all interview questions, personally conducting two market research interviews, synthesizing findings from all six participant conversations, and creating user personas that informed every subsequent design decision. I developed the usability test plan and personally tested with two users, then collected and organized all feedback into an actionable fix list.
+            </p>
+
+            <div class="image-bubble float-left">
+                <p class="image-placeholder">[Content Strategy:<br>Tone Guide]</p>
+            </div>
+
+            <p class="section-text">
+                Content strategy fell entirely under my purview. I drafted comprehensive page copy and a tone guide establishing StarTea's voice as relaxing, mindful, youthful yet professional. I also led our collaborative content planning sessions, working with Isabella and David to ensure visual design and written content formed a cohesive narrative.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Accessibility Report:<br>WCAG Compliance]</p>
+            </div>
+
+            <p class="section-text">
+                Accessibility wasn't an afterthought but a core design principle. I performed detailed WCAG compliance checks covering color contrast, keyboard navigation, screen reader compatibility, and clear visual hierarchy. This work ensured StarTea's digital presence would be genuinely welcoming to all potential customers, regardless of ability.
+            </p>
+        </section>
+
+        <!-- What I Learned Section -->
+        <section class="content-section" id="learned">
+            <h2 class="section-title">What I Learned</h2>
+            
+            <p class="section-text">
+                StarTea taught me how research transforms good design into great design. The patterns that emerged from our six user interviews—preferences for calming color palettes, desires for transparent ingredient information, expectations around mobile-first shopping—shaped decisions that would have been pure guesswork otherwise. Numbers and quotes gave us confidence to advocate for specific design directions.
+            </p>
+
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[Team Collaboration:<br>Design Review]</p>
+            </div>
+            
+            <p class="section-text">
+                Managing a collaborative design process required balancing structure with flexibility. My detailed project plan and timeline kept us organized, but I learned when to adjust deadlines based on unexpected challenges or opportunities for improvement. Regular group reviews ensured everyone felt ownership over the final product while maintaining cohesive vision.
+            </p>
+            
+            <p class="section-text">
+                Content strategy emerged as unexpectedly crucial to the user experience. The tone guide I developed—warm but not overly casual, informative but not clinical—became a north star for decisions far beyond written copy. It influenced color choices, photography style, even the pacing of animations in our prototype. Consistency in voice creates consistency in experience.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Final Presentation:<br>Behance Case Study]</p>
+            </div>
+
+            <p class="section-text">
+                Most valuable was learning that accessibility and beautiful design aren't opposing forces—they're complementary. Every accessibility check that initially felt like a constraint (is this contrast ratio high enough? does this animation respect motion preferences?) ultimately made the design stronger, clearer, and more intentional. Universal design principles benefit everyone, not just users with disabilities.
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scroll to sections
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Update active depth marker on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['introduction', 'design-process', 'my-role', 'learned'];
+            const markers = document.querySelectorAll('.depth-marker');
+            
+            let currentSection = 0;
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
+                    currentSection = index;
+                }
+            });
+
+            markers.forEach((marker, index) => {
+                if (index === currentSection) {
+                    marker.classList.add('active');
+                } else {
+                    marker.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
