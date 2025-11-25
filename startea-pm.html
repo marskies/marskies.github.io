@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarTea Project Management • Marina DiPonio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom,
+                #1e3442 0%,
+                #142838 25%,
+                #0d1d2e 50%,
+                #081524 75%,
+                #040d1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Depth meter for project pages */
+        .depth-meter {
+            position: fixed;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .depth-line {
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(to bottom, 
+                rgba(180, 200, 220, 0.4) 0%,
+                rgba(140, 160, 200, 0.3) 50%,
+                rgba(180, 140, 120, 0.4) 100%);
+            position: relative;
+        }
+
+        .depth-marker {
+            position: absolute;
+            right: -4px;
+            width: 8px;
+            height: 8px;
+            background: rgba(200, 220, 240, 0.6);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .depth-marker:hover {
+            transform: scale(1.8);
+            background: rgba(220, 240, 255, 0.9);
+            box-shadow: 0 0 15px rgba(200, 220, 240, 0.6);
+        }
+
+        .depth-marker.active {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.5);
+        }
+
+        .depth-label {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .depth-marker:hover .depth-label {
+            opacity: 1;
+        }
+
+        /* Top navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 20, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(200, 220, 240, 0.2);
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(200, 220, 240, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            border-color: rgba(200, 220, 240, 0.6);
+            background: rgba(10, 20, 35, 0.8);
+            transform: translateX(-3px);
+        }
+
+        .nav-btn.next:hover {
+            transform: translateX(3px);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        /* Content */
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 3rem 4rem;
+        }
+
+        .project-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 4.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            color: rgba(220, 240, 255, 0.95);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.6);
+            letter-spacing: 0.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: rgba(200, 220, 240, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: rgba(220, 240, 255, 0.9);
+        }
+
+        /* Content sections */
+        .content-section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 120px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(200, 220, 240, 0.95);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.8);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Image bubble placeholders */
+        .image-bubble {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(100, 181, 246, 0.1);
+            border: 2px solid rgba(100, 181, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-bubble.float-right {
+            float: right;
+            margin: 0 0 2rem 3rem;
+        }
+
+        .image-bubble.float-left {
+            float: left;
+            margin: 0 3rem 2rem 0;
+        }
+
+        .image-bubble::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%);
+            animation: bubble-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes bubble-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .image-placeholder {
+            font-size: 0.9rem;
+            color: rgba(200, 220, 240, 0.6);
+            text-align: center;
+            z-index: 1;
+            letter-spacing: 0.1rem;
+        }
+
+        /* Links */
+        .project-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .project-link {
+            background: transparent;
+            border: 1px solid rgba(100, 181, 246, 0.4);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            color: rgba(100, 181, 246, 0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(100, 181, 246, 0.1);
+            border-color: rgba(100, 181, 246, 0.7);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 968px) {
+            .top-nav {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-center {
+                order: -1;
+            }
+
+            .project-content {
+                padding: 12rem 1.5rem 3rem;
+            }
+
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-meta {
+                gap: 1.5rem;
+            }
+
+            .image-bubble {
+                width: 250px;
+                height: 250px;
+            }
+
+            .image-bubble.float-right,
+            .image-bubble.float-left {
+                float: none;
+                margin: 2rem auto;
+            }
+
+            .depth-meter {
+                right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="learn-to-leap.html" class="nav-btn">← Previous Project</a>
+        <div class="nav-center">
+            <a href="project-management.html" class="nav-btn">← Return to Category</a>
+        </div>
+        <a href="yuumi-chan.html" class="nav-btn next">Next Project →</a>
+    </nav>
+
+    <!-- Depth Meter -->
+    <div class="depth-meter">
+        <div class="depth-line">
+            <div class="depth-marker active" style="top: 0;" onclick="scrollToSection('planning')">
+                <div class="depth-label">Planning & Setup</div>
+            </div>
+            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('coordination')">
+                <div class="depth-label">Team Coordination</div>
+            </div>
+            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('execution')">
+                <div class="depth-label">Execution & Delivery</div>
+            </div>
+            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('outcomes')">
+                <div class="depth-label">Outcomes & Insights</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <!-- Header -->
+        <div class="project-header">
+            <h1 class="project-title">StarTea</h1>
+            <p class="project-subtitle">Project Management • Cross-Functional Team Leadership</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Project Manager</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">30 Days • 5 Phases</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Team Size</div>
+                    <div class="meta-value">3 Members (Cross-Functional)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Deliverables</div>
+                    <div class="meta-value">Hi-Fi Prototype, Case Study, Presentation</div>
+                </div>
+            </div>
+
+            <div class="project-links">
+                <a href="https://www.figma.com/proto/tesZsdQUWD0p7IYD3rt1K0/StarTea-Prototype?node-id=3464-260&p=f&t=YDZQVPc8CwuxfEOy-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1" target="_blank" class="project-link">View Final Prototype</a>
+                <a href="https://www.behance.net/gallery/235886391/StarTea-Website-Design" target="_blank" class="project-link">View Case Study</a>
+            </div>
+        </div>
+
+        <!-- Planning & Setup Section -->
+        <section class="content-section" id="planning">
+            <h2 class="section-title">Planning & Setup</h2>
+            
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[Project Plan:<br>Initial Document]</p>
+            </div>
+            
+            <p class="section-text">
+                Every successful project begins with clarity. I created a comprehensive one-page project plan that established our north star: building a polished, professional website for StarTea—a wellness brand of teas, supplements, and herbal blends—while demonstrating advanced UI/UX process for our portfolios and course requirements.
+            </p>
+            
+            <p class="section-text">
+                The plan defined clear success criteria from day one: clean and intuitive website design, documented UX process with research and iterations, at least six user research inputs across market research and usability testing, cohesive Behance case study showcasing both process and polish, and a compelling five-minute presentation with clear role delineation.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Project Timeline:<br>5 Phase Breakdown]</p>
+            </div>
+
+            <p class="section-text">
+                I structured the 30-day timeline across five strategic phases: Kickoff & Setup (Sept 5-11) for research foundations, Research & Wireframes (Sept 12-18) for user insights and information architecture, Design (Sept 19-25) for visual system development, Prototype & Testing (Sept 26-Oct 2) for validation and refinement, and Final Wrap-Up (Oct 3-5) for documentation and presentation polish.
+            </p>
+
+            <p class="section-text">
+                Team roles were clearly defined to maximize strengths while ensuring accountability. Isabella Alfonso served as Lead Designer handling visual design, moodboards, high-fidelity mockups, prototyping, and Behance layout. David Etherage contributed market research, content planning, specific page wireframes (Contact/Blog), and quality assurance. I wore multiple hats as Project Manager, handling planning, content writing, user interviews, testing coordination, process documentation, and presentation delivery.
+            </p>
+        </section>
+
+        <!-- Team Coordination Section -->
+        <section class="content-section" id="coordination">
+            <h2 class="section-title">Team Coordination</h2>
+            
+            <div class="image-bubble float-left">
+                <p class="image-placeholder">[Task Distribution:<br>Detailed Timeline]</p>
+            </div>
+            
+            <p class="section-text">
+                Coordinating a three-person team across parallel workstreams required meticulous task breakdown and dependency management. I maintained a detailed timeline tracking 50+ individual tasks, ensuring team members always knew their immediate priorities while understanding how their work connected to the larger vision.
+            </p>
+            
+            <p class="section-text">
+                During Kickoff & Setup, I orchestrated parallel work: while I drafted interview questions and collected reference materials, Isabella explored style directions through moodboards, and David began competitive analysis. All three of us simultaneously recruited two research participants each—distributing the recruitment burden while building toward our six-participant research goal.
+            </p>
+
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[Team Communication:<br>Progress Check-ins]</p>
+            </div>
+
+            <p class="section-text">
+                The Research & Wireframes phase showcased strategic parallel execution. Isabella, David, and I each conducted two user interviews independently, then I synthesized all six conversations into cohesive findings and personas. While I worked on synthesis, Isabella sketched the sitemap. We then converged for collaborative content planning before splitting wireframe responsibilities—Isabella handling Homepage, Discover, and Products while David tackled Account and Cart.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Group Review:<br>Design Decisions]</p>
+            </div>
+
+            <p class="section-text">
+                Throughout the Design phase, I facilitated group reviews and collaborative decision-making. While Isabella drove visual design and David supported with additional page designs, I focused on content creation and accessibility validation. Our scheduled group review on Sept 25 ensured everyone could provide input on design directions before we committed to prototype development.
+            </p>
+        </section>
+
+        <!-- Execution & Delivery Section -->
+        <section class="content-section" id="execution">
+            <h2 class="section-title">Execution & Delivery</h2>
+            
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[Usability Testing:<br>Session Notes]</p>
+            </div>
+            
+            <p class="section-text">
+                As we entered the Prototype & Testing phase, I balanced multiple critical paths simultaneously. While Isabella built the clickable Figma prototype, I developed the usability test plan with clear objectives, tasks, and success metrics. We pursued our stretch goal of Instagram grid and story mockups as a team, extending the design system beyond the core website.
+            </p>
+            
+            <p class="section-text">
+                Testing coordination required careful orchestration. David and I each recruited and tested with two users (meeting our six-user research target), while Isabella polished prototype details to ensure testers experienced the most refined version possible. I collected all feedback into a prioritized fix list, balancing quick wins against high-impact improvements given our compressed timeline.
+            </p>
+
+            <div class="image-bubble float-left">
+                <p class="image-placeholder">[Fix List:<br>Priority Matrix]</p>
+            </div>
+
+            <p class="section-text">
+                The Final Wrap-Up phase tested our ability to execute under deadline pressure. As a team, we collaboratively built the Behance case study, dividing sections based on individual expertise while maintaining unified visual and narrative coherence. I drove the process documentation that would transform our scattered work into a compelling portfolio story.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Final Deliverables:<br>Complete Package]</p>
+            </div>
+
+            <p class="section-text">
+                Final checks and rehearsal consumed the last day—validating every link, testing across devices, timing our presentation, and refining our speaking roles. I ensured we hit our five-minute presentation target while showcasing each team member's contributions clearly. We delivered on October 5 with all success criteria met and a case study ready for portfolio inclusion.
+            </p>
+        </section>
+
+        <!-- Outcomes & Insights Section -->
+        <section class="content-section" id="outcomes">
+            <h2 class="section-title">Outcomes & Insights</h2>
+            
+            <div class="image-bubble float-right">
+                <p class="image-placeholder">[Project Metrics:<br>Success Indicators]</p>
+            </div>
+            
+            <p class="section-text">
+                We achieved every success criterion established in the project plan: a clean, intuitive website design validated through usability testing, comprehensive UX process documentation spanning research through iteration, six user research inputs evenly distributed across market research and usability validation, polished Behance case study demonstrating both process rigor and visual excellence, and an engaging presentation delivered within time constraints with clear role representation.
+            </p>
+            
+            <p class="section-text">
+                The 30-day timeline proved aggressive but achievable through strategic parallelization. Breaking the project into five distinct phases with clear deliverables created natural checkpoints for course correction. When early research revealed unexpected insights about mobile-first expectations, we adjusted design priorities without derailing the timeline—exactly the kind of adaptive planning that separates theory from execution.
+            </p>
+
+            <div class="image-bubble float-left">
+                <p class="image-placeholder">[Team Retrospective:<br>Key Learnings]</p>
+            </div>
+
+            <p class="section-text">
+                Team coordination taught me that clear role definition doesn't mean rigid boundaries. While Isabella owned visual design, my accessibility checks and David's content contributions created natural collaboration points that strengthened the final product. The key was establishing ownership while encouraging cross-functional input at designated review moments.
+            </p>
+
+            <div class="image-bubble">
+                <p class="image-placeholder">[Portfolio Impact:<br>Professional Growth]</p>
+            </div>
+
+            <p class="section-text">
+                Perhaps most valuable was learning how detailed planning enables creative flexibility. The comprehensive timeline and task breakdown didn't constrain our design exploration—it protected it. Because we knew exactly what needed to happen when, we could make informed decisions about where to invest extra effort (like the Instagram stretch goal) and where to maintain scope discipline.
+            </p>
+
+            <p class="section-text">
+                This project reinforced that project management in creative contexts requires balancing structure with adaptability, individual accountability with collaborative decision-making, and timeline discipline with quality standards. The result—a professional website design and comprehensive case study—proved that methodical planning doesn't kill creativity; it creates the conditions for creativity to flourish within real-world constraints.
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scroll to sections
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Update active depth marker on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['planning', 'coordination', 'execution', 'outcomes'];
+            const markers = document.querySelectorAll('.depth-marker');
+            
+            let currentSection = 0;
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
+                    currentSection = index;
+                }
+            });
+
+            markers.forEach((marker, index) => {
+                if (index === currentSection) {
+                    marker.classList.add('active');
+                } else {
+                    marker.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
