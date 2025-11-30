@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Catch • Marina DiPonio</title>
+    <title>UF Club Software • Marina DiPonio</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,26 +29,23 @@
         .project-header { margin-bottom: 4rem; text-align: center; }
         .header-role-tags { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .role-tag { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid; }
-        .role-tag.role-pm { color: rgba(129, 212, 250, 0.9); border-color: rgba(129, 212, 250, 0.4); background: rgba(129, 212, 250, 0.1); }
         .role-tag.role-uiux { color: rgba(186, 164, 212, 0.9); border-color: rgba(186, 164, 212, 0.4); background: rgba(186, 164, 212, 0.1); }
+        .role-tag.role-research { color: rgba(129, 199, 132, 0.9); border-color: rgba(129, 199, 132, 0.4); background: rgba(129, 199, 132, 0.1); }
         .project-title { font-size: 4.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: rgba(220, 240, 255, 0.95); margin-bottom: 1rem; letter-spacing: 0.05rem; }
         .project-subtitle { font-size: 1.2rem; font-weight: 300; color: rgba(200, 220, 240, 0.6); letter-spacing: 0.1rem; }
         .project-meta { display: flex; gap: 3rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
         .meta-item { text-align: center; }
         .meta-label { font-size: 0.75rem; color: rgba(200, 220, 240, 0.5); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 0.5rem; }
         .meta-value { font-size: 1.1rem; color: rgba(220, 240, 255, 0.9); }
-        .project-links { display: flex; gap: 2rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; }
-        .project-link { background: transparent; border: 1px solid rgba(100, 181, 246, 0.4); padding: 1rem 2rem; border-radius: 30px; color: rgba(100, 181, 246, 0.9); text-decoration: none; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; transition: all 0.3s ease; }
-        .project-link:hover { background: rgba(100, 181, 246, 0.1); border-color: rgba(100, 181, 246, 0.7); transform: translateY(-2px); }
         .contributions-section { background: rgba(10, 20, 35, 0.4); border: 1px solid rgba(200, 220, 240, 0.15); border-radius: 10px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(10px); }
         .contributions-title { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; text-align: center; letter-spacing: 0.05rem; }
         .contributions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .contribution-column { padding: 1.5rem; border-radius: 8px; background: rgba(0, 0, 0, 0.2); }
-        .contribution-column.pm { border-left: 3px solid rgba(129, 212, 250, 0.6); }
         .contribution-column.uiux { border-left: 3px solid rgba(186, 164, 212, 0.6); }
+        .contribution-column.research { border-left: 3px solid rgba(129, 199, 132, 0.6); }
         .contribution-role-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1rem; text-transform: uppercase; margin-bottom: 1rem; }
-        .contribution-column.pm .contribution-role-title { color: rgba(129, 212, 250, 0.9); }
         .contribution-column.uiux .contribution-role-title { color: rgba(186, 164, 212, 0.9); }
+        .contribution-column.research .contribution-role-title { color: rgba(129, 199, 132, 0.9); }
         .contribution-list { list-style: none; }
         .contribution-list li { font-size: 0.95rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.7; margin-bottom: 0.8rem; padding-left: 1rem; position: relative; }
         .contribution-list li::before { content: '→'; position: absolute; left: 0; color: rgba(200, 220, 240, 0.4); }
@@ -68,61 +65,57 @@
     <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
 
     <nav class="top-nav">
-        <a href="tick-tock-trivia.html" class="nav-btn">← Previous</a>
+        <a href="nutrition-app.html" class="nav-btn">← Previous</a>
         <div class="nav-center">
             <a href="index.html" class="nav-btn">Home</a>
             <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
         </div>
-        <a href="startea.html" class="nav-btn next">Next →</a>
+        <a href="ice-accessibility.html" class="nav-btn next">Next →</a>
     </nav>
 
     <div class="depth-meter">
         <div class="depth-line">
             <div class="depth-marker active" style="top: 0;" onclick="scrollToSection('overview')"><div class="depth-label">Overview</div></div>
-            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('final-piece')"><div class="depth-label">Final Piece</div></div>
-            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('process')"><div class="depth-label">Process</div></div>
-            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('learned')"><div class="depth-label">What I Learned</div></div>
+            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('research')"><div class="depth-label">Research</div></div>
+            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('findings')"><div class="depth-label">Findings</div></div>
+            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('solutions')"><div class="depth-label">Solutions</div></div>
         </div>
     </div>
 
     <div class="project-content">
         <div class="project-header">
             <div class="header-role-tags">
-                <span class="role-tag role-pm">Project Management</span>
                 <span class="role-tag role-uiux">UI/UX Design</span>
+                <span class="role-tag role-research">User Research</span>
             </div>
-            <h1 class="project-title">Cosmic Catch</h1>
-            <p class="project-subtitle">🏆 Most Innovative • Cozy Rhythm Fishing Adventure</p>
+            <h1 class="project-title">UF Club Software</h1>
+            <p class="project-subtitle">University Platform Usability Study</p>
             <div class="project-meta">
-                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">10 Hours (Create-A-Thon)</div></div>
-                <div class="meta-item"><div class="meta-label">Team Size</div><div class="meta-value">5 Members</div></div>
-                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Unity, Procreate, Canva</div></div>
-            </div>
-            <div class="project-links">
-                <a href="https://marskies.itch.io/cosmic-catch" target="_blank" class="project-link">Play Game</a>
-                <a href="https://www.behance.net/gallery/235381691/Cosmic-Catch-Post-Mortem" target="_blank" class="project-link">View Case Study</a>
+                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">Summer 2025</div></div>
+                <div class="meta-item"><div class="meta-label">Team</div><div class="meta-value">UX Research Team</div></div>
+                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Figma, User Testing, Accessibility Audits</div></div>
             </div>
         </div>
 
         <div class="contributions-section">
             <h2 class="contributions-title">My Contributions</h2>
             <div class="contributions-grid">
-                <div class="contribution-column pm">
-                    <h3 class="contribution-role-title">Project Management</h3>
-                    <ul class="contribution-list">
-                        <li>Managed 10-hour Create-A-Thon team of 5</li>
-                        <li>Coordinated rapid prototyping and asset creation</li>
-                        <li>Made critical pivot decisions under pressure</li>
-                        <li>Redirected team toward polished concept presentation</li>
-                    </ul>
-                </div>
                 <div class="contribution-column uiux">
                     <h3 class="contribution-role-title">UI/UX Design</h3>
                     <ul class="contribution-list">
-                        <li>Designed core gameplay loop UX</li>
-                        <li>Created all UI elements and transitions</li>
-                        <li>Developed visual language merging rhythm + fishing</li>
-                        <li>Built collection screens and button states</li>
+                        <li>Developed Figma prototypes for solutions</li>
+                        <li>Designed wireframes addressing usability issues</li>
+                        <li>Created research-backed design recommendations</li>
+                        <li>Validated solutions through user feedback</li>
+                    </ul>
+                </div>
+                <div class="contribution-column research">
+                    <h3 class="contribution-role-title">User Research</h3>
+                    <ul class="contribution-list">
+                        <li>Directed comprehensive usability testing</li>
+                        <li>Audited accessibility for inclusivity gaps</li>
+                        <li>Uncovered critical user pain points</li>
+                        <li>Synthesized findings into actionable insights</li>
                     </ul>
                 </div>
             </div>
@@ -130,49 +123,26 @@
 
         <section class="content-section" id="overview">
             <h2 class="section-title">Overview</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Game Screenshot:<br>Main Menu]</p></div>
-            <p class="section-text">
-                Cosmic Catch combines the relaxing satisfaction of fishing with rhythm game mechanics, 
-                set against a dreamy cosmic backdrop. Players cast their line into the stars, timing 
-                their catches to the beat while building a collection of celestial creatures.
-            </p>
-            <p class="section-text">
-                Created during a 10-hour Create-A-Thon, this project won Most Innovative for its unique 
-                genre fusion and polished presentation despite the tight timeline.
-            </p>
+            <div class="image-bubble float-right"><p class="image-placeholder">[Platform Screenshot:<br>Current State]</p></div>
+            <p class="section-text"><!-- TODO: Add overview --> Content coming soon. This study evaluated UF's club software platform to improve the student organization experience.</p>
         </section>
 
-        <section class="content-section" id="final-piece">
-            <h2 class="section-title">Final Piece</h2>
-            <div class="image-bubble float-left"><p class="image-placeholder">[Gameplay:<br>Rhythm Fishing]</p></div>
-            <p class="section-text">
-                <!-- TODO: Add more detail about the final game -->
-                The final experience delivers a cozy, meditative fishing game where timing matters. 
-                Players learn the rhythms of different cosmic fish, building their collection while 
-                enjoying the ambient soundtrack.
-            </p>
+        <section class="content-section" id="research">
+            <h2 class="section-title">Research Process</h2>
+            <div class="image-bubble float-left"><p class="image-placeholder">[Research Methods:<br>Testing Sessions]</p></div>
+            <p class="section-text"><!-- TODO: Add research --> Content coming soon.</p>
         </section>
 
-        <section class="content-section" id="process">
-            <h2 class="section-title">Process</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Team Brainstorm:<br>Whiteboard Session]</p></div>
-            <p class="section-text">
-                <!-- TODO: Add process details -->
-                The 10-hour constraint forced rapid decision-making. When we hit programming roadblocks 
-                early, I pivoted the team toward a polished concept demo rather than a buggy prototype—a 
-                decision that ultimately won us the award.
-            </p>
+        <section class="content-section" id="findings">
+            <h2 class="section-title">Key Findings</h2>
+            <div class="image-bubble float-right"><p class="image-placeholder">[Analysis:<br>Pain Points Map]</p></div>
+            <p class="section-text"><!-- TODO: Add findings --> Content coming soon.</p>
         </section>
 
-        <section class="content-section" id="learned">
-            <h2 class="section-title">What I Learned</h2>
-            <div class="image-bubble"><p class="image-placeholder">[Award Ceremony:<br>Most Innovative]</p></div>
-            <p class="section-text">
-                <!-- TODO: Add learnings -->
-                This jam taught me the power of strategic pivots. Sometimes the best project management 
-                decision is knowing when to change direction. A polished partial vision beats a broken 
-                complete one every time.
-            </p>
+        <section class="content-section" id="solutions">
+            <h2 class="section-title">Proposed Solutions</h2>
+            <div class="image-bubble"><p class="image-placeholder">[Figma Prototypes:<br>Redesign Concepts]</p></div>
+            <p class="section-text"><!-- TODO: Add solutions --> Content coming soon.</p>
         </section>
     </div>
 
@@ -183,7 +153,7 @@
         if (localStorage.getItem('soundEnabled') === 'true') { soundOn = true; audio.play(); document.querySelector('.sound-toggle').textContent = 'Sound On'; document.querySelector('.sound-toggle').classList.add('active'); }
         function toggleSound() { soundOn = !soundOn; const toggle = document.querySelector('.sound-toggle'); if (soundOn) { toggle.textContent = 'Sound On'; toggle.classList.add('active'); audio.play(); localStorage.setItem('soundEnabled', 'true'); } else { toggle.textContent = 'Sound Off'; toggle.classList.remove('active'); audio.pause(); localStorage.setItem('soundEnabled', 'false'); } }
         function scrollToSection(sectionId) { document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        window.addEventListener('scroll', () => { const sections = ['overview', 'final-piece', 'process', 'learned']; const markers = document.querySelectorAll('.depth-marker'); let currentSection = 0; sections.forEach((section, index) => { const element = document.getElementById(section); const rect = element.getBoundingClientRect(); if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) { currentSection = index; } }); markers.forEach((marker, index) => { if (index === currentSection) { marker.classList.add('active'); } else { marker.classList.remove('active'); } }); });
+        window.addEventListener('scroll', () => { const sections = ['overview', 'research', 'findings', 'solutions']; const markers = document.querySelectorAll('.depth-marker'); let currentSection = 0; sections.forEach((section, index) => { const element = document.getElementById(section); const rect = element.getBoundingClientRect(); if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) { currentSection = index; } }); markers.forEach((marker, index) => { if (index === currentSection) { marker.classList.add('active'); } else { marker.classList.remove('active'); } }); });
     </script>
 </body>
 </html>

@@ -25,7 +25,22 @@
             padding: 4rem 2rem;
         }
 
-        /* Return button */
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            background: radial-gradient(circle, rgba(200, 220, 240, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+
         .return-btn {
             position: fixed;
             top: 3rem;
@@ -53,9 +68,40 @@
             transform: translateX(-5px);
         }
 
+        /* Sound toggle */
+        .sound-toggle {
+            position: fixed;
+            top: 3rem;
+            right: 3rem;
+            z-index: 1000;
+            background: rgba(10, 20, 35, 0.5);
+            border: 1px solid rgba(200, 220, 240, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sound-toggle:hover {
+            border-color: rgba(200, 220, 240, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .sound-toggle.active {
+            color: rgba(200, 220, 240, 1);
+            border-color: rgba(200, 220, 240, 0.4);
+        }
+
         .page-header {
             text-align: center;
             margin-bottom: 6rem;
+            padding-top: 2rem;
             animation: fadeIn 1s ease-out;
         }
 
@@ -98,7 +144,7 @@
             background: rgba(90, 122, 143, 0.15);
             border: 2px solid rgba(90, 122, 143, 0.3);
             border-radius: 10px;
-            padding: 3rem;
+            padding: 2.5rem;
             cursor: pointer;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -113,7 +159,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1) 0%, rgba(129, 212, 250, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(129, 199, 132, 0.1) 0%, rgba(102, 187, 106, 0.1) 100%);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -121,9 +167,9 @@
         .project-card:hover {
             filter: saturate(1);
             transform: translateY(-10px) scale(1.02);
-            border-color: rgba(100, 181, 246, 0.6);
-            background: rgba(100, 181, 246, 0.1);
-            box-shadow: 0 20px 60px rgba(100, 181, 246, 0.3);
+            border-color: rgba(129, 199, 132, 0.6);
+            background: rgba(129, 199, 132, 0.1);
+            box-shadow: 0 20px 60px rgba(129, 199, 132, 0.3);
         }
 
         .project-card:hover::before {
@@ -135,12 +181,53 @@
             font-weight: 300;
             color: rgba(180, 200, 220, 0.5);
             letter-spacing: 0.2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
         }
 
         .project-card:hover .project-number {
-            color: rgba(100, 181, 246, 0.9);
+            color: rgba(129, 199, 132, 0.9);
+        }
+
+        /* Role tags */
+        .role-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .role-tag {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid;
+        }
+
+        .role-tag.role-pm {
+            color: rgba(129, 212, 250, 0.9);
+            border-color: rgba(129, 212, 250, 0.4);
+            background: rgba(129, 212, 250, 0.1);
+        }
+
+        .role-tag.role-uiux {
+            color: rgba(186, 164, 212, 0.9);
+            border-color: rgba(186, 164, 212, 0.4);
+            background: rgba(186, 164, 212, 0.1);
+        }
+
+        .role-tag.role-research {
+            color: rgba(129, 199, 132, 0.9);
+            border-color: rgba(129, 199, 132, 0.4);
+            background: rgba(129, 199, 132, 0.1);
+        }
+
+        .role-tag.current {
+            background: rgba(129, 199, 132, 0.3);
+            border-color: rgba(129, 199, 132, 0.8);
         }
 
         .project-title {
@@ -148,13 +235,19 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
             color: rgba(200, 220, 240, 0.7);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             letter-spacing: 0.05rem;
             transition: color 0.5s ease;
         }
 
         .project-card:hover .project-title {
             color: rgba(220, 240, 255, 1);
+        }
+
+        .project-award {
+            font-size: 0.9rem;
+            color: rgba(255, 215, 0, 0.8);
+            margin-bottom: 1rem;
         }
 
         .project-preview {
@@ -179,50 +272,113 @@
                 left: 1.5rem;
             }
 
+            .sound-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .project-card {
+                padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <audio id="oceanAudio" loop>
+        <source src="underwaterambiance.mp3" type="audio/mpeg">
+    </audio>
+
     <a href="index.html" class="return-btn">← Return</a>
+    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
 
     <div class="page-header">
         <h1 class="page-title">User Research</h1>
         <p class="page-subtitle">Uncovering insights that drive meaningful design</p>
     </div>
 
-    <div class="projects-grid">
-        <div class="project-card" onclick="window.location.href='uf-club-software.html'">
-            <div class="project-number">PROJECT 01</div>
-            <h3 class="project-title">UF Club Software Usability Study</h3>
-            <p class="project-preview">
-                Directed comprehensive usability testing to evaluate the University of Florida's club 
-                software platform, uncovering critical user pain points and accessibility gaps that 
-                informed research-backed design solutions.
-            </p>
-        </div>
-
-        <div class="project-card" onclick="window.location.href='ice-accessibility-audit.html'">
-            <div class="project-number">PROJECT 02</div>
-            <h3 class="project-title">Digital Accessibility Audit</h3>
-            <p class="project-preview">
-                Conducted thorough WCAG 2.1 compliance audits at ICE Mortgage Technology, identifying 
-                barriers and driving accessibility enhancements that improved the user experience for 
-                individuals with disabilities.
-            </p>
-        </div>
-
-        <div class="project-card" onclick="window.location.href='survey-optimization.html'">
-            <div class="project-number">PROJECT 03</div>
-            <h3 class="project-title">Survey Response Optimization</h3>
-            <p class="project-preview">
-                Boosted survey response rates by 333% through strategic personalized outreach and timing 
-                optimization, transforming raw data into actionable insights that informed product 
-                development decisions.
-            </p>
-        </div>
+    <div class="projects-grid" id="projectsGrid">
+        <!-- Projects will be dynamically loaded -->
     </div>
+
+    <script src="projects.js"></script>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 15 + 20 + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                document.body.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Sound toggle
+        let soundOn = false;
+        const audio = document.getElementById('oceanAudio');
+        audio.volume = 0.4;
+
+        if (localStorage.getItem('soundEnabled') === 'true') {
+            soundOn = true;
+            audio.play();
+            document.querySelector('.sound-toggle').textContent = 'Sound On';
+            document.querySelector('.sound-toggle').classList.add('active');
+        }
+
+        function toggleSound() {
+            soundOn = !soundOn;
+            const toggle = document.querySelector('.sound-toggle');
+            
+            if (soundOn) {
+                toggle.textContent = 'Sound On';
+                toggle.classList.add('active');
+                audio.play();
+                localStorage.setItem('soundEnabled', 'true');
+            } else {
+                toggle.textContent = 'Sound Off';
+                toggle.classList.remove('active');
+                audio.pause();
+                localStorage.setItem('soundEnabled', 'false');
+            }
+        }
+
+        // Load projects for this category
+        const currentRole = 'research';
+        const projects = getProjectsByRole(currentRole);
+        const grid = document.getElementById('projectsGrid');
+
+        projects.forEach((project, index) => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = () => window.location.href = `${project.id}.html`;
+
+            // Build role tags
+            const roleTags = project.roles.map(role => {
+                const isCurrent = role === currentRole;
+                return `<span class="role-tag role-${role} ${isCurrent ? 'current' : ''}">${getRoleDisplayName(role)}</span>`;
+            }).join('');
+
+            // Build award line if exists
+            const awardHtml = project.award ? `<div class="project-award">${project.award}</div>` : '';
+
+            card.innerHTML = `
+                <div class="project-number">PROJECT ${String(index + 1).padStart(2, '0')}</div>
+                <div class="role-tags">${roleTags}</div>
+                <h3 class="project-title">${project.title}</h3>
+                ${awardHtml}
+                <p class="project-preview">${project.roleDescriptions[currentRole]}</p>
+            `;
+
+            grid.appendChild(card);
+        });
+    </script>
 </body>
 </html>
