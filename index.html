@@ -263,6 +263,29 @@
                 opacity: 0.8;
             }
         }
+
+        /* Logo styles - positioned at top of surface section, scrolls with content */
+        .logo-container {
+            position: absolute;
+            top: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: auto;
+            z-index: 100;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            opacity: 1;
+        }
         
         /* TWILIGHT ZONE - CATEGORIES */
         .twilight {
@@ -787,24 +810,10 @@
             }
 
             .logo-container {
-    margin-bottom: 2rem;
-    width: 80px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
+                width: 80px;
+                top: 2rem;
+            }
 
-.logo-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-}
-
-.logo-container img:hover {
-    opacity: 1;
-}
             .ocean-section {
                 padding: 4rem 1.5rem;
             }
@@ -845,11 +854,12 @@
 
     <!-- SURFACE -->
     <section class="ocean-section surface" id="surface">
-        <div class="title-area">
-            <!-- Add logo here at the very top -->
+        <!-- Logo at top, scrolls with page -->
         <div class="logo-container">
             <img src="LOGO_blue.png" alt="Marina DiPonio's Logo">
         </div>
+        
+        <div class="title-area">
             <div class="depth-indicator">— WELCOME —</div>
             <h1 class="main-title">Marina DiPonio</h1>
             <p class="subtitle">Project Manager • Game Developer • Player Experience Designer</p>
