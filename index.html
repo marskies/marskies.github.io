@@ -786,25 +786,18 @@
                 left: 1.5rem;
             }
 
-            /* Logo at top center */
-.top-logo {
-    position: fixed;
-    top: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    animation: fade-in 1.5s ease-out;
+            .logo-container {
+    margin-bottom: 2rem;
 }
 
-.top-logo img {
+.logo-container img {
     max-width: 120px;
     height: auto;
     opacity: 0.9;
     transition: all 0.3s ease;
-    display: block;
 }
 
-.top-logo img:hover {
+.logo-container img:hover {
     opacity: 1;
     transform: scale(1.05);
 }
@@ -822,9 +815,6 @@
 <body>
     <div class="custom-cursor"></div>
 
-    <div class="top-logo">
-        <img src="LOGO_blue.png" alt="Marina DiPonio's Logo">
-    </div>
 
     <audio id="oceanAudio" loop>
         <source src="underwaterambiance.mp3" type="audio/mpeg">
@@ -853,6 +843,10 @@
     <!-- SURFACE -->
     <section class="ocean-section surface" id="surface">
         <div class="title-area">
+            <!-- Add logo here at the very top -->
+        <div class="logo-container">
+            <img src="LOGO_blue.png" alt="Marina DiPonio's Logo">
+        </div>
             <div class="depth-indicator">— WELCOME —</div>
             <h1 class="main-title">Marina DiPonio</h1>
             <p class="subtitle">Project Manager • Game Developer • Player Experience Designer</p>
