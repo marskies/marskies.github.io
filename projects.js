@@ -162,6 +162,7 @@ const PROJECTS = {
         uiux: "Researched competitive analysis and crosshair accuracy communication. Iterated on HUD designs for optimal player feedback, communicated implementation methods to developers, and workshopped iterations with team."
     }
 }
+        };
 
 // Helper function to get projects by role
 function getProjectsByRole(role) {
