@@ -60,7 +60,9 @@
         .image-bubble.float-left { float: left; margin: 0 3rem 2rem 0; }
         .image-bubble::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%); animation: bubble-pulse 3s ease-in-out infinite; }
         @keyframes bubble-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
+        .image-bubble img { width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 50%; }
         .image-placeholder { font-size: 0.9rem; color: rgba(200, 220, 240, 0.6); text-align: center; z-index: 1; letter-spacing: 0.1rem; }
+        .clearfix::after { content: ""; clear: both; display: table; }
         @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .nav-center { order: -1; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -68,10 +70,10 @@
     <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
 
     <nav class="top-nav">
-    <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
-    <a href="index.html" class="nav-btn">Home</a>
-    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
-</nav>
+        <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
+        <a href="index.html" class="nav-btn">Home</a>
+        <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
+    </nav>
 
     <div class="depth-meter">
         <div class="depth-line">
@@ -91,12 +93,12 @@
             <h1 class="project-title">Cosmic Catch</h1>
             <p class="project-subtitle">🏆 Most Innovative • Cozy Rhythm Fishing Adventure</p>
             <div class="project-meta">
-                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">10 Hours (Create-A-Thon)</div></div>
+                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">12-Hour Create-A-Thon</div></div>
                 <div class="meta-item"><div class="meta-label">Team Size</div><div class="meta-value">5 Members</div></div>
                 <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Unity, Procreate, Canva</div></div>
             </div>
             <div class="project-links">
-                <a href="https://marskies.itch.io/cosmic-catch" target="_blank" class="project-link">Play Game</a>
+                <a href="https://marskies.itch.io/cosmic-catch" target="_blank" class="project-link">View on Itch.io</a>
                 <a href="https://www.behance.net/gallery/235381691/Cosmic-Catch-Post-Mortem" target="_blank" class="project-link">View Case Study</a>
             </div>
         </div>
@@ -107,68 +109,107 @@
                 <div class="contribution-column pm">
                     <h3 class="contribution-role-title">Project Management</h3>
                     <ul class="contribution-list">
-                        <li>Managed 10-hour Create-A-Thon team of 5</li>
-                        <li>Coordinated rapid prototyping and asset creation</li>
-                        <li>Made critical pivot decisions under pressure</li>
-                        <li>Redirected team toward polished concept presentation</li>
+                        <li>Coordinated 5-person team through 12-hour Create-A-Thon</li>
+                        <li>Made critical scope decisions under time pressure</li>
+                        <li>Pivoted team toward polished concept presentation when programming hit roadblocks</li>
+                        <li>Managed asset creation pipeline and milestone tracking</li>
                     </ul>
                 </div>
                 <div class="contribution-column uiux">
                     <h3 class="contribution-role-title">UI/UX Design</h3>
                     <ul class="contribution-list">
-                        <li>Designed core gameplay loop UX</li>
-                        <li>Created all UI elements and transitions</li>
-                        <li>Developed visual language merging rhythm + fishing</li>
-                        <li>Built collection screens and button states</li>
+                        <li>Designed core gameplay loop merging rhythm mechanics with fishing</li>
+                        <li>Created UI elements including collection screens and button states</li>
+                        <li>Developed visual language for the cosmic fishing aesthetic</li>
+                        <li>Contributed to character and environment art direction</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <section class="content-section" id="overview">
+        <section class="content-section clearfix" id="overview">
             <h2 class="section-title">Overview</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Game Screenshot:<br>Main Menu]</p></div>
+            <div class="image-bubble float-right"><img src="cc-menu.png" alt="Cosmic Catch Main Menu"></div>
             <p class="section-text">
-                Cosmic Catch combines the relaxing satisfaction of fishing with rhythm game mechanics, 
-                set against a dreamy cosmic backdrop. Players cast their line into the stars, timing 
-                their catches to the beat while building a collection of celestial creatures.
+                Cosmic Catch puts you in the role of a pop star mermaid, using your musical powers to catch 
+                celestial fish and add them to your collection. The concept merges the cozy satisfaction of 
+                fishing games with rhythm-based mechanics—timing your inputs to the beat to reel in your catch.
             </p>
             <p class="section-text">
-                Created during a 10-hour Create-A-Thon, this project won Most Innovative for its unique 
-                genre fusion and polished presentation despite the tight timeline.
+                Created during a 12-hour Create-A-Thon with the theme "Star," our team of five developed a 
+                cohesive vision that earned the Most Innovative award. While programming challenges prevented 
+                a working prototype, the strength of our concept, art direction, and presentation demonstrated 
+                what a polished vision can achieve even without functional mechanics.
             </p>
         </section>
 
-        <section class="content-section" id="final-piece">
+        <section class="content-section clearfix" id="final-piece">
             <h2 class="section-title">Final Piece</h2>
-            <div class="image-bubble float-left"><p class="image-placeholder">[Gameplay:<br>Rhythm Fishing]</p></div>
+            <div class="image-bubble float-left"><img src="cc-gameplay.png" alt="Cosmic Catch Gameplay Concept"></div>
             <p class="section-text">
-                <!-- TODO: Add more detail about the final game -->
-                The final experience delivers a cozy, meditative fishing game where timing matters. 
-                Players learn the rhythms of different cosmic fish, building their collection while 
-                enjoying the ambient soundtrack.
+                Our deliverable was a comprehensive concept package rather than a playable prototype. We 
+                presented a complete vision of what Cosmic Catch could be: a meditative fishing experience 
+                where players learn the rhythms of different cosmic fish, building their collection while 
+                enjoying an ambient soundtrack.
             </p>
+            <p class="section-text">
+                The package included fully realized art assets—our mermaid protagonist, three unique fish 
+                designs with animation poses, the space moon pool environment, and a complete UI system. 
+                We also delivered three original "fish fight" music tracks with percussion and vocals, plus 
+                ambient background music. The judges saw not just an idea, but a world ready to be built.
+            </p>
+            <div style="clear: both; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <div class="image-bubble"><img src="cc-collect.png" alt="Fish Collection Screen"></div>
+                <div class="image-bubble"><img src="cc-melody.png" alt="Melody Character"></div>
+            </div>
         </section>
 
-        <section class="content-section" id="process">
+        <section class="content-section clearfix" id="process">
             <h2 class="section-title">Process</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Team Brainstorm:<br>Whiteboard Session]</p></div>
+            <div class="image-bubble float-right"><img src="cc-fish1.png" alt="Fish Design 1"></div>
             <p class="section-text">
-                <!-- TODO: Add process details -->
-                The 10-hour constraint forced rapid decision-making. When we hit programming roadblocks 
-                early, I pivoted the team toward a polished concept demo rather than a buggy prototype—a 
-                decision that ultimately won us the award.
+                Our initial brainstorm landed on a tight concept: rhythm-based fishing with a star theme. 
+                We scoped it small on purpose. But passion has a way of expanding scope—one teammate's 
+                enthusiasm for adding a collection system was hard to resist, and suddenly we had two 
+                interconnected systems instead of one focused mechanic.
+            </p>
+            <p class="section-text">
+                With four hours left and programming hitting unfamiliar technical walls, I had to make a 
+                call. I assessed where we actually were versus where we hoped to be, and redirected the 
+                team's energy. Instead of forcing a broken prototype, we would highlight everything that 
+                was done and present a polished concept. We focused on what we had—incredible art, 
+                cohesive direction, original music—rather than scrambling to ship buggy mechanics.
+            </p>
+            <div class="image-bubble float-left"><img src="cc-fish2.png" alt="Fish Design 2"></div>
+            <p class="section-text">
+                That pivot meant packaging our vision in a way judges could understand and get excited 
+                about. The result was a presentation that showed not just what we made, but what Cosmic 
+                Catch could become—and that vision won Most Innovative.
             </p>
         </section>
 
-        <section class="content-section" id="learned">
+        <section class="content-section clearfix" id="learned">
             <h2 class="section-title">What I Learned</h2>
-            <div class="image-bubble"><p class="image-placeholder">[Award Ceremony:<br>Most Innovative]</p></div>
+            <div class="image-bubble"><img src="cc-menu.png" alt="Cosmic Catch Award Winner"></div>
             <p class="section-text">
-                <!-- TODO: Add learnings -->
-                This jam taught me the power of strategic pivots. Sometimes the best project management 
-                decision is knowing when to change direction. A polished partial vision beats a broken 
-                complete one every time.
+                Sometimes you can pick your team, and sometimes you can't. This jam taught me that either 
+                way, understanding your teammates' actual capabilities before scoping is essential. We 
+                asked our programmer to tackle unfamiliar systems without fully understanding the learning 
+                curve involved. Going forward, I'd interview teammates about their comfort zones and 
+                experience levels before committing to technical scope.
+            </p>
+            <p class="section-text">
+                The bigger lesson: always build on a foundation. Establish your bare minimum first—the 
+                smallest version that proves the concept works—then layer on features. We tried to build 
+                both the rhythm system and collection system simultaneously, and ended up with neither. 
+                A working rhythm demo with placeholder art would have been stronger than beautiful art 
+                with no mechanics.
+            </p>
+            <p class="section-text">
+                But here's the flip side: a polished partial vision can still win. Knowing when to pivot 
+                from "ship the prototype" to "sell the concept" is its own skill. Sometimes the best 
+                project management decision is recognizing what you actually have and presenting it with 
+                confidence.
             </p>
         </section>
     </div>
