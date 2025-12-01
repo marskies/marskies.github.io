@@ -3,157 +3,789 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insane Wizard Goes Crazy • Marina DiPonio</title>
+    <title>Insane Wizard Goes Crazy Everywhere • Marina DiPonio</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #1e3442 0%, #142838 25%, #0d1d2e 50%, #081524 75%, #040d1a 100%); min-height: 100vh; color: #fff; }
-        .particle { position: fixed; background: radial-gradient(circle, rgba(200, 220, 240, 0.3) 0%, transparent 70%); border-radius: 50%; pointer-events: none; animation: float-up linear infinite; }
-        @keyframes float-up { 0% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-10vh); opacity: 0; } }
-        .depth-meter { position: fixed; right: 3rem; top: 50%; transform: translateY(-50%); z-index: 1000; }
-        .depth-line { width: 1px; height: 200px; background: linear-gradient(to bottom, rgba(180, 200, 220, 0.4) 0%, rgba(140, 160, 200, 0.3) 50%, rgba(180, 140, 120, 0.4) 100%); position: relative; }
-        .depth-marker { position: absolute; right: -4px; width: 8px; height: 8px; background: rgba(200, 220, 240, 0.6); border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
-        .depth-marker:hover { transform: scale(1.8); background: rgba(220, 240, 255, 0.9); box-shadow: 0 0 15px rgba(200, 220, 240, 0.6); }
-        .depth-marker.active { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); transform: scale(1.5); }
-        .depth-label { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 0.75rem; font-weight: 300; letter-spacing: 0.15rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-        .depth-marker:hover .depth-label { opacity: 1; }
-        .top-nav { position: fixed; top: 0; left: 0; width: 100%; background: rgba(10, 20, 35, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(200, 220, 240, 0.2); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .nav-btn { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: inline-block; }
-        .nav-btn:hover { border-color: rgba(200, 220, 240, 0.6); background: rgba(10, 20, 35, 0.8); transform: translateX(-3px); }
-        .nav-btn.next:hover { transform: translateX(3px); }
-        .nav-center { display: flex; gap: 1rem; align-items: center; }
-        .sound-toggle { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
-        .sound-toggle:hover { border-color: rgba(200, 220, 240, 0.5); color: rgba(255, 255, 255, 0.9); }
-        .sound-toggle.active { color: rgba(200, 220, 240, 1); border-color: rgba(200, 220, 240, 0.4); }
-        .project-content { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
-        .project-header { margin-bottom: 4rem; text-align: center; }
-        .header-role-tags { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
-        .role-tag { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid; }
-        .role-tag.role-pm { color: rgba(129, 212, 250, 0.9); border-color: rgba(129, 212, 250, 0.4); background: rgba(129, 212, 250, 0.1); }
-        .role-tag.role-uiux { color: rgba(186, 164, 212, 0.9); border-color: rgba(186, 164, 212, 0.4); background: rgba(186, 164, 212, 0.1); }
-        .project-title { font-size: 4.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: rgba(220, 240, 255, 0.95); margin-bottom: 1rem; letter-spacing: 0.05rem; }
-        .project-subtitle { font-size: 1.2rem; font-weight: 300; color: rgba(200, 220, 240, 0.6); letter-spacing: 0.1rem; }
-        .project-meta { display: flex; gap: 3rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
-        .meta-item { text-align: center; }
-        .meta-label { font-size: 0.75rem; color: rgba(200, 220, 240, 0.5); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 0.5rem; }
-        .meta-value { font-size: 1.1rem; color: rgba(220, 240, 255, 0.9); }
-        .contributions-section { background: rgba(10, 20, 35, 0.4); border: 1px solid rgba(200, 220, 240, 0.15); border-radius: 10px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(10px); }
-        .contributions-title { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; text-align: center; letter-spacing: 0.05rem; }
-        .contributions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .contribution-column { padding: 1.5rem; border-radius: 8px; background: rgba(0, 0, 0, 0.2); }
-        .contribution-column.pm { border-left: 3px solid rgba(129, 212, 250, 0.6); }
-        .contribution-column.uiux { border-left: 3px solid rgba(186, 164, 212, 0.6); }
-        .contribution-role-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1rem; text-transform: uppercase; margin-bottom: 1rem; }
-        .contribution-column.pm .contribution-role-title { color: rgba(129, 212, 250, 0.9); }
-        .contribution-column.uiux .contribution-role-title { color: rgba(186, 164, 212, 0.9); }
-        .contribution-list { list-style: none; }
-        .contribution-list li { font-size: 0.95rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.7; margin-bottom: 0.8rem; padding-left: 1rem; position: relative; }
-        .contribution-list li::before { content: '→'; position: absolute; left: 0; color: rgba(200, 220, 240, 0.4); }
-        .content-section { margin-bottom: 6rem; scroll-margin-top: 120px; }
-        .section-title { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; letter-spacing: 0.05rem; }
-        .section-text { font-size: 1.1rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.9; margin-bottom: 2rem; }
-        .image-bubble { width: 300px; height: 300px; border-radius: 50%; background: rgba(100, 181, 246, 0.1); border: 2px solid rgba(100, 181, 246, 0.3); display: flex; align-items: center; justify-content: center; margin: 3rem auto; position: relative; overflow: hidden; }
-        .image-bubble.float-right { float: right; margin: 0 0 2rem 3rem; }
-        .image-bubble.float-left { float: left; margin: 0 3rem 2rem 0; }
-        .image-bubble::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%); animation: bubble-pulse 3s ease-in-out infinite; }
-        @keyframes bubble-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
-        .image-placeholder { font-size: 0.9rem; color: rgba(200, 220, 240, 0.6); text-align: center; z-index: 1; letter-spacing: 0.1rem; }
-        @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .nav-center { order: -1; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom,
+                #1e3442 0%,
+                #142838 25%,
+                #0d1d2e 50%,
+                #081524 75%,
+                #040d1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            background: radial-gradient(circle, rgba(200, 220, 240, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        /* Depth meter for project pages */
+        .depth-meter {
+            position: fixed;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .depth-line {
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(to bottom, 
+                rgba(180, 200, 220, 0.4) 0%,
+                rgba(140, 160, 200, 0.3) 50%,
+                rgba(180, 140, 120, 0.4) 100%);
+            position: relative;
+        }
+
+        .depth-marker {
+            position: absolute;
+            right: -4px;
+            width: 8px;
+            height: 8px;
+            background: rgba(200, 220, 240, 0.6);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .depth-marker:hover {
+            transform: scale(1.8);
+            background: rgba(220, 240, 255, 0.9);
+            box-shadow: 0 0 15px rgba(200, 220, 240, 0.6);
+        }
+
+        .depth-marker.active {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.5);
+        }
+
+        .depth-label {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .depth-marker:hover .depth-label {
+            opacity: 1;
+        }
+
+        /* Top navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 20, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(200, 220, 240, 0.2);
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(200, 220, 240, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            border-color: rgba(200, 220, 240, 0.6);
+            background: rgba(10, 20, 35, 0.8);
+            transform: translateX(-3px);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-spacer {
+            width: 100px;
+        }
+
+        /* Sound toggle in nav */
+        .sound-toggle {
+            background: transparent;
+            border: 1px solid rgba(200, 220, 240, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sound-toggle:hover {
+            border-color: rgba(200, 220, 240, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .sound-toggle.active {
+            color: rgba(200, 220, 240, 1);
+            border-color: rgba(200, 220, 240, 0.4);
+        }
+
+        /* Content */
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 3rem 4rem;
+        }
+
+        .project-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        /* Role tags in header */
+        .header-role-tags {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .role-tag {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid;
+        }
+
+        .role-tag.role-pm {
+            color: rgba(129, 212, 250, 0.9);
+            border-color: rgba(129, 212, 250, 0.4);
+            background: rgba(129, 212, 250, 0.1);
+        }
+
+        .role-tag.role-uiux {
+            color: rgba(186, 164, 212, 0.9);
+            border-color: rgba(186, 164, 212, 0.4);
+            background: rgba(186, 164, 212, 0.1);
+        }
+
+        .role-tag.role-research {
+            color: rgba(129, 199, 132, 0.9);
+            border-color: rgba(129, 199, 132, 0.4);
+            background: rgba(129, 199, 132, 0.1);
+        }
+
+        .project-title {
+            font-size: 4.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            color: rgba(220, 240, 255, 0.95);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.6);
+            letter-spacing: 0.1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: rgba(200, 220, 240, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            color: rgba(220, 240, 255, 0.9);
+        }
+
+        /* Links */
+        .project-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            background: transparent;
+            border: 1px solid rgba(100, 181, 246, 0.4);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            color: rgba(100, 181, 246, 0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(100, 181, 246, 0.1);
+            border-color: rgba(100, 181, 246, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* My Contributions Section */
+        .contributions-section {
+            background: rgba(10, 20, 35, 0.4);
+            border: 1px solid rgba(200, 220, 240, 0.15);
+            border-radius: 10px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .contributions-title {
+            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(200, 220, 240, 0.95);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 0.05rem;
+        }
+
+        .contributions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .contribution-column {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .contribution-column.pm {
+            border-left: 3px solid rgba(129, 212, 250, 0.6);
+        }
+
+        .contribution-column.uiux {
+            border-left: 3px solid rgba(186, 164, 212, 0.6);
+        }
+
+        .contribution-column.research {
+            border-left: 3px solid rgba(129, 199, 132, 0.6);
+        }
+
+        .contribution-role-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .contribution-column.pm .contribution-role-title {
+            color: rgba(129, 212, 250, 0.9);
+        }
+
+        .contribution-column.uiux .contribution-role-title {
+            color: rgba(186, 164, 212, 0.9);
+        }
+
+        .contribution-column.research .contribution-role-title {
+            color: rgba(129, 199, 132, 0.9);
+        }
+
+        .contribution-list {
+            list-style: none;
+        }
+
+        .contribution-list li {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.8);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .contribution-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: rgba(200, 220, 240, 0.4);
+        }
+
+        /* Content sections */
+        .content-section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 120px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: rgba(200, 220, 240, 0.95);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(200, 220, 240, 0.8);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Image bubble placeholders */
+        .image-bubble {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(100, 181, 246, 0.1);
+            border: 2px solid rgba(100, 181, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-bubble.float-right {
+            float: right;
+            margin: 0 0 2rem 3rem;
+        }
+
+        .image-bubble.float-left {
+            float: left;
+            margin: 0 3rem 2rem 0;
+        }
+
+        .image-bubble::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%);
+            animation: bubble-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes bubble-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .image-placeholder {
+            font-size: 0.9rem;
+            color: rgba(200, 220, 240, 0.6);
+            text-align: center;
+            z-index: 1;
+            letter-spacing: 0.1rem;
+        }
+
+        @media (max-width: 968px) {
+            .top-nav {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-center {
+                order: -1;
+            }
+
+            .nav-spacer {
+                display: none;
+            }
+
+            .project-content {
+                padding: 12rem 1.5rem 3rem;
+            }
+
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-meta {
+                gap: 1.5rem;
+            }
+
+            .image-bubble {
+                width: 250px;
+                height: 250px;
+            }
+
+            .image-bubble.float-right,
+            .image-bubble.float-left {
+                float: none;
+                margin: 2rem auto;
+            }
+
+            .depth-meter {
+                right: 1.5rem;
+            }
+
+            .contributions-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .contributions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
+    <audio id="oceanAudio" loop>
+        <source src="underwaterambiance.mp3" type="audio/mpeg">
+    </audio>
 
+    <!-- Top Navigation -->
     <nav class="top-nav">
-        <a href="ice-accessibility.html" class="nav-btn">← Previous</a>
+        <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
         <div class="nav-center">
             <a href="index.html" class="nav-btn">Home</a>
             <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
         </div>
-        <a href="tick-tock-trivia.html" class="nav-btn next">Next →</a>
+        <div class="nav-spacer"></div>
     </nav>
 
+    <!-- Depth Meter -->
     <div class="depth-meter">
         <div class="depth-line">
-            <div class="depth-marker active" style="top: 0;" onclick="scrollToSection('overview')"><div class="depth-label">Overview</div></div>
-            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('chaos')"><div class="depth-label">The Chaos</div></div>
-            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('design')"><div class="depth-label">Design</div></div>
-            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('learned')"><div class="depth-label">What I Learned</div></div>
+            <div class="depth-marker active" style="top: 0;" onclick="scrollToSection('overview')">
+                <div class="depth-label">Overview</div>
+            </div>
+            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('final-piece')">
+                <div class="depth-label">Final Piece</div>
+            </div>
+            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('process')">
+                <div class="depth-label">Process</div>
+            </div>
+            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('learned')">
+                <div class="depth-label">What I Learned</div>
+            </div>
         </div>
     </div>
 
+    <!-- Project Content -->
     <div class="project-content">
+        <!-- Header -->
         <div class="project-header">
             <div class="header-role-tags">
                 <span class="role-tag role-pm">Project Management</span>
                 <span class="role-tag role-uiux">UI/UX Design</span>
             </div>
+            
             <h1 class="project-title">Insane Wizard Goes Crazy Everywhere</h1>
-            <p class="project-subtitle">Chaotic Action Game</p>
+            <p class="project-subtitle">Chaotic First-Person Action Game</p>
+            
             <div class="project-meta">
-                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">Game Jam</div></div>
-                <div class="meta-item"><div class="meta-label">Team</div><div class="meta-value">Small Team</div></div>
-                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Unity, Figma</div></div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div class="meta-value">2 Weeks</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Team Size</div>
+                    <div class="meta-value">6 Members</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Tools</div>
+                    <div class="meta-value">Unity, Canva, Itch.io</div>
+                </div>
+            </div>
+
+            <div class="project-links">
+                <a href="https://marskies.itch.io/iwgce" target="_blank" class="project-link">Play Game</a>
             </div>
         </div>
 
+        <!-- My Contributions -->
         <div class="contributions-section">
             <h2 class="contributions-title">My Contributions</h2>
             <div class="contributions-grid">
                 <div class="contribution-column pm">
                     <h3 class="contribution-role-title">Project Management</h3>
                     <ul class="contribution-list">
-                        <li>Coordinated rapid game jam development</li>
-                        <li>Managed scope under tight deadline</li>
-                        <li>Prioritized features for maximum impact</li>
-                        <li>Ensured creative vision alignment</li>
+                        <li>Created task lists for all departments (programming, art, audio, UI)</li>
+                        <li>Managed scope within tight timeline constraints</li>
+                        <li>Organized meetings and documented meeting notes</li>
+                        <li>Aligned scope with teammates' capacities and skill sets</li>
+                        <li>Created and supported deadlines across all workstreams</li>
                     </ul>
                 </div>
                 <div class="contribution-column uiux">
                     <h3 class="contribution-role-title">UI/UX Design</h3>
                     <ul class="contribution-list">
-                        <li>Designed chaotic yet readable interfaces</li>
-                        <li>Created UI that matches frenetic gameplay</li>
-                        <li>Built clear game state communication</li>
-                        <li>Balanced visual chaos with usability</li>
+                        <li>Researched competitive analysis of similar games against our goals</li>
+                        <li>Researched crosshair accuracy communication best practices</li>
+                        <li>Created multiple HUD iterations for optimal player feedback</li>
+                        <li>Communicated implementation methods to developers</li>
+                        <li>Presented and workshopped iterations with team for input</li>
                     </ul>
                 </div>
             </div>
         </div>
 
+        <!-- Overview Section -->
         <section class="content-section" id="overview">
             <h2 class="section-title">Overview</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Game Screenshot:<br>Wizard Chaos]</p></div>
-            <p class="section-text"><!-- TODO: Add overview --> Content coming soon. This fast-paced game jam project challenged us to create controlled chaos.</p>
+            
+            <div class="image-bubble float-right" style="background-image: url('images/wizard-screenshot.png'); background-size: cover; background-position: center;">
+            </div>
+            
+            <p class="section-text">
+                Insane Wizard Goes Crazy Everywhere is a first-person action game where players wield magical spells 
+                to survive waves of goblins and trolls in a cathedral dungeon. Built in just two weeks, the project 
+                challenged our team of six to deliver a polished, playable experience with tight scope management 
+                and rapid iteration.
+            </p>
+            
+            <p class="section-text">
+                The game features spell-based combat with a unique dual-hand system—Magic Missile in the main hand 
+                for mana regeneration, and powerful spells like Fireball and Laser Beam in the off-hand. Our design 
+                pillars focused on fantasy elements, satisfying magic mechanics, and delivering the smallest viable 
+                demo that showcased each team member's skills.
+            </p>
+
+            <div class="image-bubble" style="background-image: url('images/wizard-action.png'); background-size: cover; background-position: center;">
+            </div>
         </section>
 
-        <section class="content-section" id="chaos">
-            <h2 class="section-title">Embracing the Chaos</h2>
-            <div class="image-bubble float-left"><p class="image-placeholder">[Gameplay:<br>Action Sequence]</p></div>
-            <p class="section-text"><!-- TODO: Add chaos description --> Content coming soon.</p>
+        <!-- Final Piece Section -->
+        <section class="content-section" id="final-piece">
+            <h2 class="section-title">Final Piece</h2>
+            
+            <div class="image-bubble float-left" style="background-image: url('images/wizard-ui.png'); background-size: cover; background-position: center;">
+            </div>
+            
+            <p class="section-text">
+                The final product delivers five waves of increasingly challenging enemies in a stylized cathedral 
+                environment. Players face goblins as medium-tier threats and trolls as tanky heavy enemies, with 
+                wave composition escalating from simple goblin encounters to mixed hordes that test all available spells.
+            </p>
+            
+            <p class="section-text">
+                The UI system communicates critical game state through a health bar, mana meter, spell hotbar, and 
+                wave indicator. I designed the HUD to balance the game's chaotic energy with clear readability—players 
+                needed to track their resources at a glance while focused on fast-paced combat. The mana circle design 
+                went through several iterations based on team feedback to find the right visual weight.
+            </p>
+
+            <p class="section-text">
+                Our cartoonish, darkly whimsical art direction drew inspiration from games like YAP YAP and Hades, 
+                creating a tone that was goofy and surreal while still delivering satisfying combat feedback. The 
+                low-poly cathedral environment with stained glass windows and torchlight gave the dungeon atmosphere 
+                without overscoping our artists.
+            </p>
         </section>
 
-        <section class="content-section" id="design">
-            <h2 class="section-title">Design Approach</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[UI Elements:<br>Interface Design]</p></div>
-            <p class="section-text"><!-- TODO: Add design approach --> Content coming soon.</p>
+        <!-- Process Section -->
+        <section class="content-section" id="process">
+            <h2 class="section-title">Process</h2>
+            
+            <div class="image-bubble float-right" style="background-image: url('images/wizard-action.png'); background-size: cover; background-position: center;">
+            </div>
+            
+            <p class="section-text">
+                Development kicked off with intensive brainstorming sessions where we defined our core concept: 
+                "a wacky little wizard fights waves of goofy goblins and trolls." From there, I helped the team 
+                scope down from ambitious rogue-lite features to a focused demo that would showcase one room, 
+                two enemy types, and three spells.
+            </p>
+            
+            <p class="section-text">
+                I created a comprehensive task list in Trello, breaking work into programming, modeling, UI, and 
+                audio tracks. Each teammate estimated their weekly capacity (ranging from 2-8 hours), and I aligned 
+                deliverables accordingly. Our meeting cadence—Sunday, Monday, and Friday sessions—kept everyone 
+                synchronized without burning out.
+            </p>
+
+            <p class="section-text">
+                For the UI/UX work, I started with competitive analysis of games like Rune Fjell and Terraria to 
+                understand spell hotbar conventions. The crosshair research focused on communicating accuracy and 
+                spell state clearly. I built HUD mockups in Canva, presented them to the team, and iterated based 
+                on developer feedback about implementation feasibility and player testing insights.
+            </p>
+
+            <div class="image-bubble" style="background-image: url('images/wizard-ui.png'); background-size: cover; background-position: center;">
+            </div>
         </section>
 
+        <!-- What I Learned Section -->
         <section class="content-section" id="learned">
             <h2 class="section-title">What I Learned</h2>
-            <div class="image-bubble"><p class="image-placeholder">[Team Photo:<br>Jam Finale]</p></div>
-            <p class="section-text"><!-- TODO: Add learnings --> Content coming soon.</p>
+            
+            <p class="section-text">
+                This project reinforced that appropriate scope is everything. Our team succeeded because everyone 
+                understood their capacity and committed to realistic deliverables. When challenges arose, teammates 
+                collaborated to solve problems rather than pushing through alone—a dynamic I worked hard to foster 
+                through transparent communication and flexible task reassignment.
+            </p>
+
+            <div class="image-bubble float-right" style="background-image: url('images/wizard-team.png'); background-size: cover; background-position: center;">
+            </div>
+            
+            <p class="section-text">
+                I gained confidence in creating UI assets. Early in the project, I hesitated to commit to visual 
+                designs, but iterating through multiple HUD versions with team feedback showed me that rough concepts 
+                spark better discussions than waiting for perfect mockups. The collaborative workshopping process 
+                produced stronger results than I could have achieved designing in isolation.
+            </p>
+            
+            <p class="section-text">
+                Looking back, more emphasis on post-production and marketing would have added extra polish to our 
+                game. We delivered a solid playable experience, but dedicated time for trailer creation, itch.io 
+                page optimization, and social media presence could have given our work more visibility. It's a 
+                lesson I'll carry into future projects—budgeting time for the "sparkle" that helps games stand out.
+            </p>
+
+            <div class="image-bubble" style="background-image: url('images/wizard-screenshot.png'); background-size: cover; background-position: center;">
+            </div>
         </section>
     </div>
 
     <script>
-        function createParticles() { for (let i = 0; i < 15; i++) { const particle = document.createElement('div'); particle.className = 'particle'; particle.style.width = Math.random() * 4 + 2 + 'px'; particle.style.height = particle.style.width; particle.style.left = Math.random() * 100 + '%'; particle.style.animationDuration = Math.random() * 15 + 20 + 's'; particle.style.animationDelay = Math.random() * 10 + 's'; document.body.appendChild(particle); } }
+        // Create floating particles
+        function createParticles() {
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 15 + 20 + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                document.body.appendChild(particle);
+            }
+        }
         createParticles();
-        let soundOn = false; const audio = document.getElementById('oceanAudio'); audio.volume = 0.4;
-        if (localStorage.getItem('soundEnabled') === 'true') { soundOn = true; audio.play(); document.querySelector('.sound-toggle').textContent = 'Sound On'; document.querySelector('.sound-toggle').classList.add('active'); }
-        function toggleSound() { soundOn = !soundOn; const toggle = document.querySelector('.sound-toggle'); if (soundOn) { toggle.textContent = 'Sound On'; toggle.classList.add('active'); audio.play(); localStorage.setItem('soundEnabled', 'true'); } else { toggle.textContent = 'Sound Off'; toggle.classList.remove('active'); audio.pause(); localStorage.setItem('soundEnabled', 'false'); } }
-        function scrollToSection(sectionId) { document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        window.addEventListener('scroll', () => { const sections = ['overview', 'chaos', 'design', 'learned']; const markers = document.querySelectorAll('.depth-marker'); let currentSection = 0; sections.forEach((section, index) => { const element = document.getElementById(section); const rect = element.getBoundingClientRect(); if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) { currentSection = index; } }); markers.forEach((marker, index) => { if (index === currentSection) { marker.classList.add('active'); } else { marker.classList.remove('active'); } }); });
+
+        // Sound toggle
+        let soundOn = false;
+        const audio = document.getElementById('oceanAudio');
+        audio.volume = 0.4;
+
+        if (localStorage.getItem('soundEnabled') === 'true') {
+            soundOn = true;
+            audio.play();
+            document.querySelector('.sound-toggle').textContent = 'Sound On';
+            document.querySelector('.sound-toggle').classList.add('active');
+        }
+
+        function toggleSound() {
+            soundOn = !soundOn;
+            const toggle = document.querySelector('.sound-toggle');
+            
+            if (soundOn) {
+                toggle.textContent = 'Sound On';
+                toggle.classList.add('active');
+                audio.play();
+                localStorage.setItem('soundEnabled', 'true');
+            } else {
+                toggle.textContent = 'Sound Off';
+                toggle.classList.remove('active');
+                audio.pause();
+                localStorage.setItem('soundEnabled', 'false');
+            }
+        }
+
+        // Smooth scroll to sections
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Update active depth marker on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['overview', 'final-piece', 'process', 'learned'];
+            const markers = document.querySelectorAll('.depth-marker');
+            
+            let currentSection = 0;
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
+                    currentSection = index;
+                }
+            });
+
+            markers.forEach((marker, index) => {
+                if (index === currentSection) {
+                    marker.classList.add('active');
+                } else {
+                    marker.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
