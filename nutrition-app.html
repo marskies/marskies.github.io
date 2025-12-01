@@ -63,13 +63,10 @@
     <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
 
     <nav class="top-nav">
-        <a href="social-media-cys.html" class="nav-btn">← Previous</a>
-        <div class="nav-center">
-            <a href="index.html" class="nav-btn">Home</a>
-            <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
-        </div>
-        <a href="uf-club-software.html" class="nav-btn next">Next →</a>
-    </nav>
+    <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
+    <div class="nav-center">...</div>
+    <div class="nav-spacer"></div>
+</nav>
 
     <div class="depth-meter">
         <div class="depth-line">
