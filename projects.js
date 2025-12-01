@@ -146,23 +146,23 @@ const PROJECTS = {
     },
     
     "insane-wizard": {
-    id: "insane-wizard",
-    title: "Insane Wizard Goes Crazy Everywhere",
-    subtitle: "Chaotic Action Game",
-    roles: ["pm", "uiux"],
-    timeline: "2 Weeks",
-    teamSize: "6 Members",
-    tools: ["Unity", "Canva", "Itch.io"],
-    links: {
-        play: "https://marskies.itch.io/iwgce"
-    },
-    thumbnail: "images/insane-wizard-thumb.png",
-    roleDescriptions: {
-        pm: "Created task lists for all departments and managed scope within timeline constraints. Organized meetings, took notes, and aligned scope with teammates' capacities while supporting deadlines.",
-        uiux: "Researched competitive analysis and crosshair accuracy communication. Iterated on HUD designs for optimal player feedback, communicated implementation methods to developers, and workshopped iterations with team."
+        id: "insane-wizard",
+        title: "Insane Wizard Goes Crazy Everywhere",
+        subtitle: "Chaotic Action Game",
+        roles: ["pm", "uiux"],
+        timeline: "2 Weeks",
+        teamSize: "6 Members",
+        tools: ["Unity", "Canva", "Itch.io"],
+        links: {
+            play: "https://marskies.itch.io/iwgce"
+        },
+        thumbnail: "images/insane-wizard-thumb.png",
+        roleDescriptions: {
+            pm: "Created task lists for all departments and managed scope within timeline constraints. Organized meetings, took notes, and aligned scope with teammates' capacities while supporting deadlines.",
+            uiux: "Researched competitive analysis and crosshair accuracy communication. Iterated on HUD designs for optimal player feedback, communicated implementation methods to developers, and workshopped iterations with team."
+        }
     }
-}
-        };
+};
 
 // Helper function to get projects by role
 function getProjectsByRole(role) {
