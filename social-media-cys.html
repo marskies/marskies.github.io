@@ -20,8 +20,6 @@
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; background: rgba(10, 20, 35, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(200, 220, 240, 0.2); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
         .nav-btn { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: inline-block; }
         .nav-btn:hover { border-color: rgba(200, 220, 240, 0.6); background: rgba(10, 20, 35, 0.8); transform: translateX(-3px); }
-        .nav-btn.next:hover { transform: translateX(3px); }
-        .nav-center { display: flex; gap: 1rem; align-items: center; }
         .sound-toggle { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
         .sound-toggle:hover { border-color: rgba(200, 220, 240, 0.5); color: rgba(255, 255, 255, 0.9); }
         .sound-toggle.active { color: rgba(200, 220, 240, 1); border-color: rgba(200, 220, 240, 0.4); }
@@ -49,23 +47,27 @@
         .content-section { margin-bottom: 6rem; scroll-margin-top: 120px; }
         .section-title { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; letter-spacing: 0.05rem; }
         .section-text { font-size: 1.1rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.9; margin-bottom: 2rem; }
+        .highlight-stat { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; color: rgba(129, 199, 132, 0.9); text-align: center; margin: 2rem 0; }
+        .highlight-stat span { display: block; font-size: 1rem; font-family: 'Inter', sans-serif; color: rgba(200, 220, 240, 0.6); margin-top: 0.5rem; }
+        .stats-row { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin: 3rem 0; }
         .image-bubble { width: 300px; height: 300px; border-radius: 50%; background: rgba(100, 181, 246, 0.1); border: 2px solid rgba(100, 181, 246, 0.3); display: flex; align-items: center; justify-content: center; margin: 3rem auto; position: relative; overflow: hidden; }
         .image-bubble.float-right { float: right; margin: 0 0 2rem 3rem; }
         .image-bubble.float-left { float: left; margin: 0 3rem 2rem 0; }
         .image-bubble::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%); animation: bubble-pulse 3s ease-in-out infinite; }
         @keyframes bubble-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
-        .image-placeholder { font-size: 0.9rem; color: rgba(200, 220, 240, 0.6); text-align: center; z-index: 1; letter-spacing: 0.1rem; }
-        @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .nav-center { order: -1; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } }
+        .image-bubble img { width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 50%; }
+        .clearfix::after { content: ""; clear: both; display: table; }
+        @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
 
     <nav class="top-nav">
-    <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
-    <a href="index.html" class="nav-btn">Home</a>
-    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
-</nav>
+        <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
+        <a href="index.html" class="nav-btn">Home</a>
+        <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
+    </nav>
 
     <div class="depth-meter">
         <div class="depth-line">
@@ -82,11 +84,11 @@
                 <span class="role-tag role-pm">Project Management</span>
             </div>
             <h1 class="project-title">Social Media Campaign</h1>
-            <p class="project-subtitle">Strategic Marketing at CYS</p>
+            <p class="project-subtitle">The Courtyards at UF</p>
             <div class="project-meta">
                 <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">6 Months</div></div>
-                <div class="meta-item"><div class="meta-label">Team</div><div class="meta-value">Marketing Team</div></div>
-                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">CRM, Analytics, Content Planning</div></div>
+                <div class="meta-item"><div class="meta-label">Company</div><div class="meta-value">Contemporary Management Concepts</div></div>
+                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">CRM, Canva, Buffer</div></div>
             </div>
         </div>
 
@@ -96,37 +98,89 @@
                 <div class="contribution-column pm">
                     <h3 class="contribution-role-title">Project Management</h3>
                     <ul class="contribution-list">
-                        <li>Orchestrated high-impact social media campaigns</li>
-                        <li>Generated 6,332 views in one month</li>
+                        <li>Created resident life and informational content campaigns</li>
+                        <li>Researched optimal posting times by region and demographic</li>
+                        <li>Managed daily lead tracking and CRM engagement</li>
                         <li>Achieved 60%+ follower interaction rate</li>
-                        <li>Streamlined lead tracking and CRM engagement</li>
+                        <li>Generated 6,332 views in one month</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <section class="content-section" id="overview">
+        <section class="content-section clearfix" id="overview">
             <h2 class="section-title">Overview</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Campaign Analytics:<br>Performance Dashboard]</p></div>
-            <p class="section-text"><!-- TODO: Add overview --> Content coming soon.</p>
+            <div class="image-bubble float-right"><img src="images/cys-instagram.png" alt="The Courtyards Instagram Page"></div>
+            <p class="section-text">
+                The Courtyards is a student-focused apartment complex half a block from UF's campus, managed 
+                by Contemporary Management Concepts. My role combined social media marketing with hands-on 
+                CRM management—creating content that drove engagement while personally tracking and nurturing 
+                leads through the leasing pipeline.
+            </p>
+            <p class="section-text">
+                The challenge was reaching students where they actually spend time (social media) while 
+                maintaining the personal touch that converts interest into signed leases. I developed a 
+                strategy that balanced resident life content—building community and FOMO—with practical 
+                deadline reminders and activity announcements.
+            </p>
+            
+            <div class="stats-row">
+                <div class="highlight-stat">6,332<span>Views in One Month</span></div>
+                <div class="highlight-stat">60%+<span>Follower Interaction Rate</span></div>
+            </div>
         </section>
 
-        <section class="content-section" id="strategy">
+        <section class="content-section clearfix" id="strategy">
             <h2 class="section-title">Strategy</h2>
-            <div class="image-bubble float-left"><p class="image-placeholder">[Content Calendar:<br>Planning Overview]</p></div>
-            <p class="section-text"><!-- TODO: Add strategy --> Content coming soon.</p>
+            <div class="image-bubble float-left"><img src="images/cys-content.png" alt="Content Strategy"></div>
+            <p class="section-text">
+                I approached posting time optimization like a research project. Generic "best times to post" 
+                advice wasn't cutting it, so I dug deeper—researching optimal timing by region, time zone, 
+                and demographic. The more specific the data, the better the results. I tested different 
+                combinations and tracked what actually moved the needle for our specific audience of 
+                UF-adjacent students.
+            </p>
+            <p class="section-text">
+                Content fell into two buckets: resident life (community events, apartment features, lifestyle 
+                content) and informational (deadline reminders, leasing updates, activity announcements). The 
+                resident life content built aspiration—showing prospective tenants what living at The Courtyards 
+                actually looked like. The informational content drove action at key decision points in the 
+                leasing cycle.
+            </p>
         </section>
 
-        <section class="content-section" id="execution">
+        <section class="content-section clearfix" id="execution">
             <h2 class="section-title">Execution</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Social Posts:<br>Content Examples]</p></div>
-            <p class="section-text"><!-- TODO: Add execution --> Content coming soon.</p>
+            <div class="image-bubble float-right"><img src="images/cys-posts.png" alt="Social Media Posts"></div>
+            <p class="section-text">
+                Beyond social media, I managed the CRM side of the operation. Each day I worked, I reviewed 
+                incoming messages and cross-referenced them with notes from property tours. This wasn't 
+                automated follow-up—it was personal outreach informed by actual conversations.
+            </p>
+            <p class="section-text">
+                I contacted leads through the right channel at the right time: emails for detailed information, 
+                texts for quick reminders, calls for prospects who needed that extra push. The key was treating 
+                each lead as a person with specific concerns, not just a name in a database. Tour notes gave me 
+                context—what they were excited about, what hesitations they had—so my follow-ups could address 
+                real questions rather than sending generic marketing copy.
+            </p>
         </section>
 
-        <section class="content-section" id="results">
+        <section class="content-section clearfix" id="results">
             <h2 class="section-title">Results</h2>
-            <div class="image-bubble"><p class="image-placeholder">[Metrics:<br>Key Achievements]</p></div>
-            <p class="section-text"><!-- TODO: Add results --> Content coming soon.</p>
+            <p class="section-text">
+                The numbers validated the strategy: 6,332 views in a single month and over 60% follower 
+                interaction rate. But the real win was in the process—building a repeatable system that 
+                connected social media engagement to actual leasing outcomes.
+            </p>
+            <p class="section-text">
+                This role taught me that marketing and user research share the same core skill: understanding 
+                what people actually care about and meeting them there. The posting time research was 
+                fundamentally user research. The personalized CRM follow-ups were empathy in action. The 
+                content strategy was hypothesis testing. These aren't separate disciplines—they're all 
+                about paying attention to what works and doing more of it.
+            </p>
+            <div class="image-bubble"><img src="images/cys-analytics.png" alt="Campaign Analytics"></div>
         </section>
     </div>
 
