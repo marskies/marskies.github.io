@@ -20,8 +20,6 @@
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; background: rgba(10, 20, 35, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(200, 220, 240, 0.2); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
         .nav-btn { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: inline-block; }
         .nav-btn:hover { border-color: rgba(200, 220, 240, 0.6); background: rgba(10, 20, 35, 0.8); transform: translateX(-3px); }
-        .nav-btn.next:hover { transform: translateX(3px); }
-        .nav-center { display: flex; gap: 1rem; align-items: center; }
         .sound-toggle { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
         .sound-toggle:hover { border-color: rgba(200, 220, 240, 0.5); color: rgba(255, 255, 255, 0.9); }
         .sound-toggle.active { color: rgba(200, 220, 240, 1); border-color: rgba(200, 220, 240, 0.4); }
@@ -30,20 +28,26 @@
         .header-role-tags { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .role-tag { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid; }
         .role-tag.role-uiux { color: rgba(186, 164, 212, 0.9); border-color: rgba(186, 164, 212, 0.4); background: rgba(186, 164, 212, 0.1); }
+        .role-tag.role-dev { color: rgba(255, 183, 77, 0.9); border-color: rgba(255, 183, 77, 0.4); background: rgba(255, 183, 77, 0.1); }
         .project-title { font-size: 4.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: rgba(220, 240, 255, 0.95); margin-bottom: 1rem; letter-spacing: 0.05rem; }
         .project-subtitle { font-size: 1.2rem; font-weight: 300; color: rgba(200, 220, 240, 0.6); letter-spacing: 0.1rem; }
         .project-meta { display: flex; gap: 3rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+        .project-links { display: flex; gap: 2rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; }
+        .project-link { background: transparent; border: 1px solid rgba(100, 181, 246, 0.4); padding: 1rem 2rem; border-radius: 30px; color: rgba(100, 181, 246, 0.9); text-decoration: none; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; transition: all 0.3s ease; }
+        .project-link:hover { background: rgba(100, 181, 246, 0.1); border-color: rgba(100, 181, 246, 0.7); transform: translateY(-2px); }
         .meta-item { text-align: center; }
         .meta-label { font-size: 0.75rem; color: rgba(200, 220, 240, 0.5); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 0.5rem; }
         .meta-value { font-size: 1.1rem; color: rgba(220, 240, 255, 0.9); }
-        .status-badge { display: inline-block; background: rgba(255, 193, 7, 0.2); border: 1px solid rgba(255, 193, 7, 0.4); color: rgba(255, 193, 7, 0.9); padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.85rem; letter-spacing: 0.1rem; text-transform: uppercase; margin-top: 2rem; }
+        .status-badge { display: inline-block; background: rgba(129, 199, 132, 0.2); border: 1px solid rgba(129, 199, 132, 0.4); color: rgba(129, 199, 132, 0.9); padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.85rem; letter-spacing: 0.1rem; text-transform: uppercase; margin-top: 2rem; }
         .contributions-section { background: rgba(10, 20, 35, 0.4); border: 1px solid rgba(200, 220, 240, 0.15); border-radius: 10px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(10px); }
         .contributions-title { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; text-align: center; letter-spacing: 0.05rem; }
         .contributions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .contribution-column { padding: 1.5rem; border-radius: 8px; background: rgba(0, 0, 0, 0.2); }
         .contribution-column.uiux { border-left: 3px solid rgba(186, 164, 212, 0.6); }
+        .contribution-column.dev { border-left: 3px solid rgba(255, 183, 77, 0.6); }
         .contribution-role-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1rem; text-transform: uppercase; margin-bottom: 1rem; }
         .contribution-column.uiux .contribution-role-title { color: rgba(186, 164, 212, 0.9); }
+        .contribution-column.dev .contribution-role-title { color: rgba(255, 183, 77, 0.9); }
         .contribution-list { list-style: none; }
         .contribution-list li { font-size: 0.95rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.7; margin-bottom: 0.8rem; padding-left: 1rem; position: relative; }
         .contribution-list li::before { content: '→'; position: absolute; left: 0; color: rgba(200, 220, 240, 0.4); }
@@ -55,18 +59,24 @@
         .image-bubble.float-left { float: left; margin: 0 3rem 2rem 0; }
         .image-bubble::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%); animation: bubble-pulse 3s ease-in-out infinite; }
         @keyframes bubble-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
-        .image-placeholder { font-size: 0.9rem; color: rgba(200, 220, 240, 0.6); text-align: center; z-index: 1; letter-spacing: 0.1rem; }
-        @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .nav-center { order: -1; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } }
+        .image-bubble img { width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 50%; }
+        .clearfix::after { content: ""; clear: both; display: table; }
+        .flow-diagram { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 3rem 0; padding: 2rem; background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
+        .flow-step { text-align: center; padding: 1rem 1.5rem; background: rgba(100, 181, 246, 0.1); border: 1px solid rgba(100, 181, 246, 0.3); border-radius: 8px; }
+        .flow-step-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .flow-step-label { font-size: 0.85rem; color: rgba(200, 220, 240, 0.8); }
+        .flow-arrow { font-size: 1.5rem; color: rgba(200, 220, 240, 0.4); }
+        @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } .flow-diagram { flex-direction: column; } .flow-arrow { transform: rotate(90deg); } }
     </style>
 </head>
 <body>
     <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
 
     <nav class="top-nav">
-    <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
-    <a href="index.html" class="nav-btn">Home</a>
-    <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
-</nav>
+        <button onclick="history.length > 1 ? history.back() : window.location='index.html'" class="nav-btn">← Back</button>
+        <a href="index.html" class="nav-btn">Home</a>
+        <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
+    </nav>
 
     <div class="depth-meter">
         <div class="depth-line">
@@ -83,13 +93,15 @@
                 <span class="role-tag role-uiux">UI/UX Design</span>
             </div>
             <h1 class="project-title">Nutrition Tracking App</h1>
-            <p class="project-subtitle">AI-Powered Food Logging</p>
+            <p class="project-subtitle">AI-Powered Photo Recognition</p>
             <div class="project-meta">
-                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">In Development</div></div>
                 <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Solo Project</div></div>
-                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Figma, Lovable, n8n, AI</div></div>
+                <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Functional MVP</div></div>
+                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Lovable, n8n, OpenAI, Anthropic</div></div>
             </div>
-            <div class="status-badge">🚧 In Development</div>
+            <div class="project-links">
+                <a href="https://www.canva.com/design/DAG4ySvQZJM/r73Xp-GmwY8z1KPgRzT1RA/view?utm_content=DAG4ySvQZJM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hab7b215aa0" target="_blank" class="project-link">View Presentation</a>
+            </div>
         </div>
 
         <div class="contributions-section">
@@ -98,37 +110,98 @@
                 <div class="contribution-column uiux">
                     <h3 class="contribution-role-title">UI/UX Design</h3>
                     <ul class="contribution-list">
-                        <li>Designing frictionless food logging experience</li>
-                        <li>Exploring AI image analysis for nutrition extraction</li>
-                        <li>Creating personalized insights visualization</li>
-                        <li>Ensuring accessible data presentation</li>
+                        <li>Designed frictionless food logging experience</li>
+                        <li>Created intuitive photo capture and results flow</li>
+                        <li>Developed clear macro nutrition data visualization</li>
+                        <li>Ensured accessible data presentation</li>
+                        <li>Integrated AI/LLM for image recognition</li>
+                        <li>Built photo processing pipeline with n8n automation</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <section class="content-section" id="overview">
+        <section class="content-section clearfix" id="overview">
             <h2 class="section-title">Overview</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[App Mockup:<br>Main Interface]</p></div>
-            <p class="section-text"><!-- TODO: Add overview --> Content coming soon. This project explores how AI image analysis can simplify nutrition tracking.</p>
+            <div class="image-bubble float-right"><img src="images/nutrition-app.png" alt="Nutrition App Interface"></div>
+            <p class="section-text">
+                Tracking calories and macros is essential for many people—athletes optimizing performance, 
+                individuals managing health conditions, anyone trying to understand what they're actually 
+                eating. But manual food logging is tedious enough that most people abandon it within weeks. 
+                The friction isn't motivation; it's the process itself.
+            </p>
+            <p class="section-text">
+                I built a nutrition tracking app that uses AI photo recognition to extract macro nutritional 
+                data from images of food. Snap a photo, get your calories, protein, carbs, and fats. The goal 
+                was eliminating the manual entry barrier that kills most tracking habits before they form.
+            </p>
         </section>
 
-        <section class="content-section" id="problem">
+        <section class="content-section clearfix" id="problem">
             <h2 class="section-title">The Problem</h2>
-            <div class="image-bubble float-left"><p class="image-placeholder">[User Research:<br>Pain Points]</p></div>
-            <p class="section-text"><!-- TODO: Add problem --> Content coming soon.</p>
+            <div class="image-bubble float-left"><img src="images/nutrition-problem.png" alt="Manual Logging Pain Points"></div>
+            <p class="section-text">
+                Traditional nutrition apps require users to search databases, select portion sizes, and manually 
+                enter every item in every meal. For a single lunch, that might mean five separate entries with 
+                estimated weights and brand selections. Multiply that by three meals plus snacks, and you're 
+                spending significant time on data entry instead of actually eating.
+            </p>
+            <p class="section-text">
+                The people who need tracking most—those managing diabetes, recovering from eating disorders, 
+                or following strict dietary protocols—are often the same people for whom the cognitive load 
+                of manual logging creates the most friction. A simpler input method doesn't just save time; 
+                it makes consistent tracking actually sustainable.
+            </p>
         </section>
 
-        <section class="content-section" id="solution">
+        <section class="content-section clearfix" id="solution">
             <h2 class="section-title">The Solution</h2>
-            <div class="image-bubble float-right"><p class="image-placeholder">[Wireframes:<br>Key Screens]</p></div>
-            <p class="section-text"><!-- TODO: Add solution --> Content coming soon.</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-step-icon">📸</div>
+                    <div class="flow-step-label">Take Photo</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">🤖</div>
+                    <div class="flow-step-label">AI Processing</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">📊</div>
+                    <div class="flow-step-label">Macro Output</div>
+                </div>
+            </div>
+            
+            <p class="section-text">
+                The app reduces food logging to a single action: take a photo. The AI analyzes the image, 
+                identifies the food items, estimates portions, and outputs calorie and macro data. Users 
+                get immediate feedback without searching databases or guessing serving sizes.
+            </p>
+            <div class="image-bubble float-right"><img src="images/nutrition-results.png" alt="Macro Results Display"></div>
+            <p class="section-text">
+                I built the processing pipeline using n8n for automation, connecting the photo input to an 
+                LLM for image analysis and nutrition estimation. The interface was designed in Figma and 
+                built with Lovable, prioritizing speed and clarity over feature bloat. The current MVP is 
+                fully functional—you can use it today to track meals.
+            </p>
         </section>
 
-        <section class="content-section" id="next-steps">
+        <section class="content-section clearfix" id="next-steps">
             <h2 class="section-title">Next Steps</h2>
-            <div class="image-bubble"><p class="image-placeholder">[Roadmap:<br>Future Features]</p></div>
-            <p class="section-text"><!-- TODO: Add next steps --> Content coming soon.</p>
+            <p class="section-text">
+                The MVP proves the concept works. The next milestone is improving accuracy, which requires 
+                upgrading the LLM's capacity and processing power. Better models mean more reliable food 
+                identification, more accurate portion estimation, and more precise macro calculations.
+            </p>
+            <p class="section-text">
+                With additional funding, I'd also expand the feature set: meal history tracking, daily/weekly 
+                summaries, goal setting, and integration with fitness apps. But the core insight remains the 
+                same—reduce friction to the absolute minimum, and people will actually track. Everything else 
+                is iteration on that foundation.
+            </p>
+            <div class="image-bubble"><img src="images/nutrition-future.png" alt="Future Development Roadmap"></div>
         </section>
     </div>
 
