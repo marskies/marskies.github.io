@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Submerged · Mockup · Marina DiPonio</title>
+<style>
+  :root{
+    --ink:#eaf2f5;
+    --ink-dim:rgba(234,242,245,.70);
+    --ink-mute:rgba(234,242,245,.50);
+    --pane:rgba(12,34,48,.42);
+    --pane-strong:rgba(8,24,36,.58);
+    --edge:rgba(190,220,235,.14);
+    --edge-bright:rgba(220,240,250,.22);
+    --accent:#8fd4d6;
+    --accent-dim:rgba(143,212,214,.55);
+    --radius:22px;
+    --radius-sm:14px;
+    --shadow:0 30px 60px -20px rgba(0,0,0,.55), 0 12px 28px -12px rgba(0,0,0,.45);
+    --serif:"Cormorant Garamond","EB Garamond",Georgia,serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#04111b;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(1200px 700px at 50% -10%, rgba(60,140,170,.35), transparent 60%),
+      radial-gradient(900px 600px at 80% 110%, rgba(20,60,90,.55), transparent 60%),
+      url("images/background.jpg") center/cover no-repeat fixed,
+      #04111b;
+  }
+  .wrap{max-width:1400px;margin:0 auto;padding:32px 28px 120px;}
+  .frame-label{font-family:var(--serif);font-size:32px;font-weight:500;margin:60px 0 6px;color:var(--ink);}
+  .frame-label small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin-top:8px;font-weight:500;}
+  .nav{position:sticky;top:18px;z-index:50;display:flex;justify-content:center;margin-bottom:24px;}
+  .nav-pill{display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--pane-strong);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border:1px solid var(--edge);box-shadow:var(--shadow),inset 0 1px 0 var(--edge-bright);}
+  .nav-pill a{color:var(--ink-dim);text-decoration:none;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:10px 18px;border-radius:999px;font-weight:500;transition:color .2s,background .2s;}
+  .nav-pill a.active{background:rgba(143,212,214,.12);color:var(--ink);}
+  .nav-pill a:hover{color:var(--ink);}
+  .pane{background:var(--pane);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border:1px solid var(--edge);border-radius:var(--radius);box-shadow:var(--shadow),inset 0 1px 0 var(--edge-bright);}
+  .frame-a{display:grid;grid-template-columns:1fr minmax(520px,720px) 1fr;gap:20px;align-items:start;margin-top:10px;}
+  .a-left,.a-right{display:flex;flex-direction:column;gap:16px;}
+  .a-center{display:flex;flex-direction:column;gap:16px;}
+  .a-hero{padding:36px 38px;display:flex;gap:24px;align-items:center;}
+  .a-portrait{width:96px;height:96px;border-radius:50%;flex:0 0 96px;background:radial-gradient(circle at 35% 30%,rgba(200,230,240,.35),transparent 55%),linear-gradient(140deg,#2a6b78 0%,#0f3744 100%);border:1px solid var(--edge-bright);box-shadow:inset 0 2px 8px rgba(255,255,255,.08),0 6px 18px rgba(0,0,0,.35);}
+  .a-hero-text h1{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.05;color:var(--ink);}
+  .a-hero-text h1 em{font-style:italic;color:var(--accent);}
+  .a-hero-text .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px;}
+  .a-hero-text p{color:var(--ink-dim);line-height:1.55;margin-top:12px;max-width:440px;font-family:var(--serif);font-style:italic;font-size:16px;}
+  .now-list{padding:20px 22px;}
+  .now-list h4{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px;}
+  .now-item{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--edge);}
+  .now-item:last-child{border-bottom:none;}
+  .now-item .t{font-family:var(--serif);font-size:17px;color:var(--ink);}
+  .now-item .y{font-size:10px;letter-spacing:.18em;color:var(--ink-mute);}
+  .on-deck{padding:22px 24px;}
+  .on-deck h4{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .on-deck .proj{font-family:var(--serif);font-size:26px;color:var(--ink);margin-top:18px;line-height:1.1;}
+  .on-deck .sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-top:8px;}
+  .contact{padding:18px 22px;display:flex;flex-direction:column;gap:10px;}
+  .contact h4{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .contact a{color:var(--ink);text-decoration:none;font-size:13px;display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--edge);}
+  .contact a:last-child{border-bottom:none;}
+  .contact a span.arrow{color:var(--ink-mute);font-size:14px;}
+  .audio-tile{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;}
+  .audio-tile .lbl{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-dim);font-weight:600;}
+  .audio-tile .toggle{width:38px;height:22px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--edge);position:relative;}
+  .audio-tile .toggle::after{content:"";position:absolute;left:3px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--ink-dim);}
+  .move-strip{display:flex;justify-content:center;gap:24px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);padding:18px 0 4px;}
+  .frame-b{margin-top:72px;}
+  .cat-pills{display:flex;justify-content:center;gap:10px;margin-bottom:22px;}
+  .cat-pills .pill{padding:10px 18px;border-radius:999px;background:var(--pane);border:1px solid var(--edge);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);}
+  .cat-pills .pill.active{background:rgba(143,212,214,.14);color:var(--ink);border-color:var(--accent-dim);}
+  .shelf{display:grid;grid-template-columns:1fr 1.8fr 1fr;gap:18px;align-items:center;padding:28px 28px 22px;}
+  .neighbor{padding:22px;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;opacity:.72;transform:scale(.92);}
+  .neighbor .n-title{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.1;}
+  .neighbor .n-meta{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-top:6px;}
+  .featured{padding:26px;display:flex;flex-direction:column;}
+  .featured .img{flex:1;border-radius:var(--radius-sm);background:radial-gradient(circle at 30% 30%,rgba(180,220,235,.22),transparent 60%),linear-gradient(160deg,#1c4a58 0%,#0a2130 100%);border:1px solid var(--edge);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:10px;letter-spacing:.3em;min-height:240px;}
+  .featured .f-title{font-family:var(--serif);font-size:38px;color:var(--ink);margin-top:18px;line-height:1;}
+  .featured .f-meta{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-top:10px;display:flex;gap:18px;}
+  .shelf-foot{display:flex;justify-content:center;align-items:center;gap:14px;padding:14px 0 4px;}
+  .arrow-btn{width:44px;height:36px;border-radius:999px;background:var(--pane);border:1px solid var(--edge);color:var(--ink-dim);display:flex;align-items:center;justify-content:center;font-size:14px;}
+  .count{font-size:10px;letter-spacing:.3em;color:var(--ink-mute);}
+  .frame-c{margin-top:72px;}
+  .case{display:grid;grid-template-columns:260px 1fr 280px;gap:18px;align-items:start;}
+  .rail{padding:18px 14px;}
+  .rail-head{display:flex;justify-content:space-between;align-items:center;padding:2px 8px 14px;border-bottom:1px solid var(--edge);}
+  .rail-head .back{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-mute);}
+  .rail-head .all{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);}
+  .cat-head{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;padding:14px 10px 8px;}
+  .proj-item{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px;}
+  .proj-item .thumb{width:38px;height:38px;border-radius:10px;flex:0 0 38px;background:linear-gradient(140deg,#1e4a58,#0b2230);border:1px solid var(--edge);}
+  .proj-item .meta{flex:1;min-width:0;}
+  .proj-item .t{font-family:var(--serif);font-size:15px;color:var(--ink);line-height:1.15;}
+  .proj-item .tags{display:flex;gap:4px;margin-top:4px;}
+  .proj-item .chip{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);padding:2px 6px;border:1px solid var(--edge);border-radius:6px;}
+  .proj-item.active{background:rgba(143,212,214,.10);border:1px solid var(--edge-bright);}
+  .proj-item.active .t{color:var(--accent);}
+  .center-stack{display:flex;flex-direction:column;gap:18px;}
+  .hero-pane{padding:28px;}
+  .hero-pane .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .hero-pane h2{font-family:var(--serif);font-size:48px;font-weight:500;color:var(--ink);margin-top:10px;line-height:1;}
+  .hero-pane .tag{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-dim);margin-top:12px;max-width:580px;line-height:1.4;}
+  .hero-img{margin-top:22px;border-radius:var(--radius-sm);min-height:300px;background:radial-gradient(circle at 25% 20%,rgba(180,220,235,.18),transparent 60%),linear-gradient(160deg,#1c4a58 0%,#0a2130 100%);border:1px solid var(--edge);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:10px;letter-spacing:.3em;}
+  .narrative{padding:26px 28px;display:flex;flex-direction:column;gap:18px;}
+  .narrative .chapter{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .narrative h3{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ink);margin-top:4px;}
+  .narrative p{color:var(--ink-dim);font-size:14px;line-height:1.7;margin-top:8px;max-width:640px;}
+  .right-stack{display:flex;flex-direction:column;gap:14px;}
+  .stats-card{padding:18px 20px;}
+  .stats-card h5{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px;}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .stat{padding:12px;border:1px solid var(--edge);border-radius:12px;background:rgba(255,255,255,.02);}
+  .stat .k{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);}
+  .stat .v{font-family:var(--serif);font-size:18px;color:var(--ink);margin-top:4px;line-height:1.1;}
+  .links-card{padding:18px 20px;}
+  .links-card h5{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px;}
+  .link-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--edge);color:var(--ink);font-size:13px;text-decoration:none;}
+  .link-row:last-child{border-bottom:none;}
+  .link-row .kind{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-top:3px;}
+  .link-row .arrow{color:var(--accent);font-size:14px;}
+  .ask-card{padding:16px 20px;display:flex;align-items:center;gap:14px;}
+  .ask-avatar{width:42px;height:42px;border-radius:50%;flex:0 0 42px;background:linear-gradient(140deg,#2a6b78,#0f3744);border:1px solid var(--edge-bright);}
+  .ask-card .t{font-size:12px;color:var(--ink);line-height:1.3;}
+  .ask-card .s{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-top:3px;}
+  .footer-note{margin:80px auto 0;max-width:760px;text-align:center;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-mute);padding:20px;border-top:1px solid var(--edge);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><div class="nav-pill"><a href="#frame-a" class="active">Home</a><a href="#frame-b">Work</a><a href="#frame-c">About</a><a href="#frame-c">Contact</a></div></nav>
+
+  <h2 class="frame-label" id="frame-a">Frame A &middot; Landing <small>Default state &middot; First thing they see</small></h2>
+  <section class="frame-a">
+    <aside class="a-left">
+      <div class="pane now-list">
+        <h4>Now</h4>
+        <div class="now-item"><span class="t">Learn To Leap</span><span class="y">2025&mdash;26</span></div>
+        <div class="now-item"><span class="t">Portfolio v3</span><span class="y">2026</span></div>
+        <div class="now-item"><span class="t">ICE Audit &middot; v2</span><span class="y">2025</span></div>
+      </div>
+      <div class="pane audio-tile"><span class="lbl">Audio &middot; Off</span><span class="toggle"></span></div>
+    </aside>
+    <div class="a-center">
+      <div class="pane a-hero">
+        <div class="a-portrait"></div>
+        <div class="a-hero-text">
+          <div class="eyebrow">Marina DiPonio &middot; UX/UI &middot; 2020&mdash;2026</div>
+          <h1>Designs that<br><em>surface slowly.</em></h1>
+          <p>Ten projects across product, accessibility, and play &mdash; come in and swim through them.</p>
+        </div>
+      </div>
+      <div class="move-strip"><span>Move</span><span>&middot;</span><span>Click</span><span>&middot;</span><span>Listen</span></div>
+    </div>
+    <aside class="a-right">
+      <div class="pane on-deck"><h4>On Deck &middot; Capstone</h4><div class="proj">Learn To Leap</div><div class="sub">UX / UI &middot; 2025&mdash;26 &middot; Capstone</div></div>
+      <div class="pane contact"><h4>Contact</h4><a href="#">LinkedIn <span class="arrow">&rarr;</span></a><a href="#">Email <span class="arrow">&rarr;</span></a></div>
+    </aside>
+  </section>
+
+  <h2 class="frame-label" id="frame-b">Frame B &middot; Work shelf <small>Category-first &middot; Featured project</small></h2>
+  <section class="frame-b">
+    <div class="cat-pills"><span class="pill">All</span><span class="pill active">UI / UX</span><span class="pill">Project Management</span><span class="pill">User Research</span></div>
+    <div class="pane shelf">
+      <div class="pane neighbor"><div class="n-title">Nutrition<br>Tracking App</div><div class="n-meta">UI/UX &middot; 2024</div></div>
+      <div class="pane featured"><div class="img">[ Case image ]</div><div class="f-title">Learn To Leap</div><div class="f-meta"><span>UX / UI</span><span>2025&mdash;26</span><span>Capstone</span></div></div>
+      <div class="pane neighbor"><div class="n-title">Tick Tock<br>Trivia</div><div class="n-meta">Prototype &middot; 2023</div></div>
+    </div>
+    <div class="shelf-foot"><span class="arrow-btn">&lsaquo;</span><span class="count">04 / 11</span><span class="arrow-btn">&rsaquo;</span></div>
+  </section>
+
+  <h2 class="frame-label" id="frame-c">Frame C &middot; Case study <small>Left rail &middot; Center hero &middot; Right stack</small></h2>
+  <section class="frame-c">
+    <div class="case">
+      <aside class="pane rail">
+        <div class="rail-head"><span class="back">&larr; Work</span><span class="all">All &middot; 11</span></div>
+        <div class="cat-head">Project Management</div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">Tick Tock Trivia</div><div class="tags"><span class="chip">UI/UX</span><span class="chip">Research</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">Cosmic Catch</div><div class="tags"><span class="chip">UI/UX</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">Yuumi-Chan: Rent is Due!</div><div class="tags"><span class="chip">Research</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">StarTea</div><div class="tags"><span class="chip">UI/UX</span><span class="chip">Research</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">Insane Wizard</div><div class="tags"><span class="chip">UI/UX</span><span class="chip">Research</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">Social Media Campaign</div></div></div>
+        <div class="cat-head">UI / UX</div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">Nutrition Tracking App</div><div class="tags"><span class="chip">PM</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">UF Club Software</div><div class="tags"><span class="chip">Research</span></div></div></div>
+        <div class="cat-head">User Research</div>
+        <div class="proj-item active"><div class="thumb"></div><div class="meta"><div class="t">Learn To Leap</div><div class="tags"><span class="chip">PM</span><span class="chip">UI/UX</span></div></div></div>
+        <div class="proj-item"><div class="thumb"></div><div class="meta"><div class="t">ICE Accessibility Audit</div><div class="tags"><span class="chip">UI/UX</span></div></div></div>
+      </aside>
+      <div class="center-stack">
+        <div class="pane hero-pane">
+          <div class="eyebrow">Capstone &middot; 2025&mdash;2026</div>
+          <h2>Learn To Leap</h2>
+          <div class="tag">A learning platform that meets new instructors where they are &mdash; and gets out of their way once they&rsquo;re moving.</div>
+          <div class="hero-img">[ Hero screenshot ]</div>
+        </div>
+        <div class="pane narrative">
+          <div><div class="chapter">Brief</div><h3>The ask</h3><p>New aerial instructors were burning out in their first six months &mdash; not from teaching, but from the scaffolding around teaching: lesson prep, sequencing, safety docs, and the quiet expectation that they already knew how it all fit together.</p></div>
+          <div><div class="chapter">Research</div><h3>What we found</h3><p>Interviews with twelve instructors across four studios revealed a pattern: the best mentors taught through a shared vocabulary the platforms didn&rsquo;t support. We designed around that vocabulary instead of around the LMS.</p></div>
+          <div><div class="chapter">Outcome</div><h3>What shipped</h3><p>Setup time dropped roughly 38% in pilot cohorts, and retention in the first six months climbed meaningfully. The platform is now in use across three partner studios with a fourth onboarding this spring.</p></div>
+        </div>
+      </div>
+      <aside class="right-stack">
+        <div class="pane stats-card">
+          <h5>Quick overview</h5>
+          <div class="stats-grid">
+            <div class="stat"><div class="k">Role</div><div class="v">UX / UI Lead</div></div>
+            <div class="stat"><div class="k">Timeline</div><div class="v">10 months</div></div>
+            <div class="stat"><div class="k">Team</div><div class="v">Solo design</div></div>
+            <div class="stat"><div class="k">Outcome</div><div class="v">&minus;38% setup</div></div>
+          </div>
+        </div>
+        <div class="pane links-card">
+          <h5>How to view it</h5>
+          <a class="link-row" href="#"><div><div>Live prototype</div><div class="kind">Figma</div></div><span class="arrow">&rarr;</span></a>
+          <a class="link-row" href="#"><div><div>Process deck</div><div class="kind">PDF &middot; 24 slides</div></div><span class="arrow">&rarr;</span></a>
+          <a class="link-row" href="#"><div><div>Source</div><div class="kind">GitHub</div></div><span class="arrow">&rarr;</span></a>
+        </div>
+        <div class="pane ask-card"><div class="ask-avatar"></div><div><div class="t">Ask me anything about this project</div><div class="s">LinkedIn &middot; Marina DiPonio</div></div></div>
+        <div class="pane audio-tile"><span class="lbl">Audio &middot; Off</span><span class="toggle"></span></div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="footer-note">Submerged &middot; mockup v1 &middot; static composition &middot; no animations</div>
+</div>
+</body>
+</html>
