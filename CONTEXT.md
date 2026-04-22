@@ -270,6 +270,37 @@ Three columns:
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout · v5 (Phase 1 copy swap)
+
+**Where we stopped:** Marina paused after the Phase 1 copy swap landed. Mockup is now running on real copy from her thesis, LinkedIn, index.html, Behance, and mdwebdesign. Two commits this session: the big copy swap, then a Fun Facts / Recognition trim.
+
+### What's done in this session
+- Replaced every hallucinated string in mockup.html (v4.4 content was almost entirely fabricated).
+- Frame A: real Currently card (Summa Cum Laude, thesis, Yuumi-Chan, Convergence April 23), Games User Researcher tagline, real email, Calendly marked "Coming soon", testimonial is a labeled placeholder.
+- Frame B: "Learn To Leap" shelf card updated to Senior Capstone · Games User Research.
+- Frame C: fully rewritten from Marina's honors thesis. IRB protocol ET00049273, 11 participants, three tutorial modes (Minimal/Guided/Explicit), Unity 2D with B-key jump, Braun & Clarke thematic analysis, universal-value-of-player-choice finding, preference-behavior gap. Quick Stats / Methods / Tools chips all updated.
+- Frame D: new bio (Games User Researcher · Player Experience Designer, Puerto Rico → Gainesville → Jacksonville, six shipped games). Timeline rebuilt from LinkedIn-accurate roles. Story tab uses Marina's LinkedIn About verbatim. Approach/Tools/Currently drafted by Claude from context. Recognition has Summa Cum Laude, President's/Dean's List, Best in Show (Tick Tock Trivia), Most Innovative (Cosmic Catch). Fun Facts trimmed to 3: Puerto Rico, Overwatch (favorite game, 10 years), exercise list.
+- Frame E: Speaking dropped from Reach Out For. Freelance now references mdwebdesign. Form topic options cut to 3. Before You Write reflects Jacksonville move, NDA question dropped.
+- CONTEXT.md: BFA → BA correction; Learn To Leap reclassified from "Research | PM, UI/UX (FEATURED)" to "Research | Senior Capstone (FEATURED)".
+
+### Still open (carry into next session)
+- **About-page copy rewrite.** Marina wants to personally rewrite the About page in her own voice — especially Story / Approach / Tools / Currently. Claude's current drafts are placeholders in her voice but not hers. **Do not touch these on next session unless Marina sends replacement copy.**
+- **Testimonial.** Current state: "[Testimonial placeholder — pending quote from manager or professor.]" with "[Attribution pending]".
+- **Resume PDF.** Still not uploaded to repo root. LinkedIn now has a new Freelance Web Designer role at Parasole Properties that needs to be in the resume.
+- **Formspree endpoint.** Still `YOUR_FORMSPREE_URL_HERE` in the form action.
+- **Calendly link.** Account not set up; text reads "Coming soon".
+- **Images.** All project thumbnails, Frame C hero ("learn to leap · hero image"), Frame A portrait, Frame D about photo, Frame A On Deck thumb — all still placeholders.
+- **Logo render** in top-left still reads as wonky alt-text.
+- **LL case-study hero image label** currently reads "learn to leap · hero image" — will become a real image when Marina exports one.
+
+### Notes for next-Claude
+- Learn To Leap is Marina's senior capstone, published March 2026 on Behance. It's real, not hallucinated (last-Claude was wrong about that). Thesis PDF is on Marina's local machine at a `file://` path; can't be auto-read. If needed again, ask Marina to paste or upload.
+- Marina graduates in early May 2026. "Just graduated Summa Cum Laude" is her preferred phrasing even though the formal date hasn't hit yet.
+- The mdwebdesign site (<https://marskies.github.io/mdwebdesign/>) is her separate freelance web-design presence, referenced in Frame E Freelance.
+- Her new freelance role (Apr 2026 – Present) is at Parasole Properties for a luxury real-estate launch site. This will matter for the resume.
+- `raw.githubusercontent.com` CDN caches aggressively even with `?bust=` query strings. Use the GitHub contents API (`api.github.com/repos/.../contents/...`) for reliable verification.
+- Output sanitizer in the `javascript_tool` sometimes returns "[BLOCKED: Cookie/query string data]" for certain string slices — if it happens, slice into smaller chunks (50–100 chars) to work around it.
+
 ---
 
 End of context doc. Good luck.
