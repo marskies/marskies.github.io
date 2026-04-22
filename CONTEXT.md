@@ -7,7 +7,7 @@
 
 ## TL;DR for next-Claude
 
-I'm Marina DiPonio, a UX researcher / product designer (UF senior, BFA Digital Arts & Sciences). I'm building a new portfolio concept called **Submerged** — an underwater-themed, glass-pane-styled site that lives at `mockup.html` in this repo (NOT `index.html`, which is my current live v2.5 site).
+I'm Marina DiPonio, a UX researcher / product designer (UF senior, BA Digital Arts & Sciences). I'm building a new portfolio concept called **Submerged** — an underwater-themed, glass-pane-styled site that lives at `mockup.html` in this repo (NOT `index.html`, which is my current live v2.5 site).
 
 You and I have been iterating on the mockup over multiple sessions. **Read the live file first** before suggesting anything: <https://marskies.github.io/mockup.html>.
 
@@ -109,7 +109,7 @@ Three columns:
 
 | Project | Primary | Tags |
 |---|---|---|
-| Learn To Leap | Research | PM, UI/UX (FEATURED) |
+| Learn To Leap | Research | Senior Capstone (FEATURED) |
 | ICE Accessibility Audit | Research | UI/UX |
 | Tick Tock Trivia | Product Management | UI/UX, Research |
 | Cosmic Catch | Product Management | UI/UX |
