@@ -219,12 +219,6 @@ Three columns:
 
 > Drafted at end of v4.4 session. Effort tags: **S** = <30 min / quick copy or config paste. **M** = 30 min–2 hr / layout tweak, asset export, multi-file edit. **L** = half-day+ / new system, mobile pass, animation framework.
 
-### Phase 0 · Open issues from v4.4 (lift-and-shift from "known issues")
-- Logo render in top-left — **S**
-- Paste real email into channel cards — **S**
-- Paste Formspree endpoint into contact form action — **S**
-- Replace Calendly "#" placeholder once account exists — **S**
-
 ### Phase 1 · Content & copy (unblocks review; do first)
 - Fix copy on homepage — **S**
 - Fix copy on About (bio paragraph) — **S**
@@ -244,10 +238,12 @@ Three columns:
 - Learn To Leap photos — **M**
 - Images on each project page — **L** (10 projects)
 - Upload resume.pdf for downloadable resume — **S**
+- Paste real email into channel cards — **S**
 
 ### Phase 3 · Core functionality & structure (before polish)
-- Set up contact form (Formspree endpoint + test send) — **S**
-- Set up Calendly booking (account + embed/link) — **M**
+- Fix logo render in top-left — **S**
+- Set up contact form (paste Formspree endpoint + test send) — **S**
+- Set up Calendly booking (create account, replace "#" placeholder, embed/link) — **M**
 - Make sure audio works across pages — **S**
 - LinkedIn more accessible (placement/weight in channels) — **S**
 - Work page tabs working (category filter active state + filtering) — **M**
@@ -269,8 +265,8 @@ Three columns:
 ### Rough session map
 1. **Session A (copy marathon):** Phase 1 homepage/about/work/contact + About sub-sections.
 2. **Session B (project copy):** Phase 1 per-project copy + Learn To Leap.
-3. **Session C (assets):** Phase 2 all image + resume uploads.
-4. **Session D (structure):** Phase 3 functionality + panel restructure + font audit.
+3. **Session C (assets):** Phase 2 all image + resume + email paste.
+4. **Session D (structure):** Phase 3 functionality + panel restructure + font audit + logo fix.
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
