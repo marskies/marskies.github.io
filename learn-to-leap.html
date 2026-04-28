@@ -302,13 +302,19 @@
             50% { transform: scale(1.1); opacity: 1; }
         }
 
-        .image-placeholder {
-            font-size: 0.9rem;
-            color: rgba(200, 220, 240, 0.6);
-            text-align: center;
+        .image-bubble img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: 1;
-            letter-spacing: 0.1rem;
-            padding: 1rem;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
         }
 
         /* Special callout box for the big finding */
@@ -513,7 +519,7 @@
                 </div>
                 <div class="meta-item">
                     <div class="meta-label">Tools</div>
-                    <div class="meta-value">Unity, Claude Code, C#, Microsoft Suite, Canva, Monday</div>
+                    <div class="meta-value">Unity, Python, Flask, Figma</div>
                 </div>
             </div>
 
@@ -524,11 +530,11 @@
         </div>
 
         <!-- Introduction Section -->
-        <section class="content-section" id="introduction">
+        <section class="content-section clearfix" id="introduction">
             <h2 class="section-title">Introduction</h2>
             
             <div class="image-bubble float-right">
-                <p class="image-placeholder">[Booth Photo:<br>Convergence 2026]</p>
+                <img src="images/learntoleap-booth.jpg" alt="Booth at Convergence 2026">
             </div>
             
             <p class="section-text">
@@ -548,7 +554,7 @@
             </p>
 
             <div class="image-bubble">
-                <p class="image-placeholder">[Unity Prototype:<br>The Double Jump Gap]</p>
+                <img src="images/learntoleap-prototype.png" alt="Unity Prototype: The Double Jump Gap">
             </div>
 
             <p class="section-text">
@@ -566,7 +572,7 @@
         </section>
 
         <!-- Final Piece Section -->
-        <section class="content-section" id="final-piece">
+        <section class="content-section clearfix" id="final-piece">
             <h2 class="section-title">Final Piece</h2>
             
             <p class="section-text">
@@ -576,7 +582,7 @@
             </p>
 
             <div class="image-bubble float-left">
-                <p class="image-placeholder">[Three Tutorial<br>UI States]</p>
+                <img src="images/learntoleap-tutorials.png" alt="Three Tutorial UI States">
             </div>
 
             <p class="section-text">
@@ -602,7 +608,7 @@
             </div>
 
             <div class="image-bubble float-right">
-                <p class="image-placeholder">[Live Data Viz:<br>Flask Booth Tool]</p>
+                <img src="images/learntoleap-dataviz.png" alt="Live Data Visualization Flask Tool">
             </div>
 
             <p class="section-text">
@@ -618,12 +624,12 @@
         </section>
 
         <!-- Process Section -->
-        <section class="content-section" id="process">
+        <section class="content-section clearfix" id="process">
             <h2 class="section-title">Process</h2>
             
             <h3 class="subsection-title">Methodology</h3>
             <div class="image-bubble float-right">
-                <p class="image-placeholder">[Research<br>Framework]</p>
+                <img src="images/learntoleap-framework.png" alt="Research Framework">
             </div>
             <p class="section-text">
                 Eleven participants completed sessions that combined three data streams: automatic Unity 
@@ -648,7 +654,7 @@
             </p>
 
             <div class="image-bubble">
-                <p class="image-placeholder">[Data Comparison:<br>Stated vs. Actual]</p>
+                <img src="images/learntoleap-data.png" alt="Data Comparison: Stated vs. Actual Behavior">
             </div>
 
             <h3 class="subsection-title">The Finding That Reframed Everything</h3>
@@ -669,7 +675,7 @@
         </section>
 
         <!-- What I Learned Section -->
-        <section class="content-section" id="learned">
+        <section class="content-section clearfix" id="learned">
             <h2 class="section-title">What I Learned</h2>
             
             <p class="section-text">
@@ -680,7 +686,7 @@
             </p>
 
             <div class="image-bubble float-right">
-                <p class="image-placeholder">[Thesis Cover<br>or Award Photo]</p>
+                <img src="images/learntoleap-award.jpg" alt="Outstanding Achievement Award">
             </div>
 
             <p class="section-text">
@@ -698,7 +704,7 @@
             </p>
 
             <div class="image-bubble">
-                <p class="image-placeholder">[Booth Visitors<br>Playing Prototype]</p>
+                <img src="images/learntoleap-visitors.jpg" alt="Booth Visitors Playing Prototype">
             </div>
 
             <p class="section-text">
