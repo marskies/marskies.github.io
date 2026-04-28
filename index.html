@@ -264,29 +264,6 @@
             }
         }
 
-        /* Logo styles - positioned at top of surface section, scrolls with content */
-        .logo-container {
-            position: absolute;
-            top: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: auto;
-            z-index: 100;
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo-container img:hover {
-            opacity: 1;
-        }
-        
         /* TWILIGHT ZONE - CATEGORIES */
         .twilight {
             background: linear-gradient(to bottom,
@@ -809,11 +786,6 @@
                 left: 1.5rem;
             }
 
-            .logo-container {
-                width: 80px;
-                top: 2rem;
-            }
-
             .ocean-section {
                 padding: 4rem 1.5rem;
             }
@@ -826,7 +798,6 @@
 </head>
 <body>
     <div class="custom-cursor"></div>
-
 
     <audio id="oceanAudio" loop>
         <source src="underwaterambiance.mp3" type="audio/mpeg">
@@ -854,15 +825,10 @@
 
     <!-- SURFACE -->
     <section class="ocean-section surface" id="surface">
-        <!-- Logo at top, scrolls with page -->
-        <div class="logo-container">
-            <img src="LOGO_blue.png" alt="Marina DiPonio's Logo">
-        </div>
-        
         <div class="title-area">
             <div class="depth-indicator">— WELCOME —</div>
             <h1 class="main-title">Marina DiPonio</h1>
-            <p class="subtitle">Player Experience Designer • Project Manager • Game Designer</p>
+            <p class="subtitle">Project Manager • Game Developer • Player Experience Designer</p>
             <p class="scroll-prompt">Scroll to Descend</p>
         </div>
     </section>
@@ -934,23 +900,53 @@
                 <h3 class="resume-title">Education</h3>
                 <div class="resume-card">
                     <h4>BA Digital Arts & Sciences — University of Florida</h4>
-                    <p>2024-Present | Digital Institute</p>
+                    <p>August 2024 - May 2026 | Digital Worlds Institute | Summa Cum Laude</p>
+                    <p>Concentration: Game Production and User Experience</p>
                     <p>President's List, Dean's List</p>
                     <p>Gator User Design Club, BADAS Mentorship Club (Mentee/Mentor), BADAS Society, Catholic Campus Ministry</p>
                 </div>
                 <div class="resume-card">
                     <h4>AA — University of North Florida</h4>
-                    <p>2023-2024</p>
+                    <p>January 2023 - May 2024 | GPA: 3.98/4.0</p>
                     <p>President's List, Dean's List</p>
                     <p>Hicks Honors College, Virtual Reality Club, Catholic Campus Ministry</p>
                 </div>
             </div>
 
             <div class="resume-section">
+                <h3 class="resume-title">Awards & Recognition</h3>
+                <div class="resume-card">
+                    <h4>Outstanding Achievement in Experience Design</h4>
+                    <p>Convergence 2026 (25th Anniversary) — University of Florida</p>
+                    <p>Awarded for "Learn to Leap," a mixed-methods UX research study examining player choice in tutorial design.</p>
+                </div>
+                <div class="resume-card">
+                    <h4>Best in Show — Tick Tock Trivia</h4>
+                    <p>University Showcase</p>
+                    <p>Recognized for polish, innovation, and player experience design in a fast-paced party trivia game.</p>
+                </div>
+                <div class="resume-card">
+                    <h4>Most Innovative — Cosmic Catch</h4>
+                    <p>UF Create-A-Thon</p>
+                    <p>Recognized for innovative rhythm-fishing game concept developed in a 12-hour game jam.</p>
+                </div>
+                <div class="resume-card">
+                    <h4>Yuumi-Chan: Rent is Due! — Launched on Steam</h4>
+                    <p>Magical Girl Beat 'Em Up</p>
+                    <p>Served as Producer for a 25-person team, managing milestone delivery, playtest analysis, and team post-mortem documentation. <a href="https://store.steampowered.com/app/4559300/YuumiChan_Rent_is_Due/" target="_blank" style="color: rgba(186, 164, 212, 0.9);">View on Steam</a></p>
+                </div>
+            </div>
+
+            <div class="resume-section">
                 <h3 class="resume-title">Experience</h3>
                 <div class="resume-card">
+                    <h4>Freelance Web Designer — Parasole Properties</h4>
+                    <p>April 2026-Present</p>
+                    <p>Designed and built a responsive WordPress site optimized for a 55+ audience, applying user research principles for accessibility and intuitive navigation. Independently managed the project from contract negotiation through delivery, including brand development and client training.</p>
+                </div>
+                <div class="resume-card">
                     <h4>UX Researcher — University of Florida</h4>
-                    <p>June 2025-Present</p>
+                    <p>June 2025-October 2025</p>
                     <p>Directed usability testing to evaluate UF's club software platform. Audited accessibility to uncover user pain points and inclusivity gaps. Developed Figma-based prototypes to communicate research-backed solutions.</p>
                 </div>
                 <div class="resume-card">
@@ -966,12 +962,22 @@
             </div>
 
             <div class="resume-section">
+                <h3 class="resume-title">Certifications</h3>
+                <div class="resume-card">
+                    <p><strong>Design Thinking:</strong> Customer Experience — LinkedIn Learning</p>
+                    <p><strong>Customer Experience:</strong> Journey Mapping — LinkedIn Learning</p>
+                    <p><strong>Figma for UX Design</strong> — LinkedIn Learning</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
                 <h3 class="resume-title">Skills</h3>
                 <div class="resume-card">
-                    <p><strong>User Research:</strong> Usability Testing, Digital Accessibility, WCAG 2.1 Compliance</p>
-                    <p><strong>Design Tools:</strong> Figma, Adobe Creative Suite, Prototyping</p>
-                    <p><strong>Core Competencies:</strong> Visual Design, Strategic Thinking, Data-Driven Decision Making</p>
-                    <p><strong>Soft Skills:</strong> Communication, Collaboration, Empathy</p>
+                    <p><strong>User Research:</strong> Mixed-Methods Research, Usability Testing, Thematic Analysis, IRB Protocol Authoring, Digital Accessibility, WCAG 2.1 Compliance</p>
+                    <p><strong>Design Tools:</strong> Figma, Adobe Creative Suite, Unity, Prototyping</p>
+                    <p><strong>Web Development:</strong> WordPress, HTML/CSS, Responsive Design, Brand Identity Systems</p>
+                    <p><strong>Core Competencies:</strong> Visual Design, Strategic Thinking, Data-Driven Decision Making, Project Management</p>
+                    <p><strong>Soft Skills:</strong> Communication, Collaboration, Empathy, Leadership</p>
                 </div>
             </div>
         </div>
