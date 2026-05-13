@@ -320,9 +320,9 @@
 </style>
 <style>
   /* ===== FRAME D (About) ===== */
-  #frame-d .about-left{width:320px}
-  #frame-d .about-center{width:560px}
-  #frame-d .side-stack{width:300px}
+  #frame-d .about-left{width:320px;height:640px}
+  #frame-d .about-center{width:560px;height:640px}
+  #frame-d .side-stack{width:300px;display:flex;flex-direction:column;gap:14px}
   .about-left{padding:22px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
   .about-left::-webkit-scrollbar{width:6px}
   .about-left::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
@@ -365,7 +365,9 @@
     flex:1;overflow-y:auto;padding-right:8px;
     font-size:16px;line-height:1.7;color:var(--ink-dim);
     scrollbar-width:thin;scrollbar-color:var(--copper) transparent;
+    display:none;
   }
+  .about-body.on{display:block}
   .about-body::-webkit-scrollbar{width:6px}
   .about-body::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
   .about-body p{margin:0 0 12px 0}
@@ -426,13 +428,17 @@
   /* anchor offset for fixed top bar */
   section.frame{scroll-margin-top:0}
 
-  /* Tablet: scale Frame C down so the fixed card fits */
+  /* Tablet: scale Frame C + Frame D down so the fixed cards fit */
   @media (max-width:1100px) and (min-width:768px){
     #frame-c{gap:16px;padding-left:20px;padding-right:20px}
     #frame-c .rail{width:220px}
     #frame-c .case{width:560px;height:600px}
     #frame-c .side-stack{width:260px}
     .case-title{font-size:26px}
+    #frame-d{gap:16px;padding-left:20px;padding-right:20px}
+    #frame-d .about-left{width:260px;height:600px}
+    #frame-d .about-center{width:500px;height:600px}
+    #frame-d .side-stack{width:240px}
   }
 </style>
 
@@ -707,16 +713,22 @@
   <!-- CENTER: photo + tabs + body -->
   <div class="pane about-center">
     <div class="about-photo">photo placeholder</div>
-    <div class="about-tabs">
-      <button class="chapter-tab on">Story</button>
-      <button class="chapter-tab">Approach</button>
-      <button class="chapter-tab">Tools</button>
-      <button class="chapter-tab">Currently</button>
+    <div class="about-tabs" data-chapters="ab">
+      <button class="chapter-tab on" data-target="ab-story">Story</button>
+      <button class="chapter-tab" data-target="ab-approach">Approach</button>
+      <button class="chapter-tab" data-target="ab-tools">Tools</button>
+      <button class="chapter-tab" data-target="ab-currently">Currently</button>
     </div>
-    <div class="about-body">
+    <div class="about-body on" id="ab-story">
       <p><strong>Story.</strong> Each day, the connection between man and machine grows stronger, shaping how we engage with the world and each other. My passion lies in designing systems that bridge this connection without losing the delicate touch of humanity. I'm driven to create positive and inclusive experiences in social games — systems that amplify prosocial engagement and player interaction while keeping these experiences accessible to everyone.</p>
+    </div>
+    <div class="about-body" id="ab-approach">
       <p><strong>Approach.</strong> Research first, opinions second. Every design decision I make is a hypothesis I'd rather test than defend, which means I lean hard on playtesting, accessibility audits, and thematic analysis before anything reaches a wireframe. I care about "the little things" — tutorial pacing, contrast ratios, the phrasing of a confirmation button — because the little things are what make an experience feel intentional.</p>
+    </div>
+    <div class="about-body" id="ab-tools">
       <p><strong>Tools.</strong> Research: usability testing, accessibility audits (WCAG 2.1), affinity mapping, playtest observation, thematic analysis. Design: Figma, Adobe Creative Suite, Canva. Game: Unity 2D, Unity 3D, Unreal. Planning: Monday.com, Miro, Slipbox, Notion, Google Workspace. Certified in Generative AI UX Design with Uizard (2025) and Figma for UX Design (2024).</p>
+    </div>
+    <div class="about-body" id="ab-currently">
       <p><strong>Currently.</strong> Just wrapped my senior capstone (Learn To Leap) and presenting at Convergence 2026 on April 23. Freelancing as a web designer for Parasole Properties. Packing up Gainesville for a move to Jacksonville. Open to full-time Games User Research and Player Experience roles.</p>
     </div>
   </div>
@@ -873,19 +885,19 @@
     document.querySelectorAll('section.frame').forEach(function(s){ io.observe(s); });
   })();
 
-  // Frame C chapter tabs
+  // Chapter / about tab switching (Frame C + Frame D)
   (function(){
-    var groups = document.querySelectorAll('.chapters[data-chapters]');
+    var groups = document.querySelectorAll('[data-chapters]');
     groups.forEach(function(g){
       var tabs = g.querySelectorAll('.chapter-tab');
+      var key = g.getAttribute('data-chapters');
       tabs.forEach(function(btn){
         btn.addEventListener('click', function(){
           var targetId = btn.getAttribute('data-target');
           if (!targetId) return;
           tabs.forEach(function(b){ b.classList.remove('on'); });
           btn.classList.add('on');
-          var key = g.getAttribute('data-chapters');
-          var siblings = document.querySelectorAll('.chapter-body[id^="'+key+'-"]');
+          var siblings = document.querySelectorAll('[id^="'+key+'-"]');
           siblings.forEach(function(p){ p.classList.remove('on'); });
           var target = document.getElementById(targetId);
           if (target){ target.classList.add('on'); target.scrollTop = 0; }
