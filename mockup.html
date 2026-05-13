@@ -303,6 +303,11 @@
     display:none;
   }
   .chapter-body.on{display:block}
+  .tools-grid{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+  .tg-row{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;line-height:1.5}
+  .tg-row:last-child{border-bottom:0}
+  .tg-row .tg-k{flex:0 0 110px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--copper);font-weight:600;padding-top:3px}
+  .tg-row .tg-v{flex:1;color:var(--ink-dim)}
   .chapter-body::-webkit-scrollbar{width:6px}
   .chapter-body::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
   .chapter-body p{margin:0 0 12px 0}
@@ -722,13 +727,19 @@
       <button class="chapter-tab" data-target="ab-currently">Currently</button>
     </div>
     <div class="about-body on" id="ab-story">
-      <p><strong>Story.</strong> Each day, the connection between man and machine grows stronger, shaping how we engage with the world and each other. My passion lies in designing systems that bridge this connection without losing the delicate touch of humanity. I'm driven to create positive and inclusive experiences in social games using systems that amplify prosocial engagement and player interaction while keeping these experiences accessible to everyone.</p>
+      <p><strong>Story.</strong> I'm a designer who grew up between the Midwest, Puerto Rico, and Florida. The first half of my life was spent in the middle of nowhere with three siblings, which taught me pretty much everything I know about multiplayer experiences, indoors and out. These days, I research and design social games, the kind that bring people closer instead of burning them out, with a soft spot for systems that make players a little kinder to each other. When I'm not prototyping, you can usually find me fishing or losing ranked Overwatch with friends.</p>
     </div>
     <div class="about-body" id="ab-approach">
       <p><strong>Approach.</strong> Research first, opinions second. Every design decision I make is a hypothesis I'd rather test than defend, which means I lean hard on playtesting, accessibility audits, and thematic analysis before anything reaches a wireframe. I care about "the little things." Tutorial pacing, contrast ratios, the phrasing of a confirmation button. Because the little things are what make an experience feel intentional.</p>
     </div>
     <div class="about-body" id="ab-tools">
-      <p><strong>Tools.</strong> Research: usability testing, accessibility audits (WCAG 2.1), affinity mapping, playtest observation, thematic analysis. Design: Figma, Adobe Creative Suite, Canva. Game: Unity 2D, Unity 3D, Unreal. Planning: Monday.com, Miro, Slipbox, Notion, Google Workspace. Certified in Generative AI UX Design with Uizard (2025) and Figma for UX Design (2024).</p>
+      <div class="tools-grid">
+        <div class="tg-row"><span class="tg-k">Research</span><span class="tg-v">Usability testing · Accessibility audits (WCAG 2.1) · Affinity mapping · Playtest observation · Thematic analysis</span></div>
+        <div class="tg-row"><span class="tg-k">Design</span><span class="tg-v">Figma · Adobe Creative Suite · Canva</span></div>
+        <div class="tg-row"><span class="tg-k">Game</span><span class="tg-v">Unity 2D · Unity 3D · Unreal</span></div>
+        <div class="tg-row"><span class="tg-k">Planning</span><span class="tg-v">Monday.com · Miro · Slipbox · Notion · Google Workspace</span></div>
+        <div class="tg-row"><span class="tg-k">Certifications</span><span class="tg-v">Generative AI UX Design — Uizard (2025) · Figma for UX Design (2024)</span></div>
+      </div>
     </div>
     <div class="about-body" id="ab-currently">
       <p><strong>Currently.</strong> Just wrapped my award winning senior capstone (Learn To Leap) and presented at Convergence 2026 on April 23. Freelancing as a web designer for Parasole Properties. Packing up Gainesville for a move to Jacksonville. Open to full-time Games User Research and web design roles.</p>
