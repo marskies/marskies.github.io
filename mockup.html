@@ -249,7 +249,9 @@
   .shelf-dots i.on{background:var(--copper);width:22px;border-radius:4px}
 
   /* ===== FRAME C (case study) ===== */
-  #frame-c .rail{width:260px;padding:18px}
+  #frame-c .rail{width:260px;height:640px;padding:18px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
+  #frame-c .rail::-webkit-scrollbar{width:6px}
+  #frame-c .rail::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
   .rail-search{
     width:100%;padding:9px 12px;border-radius:10px;
     background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);
@@ -431,7 +433,7 @@
   /* Tablet: scale Frame C + Frame D down so the fixed cards fit */
   @media (max-width:1100px) and (min-width:768px){
     #frame-c{gap:16px;padding-left:20px;padding-right:20px}
-    #frame-c .rail{width:220px}
+    #frame-c .rail{width:220px;height:600px}
     #frame-c .case{width:560px;height:600px}
     #frame-c .side-stack{width:260px}
     .case-title{font-size:28px}
