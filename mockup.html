@@ -117,6 +117,7 @@
     width:520px;
   }
   #frame-a .side-stack{width:300px}
+  #frame-c .side-stack{width:300px;display:flex;flex-direction:column;gap:14px}
   #frame-a .side-stack .pane:last-child{flex:0 0 auto}
   .portrait{
     width:200px;height:260px;border-radius:18px;overflow:hidden;
@@ -248,7 +249,7 @@
   .shelf-dots i.on{background:var(--copper);width:22px;border-radius:4px}
 
   /* ===== FRAME C (case study) ===== */
-  #frame-c .rail{padding:18px}
+  #frame-c .rail{width:260px;padding:18px}
   .rail-search{
     width:100%;padding:9px 12px;border-radius:10px;
     background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);
@@ -268,7 +269,7 @@
     font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;
     padding:2px 6px;border-radius:4px;background:rgba(143,212,214,0.10);color:var(--teal);
   }
-  .case{padding:0;display:flex;flex-direction:column;overflow:hidden}
+  .case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow:hidden}
   .case-hero{
     height:180px;background:linear-gradient(160deg,#2a525c,#0f2c33);
     display:flex;align-items:center;justify-content:center;color:var(--ink-quiet);
@@ -297,7 +298,9 @@
     flex:1;overflow-y:auto;padding-right:8px;
     font-size:16px;line-height:1.65;color:var(--ink-dim);
     scrollbar-width:thin;scrollbar-color:var(--copper) transparent;
+    display:none;
   }
+  .chapter-body.on{display:block}
   .chapter-body::-webkit-scrollbar{width:6px}
   .chapter-body::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
   .chapter-body p{margin:0 0 12px 0}
@@ -422,6 +425,15 @@
 
   /* anchor offset for fixed top bar */
   section.frame{scroll-margin-top:0}
+
+  /* Tablet: scale Frame C down so the fixed card fits */
+  @media (max-width:1100px) and (min-width:768px){
+    #frame-c{gap:16px;padding-left:20px;padding-right:20px}
+    #frame-c .rail{width:220px}
+    #frame-c .case{width:560px;height:600px}
+    #frame-c .side-stack{width:260px}
+    .case-title{font-size:26px}
+  }
 </style>
 
 <header class="topbar">
@@ -586,20 +598,28 @@
     <div class="case-body">
       <h2 class="case-title">Learn To <em>Leap</em></h2>
       <p class="case-sub">Rethinking tutorial design through player choice · Senior Capstone · 2026</p>
-      <div class="chapters">
-        <button class="chapter-tab on">Overview</button>
-        <button class="chapter-tab">Research</button>
-        <button class="chapter-tab">Synthesis</button>
-        <button class="chapter-tab">Design</button>
-        <button class="chapter-tab">Outcome</button>
+      <div class="chapters" data-chapters="ll">
+        <button class="chapter-tab on" data-target="ll-overview">Overview</button>
+        <button class="chapter-tab" data-target="ll-research">Research</button>
+        <button class="chapter-tab" data-target="ll-synthesis">Synthesis</button>
+        <button class="chapter-tab" data-target="ll-design">Design</button>
+        <button class="chapter-tab" data-target="ll-outcome">Outcome</button>
       </div>
-      <div class="chapter-body">
+      <div class="chapter-body on" id="ll-overview">
         <p><strong>Overview.</strong> Many platformer games use static, one-size-fits-all tutorials that don't account for differences in player experience. Learn To Leap asks whether gaming experience level correlates with a player's preferred tutorial guidance — and, more practically, whether letting players choose their own guidance is a better design pattern than guessing for them.</p>
         <p>I built a custom Unity 2D platformer as the research instrument, focused on a single double-jump mechanic. Players could switch between three tutorial modes — Minimal, Guided, and Explicit — at any time, and the prototype logged every switch and time in state.</p>
+      </div>
+      <div class="chapter-body" id="ll-research">
         <p><strong>Research.</strong> Mixed-methods design, IRB exempt (UF Protocol ET00049273). Eleven participants aged 18–26 completed one session each over five days in March 2026, recruited via Discord and personal networks and distributed across four self-reported gaming-frequency bands.</p>
         <p>Each session ran ~20 minutes: a short pre-play survey, a 5–7 minute gameplay session with no instruction beyond "pick the mode that feels right," and a 5–7 minute semi-structured interview. Quantitative gameplay data was paired with qualitative interview data analyzed via Braun and Clarke's six-phase thematic analysis.</p>
+      </div>
+      <div class="chapter-body" id="ll-synthesis">
         <p><strong>Synthesis.</strong> Gaming frequency did not reliably predict tutorial preference. But eight themes surfaced across interviews, and two were unusually strong: all 11 participants affirmed that being able to select their own guidance level was a positive experience, and stated preference diverged from behavioral usage — several participants who said they preferred Explicit actually spent the majority of their session in Minimal.</p>
+      </div>
+      <div class="chapter-body" id="ll-design">
         <p><strong>Design.</strong> The prototype was designed to be the artifact. Jump was intentionally mapped to "B" rather than space bar to neutralize prior muscle memory — a choice that surfaced in interviews as a design decision in its own right. Placeholder art was used throughout so visual polish wouldn't introduce unintended differences between tutorial states.</p>
+      </div>
+      <div class="chapter-body" id="ll-outcome">
         <p><strong>Outcome.</strong> The thesis now sits behind my senior capstone, alongside a full process gallery on Behance and a presentation at Convergence 2026. The broader takeaway: adaptive tutorial systems built only on performance data — or only on stated preference — miss part of the picture. The most reliable signal across 11 participants wasn't which mode they picked; it was that being allowed to pick at all mattered to every one of them.</p>
       </div>
     </div>
@@ -851,6 +871,27 @@
       });
     }, {threshold:0.55});
     document.querySelectorAll('section.frame').forEach(function(s){ io.observe(s); });
+  })();
+
+  // Frame C chapter tabs
+  (function(){
+    var groups = document.querySelectorAll('.chapters[data-chapters]');
+    groups.forEach(function(g){
+      var tabs = g.querySelectorAll('.chapter-tab');
+      tabs.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var targetId = btn.getAttribute('data-target');
+          if (!targetId) return;
+          tabs.forEach(function(b){ b.classList.remove('on'); });
+          btn.classList.add('on');
+          var key = g.getAttribute('data-chapters');
+          var siblings = document.querySelectorAll('.chapter-body[id^="'+key+'-"]');
+          siblings.forEach(function(p){ p.classList.remove('on'); });
+          var target = document.getElementById(targetId);
+          if (target){ target.classList.add('on'); target.scrollTop = 0; }
+        });
+      });
+    });
   })();
 </script>
 </body>
