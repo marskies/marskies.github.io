@@ -998,17 +998,24 @@ return activeCat === "all" || (c.getAttribute("data-cat") || "").split(" ").inde
 }
 function applySizes(){
 var vis = visibleCards();
-allCards.forEach(function(c){ c.classList.add("hidden-card"); c.classList.remove("size-xs","size-sm","size-lg"); });
+allCards.forEach(function(c){ c.classList.add("hidden-card"); c.classList.remove("size-xs","size-sm","size-lg"); c.style.order = ""; });
 if(vis.length === 0){ renderDots(0); return; }
 if(centerIdx >= vis.length) centerIdx = 0;
 var n = vis.length;
-vis.forEach(function(c, i){
+var range = Math.min(2, Math.floor((n-1)/2));
+var placed = {};
+for(var off = -range; off <= range; off++){
+var idx = ((centerIdx + off) % n + n) % n;
+if(placed[idx]) continue;
+placed[idx] = true;
+var c = vis[idx];
 c.classList.remove("hidden-card");
-var dist = Math.min((i - centerIdx + n) % n, (centerIdx - i + n) % n);
-if(dist === 0) c.classList.add("size-lg");
-else if(dist === 1) c.classList.add("size-sm");
+c.style.order = (off + 10);
+var ad = Math.abs(off);
+if(ad === 0) c.classList.add("size-lg");
+else if(ad === 1) c.classList.add("size-sm");
 else c.classList.add("size-xs");
-});
+}
 renderDots(n);
 }
 function renderDots(n){
