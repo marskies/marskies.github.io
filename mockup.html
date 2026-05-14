@@ -244,6 +244,10 @@
   .album-card.size-lg .thumb{height:340px}
   .album-card.size-lg{box-shadow:var(--shadow), 0 0 0 1px rgba(209,138,90,0.5), inset 0 1px 0 rgba(255,255,255,0.10)}
   .album-card.size-lg .meta .t{font-size:20px}
+.album-card{cursor:pointer}
+.album-card.hidden-card{display:none}
+.album-cats button{transition:background .15s, color .15s, border-color .15s}
+.shelf-dots i{cursor:pointer;transition:background .15s, width .15s}
   .shelf-dots{display:flex;gap:8px;justify-content:center}
   .shelf-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.2)}
   .shelf-dots i.on{background:var(--copper);width:22px;border-radius:4px}
@@ -560,22 +564,24 @@
       <h2>Selected <em>Work</em></h2>
       <p>Highlighted case studies across research, product management, and UI/UX — flip through the shelf.</p>
       <div class="album-cats">
-        <button class="on">All</button>
-        <button>Research</button>
-        <button>Product Mgmt</button>
-        <button>UI / UX</button>
+        <button class="on" data-cat="all">All</button>
+        <button data-cat="research">Research</button>
+        <button data-cat="pm">Product Mgmt</button>
+        <button data-cat="uiux">UI / UX</button>
       </div>
     </div>
-    <div class="shelf">
-      <div class="album-card size-xs"><div class="thumb">cosmic catch</div><div class="meta"><div class="t">Cosmic Catch</div><div class="c">Product Mgmt</div></div></div>
-      <div class="album-card size-sm"><div class="thumb">tick tock</div><div class="meta"><div class="t">Tick Tock Trivia</div><div class="c">Product Mgmt</div></div></div>
-      <div class="album-card size-lg"><div class="thumb">learn to leap</div><div class="meta"><div class="t">Learn To Leap</div><div class="c">Senior Capstone · Games User Research</div></div></div>
-      <div class="album-card size-sm"><div class="thumb">ICE audit</div><div class="meta"><div class="t">ICE Accessibility</div><div class="c">Research</div></div></div>
-      <div class="album-card size-xs"><div class="thumb">nutrition</div><div class="meta"><div class="t">Nutrition App</div><div class="c">UI / UX</div></div></div>
+    <div class="shelf" id="album-shelf">
+      <div class="album-card" data-cat="pm uiux"><div class="thumb">cosmic catch</div><div class="meta"><div class="t">Cosmic Catch</div><div class="c">Product Mgmt</div></div></div>
+      <div class="album-card" data-cat="pm uiux research"><div class="thumb">tick tock trivia</div><div class="meta"><div class="t">Tick Tock Trivia</div><div class="c">Product Mgmt</div></div></div>
+      <div class="album-card" data-cat="research pm uiux"><div class="thumb">learn to leap</div><div class="meta"><div class="t">Learn To Leap</div><div class="c">Senior Capstone · Games User Research</div></div></div>
+      <div class="album-card" data-cat="research uiux"><div class="thumb">ice accessibility</div><div class="meta"><div class="t">ICE Accessibility</div><div class="c">Research</div></div></div>
+      <div class="album-card" data-cat="uiux"><div class="thumb">nutrition app</div><div class="meta"><div class="t">Nutrition App</div><div class="c">UI / UX</div></div></div>
+      <div class="album-card" data-cat="pm uiux research"><div class="thumb">startea</div><div class="meta"><div class="t">StarTea</div><div class="c">UI / UX · Research</div></div></div>
+      <div class="album-card" data-cat="pm research"><div class="thumb">yuumi-chan</div><div class="meta"><div class="t">Yuumi-Chan</div><div class="c">Product Mgmt · Research</div></div></div>
+      <div class="album-card" data-cat="pm uiux"><div class="thumb">insane wizard</div><div class="meta"><div class="t">Insane Wizard</div><div class="c">Product Mgmt</div></div></div>
+      <div class="album-card" data-cat="uiux research"><div class="thumb">uf club software</div><div class="meta"><div class="t">UF Club Software</div><div class="c">UI / UX · Research</div></div></div>
     </div>
-    <div class="shelf-dots">
-      <i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
+    <div class="shelf-dots" id="shelf-dots"></div>
   </div>
 </section>
 
@@ -974,6 +980,74 @@ chip.classList.remove("open");
 btn.setAttribute("aria-expanded","false");
 }
 });
+})();
+
+// Frame B shelf: filter + rotate + dots
+(function(){
+var shelf = document.getElementById("album-shelf");
+var dotsWrap = document.getElementById("shelf-dots");
+var catsWrap = document.querySelector(".album-cats");
+if(!shelf || !dotsWrap || !catsWrap) return;
+var allCards = Array.from(shelf.querySelectorAll(".album-card"));
+var activeCat = "all";
+var centerIdx = 2;
+function visibleCards(){
+return allCards.filter(function(c){
+return activeCat === "all" || (c.getAttribute("data-cat") || "").split(" ").indexOf(activeCat) >= 0;
+});
+}
+function applySizes(){
+var vis = visibleCards();
+allCards.forEach(function(c){ c.classList.add("hidden-card"); c.classList.remove("size-xs","size-sm","size-lg"); });
+if(vis.length === 0){ renderDots(0); return; }
+if(centerIdx >= vis.length) centerIdx = 0;
+var n = vis.length;
+vis.forEach(function(c, i){
+c.classList.remove("hidden-card");
+var dist = Math.min((i - centerIdx + n) % n, (centerIdx - i + n) % n);
+if(dist === 0) c.classList.add("size-lg");
+else if(dist === 1) c.classList.add("size-sm");
+else c.classList.add("size-xs");
+});
+renderDots(n);
+}
+function renderDots(n){
+dotsWrap.innerHTML = "";
+for(var i=0;i<n;i++){
+var dot = document.createElement("i");
+if(i === centerIdx) dot.className = "on";
+dot.setAttribute("data-i", i);
+dotsWrap.appendChild(dot);
+}
+}
+catsWrap.addEventListener("click", function(e){
+var btn = e.target.closest("button");
+if(!btn) return;
+var cat = btn.getAttribute("data-cat");
+if(!cat) return;
+activeCat = cat;
+centerIdx = 0;
+catsWrap.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on", b === btn); });
+applySizes();
+});
+shelf.addEventListener("click", function(e){
+var card = e.target.closest(".album-card");
+if(!card) return;
+var vis = visibleCards();
+var i = vis.indexOf(card);
+if(i < 0) return;
+centerIdx = i;
+applySizes();
+});
+dotsWrap.addEventListener("click", function(e){
+var dot = e.target.closest("i");
+if(!dot) return;
+var i = parseInt(dot.getAttribute("data-i"), 10);
+if(isNaN(i)) return;
+centerIdx = i;
+applySizes();
+});
+applySizes();
 })();
 </script>
 </body>
