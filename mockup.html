@@ -450,6 +450,26 @@
     #frame-d .about-center{width:500px;height:600px}
     #frame-d .side-stack{width:240px}
   }
+
+/* ===== CONTACT CHIP (always visible) ===== */
+.contact-chip{position:fixed;bottom:24px;right:24px;z-index:60;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:10px;pointer-events:none}
+.contact-chip > *{pointer-events:auto}
+.contact-chip .chip-toggle{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;background:var(--copper);color:#1a1108;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;border:0;cursor:pointer;box-shadow:0 12px 32px rgba(209,138,90,0.4), 0 0 0 1px rgba(255,255,255,0.06) inset;transition:background .15s, transform .15s}
+.contact-chip .chip-toggle:hover{background:#e29867;transform:translateY(-1px)}
+.contact-chip .chip-toggle .arr{font-size:15px;line-height:1}
+.contact-chip .chip-panel{display:none;flex-direction:column;gap:6px;padding:12px;border-radius:16px;background:var(--glass-strong);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-edge);box-shadow:var(--shadow);min-width:260px}
+.contact-chip.open .chip-panel{display:flex}
+.contact-chip.open .chip-toggle{background:#1a1108;color:var(--copper)}
+.contact-chip.open .chip-toggle:hover{background:#241710}
+.chip-panel a{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);transition:border-color .15s, background .15s}
+.chip-panel a:hover{border-color:var(--copper);background:rgba(209,138,90,0.08)}
+.chip-panel a .lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.chip-panel a .val{font-size:14px;color:var(--ink)}
+@media (max-width:1100px){
+.contact-chip{bottom:18px;right:18px}
+.contact-chip .chip-toggle{padding:11px 18px;font-size:12px;letter-spacing:0.14em}
+.contact-chip .chip-panel{min-width:230px}
+}
 </style>
 
 <header class="topbar">
@@ -874,6 +894,16 @@
   </aside>
 </section>
 
+<!-- Always-visible contact chip -->
+<div class="contact-chip" id="contact-chip">
+<div class="chip-panel">
+<a href="mailto:marinadiponio@proton.me"><span class="lbl">Email</span><span class="val">marinadiponio@proton.me</span></a>
+<a href="https://www.linkedin.com/in/marinadiponio" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span><span class="val">/in/marinadiponio</span></a>
+<a href="https://www.behance.net/marinadiponio" target="_blank" rel="noopener"><span class="lbl">Behance</span><span class="val">/marinadiponio</span></a>
+</div>
+<button class="chip-toggle" id="chip-toggle" aria-expanded="false" aria-controls="contact-chip"><span class="lbl-txt">Get in touch</span><span class="arr">↗</span></button>
+</div>
+
 <script>
   // Audio toggle
   (function(){
@@ -926,6 +956,24 @@
       });
     });
   })();
+
+// Contact chip toggle
+(function(){
+var chip = document.getElementById("contact-chip");
+var btn = document.getElementById("chip-toggle");
+if(!chip || !btn) return;
+btn.addEventListener("click", function(e){
+e.stopPropagation();
+var open = chip.classList.toggle("open");
+btn.setAttribute("aria-expanded", open ? "true" : "false");
+});
+document.addEventListener("click", function(e){
+if(!chip.contains(e.target)){
+chip.classList.remove("open");
+btn.setAttribute("aria-expanded","false");
+}
+});
+})();
 </script>
 </body>
 </html>
