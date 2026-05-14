@@ -301,6 +301,63 @@ Three columns:
 - `raw.githubusercontent.com` CDN caches aggressively even with `?bust=` query strings. Use the GitHub contents API (`api.github.com/repos/.../contents/...`) for reliable verification.
 - Output sanitizer in the `javascript_tool` sometimes returns "[BLOCKED: Cookie/query string data]" for certain string slices — if it happens, slice into smaller chunks (50–100 chars) to work around it.
 
+## Session closeout · v5.12 → v5.19 (Tools, About copy, contact chip, Work shelf interactivity)
+
+**Where we stopped:** Marina paused after the Work-shelf interactivity + Learn To Leap label tightening landed. The mockup now has a real Tools grid, sectioned About sub-tabs, a persistent contact button, a fully interactive album shelf, and uniform card heights on Frame B.
+
+### What shipped this session
+
+- **v5.12 · Tools grid.** Replaced the chip cloud with a 7-row Tools card on About’s Tools tab: Design / Prototyping / Game Dev / Research / Productivity / Dev / AI & Automation. AI row includes Claude. Jira removed (not used).
+- **v5.13 · About copy + section labels.** New Approach copy (verbatim from Marina) split into METHOD / CRAFT. New Currently copy (verbatim) split into NOW / OFF THE CLOCK. Added `.ab-section` + `.ab-lbl` CSS for copper section labels to match the Tools-grid visual rhythm.
+- **v5.14 · Story sectioning.** Story tab restructured into ROOTS / WHAT I MAKE with matching copper labels.
+- **v5.15 · Top-left name font fix.** Name in the top-left now renders in Fraunces serif with italic copper "DiPonio". Previously was falling back to UI sans.
+- **v5.16 · Persistent contact chip.** Added a bottom-right floating "GET IN TOUCH ↗" chip with an expandable channel panel (Email / LinkedIn / Behance / Calendly). `position:fixed` so it lives on every frame. Tablet `@media (max-width:1100px)` rule ensures it fits.
+- **v5.17 · Speech-bubble icon swap.** Chip swapped from text to a 54px circle with an inline SVG speech-bubble icon (aria-label + title tooltip preserved). Resolves overlap of Tools card on Frame C.
+- **v5.18 · Work shelf interactivity.** Frame B album shelf now sources 9 projects (Cosmic Catch, Tick Tock Trivia, Learn To Leap, ICE Accessibility, Nutrition App, StarTea, Yuumi-Chan, Insane Wizard, UF Club Software). Each has `data-cat` attributes. Category filter buttons (All / Research / Product Mgmt / UI/UX) filter the visible set. Click any card to rotate it to center. Looping via modular arithmetic. Dots redraw to match visible-count. Range = center ± 2 so max 5 cards visible at once. Social Media Campaign excluded (marketing-only).
+- **v5.19 · LTL card label tightened.** "Senior Capstone · Games User Research" → "Senior Project · UX Research" so the LTL album card no longer wraps to a 2nd line and stays the same height as the others. Added `white-space:nowrap; overflow:hidden; text-overflow:ellipsis` to `.album-card .meta .c` as a safety net for any future long labels.
+
+### File size progression
+
+47,657 → 48,001 (v5.12) → 48,602 (v5.13) → 48,707 (v5.14) → 48,911 (v5.15) → 51,894 (v5.16) → 52,196 (v5.17) → 55,506 (v5.18) → 55,555 (v5.19).
+
+### Updated master to-do list (17 items, with current status)
+
+Statuses use Marina's own words from end-of-session check-in.
+
+1. **Fix the name in top-left font.** ✅ Done in v5.15.
+2. **Make contact info always visible (teacher feedback).** ✅ Done in v5.16 → v5.17. Persistent bottom-right speech-bubble chip on every frame, opens channel panel.
+3. **Work page tabs working (category filtering).** ✅ Done in v5.18. Marina deferred until items 1 + 2 landed first; now shipped.
+4. **Work page scroll on click + loop.** ✅ Done in v5.18. Click any visible card to rotate; loops via modular arithmetic.
+5. **Custom cursor — unique + cute.** ⏳ Open. Marina wants to look at options first; no direction yet. Saved alongside Phase 4 polish.
+6. **Restructure panels (tall-left / short-right).** ➖ Probably dropping. Marina: "idk if it's really bothering me anymore." Park unless she revisits.
+7. **Downloadable resume / resume.pdf upload.** ⏳ Open — Marina to upload herself. Tagged for next session.
+8. **Audio works across pages.** ✅ Verified by Marina ("just tried audio, it works!").
+9. **Portrait.jpg in /images/.** ⏳ Marina will upload it as `portrait.jpg`.
+10. **Learn To Leap photos.** ⏳ Marina will do tomorrow.
+11. **Calendly setup.** ⏳ Marina will do tomorrow.
+12. **Formspree endpoint.** ⏳ Marina will do another time.
+13. **Fraunces audit across pages.** ➖ Closed. Marina: "it looks fine tbh idk where it was missing."
+14. **Mobile pass.** ⏳ "saving for LAST!" Do not touch until everything else is locked.
+15. **Project page copy fixes (10 projects).** ⏳ Open. Marina: easy copy-paste from existing projects, the hard part is her reading through for accuracy. She drives this.
+16. **Project page images.** ✅ Marina: "images are already in the folder." No work needed from Claude here.
+17. **Animation between page selection / between panels.** ⏳ Queued as the pass right before mobile. Bundle with other Phase 4 polish.
+
+### Next-session candidates (when Marina is back)
+
+- Marina to upload `portrait.jpg`, `resume.pdf`, LTL photos → then Claude wires them in (S each).
+- Marina pastes Formspree endpoint + Calendly link → Claude swaps placeholders (S each).
+- Project-page copy pass once Marina has reviewed (Marina drives, Claude executes).
+- Cursor exploration: Claude can sketch 3–4 unique/cute cursor options for Marina to react to before building.
+- Once all of the above is locked, start the Phase 4 animation bundle (page-selection + panel transitions), then mobile.
+
+### Notes for next-Claude
+
+- The Frame B album shelf is **now interactive** — don't revert it to a static 5-card hero/dim arrangement. Filter buttons + click-to-rotate + dots are wired in JS at the bottom of mockup.html.
+- The bottom-right contact chip is `position:fixed` and lives on every frame. If anything else needs to anchor to the corner (mobile nav etc.), watch for collision.
+- About sub-tabs (Story / Approach / Currently) now use `.ab-section` blocks with `.ab-lbl` copper labels. Tools tab uses its own grid component. Match this pattern for any future sub-tab content.
+- `mockup.html` is now ≈55.5 KB. The next big growth area will be Frame B asset wiring + mobile media queries.
+- Contact chip speech-bubble SVG is inline; if Marina wants a different icon, swap inside the `#contactFab svg` element.
+
 ---
 
 End of context doc. Good luck.
