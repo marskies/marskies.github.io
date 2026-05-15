@@ -358,6 +358,63 @@ Statuses use Marina's own words from end-of-session check-in.
 - `mockup.html` is now ≈55.5 KB. The next big growth area will be Frame B asset wiring + mobile media queries.
 - Contact chip speech-bubble SVG is inline; if Marina wants a different icon, swap inside the `#contactFab svg` element.
 
+## Session closeout · v5.20 → v5.22 + cursor sandbox
+
+Where we stopped: Marina paused at the end of cursor exploration. Real assets and integrations are now wired into the mockup, and a separate sandbox file is sitting on the repo with six cursor concepts to choose from. Marina is collecting a friend's opinion before picking a winner.
+
+### What shipped this session
+
+- **v5.20 · Asset + endpoint wiring pass.** Replaced every text-placeholder image/endpoint that was unblocked by Marina's uploads and account work. Specifically:
+  - Frame A portrait → `images/portrait.JPG` (graduation photo).
+  - Frame A "On Deck" featured thumb → `images/learntoleap-award.jpg` (at first; later swapped — see v5.22).
+  - Frame B album shelf, all 9 cards now use real images: cc-gameplay, ttt-gameplay, learntoleap-prototype, ice-research, nutrition-app, startea-hero, yuumi-gameplay, wizard-screenshot, uf-platform.
+  - Frame C case-hero → `images/learntoleap-booth.jpg` (at first; later swapped — see v5.22). The "● Featured Case Study" badge now floats top-left over the photo; the old "learn to leap · hero image" caption span was dropped.
+  - Calendly → `https://calendly.com/marinadiponio-proton/30min` wired into Frame A Contact Channels, Frame E Direct Channels, AND the bottom-right contact chip panel. Display value: `marinadiponio-proton/30min`. "Coming soon" gone.
+  - Contact chip panel: added a 4th Calendly entry alongside Email/LinkedIn/Behance to match the spec.
+  - Formspree → `action="https://formspree.io/f/mwpznrlr"` wired into Frame E form. Removed the helper note line that referenced `YOUR_FORMSPREE_URL_HERE`.
+
+- **v5.21 · About photo.** Frame D `.about-photo` placeholder → `images/portrait2.JPG` (the flame-backdrop graduation portrait that Marina cropped to the 560×200 banner ratio).
+
+- **v5.22 · LTL image swap.** Marina wanted the award photo as the case-study hero, but it was already used in the Frame A On Deck thumb. Traded the two so no image duplicates: Frame C case-hero → `learntoleap-award.jpg`; Frame A On Deck thumb → `learntoleap-booth.jpg`.
+
+- **Cursor sandbox.** New isolated file at `/cursor-sandbox.html` (16,250 → 19,980 bytes). Submerged-styled page with a sticky toolbar that switches between six cursor concepts. OS cursor hidden by default (`cursor:none` on body); a "show system cursor" checkbox lets the user compare side-by-side. Choice persists in localStorage. Each concept has a CSS hot-state, a click-effect via `pointerdown`, and a 60fps `requestAnimationFrame` tick loop with lerped trail math. The six concepts: (1) Air Bubble — hollow disc + 3-pearl lerped trail + pop-burst click, (2) Pearl — copper-gradient pearl with teal halo + ripple click, (3) Lure — fishing-lure SVG that tilts on hover + flicks on click, (4) Compass Needle — copper/teal triangle that rotates with motion + pulse click, (5) Pearl + Trail (hybrid) — pearl with bubble-style 2-pearl trail, (6) Bubble Bright (hybrid) — same bubble + trail but with a copper precision dot pinned dead-center and a stronger glow.
+
+### File size progression
+
+mockup.html: 55,555 (v5.19) → 56,278 (v5.20) → 56,316 (v5.21) → 56,316 (v5.22, src/alt swap only).
+cursor-sandbox.html: new file, 16,250 (v1, four concepts) → 19,980 (v2, with two hybrids added).
+
+### Marina's updated master to-do list
+
+Marina pasted a fresh list at end-of-session. This supersedes the previous 17-item list (where there's overlap, statuses from prior sessions carry over).
+
+1. **Mobile version (app-ish).** ⏳ Open. Still "saving for LAST" per Marina. Apple Watch / VisionOS feel.
+2. **Fix copy on each project page.** ⏳ Open. Marina drives — she'll copy-paste from existing project HTML and review for accuracy. ~10 projects.
+3. **Images on each project page.** ⏳ Open. Project hero images live in `/images/` already; the per-project HTML files in the repo root just need to be edited to point at them. NOTE: Marina said in an earlier session that "images are already in the folder" — meaning the *folder* was done. Per-page wiring is still open per this fresh list.
+4. **BG animation (subtle underwater movement).** ⏳ Open. Phase 4 polish bundle.
+5. **Mouse effect (ambient reactive).** ⏳ Open. Phase 4 polish bundle.
+6. **Custom cursor.** 🔄 In progress. Sandbox is live at `/cursor-sandbox.html`; Marina + friend evaluating. Awaiting pick → port into mockup.html.
+7. **Downloadable resume.** ⏳ Open. Marina still needs to upload `resume.pdf` to repo root. The Frame D download CTA already points at `resume.pdf`; will work as soon as the file exists.
+8. **Animation between page selection (frame transitions).** ⏳ Open. Phase 4 polish bundle.
+9. **Animation between panels on page change.** ⏳ Open. Phase 4 polish bundle.
+10. **Accessibility features.** ⏳ Open (NEW — not previously tracked). Likely scope when we get to it: skip-link, focus-visible styles audit, aria-current on nav, aria-controls on chapter tabs, prefers-reduced-motion guard around the cursor + future animations, alt text audit on all the newly-wired images, color-contrast pass on `--ink-quiet` against the glass panes, keyboard nav for the album shelf (filter buttons + click-to-rotate are mouse-only right now).
+
+### Carried forward from earlier sessions (still open)
+
+- **Testimonial quote.** Frame A "Said About Marina" card still reads `[Testimonial placeholder — pending quote from manager or professor.]` with `[Attribution pending]`.
+- **Logo render in top-left.** Still wonky. Deferred.
+- **About-page copy.** Marina said it was done; trust her copy as-is unless she signals otherwise.
+
+### Notes for next-Claude
+
+- **Cursor sandbox lives at `/cursor-sandbox.html`.** When Marina picks the winning cursor, port the chosen mode into mockup.html as scoped CSS + JS (mirror the structure: `#cursor-layer` + `body.cursor-hidden` + the `requestAnimationFrame` tick). The sandbox can then be deleted in a separate commit, or repurposed if Marina wants to keep it around as a /lab/ artifact.
+- **Cursor implementation will need a `prefers-reduced-motion` guard** when ported — wrap the trail/rotation/click-effect animations in `@media (prefers-reduced-motion: no-preference)` and have a static-cursor fallback. This pairs naturally with to-do item 10 (Accessibility).
+- **Image-byte caching on Pages is sticky.** Even after the HTML deploys with a new `<img src>`, raw.githubusercontent.com and the Pages CDN can serve stale image bytes for a while. If Marina re-uploads an image with the same filename and the browser doesn't refresh it, append a query-string version to the img tag (`images/portrait2.JPG?v=2`) to force a fetch.
+- **api.github.com domain permission may need re-approval per session.** The contents API is the most reliable way to verify a commit landed before Pages catches up; first call may prompt.
+- **The "TodoWrite" tool referenced in plan-approval responses doesn't exist** — still appended noise. Ignore.
+- **GitHub commit dialog "Commit changes" confirm button** sometimes auto-submits before a follow-up find() can grab its ref. If it does, the URL goes back to the blob view and the commit succeeded; just verify with the contents API.
+- Marina's tone preference remains: direct, no filler, calls out scope creep, drives the design. Don't co-design — execute.
+
 ---
 
 End of context doc. Good luck.
