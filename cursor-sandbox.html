@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cursor Sandbox · Submerged</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a1f24;
+    --glass:rgba(18,42,48,0.55);
+    --glass-strong:rgba(20,48,55,0.72);
+    --glass-edge:rgba(255,255,255,0.10);
+    --ink:#eaf6f7;
+    --ink-dim:#b9d2d4;
+    --ink-quiet:#7fa2a5;
+    --teal:#8fd4d6;
+    --copper:#d18a5a;
+    --shadow:0 18px 60px rgba(0,0,0,0.45);
+    --radius:22px;
+    --radius-sm:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg-deep);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.55;min-height:100vh}
+  body{
+    background-image:url('images/background.jpg');
+    background-size:cover;background-position:center;background-attachment:fixed;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:40px 32px 80px;position:relative}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:36px;letter-spacing:-0.01em;margin:0 0 6px}
+  h1 em{font-style:italic;color:var(--copper);font-weight:500}
+  .lede{color:var(--ink-dim);margin:0 0 32px;max-width:680px}
+  .lede code{background:rgba(0,0,0,0.3);padding:1px 6px;border-radius:5px;color:var(--teal);font-size:13px}
+
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    padding:14px;border-radius:var(--radius);
+    background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border:1px solid var(--glass-edge);box-shadow:var(--shadow);
+    margin-bottom:24px;position:sticky;top:14px;z-index:50;
+  }
+  .toolbar .lbl{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);margin-right:8px}
+  .tool-btn{
+    appearance:none;border:1px solid var(--glass-edge);background:rgba(0,0,0,0.18);color:var(--ink);
+    padding:8px 14px;border-radius:999px;font-family:inherit;font-size:13px;letter-spacing:0.06em;
+  }
+  .tool-btn.on{background:var(--copper);border-color:var(--copper);color:#1a0e08;font-weight:600}
+  .tool-toggle{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--ink-dim);font-size:13px}
+  .tool-toggle input{accent-color:var(--copper)}
+
+  .pane{
+    padding:28px;border-radius:var(--radius);
+    background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border:1px solid var(--glass-edge);box-shadow:var(--shadow);
+    margin-bottom:20px;
+  }
+  .pane h2{font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0 0 4px}
+  .pane h2 em{font-style:italic;color:var(--copper)}
+  .pane .desc{color:var(--ink-dim);font-size:14px;margin:0 0 18px;max-width:680px}
+
+  .targets{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn-primary{
+    appearance:none;border:none;background:var(--copper);color:#1a0e08;
+    padding:12px 22px;border-radius:999px;font-weight:600;font-family:inherit;font-size:14px;letter-spacing:0.04em;
+  }
+  .btn-secondary{
+    appearance:none;background:transparent;color:var(--ink);
+    border:1px solid var(--glass-edge);padding:11px 20px;border-radius:999px;font-family:inherit;font-size:14px;
+  }
+  .link-pill{
+    color:var(--teal);text-decoration:none;border-bottom:1px dashed rgba(143,212,214,0.4);padding:2px 0;font-size:14px;
+  }
+  .targets input[type=text]{
+    background:rgba(0,0,0,0.25);border:1px solid var(--glass-edge);color:var(--ink);
+    padding:10px 14px;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;min-width:220px;
+  }
+  .targets .swatch{
+    width:64px;height:64px;border-radius:14px;
+    background:linear-gradient(160deg,#2a525c,#11323a);
+    border:1px solid var(--glass-edge);
+  }
+  .copy-block{margin-top:18px;padding:14px 16px;background:rgba(0,0,0,0.18);border-radius:var(--radius-sm);font-size:13px;color:var(--ink-dim);line-height:1.7}
+  .copy-block strong{color:var(--ink)}
+
+  body.cursor-hidden, body.cursor-hidden *{cursor:none !important}
+
+  #cursor-layer{position:fixed;inset:0;pointer-events:none;z-index:9999}
+  .ck{position:absolute;top:0;left:0;transform:translate3d(-50%,-50%,0);will-change:transform;display:none}
+
+  /* MODE 1 - BUBBLE */
+  #cursor-layer.mode-bubble .ck-bubble{display:block}
+  #cursor-layer.mode-bubble .ck-bubble-trail{display:block}
+  .ck-bubble{
+    width:18px;height:18px;border-radius:50%;
+    border:1.5px solid var(--copper);
+    background:radial-gradient(circle at 35% 30%, rgba(143,212,214,0.35), rgba(143,212,214,0.05) 60%, transparent 80%);
+    box-shadow:0 0 14px rgba(143,212,214,0.25), inset 0 0 6px rgba(255,255,255,0.15);
+    transition:width .15s ease,height .15s ease,border-color .15s ease,background .15s ease;
+  }
+  #cursor-layer.mode-bubble.hot .ck-bubble{
+    width:28px;height:28px;
+    background:radial-gradient(circle at 35% 30%, rgba(209,138,90,0.55), rgba(209,138,90,0.1) 60%, transparent 80%);
+    border-color:#e8a777;
+  }
+  .ck-bubble-trail{
+    width:6px;height:6px;border-radius:50%;
+    border:1px solid rgba(209,138,90,0.55);background:rgba(143,212,214,0.18);
+  }
+  .ck-bubble-trail.t2{width:4px;height:4px;opacity:.7}
+  .ck-bubble-trail.t3{width:3px;height:3px;opacity:.5}
+  .ck-pop{
+    position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;
+    border:2px solid var(--copper);transform:translate3d(-50%,-50%,0);
+    pointer-events:none;animation:pop .35s ease-out forwards;
+  }
+  @keyframes pop{0%{opacity:1;width:20px;height:20px}100%{opacity:0;width:60px;height:60px}}
+
+  /* MODE 2 - PEARL */
+  #cursor-layer.mode-pearl .ck-pearl{display:block}
+  #cursor-layer.mode-pearl .ck-pearl-halo{display:block}
+  .ck-pearl{
+    width:12px;height:12px;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #ffe6d0 0%, var(--copper) 45%, #8a5536 100%);
+    box-shadow:0 0 8px rgba(209,138,90,0.5);
+  }
+  .ck-pearl-halo{
+    width:26px;height:26px;border-radius:50%;
+    border:1px solid rgba(143,212,214,0.35);
+    transition:width .18s ease,height .18s ease,border-color .18s ease;
+  }
+  #cursor-layer.mode-pearl.hot .ck-pearl-halo{
+    width:20px;height:20px;border-color:rgba(143,212,214,0.85);
+  }
+  .ck-ripple{
+    position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;
+    border:1.5px solid rgba(143,212,214,0.7);transform:translate3d(-50%,-50%,0);
+    pointer-events:none;animation:ripple .45s ease-out forwards;
+  }
+  @keyframes ripple{0%{opacity:1;width:14px;height:14px}100%{opacity:0;width:54px;height:54px}}
+
+  /* MODE 3 - LURE */
+  #cursor-layer.mode-lure .ck-lure{display:block}
+  .ck-lure{width:22px;height:30px;transform-origin:50% 20%;transition:transform .15s ease}
+  .ck-lure-flick{
+    position:absolute;left:0;top:0;width:22px;height:30px;
+    transform:translate3d(-50%,-50%,0);pointer-events:none;
+    animation:flick .35s ease-out forwards;
+  }
+  @keyframes flick{
+    0%{transform:translate3d(-50%,-50%,0) rotate(0)}
+    40%{transform:translate3d(-50%,-50%,0) rotate(-22deg)}
+    100%{transform:translate3d(-50%,-50%,0) rotate(0);opacity:0}
+  }
+
+  /* MODE 4 - COMPASS */
+  #cursor-layer.mode-compass .ck-compass{display:block}
+  .ck-compass{width:24px;height:24px;transition:filter .2s ease}
+  #cursor-layer.mode-compass.hot .ck-compass{filter:drop-shadow(0 0 6px rgba(143,212,214,0.7))}
+  .ck-compass-pulse{
+    position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;
+    border:1px solid var(--teal);transform:translate3d(-50%,-50%,0);
+    pointer-events:none;animation:cpulse .5s ease-out forwards;
+  }
+  @keyframes cpulse{0%{opacity:1;width:24px;height:24px}100%{opacity:0;width:72px;height:72px}}
+</style>
+</head>
+<body class="cursor-hidden">
+
+<div class="wrap">
+  <h1>Cursor <em>Sandbox</em></h1>
+  <p class="lede">Pick a mode, then move/click/hover anywhere below. The OS cursor is hidden by default so you see only the custom one. Tick <code>show system cursor</code> to compare side-by-side.</p>
+
+  <div class="toolbar" role="tablist" aria-label="Cursor modes">
+    <span class="lbl">Cursor</span>
+    <button class="tool-btn" data-mode="bubble">1 · Air Bubble</button>
+    <button class="tool-btn" data-mode="pearl">2 · Pearl</button>
+    <button class="tool-btn" data-mode="lure">3 · Lure</button>
+    <button class="tool-btn" data-mode="compass">4 · Compass</button>
+    <label class="tool-toggle"><input type="checkbox" id="show-sys" /> show system cursor</label>
+  </div>
+
+  <section class="pane">
+    <h2>Air <em>Bubble</em></h2>
+    <p class="desc">Hollow ~18px disc with a teal glow and copper outline, trailed by two tinier bubbles. Grows + warms on hover. Click pops a ring-burst.</p>
+    <div class="targets">
+      <button class="btn-primary">Primary CTA</button>
+      <button class="btn-secondary">Secondary</button>
+      <a href="#" class="link-pill">A text link</a>
+      <input type="text" placeholder="Type here" />
+      <div class="swatch"></div>
+    </div>
+    <div class="copy-block">
+      <strong>Try:</strong> hover the CTA, click anywhere, hover the swatch (non-interactive — cursor stays calm).
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2><em>Pearl</em></h2>
+    <p class="desc">12px copper-gradient pearl with a faint teal halo ring. Halo tightens + brightens on hover. Click drops a teal ripple.</p>
+    <div class="targets">
+      <button class="btn-primary">Primary CTA</button>
+      <button class="btn-secondary">Secondary</button>
+      <a href="#" class="link-pill">A text link</a>
+      <input type="text" placeholder="Type here" />
+      <div class="swatch"></div>
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2><em>Lure</em></h2>
+    <p class="desc">Tiny fishing-lure silhouette in copper with a teal feather. Tilts on hover (a "tug"). Click does a single line-flick.</p>
+    <div class="targets">
+      <button class="btn-primary">Primary CTA</button>
+      <button class="btn-secondary">Secondary</button>
+      <a href="#" class="link-pill">A text link</a>
+      <input type="text" placeholder="Type here" />
+      <div class="swatch"></div>
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2>Compass <em>Needle</em></h2>
+    <p class="desc">Two stacked triangles — copper front, teal back. Rotates to point in the direction you last moved. Hovering interactive elements adds a teal glow + pulse.</p>
+    <div class="targets">
+      <button class="btn-primary">Primary CTA</button>
+      <button class="btn-secondary">Secondary</button>
+      <a href="#" class="link-pill">A text link</a>
+      <input type="text" placeholder="Type here" />
+      <div class="swatch"></div>
+    </div>
+    <div class="copy-block">
+      <strong>Note:</strong> the compass rotates with your motion — that's the "directional" part. If you like the shape but not the rotation, tell me and I'll lock it to always-up.
+    </div>
+  </section>
+</div>
+
+<div id="cursor-layer" class="mode-bubble">
+  <div class="ck ck-bubble-trail t3" data-trail="3"></div>
+  <div class="ck ck-bubble-trail t2" data-trail="2"></div>
+  <div class="ck ck-bubble-trail t1" data-trail="1"></div>
+  <div class="ck ck-bubble"></div>
+
+  <div class="ck ck-pearl-halo"></div>
+  <div class="ck ck-pearl"></div>
+
+  <div class="ck ck-lure">
+    <svg viewBox="0 0 22 30" xmlns="http://www.w3.org/2000/svg" width="22" height="30">
+      <line x1="11" y1="0" x2="11" y2="7" stroke="#8fd4d6" stroke-width="1.2" opacity="0.7"/>
+      <ellipse cx="11" cy="13" rx="4.5" ry="6.5" fill="#d18a5a" stroke="#8a5536" stroke-width="0.8"/>
+      <ellipse cx="9.5" cy="10.5" rx="1" ry="1.8" fill="#ffe6d0" opacity="0.7"/>
+      <path d="M11 19 Q11 25 14 26 Q16 26 16 24" fill="none" stroke="#eaf6f7" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M11 19 L8 27 L11 25 L9 28 L11 26 Z" fill="#8fd4d6" opacity="0.85"/>
+    </svg>
+  </div>
+
+  <div class="ck ck-compass">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+      <polygon points="12,12 8,22 16,22" fill="#8fd4d6" opacity="0.55"/>
+      <polygon points="12,12 8,2 16,2" fill="#d18a5a"/>
+      <circle cx="12" cy="12" r="1.6" fill="#eaf6f7"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+(() => {
+  const layer = document.getElementById('cursor-layer');
+  const showSys = document.getElementById('show-sys');
+  const body = document.body;
+  const modes = ['bubble','pearl','lure','compass'];
+
+  function setMode(m){
+    modes.forEach(x => layer.classList.toggle('mode-' + x, x === m));
+    document.querySelectorAll('.tool-btn').forEach(b => b.classList.toggle('on', b.dataset.mode === m));
+    try { localStorage.setItem('cursorMode', m); } catch(e){}
+  }
+  document.querySelectorAll('.tool-btn').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  setMode((function(){ try { return localStorage.getItem('cursorMode'); } catch(e){ return null; }})() || 'bubble');
+
+  showSys.addEventListener('change', () => {
+    body.classList.toggle('cursor-hidden', !showSys.checked);
+  });
+
+  const ck = {
+    bubble:   layer.querySelector('.ck-bubble'),
+    t1:       layer.querySelector('[data-trail="1"]'),
+    t2:       layer.querySelector('[data-trail="2"]'),
+    t3:       layer.querySelector('[data-trail="3"]'),
+    pearl:    layer.querySelector('.ck-pearl'),
+    halo:     layer.querySelector('.ck-pearl-halo'),
+    lure:     layer.querySelector('.ck-lure'),
+    compass:  layer.querySelector('.ck-compass'),
+  };
+
+  let mx = -100, my = -100, lastX = mx, lastY = my;
+  const trail = [{x:mx,y:my},{x:mx,y:my},{x:mx,y:my}];
+  let compassAngle = 0;
+
+  window.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; });
+
+  const HOT_SELECTOR = 'a, button, input, textarea, select, [role="button"], label';
+  function hotCheck(){
+    const el = document.elementFromPoint(mx, my);
+    const hot = !!(el && el.closest && el.closest(HOT_SELECTOR));
+    layer.classList.toggle('hot', hot);
+  }
+
+  function tick(){
+    const base = 'translate3d(' + mx + 'px, ' + my + 'px, 0) translate3d(-50%,-50%,0)';
+    ck.bubble.style.transform   = base;
+    ck.pearl.style.transform    = base;
+    ck.halo.style.transform     = base;
+    ck.lure.style.transform     = base + (layer.classList.contains('hot') ? ' rotate(12deg)' : '');
+
+    const dx = mx - lastX, dy = my - lastY;
+    if (Math.hypot(dx,dy) > 0.5) {
+      compassAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+    }
+    ck.compass.style.transform = 'translate3d(' + mx + 'px, ' + my + 'px, 0) translate3d(-50%,-50%,0) rotate(' + compassAngle + 'deg)';
+
+    trail[0].x += (mx - trail[0].x) * 0.35; trail[0].y += (my - trail[0].y) * 0.35;
+    trail[1].x += (trail[0].x - trail[1].x) * 0.30; trail[1].y += (trail[0].y - trail[1].y) * 0.30;
+    trail[2].x += (trail[1].x - trail[2].x) * 0.25; trail[2].y += (trail[1].y - trail[2].y) * 0.25;
+    ck.t1.style.transform = 'translate3d(' + trail[0].x + 'px, ' + (trail[0].y + 14) + 'px, 0) translate3d(-50%,-50%,0)';
+    ck.t2.style.transform = 'translate3d(' + (trail[1].x - 4) + 'px, ' + (trail[1].y + 24) + 'px, 0) translate3d(-50%,-50%,0)';
+    ck.t3.style.transform = 'translate3d(' + (trail[2].x + 4) + 'px, ' + (trail[2].y + 32) + 'px, 0) translate3d(-50%,-50%,0)';
+
+    hotCheck();
+    lastX = mx; lastY = my;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  window.addEventListener('pointerdown', (e) => {
+    const mode = modes.find(m => layer.classList.contains('mode-' + m));
+    let cls = '';
+    if (mode === 'bubble') cls = 'ck-pop';
+    else if (mode === 'pearl') cls = 'ck-ripple';
+    else if (mode === 'lure') cls = 'ck-lure-flick';
+    else if (mode === 'compass') cls = 'ck-compass-pulse';
+    if (!cls) return;
+    const el = document.createElement('div');
+    el.className = cls;
+    if (cls === 'ck-lure-flick') {
+      el.innerHTML = layer.querySelector('.ck-lure').innerHTML;
+    }
+    el.style.left = e.clientX + 'px';
+    el.style.top  = e.clientY + 'px';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 600);
+  });
+})();
+</script>
+</body>
+</html>
