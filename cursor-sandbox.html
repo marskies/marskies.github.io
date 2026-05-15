@@ -164,6 +164,41 @@
     pointer-events:none;animation:cpulse .5s ease-out forwards;
   }
   @keyframes cpulse{0%{opacity:1;width:24px;height:24px}100%{opacity:0;width:72px;height:72px}}
+  /* MODE 5 - PEARL + TRAIL */
+  #cursor-layer.mode-pearl-trail .ck-pearl{display:block}
+  #cursor-layer.mode-pearl-trail .ck-pearl-halo{display:block}
+  #cursor-layer.mode-pearl-trail .ck-pt-trail{display:block}
+  .ck-pt-trail{
+    width:6px;height:6px;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #ffe6d0 0%, var(--copper) 55%, #6a4128 100%);
+    box-shadow:0 0 6px rgba(209,138,90,0.45);
+    opacity:0.75;
+  }
+  .ck-pt-trail.t2{width:4px;height:4px;opacity:.5}
+  #cursor-layer.mode-pearl-trail.hot .ck-pearl-halo{
+    width:20px;height:20px;border-color:rgba(143,212,214,0.85);
+  }
+
+  /* MODE 6 - BUBBLE BRIGHT */
+  #cursor-layer.mode-bubble-bright .ck-bb{display:block}
+  #cursor-layer.mode-bubble-bright .ck-bb-dot{display:block}
+  #cursor-layer.mode-bubble-bright .ck-bubble-trail{display:block}
+  .ck-bb{
+    width:20px;height:20px;border-radius:50%;
+    border:2px solid #e8a777;
+    background:radial-gradient(circle at 35% 30%, rgba(143,212,214,0.55), rgba(143,212,214,0.12) 60%, transparent 85%);
+    box-shadow:0 0 18px rgba(143,212,214,0.45), 0 0 6px rgba(209,138,90,0.35), inset 0 0 8px rgba(255,255,255,0.22);
+    transition:width .15s ease,height .15s ease,border-color .15s ease;
+  }
+  .ck-bb-dot{
+    width:4px;height:4px;border-radius:50%;
+    background:var(--copper);
+    box-shadow:0 0 6px rgba(209,138,90,0.8);
+  }
+  #cursor-layer.mode-bubble-bright.hot .ck-bb{
+    width:30px;height:30px;border-color:#ffbb86;
+  }
+
 </style>
 </head>
 <body class="cursor-hidden">
@@ -178,6 +213,8 @@
     <button class="tool-btn" data-mode="pearl">2 · Pearl</button>
     <button class="tool-btn" data-mode="lure">3 · Lure</button>
     <button class="tool-btn" data-mode="compass">4 · Compass</button>
+    <button class="tool-btn" data-mode="pearl-trail">5 · Pearl + Trail</button>
+    <button class="tool-btn" data-mode="bubble-bright">6 · Bubble Bright</button>
     <label class="tool-toggle"><input type="checkbox" id="show-sys" /> show system cursor</label>
   </div>
 
@@ -234,6 +271,30 @@
       <strong>Note:</strong> the compass rotates with your motion — that's the "directional" part. If you like the shape but not the rotation, tell me and I'll lock it to always-up.
     </div>
   </section>
+
+  <section class="pane">
+    <h2>Pearl <em>+ Trail</em></h2>
+    <p class="desc">Pearl as the main cursor (precise centered hit-point) plus a soft lerped trail of two tinier pearls behind it. Aims to solve the bubble's "where am I" issue while keeping the trail you liked.</p>
+    <div class="targets">
+      <button class="btn-primary">Primary CTA</button>
+      <button class="btn-secondary">Secondary</button>
+      <a href="#" class="link-pill">A text link</a>
+      <input type="text" placeholder="Type here" />
+      <div class="swatch"></div>
+    </div>
+  </section>
+
+  <section class="pane">
+    <h2>Bubble <em>Bright</em></h2>
+    <p class="desc">Same bubble silhouette and trail, but with a tiny solid copper dot pinned dead-center as a precision anchor, plus a stronger glow. Should read better against the background without losing the bubble's lightness.</p>
+    <div class="targets">
+      <button class="btn-primary">Primary CTA</button>
+      <button class="btn-secondary">Secondary</button>
+      <a href="#" class="link-pill">A text link</a>
+      <input type="text" placeholder="Type here" />
+      <div class="swatch"></div>
+    </div>
+  </section>
 </div>
 
 <div id="cursor-layer" class="mode-bubble">
@@ -255,6 +316,14 @@
     </svg>
   </div>
 
+  <!-- Pearl+Trail mode -->
+  <div class="ck ck-pt-trail t2" data-pt-trail="2"></div>
+  <div class="ck ck-pt-trail t1" data-pt-trail="1"></div>
+
+  <!-- Bubble Bright mode -->
+  <div class="ck ck-bb"></div>
+  <div class="ck ck-bb-dot"></div>
+
   <div class="ck ck-compass">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
       <polygon points="12,12 8,22 16,22" fill="#8fd4d6" opacity="0.55"/>
@@ -269,7 +338,7 @@
   const layer = document.getElementById('cursor-layer');
   const showSys = document.getElementById('show-sys');
   const body = document.body;
-  const modes = ['bubble','pearl','lure','compass'];
+  const modes = ['bubble','pearl','lure','compass','pearl-trail','bubble-bright'];
 
   function setMode(m){
     modes.forEach(x => layer.classList.toggle('mode-' + x, x === m));
@@ -292,6 +361,10 @@
     halo:     layer.querySelector('.ck-pearl-halo'),
     lure:     layer.querySelector('.ck-lure'),
     compass:  layer.querySelector('.ck-compass'),
+    pt1:      layer.querySelector('[data-pt-trail="1"]'),
+    pt2:      layer.querySelector('[data-pt-trail="2"]'),
+    bb:       layer.querySelector('.ck-bb'),
+    bbDot:    layer.querySelector('.ck-bb-dot'),
   };
 
   let mx = -100, my = -100, lastX = mx, lastY = my;
@@ -313,6 +386,10 @@
     ck.pearl.style.transform    = base;
     ck.halo.style.transform     = base;
     ck.lure.style.transform     = base + (layer.classList.contains('hot') ? ' rotate(12deg)' : '');
+    ck.bb.style.transform       = base;
+    ck.bbDot.style.transform    = base;
+    ck.pt1.style.transform      = 'translate3d(' + trail[0].x + 'px, ' + (trail[0].y + 12) + 'px, 0) translate3d(-50%,-50%,0)';
+    ck.pt2.style.transform      = 'translate3d(' + (trail[1].x - 3) + 'px, ' + (trail[1].y + 20) + 'px, 0) translate3d(-50%,-50%,0)';
 
     const dx = mx - lastX, dy = my - lastY;
     if (Math.hypot(dx,dy) > 0.5) {
@@ -338,6 +415,8 @@
     let cls = '';
     if (mode === 'bubble') cls = 'ck-pop';
     else if (mode === 'pearl') cls = 'ck-ripple';
+    else if (mode === 'pearl-trail') cls = 'ck-ripple';
+    else if (mode === 'bubble-bright') cls = 'ck-pop';
     else if (mode === 'lure') cls = 'ck-lure-flick';
     else if (mode === 'compass') cls = 'ck-compass-pulse';
     if (!cls) return;
