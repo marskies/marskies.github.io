@@ -384,9 +384,9 @@
   .about-body p{margin:0 0 12px 0}
   .about-body p strong{color:var(--ink)}
   .about-body p em{color:var(--copper);font-style:italic}
-.about-body .ab-section{margin-bottom:14px}
-.about-body .ab-section:last-child{margin-bottom:0}
-.about-body .ab-lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:6px;display:block}
+.about-body .ab-section, .chapter-body .ab-section{margin-bottom:14px}
+.about-body .ab-section:last-child, .chapter-body .ab-section:last-child{margin-bottom:0}
+.about-body .ab-lbl, .chapter-body .ab-lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:6px;display:block}
 
   .accolade{padding:13px 14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);margin-bottom:8px}
   .accolade .yr{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);font-weight:600}
@@ -649,22 +649,24 @@
         <button class="chapter-tab" data-target="ll-outcome">Outcome</button>
       </div>
       <div class="chapter-body on" id="ll-overview">
-        <p><strong>Overview.</strong> Many platformer games use static, one-size-fits-all tutorials that don't account for differences in player experience. Learn To Leap asks whether gaming experience level correlates with a player's preferred tutorial guidance — and, more practically, whether letting players choose their own guidance is a better design pattern than guessing for them.</p>
-        <p>I built a custom Unity 2D platformer as the research instrument, focused on a single double-jump mechanic. Players could switch between three tutorial modes — Minimal, Guided, and Explicit — at any time, and the prototype logged every switch and time in state.</p>
-      </div>
+<div class="ab-section"><span class="ab-lbl">The Question</span><p>Many platformer games use static, one-size-fits-all tutorials that don’t account for differences in player experience. Learn To Leap asks whether gaming experience level correlates with a player’s preferred tutorial guidance — and, more practically, whether letting players choose their own guidance is a better design pattern than guessing for them.</p></div>
+            <div class="ab-section"><span class="ab-lbl">The Prototype</span><p>I built a custom Unity 2D platformer as the research instrument, focused on a single double-jump mechanic. Players could switch between three tutorial modes — Minimal, Guided, and Explicit — at any time, and the prototype logged every switch and time in state.</p></div>
+          </div>
       <div class="chapter-body" id="ll-research">
-        <p><strong>Research.</strong> Mixed-methods design, IRB exempt (UF Protocol ET00049273). Eleven participants aged 18–26 completed one session each over five days in March 2026, recruited via Discord and personal networks and distributed across four self-reported gaming-frequency bands.</p>
-        <p>Each session ran ~20 minutes: a short pre-play survey, a 5–7 minute gameplay session with no instruction beyond "pick the mode that feels right," and a 5–7 minute semi-structured interview. Quantitative gameplay data was paired with qualitative interview data analyzed via Braun and Clarke's six-phase thematic analysis.</p>
-      </div>
+<div class="ab-section"><span class="ab-lbl">Method</span><p>Mixed-methods design, IRB exempt (UF Protocol ET00049273). Eleven participants aged 18–26 completed one session each over five days in March 2026, recruited via Discord and personal networks and distributed across four self-reported gaming-frequency bands.</p></div>
+            <div class="ab-section"><span class="ab-lbl">Session Flow</span><p>Each session ran ~20 minutes: a short pre-play survey, a 5–7 minute gameplay session with no instruction beyond “pick the mode that feels right,” and a 5–7 minute semi-structured interview. Quantitative gameplay data was paired with qualitative interview data analyzed via Braun and Clarke’s six-phase thematic analysis.</p></div>
+          </div>
       <div class="chapter-body" id="ll-synthesis">
-        <p><strong>Synthesis.</strong> Gaming frequency did not reliably predict tutorial preference. But eight themes surfaced across interviews, and two were unusually strong: all 11 participants affirmed that being able to select their own guidance level was a positive experience, and stated preference diverged from behavioral usage — several participants who said they preferred Explicit actually spent the majority of their session in Minimal.</p>
-      </div>
+<div class="ab-section"><span class="ab-lbl">What the Data Said</span><p>Gaming frequency did not reliably predict tutorial preference. But eight themes surfaced across interviews, and two were unusually strong: all 11 participants affirmed that being able to select their own guidance level was a positive experience.</p></div>
+            <div class="ab-section"><span class="ab-lbl">The Gap</span><p>Stated preference diverged from behavioral usage — several participants who said they preferred Explicit actually spent the majority of their session in Minimal.</p></div>
+          </div>
       <div class="chapter-body" id="ll-design">
-        <p><strong>Design.</strong> The prototype was designed to be the artifact. Jump was intentionally mapped to "B" rather than space bar to neutralize prior muscle memory — a choice that surfaced in interviews as a design decision in its own right. Placeholder art was used throughout so visual polish wouldn't introduce unintended differences between tutorial states.</p>
-      </div>
+<div class="ab-section"><span class="ab-lbl">Choices as Artifact</span><p>The prototype was designed to be the artifact. Jump was intentionally mapped to “B” rather than space bar to neutralize prior muscle memory — a choice that surfaced in interviews as a design decision in its own right. Placeholder art was used throughout so visual polish wouldn’t introduce unintended differences between tutorial states.</p></div>
+          </div>
       <div class="chapter-body" id="ll-outcome">
-        <p><strong>Outcome.</strong> The project won "Outstanding Achievement in Experience Design" at Convergence 2026. The thesis now sits behind my senior capstone, alongside a full process gallery on Behance where you are invited to play it yourself! The broader takeaway: adaptive tutorial systems built only on performance data — or only on stated preference — miss part of the picture. The most reliable signal across 11 participants wasn't which mode they picked; it was that being allowed to pick at all mattered to every one of them.</p>
-      </div>
+<div class="ab-section"><span class="ab-lbl">Recognition</span><p>The project won “Outstanding Achievement in Experience Design” at Convergence 2026. The thesis now sits behind my senior capstone, alongside a full process gallery on Behance where you are invited to play it yourself!</p></div>
+            <div class="ab-section"><span class="ab-lbl">Takeaway</span><p>The broader takeaway: adaptive tutorial systems built only on performance data — or only on stated preference — miss part of the picture. The most reliable signal across 11 participants wasn’t which mode they picked; it was that being allowed to pick at all mattered to every one of them.</p></div>
+          </div>
     </div>
   </div>
 
