@@ -1057,5 +1057,95 @@ applySizes();
 applySizes();
 })();
 </script>
+
+<!-- Custom cursor: Bubble Bright with motion-history trail. Disabled when user prefers reduced motion. -->
+<style>
+  @media (prefers-reduced-motion: no-preference){
+    body.cursor-hidden, body.cursor-hidden *{cursor:none !important}
+    #cursor-layer{position:fixed;inset:0;pointer-events:none;z-index:9999}
+    #cursor-layer .ck{position:absolute;top:0;left:0;transform:translate3d(-50%,-50%,0);will-change:transform;display:none}
+    #cursor-layer.active .ck-bb,
+    #cursor-layer.active .ck-bb-dot,
+    #cursor-layer.active .ck-bubble-trail{display:block}
+    .ck-bb{
+      width:20px;height:20px;border-radius:50%;
+      border:2px solid #e8a777;
+      background:radial-gradient(circle at 35% 30%, rgba(143,212,214,0.55), rgba(143,212,214,0.12) 60%, transparent 85%);
+      box-shadow:0 0 18px rgba(143,212,214,0.45), 0 0 6px rgba(209,138,90,0.35), inset 0 0 8px rgba(255,255,255,0.22);
+      transition:width .15s ease,height .15s ease,border-color .15s ease;
+    }
+    .ck-bb-dot{
+      width:4px;height:4px;border-radius:50%;
+      background:var(--copper,#d18a5a);
+      box-shadow:0 0 6px rgba(209,138,90,0.8);
+    }
+    #cursor-layer.hot .ck-bb{
+      width:30px;height:30px;border-color:#ffbb86;
+    }
+    .ck-bubble-trail{
+      width:6px;height:6px;border-radius:50%;
+      border:1px solid rgba(209,138,90,0.55);background:rgba(143,212,214,0.18);
+    }
+    .ck-bubble-trail.t2{width:4px;height:4px;opacity:.7}
+    .ck-bubble-trail.t3{width:3px;height:3px;opacity:.5}
+    .ck-pop{
+      position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;
+      border:2px solid var(--copper,#d18a5a);transform:translate3d(-50%,-50%,0);
+      pointer-events:none;animation:ckpop .35s ease-out forwards;
+    }
+    @keyframes ckpop{0%{opacity:1;width:20px;height:20px}100%{opacity:0;width:60px;height:60px}}
+  }
+</style>
+<div id="cursor-layer" aria-hidden="true">
+  <div class="ck ck-bubble-trail t3" data-trail="3"></div>
+  <div class="ck ck-bubble-trail t2" data-trail="2"></div>
+  <div class="ck ck-bubble-trail t1" data-trail="1"></div>
+  <div class="ck ck-bb"></div>
+  <div class="ck ck-bb-dot"></div>
+</div>
+<script>
+(() => {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layer = document.getElementById('cursor-layer');
+  if (!layer) return;
+  layer.classList.add('active');
+  document.body.classList.add('cursor-hidden');
+  const t1 = layer.querySelector('[data-trail="1"]');
+  const t2 = layer.querySelector('[data-trail="2"]');
+  const t3 = layer.querySelector('[data-trail="3"]');
+  const bb = layer.querySelector('.ck-bb');
+  const bbDot = layer.querySelector('.ck-bb-dot');
+  let mx = -100, my = -100;
+  const hist = new Array(80).fill(0).map(() => ({x:mx,y:my}));
+  let head = 0;
+  function sample(n){ return hist[(head - n + hist.length) % hist.length]; }
+  window.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; });
+  const HOT = 'a, button, input, textarea, select, [role="button"], label, .nav-pill a, .tool-btn, .btn-primary, .btn-secondary';
+  function tick(){
+    hist[head] = {x: mx, y: my};
+    head = (head + 1) % hist.length;
+    const base = 'translate3d(' + mx + 'px, ' + my + 'px, 0) translate3d(-50%,-50%,0)';
+    bb.style.transform = base;
+    bbDot.style.transform = base;
+    const b1 = sample(5), b2 = sample(12), b3 = sample(20);
+    t1.style.transform = 'translate3d(' + b1.x + 'px, ' + b1.y + 'px, 0) translate3d(-50%,-50%,0)';
+    t2.style.transform = 'translate3d(' + b2.x + 'px, ' + b2.y + 'px, 0) translate3d(-50%,-50%,0)';
+    t3.style.transform = 'translate3d(' + b3.x + 'px, ' + b3.y + 'px, 0) translate3d(-50%,-50%,0)';
+    const el = document.elementFromPoint(mx, my);
+    const hot = !!(el && el.closest && el.closest(HOT));
+    layer.classList.toggle('hot', hot);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  window.addEventListener('pointerdown', (e) => {
+    const pop = document.createElement('div');
+    pop.className = 'ck-pop';
+    pop.style.left = e.clientX + 'px';
+    pop.style.top = e.clientY + 'px';
+    layer.appendChild(pop);
+    setTimeout(() => pop.remove(), 500);
+  });
+})();
+</script>
 </body>
 </html>
