@@ -369,6 +369,12 @@
 
   let mx = -100, my = -100, lastX = mx, lastY = my;
   const trail = [{x:mx,y:my},{x:mx,y:my},{x:mx,y:my}];
+  const hist = new Array(80).fill(0).map(() => ({x:mx,y:my}));
+  let histHead = 0;
+  function sampleHist(framesBack){
+    const idx = (histHead - framesBack + hist.length) % hist.length;
+    return hist[idx];
+  }
   let compassAngle = 0;
 
   window.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; });
@@ -381,6 +387,8 @@
   }
 
   function tick(){
+    hist[histHead] = {x: mx, y: my};
+    histHead = (histHead + 1) % hist.length;
     const base = 'translate3d(' + mx + 'px, ' + my + 'px, 0) translate3d(-50%,-50%,0)';
     ck.bubble.style.transform   = base;
     ck.pearl.style.transform    = base;
@@ -388,8 +396,9 @@
     ck.lure.style.transform     = base + (layer.classList.contains('hot') ? ' rotate(12deg)' : '');
     ck.bb.style.transform       = base;
     ck.bbDot.style.transform    = base;
-    ck.pt1.style.transform      = 'translate3d(' + trail[0].x + 'px, ' + (trail[0].y + 12) + 'px, 0) translate3d(-50%,-50%,0)';
-    ck.pt2.style.transform      = 'translate3d(' + (trail[1].x - 3) + 'px, ' + (trail[1].y + 20) + 'px, 0) translate3d(-50%,-50%,0)';
+    { const s1 = sampleHist(6), s2 = sampleHist(13);
+      ck.pt1.style.transform = 'translate3d(' + s1.x + 'px, ' + s1.y + 'px, 0) translate3d(-50%,-50%,0)';
+      ck.pt2.style.transform = 'translate3d(' + s2.x + 'px, ' + s2.y + 'px, 0) translate3d(-50%,-50%,0)'; }
 
     const dx = mx - lastX, dy = my - lastY;
     if (Math.hypot(dx,dy) > 0.5) {
@@ -400,9 +409,10 @@
     trail[0].x += (mx - trail[0].x) * 0.35; trail[0].y += (my - trail[0].y) * 0.35;
     trail[1].x += (trail[0].x - trail[1].x) * 0.30; trail[1].y += (trail[0].y - trail[1].y) * 0.30;
     trail[2].x += (trail[1].x - trail[2].x) * 0.25; trail[2].y += (trail[1].y - trail[2].y) * 0.25;
-    ck.t1.style.transform = 'translate3d(' + trail[0].x + 'px, ' + (trail[0].y + 14) + 'px, 0) translate3d(-50%,-50%,0)';
-    ck.t2.style.transform = 'translate3d(' + (trail[1].x - 4) + 'px, ' + (trail[1].y + 24) + 'px, 0) translate3d(-50%,-50%,0)';
-    ck.t3.style.transform = 'translate3d(' + (trail[2].x + 4) + 'px, ' + (trail[2].y + 32) + 'px, 0) translate3d(-50%,-50%,0)';
+    { const b1 = sampleHist(5), b2 = sampleHist(12), b3 = sampleHist(20);
+      ck.t1.style.transform = 'translate3d(' + b1.x + 'px, ' + b1.y + 'px, 0) translate3d(-50%,-50%,0)';
+      ck.t2.style.transform = 'translate3d(' + b2.x + 'px, ' + b2.y + 'px, 0) translate3d(-50%,-50%,0)';
+      ck.t3.style.transform = 'translate3d(' + b3.x + 'px, ' + b3.y + 'px, 0) translate3d(-50%,-50%,0)'; }
 
     hotCheck();
     lastX = mx; lastY = my;
