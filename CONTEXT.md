@@ -490,6 +490,9 @@ Marina pasted a fresh list at end-of-session. This supersedes the previous 17-it
 ### Repo additions this session
 - `Marina_DiPonio_Resume.pdf` (344 KB) added at repo root. Marina finished her resume and dropped it in the repo directly. Live at `https://marskies.github.io/Marina_DiPonio_Resume.pdf` and accessible via raw.githubusercontent.com. Not yet linked from any project page — Marina will decide where/how to surface it in a future pass.
 
+### Fix: resume download link
+- v5.74 patched `mockup.html` About Me frame: the `.resume-cta` anchor was pointing at placeholder `resume.pdf`. Updated to `Marina_DiPonio_Resume.pdf` so the download link actually resolves. Marina caught the 404 right after the file was added to the repo.
+
 ---
 
 End of context doc. Good luck.
