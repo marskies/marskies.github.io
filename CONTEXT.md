@@ -415,6 +415,29 @@ Marina pasted a fresh list at end-of-session. This supersedes the previous 17-it
 - **GitHub commit dialog "Commit changes" confirm button** sometimes auto-submits before a follow-up find() can grab its ref. If it does, the URL goes back to the blob view and the commit succeeded; just verify with the contents API.
 - Marina's tone preference remains: direct, no filler, calls out scope creep, drives the design. Don't co-design — execute.
 
+## Session 2026-05-17 (late) — Panel scroll behavior + LL mirror
+
+**Commits this session:**
+- `v5.25` ice-accessibility.html rebuilt in Submerged case-study style (sha ea08e58)
+- `v5.26` ICE: tried making the page scroll (sticky rail/side-stack) — wrong direction, reverted
+- `v5.27` ICE: revert v5.26, restored original (.chapter-body scrolls inside .case) — Marina said "we are back where we started"
+- `v5.28` ICE: **correct fix** — entire panel content scrolls together. Moved `overflow-y:auto` from `.chapter-body` up to `.case` itself, stripped flex/overflow off `.chapter-body`. Now hero image + title + tabs + body all scroll as one unit inside the fixed 640px panel.
+- `v5.29` mockup.html: LL Frame C mirrors v5.28 (same two CSS edits)
+
+**Decision locked in:** The case-study card scrolls AS A WHOLE. The panel outline stays fixed at 640px, and the entire content stack (hero + title + subtitle + tab pills + chapter body) scrolls together with one thin-copper scrollbar on `.case`. Do NOT scroll just the chapter body (Marina explicitly rejected that — "we are back where we started lol"). Do NOT make the page itself scroll either (Marina rejected that too — "no that's not what i wanted").
+
+**The two edits to apply to every future project page rebuild:**
+1. `.case{...overflow:hidden}` → `.case{...overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}`
+2. `.chapter-body{flex:1;overflow-y:auto;padding-right:8px;font-size:17px;...}` → `.chapter-body{font-size:17px;line-height:1.65;color:var(--ink-dim);display:none}` (strip flex + overflow, keep type styles + display:none)
+
+**Status of project page rebuilds:**
+- ✅ ice-accessibility.html — full Submerged rebuild + scroll-the-panel fix
+- ✅ mockup.html Frame C (LL preview) — chapter sub-labels + scroll-the-panel fix
+- ⏳ Standalone learn-to-leap.html — still old v2.5 style; NOT yet rebuilt. Marina has not asked for the standalone rebuild yet. v5.29 fixed the LL mockup frame only.
+- ⏳ cosmic-catch, tick-tock-trivia, insane-wizard, nutrition-app, social-media-cys, startea, uf-club-software, yuumi-chan — all still old v2.5 style, queued for Marina to pick
+
+**Next session pickup:** Marina drives which project to rebuild next. When rebuilding, mirror ice-accessibility.html's structure AND remember to apply the two scroll edits above (the v5.25 template did NOT have them yet — it had the old `.chapter-body` flex:1 overflow:auto pattern).
+
 ---
 
 End of context doc. Good luck.
