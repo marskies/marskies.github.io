@@ -275,7 +275,7 @@
     font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
     padding:2px 6px;border-radius:4px;background:rgba(143,212,214,0.10);color:var(--teal);
   }
-  .case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow:hidden}
+  .case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
   .case-hero{
     height:180px;background:linear-gradient(160deg,#2a525c,#0f2c33);
     display:flex;align-items:center;justify-content:center;color:var(--ink-quiet);
@@ -301,9 +301,7 @@
     box-shadow:0 0 0 3px rgba(209,138,90,0.18);
   }
   .chapter-body{
-    flex:1;overflow-y:auto;padding-right:8px;
     font-size:17px;line-height:1.65;color:var(--ink-dim);
-    scrollbar-width:thin;scrollbar-color:var(--copper) transparent;
     display:none;
   }
   .chapter-body.on{display:block}
