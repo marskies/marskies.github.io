@@ -493,6 +493,21 @@ Marina pasted a fresh list at end-of-session. This supersedes the previous 17-it
 ### Fix: resume download link
 - v5.74 patched `mockup.html` About Me frame: the `.resume-cta` anchor was pointing at placeholder `resume.pdf`. Updated to `Marina_DiPonio_Resume.pdf` so the download link actually resolves. Marina caught the 404 right after the file was added to the repo.
 
+### Final state at session close (v5.76)
+
+**Live and verified:**
+- `Marina_DiPonio_Resume.pdf` at repo root, 344 KB, serves at `https://marskies.github.io/Marina_DiPonio_Resume.pdf` (HTTP 200, application/pdf).
+- `mockup.html` About Me frame `.resume-cta` link now resolves correctly (was placeholder `resume.pdf`, fixed in v5.74).
+- All 10 project pages on the same locked baseline: clean Unicode, rail scroll persistence (sessionStorage key `marskies_rail_scroll`), faster cursor trail (`sample(2), sample(5), sample(9)`).
+- `mockup.html` Frame B (album shelf) wired so only the center card navigates; Frame C rail anchors all point to live project pages.
+
+**Open items carried forward:**
+- Resume PDF is not yet linked from any project page or from `index.html` (live v2.5 site). Marina will decide whether/where to surface it in a future pass.
+- `cursor-sandbox.html` still in tree as a playground, untouched.
+- Standalone `learn-to-leap.html` still on old v2.5 style (only the mockup frame was rebuilt, not the standalone page).
+
+Session closed.
+
 ---
 
 End of context doc. Good luck.
