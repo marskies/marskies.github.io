@@ -172,8 +172,8 @@ a{color:inherit;text-decoration:none}
     </a>
     <div class="audio-pill">
       <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
-      <button id="aud-toggle" aria-label="toggle ambient audio">Ã¢ÂÂ¶</button>
-      <span>Ambient Ã· Underwater</span>
+      <button id="aud-toggle" aria-label="toggle ambient audio">▶</button>
+      <span>Ambient · Underwater</span>
     </div>
   </div>
   <div class="row nav-row">
@@ -190,7 +190,7 @@ a{color:inherit;text-decoration:none}
 <section class="frame">
   <aside class="pane rail">
     <h3>Project Index</h3>
-    <input class="rail-search" placeholder="Search projectsÃ¢ÂÂ¦" aria-label="Search projects" />
+    <input class="rail-search" placeholder="Search projects…" aria-label="Search projects" />
     <div class="rail-cat">Research</div>
     <a class="rail-item" href="learn-to-leap.html">
       <div class="t">Learn To Leap</div>
@@ -238,7 +238,7 @@ a{color:inherit;text-decoration:none}
   <div class="pane case">
     <div class="case-hero">
       <img src="images/startea-hero.png" alt="StarTea homepage hero" />
-      <span class="badge">â Full E-Commerce Prototype</span>
+      <span class="badge">★ Full E-Commerce Prototype</span>
     </div>
     <div class="case-body">
       <h2 class="case-title">Star<em>Tea</em></h2>
@@ -250,7 +250,7 @@ a{color:inherit;text-decoration:none}
         <button class="chapter-tab" data-target="st-outcome">Outcome</button>
       </div>
       <div class="chapter-body on" id="st-overview">
-        <div class="ab-section"><span class="ab-lbl">The Brand</span><p>StarTea is a wellness brand focused on bringing the calming ritual of tea to stressed modern lives. Our team of three designed their complete website experienceÃ¢ÂÂfrom brand strategy through final prototypeÃ¢ÂÂin just 30 days.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The Brand</span><p>StarTea is a wellness brand focused on bringing the calming ritual of tea to stressed modern lives. Our team of three designed their complete website experience—from brand strategy through final prototype—in just 30 days.</p></div>
         <div class="ab-section"><span class="ab-lbl">The Scope</span><p>This project showcases the full UX lifecycle: research informing design, design requiring coordination, and project management keeping everything on track.</p></div>
       </div>
       <div class="chapter-body" id="st-research">
@@ -258,13 +258,13 @@ a{color:inherit;text-decoration:none}
         <div class="ab-section"><span class="ab-lbl">Trust Signals</span><p>I synthesized these findings into three actionable personas that guided all design decisions, ensuring every feature served a real user need.</p></div>
       </div>
       <div class="chapter-body" id="st-design">
-        <div class="ab-section"><span class="ab-lbl">Design System</span><p>The design system balanced warmth with professionalismÃ¢ÂÂsoft earth tones, generous whitespace, and a type hierarchy that guided users naturally through product information.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Design System</span><p>The design system balanced warmth with professionalism—soft earth tones, generous whitespace, and a type hierarchy that guided users naturally through product information.</p></div>
         <div class="ab-section"><span class="ab-lbl">User Flow</span><p>Accessibility was built in from the start, not retrofitted. Every color combination was tested for WCAG AA compliance, and we conducted usability testing with 6 participants to validate our navigation and checkout flow.</p></div>
-        <div class="ab-section"><span class="ab-lbl">Coordination</span><p>With three people and 30 days, efficient coordination was essential. I created a phased approach: Discovery, Define, Design, Test, and DeliverÃ¢ÂÂwith clear handoffs and parallel workstreams where possible.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Coordination</span><p>With three people and 30 days, efficient coordination was essential. I created a phased approach: Discovery, Define, Design, Test, and Deliver—with clear handoffs and parallel workstreams where possible.</p></div>
         <div class="ab-section"><span class="ab-lbl">Parallel Work</span><p>Weekly group reviews kept everyone aligned, while I tracked 50+ tasks to ensure nothing fell through the cracks. The structured approach let us hit every milestone with room for iteration.</p></div>
       </div>
       <div class="chapter-body" id="st-outcome">
-        <div class="ab-section"><span class="ab-lbl">The Prototype</span><p>The final prototype delivered a complete e-commerce experience: homepage, product browsing, detailed product pages, cart, and checkoutÃ¢ÂÂall tested and refined based on real user feedback.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The Prototype</span><p>The final prototype delivered a complete e-commerce experience: homepage, product browsing, detailed product pages, cart, and checkout—all tested and refined based on real user feedback.</p></div>
         <div class="ab-section"><span class="ab-lbl">Lessons</span><p>This project reinforced that great UX happens at the intersection of research, design, and management. Each discipline informed the others, creating a final product stronger than any single perspective could achieve.</p></div>
       </div>
     </div>
@@ -317,8 +317,8 @@ a{color:inherit;text-decoration:none}
   var aud = document.getElementById('ambient');
   if(!btn || !aud) return;
   btn.addEventListener('click', function(){
-    if(aud.paused){ aud.play().then(function(){btn.textContent='Ã¢ÂÂ¸';}).catch(function(){}); }
-    else { aud.pause(); btn.textContent='Ã¢ÂÂ¶'; }
+    if(aud.paused){ aud.play().then(function(){btn.textContent='⏸';}).catch(function(){}); }
+    else { aud.pause(); btn.textContent='▶'; }
   });
 })();
 // Chapter tabs
