@@ -1,245 +1,406 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuumi-Chan: Rent is Due! • Marina DiPonio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #1e3442 0%, #142838 25%, #0d1d2e 50%, #081524 75%, #040d1a 100%); min-height: 100vh; color: #fff; }
-        .particle { position: fixed; background: radial-gradient(circle, rgba(200, 220, 240, 0.3) 0%, transparent 70%); border-radius: 50%; pointer-events: none; animation: float-up linear infinite; }
-        @keyframes float-up { 0% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-10vh); opacity: 0; } }
-        .depth-meter { position: fixed; right: 3rem; top: 50%; transform: translateY(-50%); z-index: 1000; }
-        .depth-line { width: 1px; height: 200px; background: linear-gradient(to bottom, rgba(180, 200, 220, 0.4) 0%, rgba(140, 160, 200, 0.3) 50%, rgba(180, 140, 120, 0.4) 100%); position: relative; }
-        .depth-marker { position: absolute; right: -4px; width: 8px; height: 8px; background: rgba(200, 220, 240, 0.6); border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
-        .depth-marker:hover { transform: scale(1.8); background: rgba(220, 240, 255, 0.9); box-shadow: 0 0 15px rgba(200, 220, 240, 0.6); }
-        .depth-marker.active { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); transform: scale(1.5); }
-        .depth-label { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 0.75rem; font-weight: 300; letter-spacing: 0.15rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-        .depth-marker:hover .depth-label { opacity: 1; }
-        .top-nav { position: fixed; top: 0; left: 0; width: 100%; background: rgba(10, 20, 35, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(200, 220, 240, 0.2); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .nav-btn { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: inline-block; }
-        .nav-btn:hover { border-color: rgba(200, 220, 240, 0.6); background: rgba(10, 20, 35, 0.8); transform: translateX(-3px); }
-        .sound-toggle { background: transparent; border: 1px solid rgba(200, 220, 240, 0.3); padding: 0.6rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
-        .sound-toggle:hover { border-color: rgba(200, 220, 240, 0.5); color: rgba(255, 255, 255, 0.9); }
-        .sound-toggle.active { color: rgba(200, 220, 240, 1); border-color: rgba(200, 220, 240, 0.4); }
-        .project-content { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
-        .project-header { margin-bottom: 4rem; text-align: center; }
-        .header-role-tags { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
-        .role-tag { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid; }
-        .role-tag.role-pm { color: rgba(129, 212, 250, 0.9); border-color: rgba(129, 212, 250, 0.4); background: rgba(129, 212, 250, 0.1); }
-        .role-tag.role-uiux { color: rgba(186, 164, 212, 0.9); border-color: rgba(186, 164, 212, 0.4); background: rgba(186, 164, 212, 0.1); }
-        .role-tag.role-research { color: rgba(129, 199, 132, 0.9); border-color: rgba(129, 199, 132, 0.4); background: rgba(129, 199, 132, 0.1); }
-        .project-title { font-size: 4.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: rgba(220, 240, 255, 0.95); margin-bottom: 1rem; letter-spacing: 0.05rem; }
-        .project-subtitle { font-size: 1.2rem; font-weight: 300; color: rgba(200, 220, 240, 0.6); letter-spacing: 0.1rem; }
-        .project-meta { display: flex; gap: 3rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
-        .meta-item { text-align: center; }
-        .meta-label { font-size: 0.75rem; color: rgba(200, 220, 240, 0.5); text-transform: uppercase; letter-spacing: 0.15rem; margin-bottom: 0.5rem; }
-        .meta-value { font-size: 1.1rem; color: rgba(220, 240, 255, 0.9); }
-        .project-links { display: flex; gap: 2rem; justify-content: center; margin-top: 3rem; flex-wrap: wrap; }
-        .project-link { background: transparent; border: 1px solid rgba(100, 181, 246, 0.4); padding: 1rem 2rem; border-radius: 30px; color: rgba(100, 181, 246, 0.9); text-decoration: none; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.1rem; text-transform: uppercase; transition: all 0.3s ease; }
-        .project-link:hover { background: rgba(100, 181, 246, 0.1); border-color: rgba(100, 181, 246, 0.7); transform: translateY(-2px); }
-        .contributions-section { background: rgba(10, 20, 35, 0.4); border: 1px solid rgba(200, 220, 240, 0.15); border-radius: 10px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(10px); }
-        .contributions-title { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; text-align: center; letter-spacing: 0.05rem; }
-        .contributions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .contribution-column { padding: 1.5rem; border-radius: 8px; background: rgba(0, 0, 0, 0.2); }
-        .contribution-column.pm { border-left: 3px solid rgba(129, 212, 250, 0.6); }
-        .contribution-column.uiux { border-left: 3px solid rgba(186, 164, 212, 0.6); }
-        .contribution-column.research { border-left: 3px solid rgba(129, 199, 132, 0.6); }
-        .contribution-role-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1rem; text-transform: uppercase; margin-bottom: 1rem; }
-        .contribution-column.pm .contribution-role-title { color: rgba(129, 212, 250, 0.9); }
-        .contribution-column.uiux .contribution-role-title { color: rgba(186, 164, 212, 0.9); }
-        .contribution-column.research .contribution-role-title { color: rgba(129, 199, 132, 0.9); }
-        .contribution-list { list-style: none; }
-        .contribution-list li { font-size: 0.95rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.7; margin-bottom: 0.8rem; padding-left: 1rem; position: relative; }
-        .contribution-list li::before { content: '→'; position: absolute; left: 0; color: rgba(200, 220, 240, 0.4); }
-        .content-section { margin-bottom: 6rem; scroll-margin-top: 120px; }
-        .section-title { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 400; color: rgba(200, 220, 240, 0.95); margin-bottom: 2rem; letter-spacing: 0.05rem; }
-        .section-text { font-size: 1.1rem; font-weight: 300; color: rgba(200, 220, 240, 0.8); line-height: 1.9; margin-bottom: 2rem; }
-        .highlight-stat { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; color: rgba(129, 199, 132, 0.9); text-align: center; margin: 2rem 0; }
-        .highlight-stat span { display: block; font-size: 1rem; font-family: 'Inter', sans-serif; color: rgba(200, 220, 240, 0.6); margin-top: 0.5rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
-        .stat-item { text-align: center; padding: 1.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 10px; border: 1px solid rgba(200, 220, 240, 0.1); }
-        .stat-number { font-size: 2rem; font-family: 'Cormorant Garamond', serif; color: rgba(129, 212, 250, 0.9); }
-        .stat-label { font-size: 0.8rem; color: rgba(200, 220, 240, 0.6); text-transform: uppercase; letter-spacing: 0.1rem; margin-top: 0.5rem; }
-        .image-bubble { width: 300px; height: 300px; border-radius: 50%; background: rgba(100, 181, 246, 0.1); border: 2px solid rgba(100, 181, 246, 0.3); display: flex; align-items: center; justify-content: center; margin: 3rem auto; position: relative; overflow: hidden; }
-        .image-bubble.float-right { float: right; margin: 0 0 2rem 3rem; }
-        .image-bubble.float-left { float: left; margin: 0 3rem 2rem 0; }
-        .image-bubble::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(100, 181, 246, 0.2) 0%, transparent 70%); animation: bubble-pulse 3s ease-in-out infinite; }
-        @keyframes bubble-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
-        .image-bubble img { width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 50%; }
-        .clearfix::after { content: ""; clear: both; display: table; }
-        @media (max-width: 968px) { .top-nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; } .project-content { padding: 12rem 1.5rem 3rem; } .project-title { font-size: 2.5rem; } .project-meta { gap: 1.5rem; } .image-bubble { width: 250px; height: 250px; } .image-bubble.float-right, .image-bubble.float-left { float: none; margin: 2rem auto; } .depth-meter { right: 1.5rem; } .contributions-section { padding: 2rem 1.5rem; } .contributions-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: repeat(2, 1fr); } }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Yuumi-Chan: Rent is Due! · Marina DiPonio</title>
+<style>
+:root{
+  --bg-deep:#0a1f24;
+  --glass:rgba(18,42,48,0.55);
+  --glass-strong:rgba(20,48,55,0.72);
+  --glass-edge:rgba(255,255,255,0.10);
+  --ink:#eaf6f7;
+  --ink-dim:#b9d2d4;
+  --ink-quiet:#7fa2a5;
+  --teal:#8fd4d6;
+  --copper:#d18a5a;
+  --copper-dim:#a86a44;
+  --shadow:0 18px 60px rgba(0,0,0,0.45);
+  --radius:22px;
+  --radius-sm:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg-deep);color:var(--ink);font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{
+  background-image:url('images/background.jpg');
+  background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;
+  min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 50% 30%, rgba(10,40,46,0.25), rgba(4,16,20,0.65) 70%);
+  pointer-events:none;z-index:0;
+}
+a{color:inherit;text-decoration:none}
+/* ===== TOP BAR ===== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:grid;grid-template-rows:auto auto;gap:12px;pointer-events:none}
+.topbar .row{max-width:1400px;margin:0 auto;padding:0 36px;width:100%;display:flex;align-items:center;justify-content:space-between;pointer-events:auto}
+.topbar .row:first-child{padding-top:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:56px;width:auto;display:block;object-fit:contain;transform:translateY(-4px)}
+.brand .name{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;letter-spacing:0.01em;color:var(--ink);line-height:1}
+.brand .name b{color:var(--copper);font-weight:500;font-style:italic}
+.audio-pill{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--glass-edge);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);box-shadow:var(--shadow)}
+.audio-pill button{background:transparent;border:0;color:var(--copper);cursor:pointer;font-size:15px;line-height:1;padding:0}
+.audio-pill .wave{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
+.audio-pill .wave i{display:block;width:2px;background:var(--teal);border-radius:1px;height:40%}
+.audio-pill .wave i:nth-child(2){height:80%}
+.audio-pill .wave i:nth-child(3){height:55%}
+.audio-pill .wave i:nth-child(4){height:95%}
+.audio-pill .wave i:nth-child(5){height:35%}
+.topbar .nav-row{justify-content:center}
+.nav-pill{display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--glass-edge);box-shadow:var(--shadow)}
+.nav-pill a{padding:11px 20px;border-radius:999px;font-size:15px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);transition:background .15s,color .15s}
+.nav-pill a:hover{color:var(--ink);background:rgba(255,255,255,0.05)}
+.nav-pill a.active{background:var(--copper);color:#1a1108;font-weight:600}
+/* ===== FRAME SHELL ===== */
+.frame{position:relative;z-index:1;min-height:100vh;padding:140px 36px 60px 36px;display:flex;align-items:center;justify-content:center;gap:22px;max-width:1400px;margin:0 auto}
+.frame > *{flex-shrink:0}
+.pane{background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--glass-edge);border-radius:var(--radius);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);padding:22px;display:flex;flex-direction:column;overflow:hidden}
+.pane h3{margin:0 0 14px 0;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.side-stack{display:flex;flex-direction:column;gap:14px}
+/* ===== CASE-STUDY (mirrors mockup Frame C) ===== */
+.rail{width:260px;height:640px;padding:18px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
+.rail::-webkit-scrollbar{width:6px}
+.rail::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
+.rail-search{width:100%;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);color:var(--ink);font-size:13px;margin-bottom:14px;font-family:inherit}
+.rail-cat{font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin:16px 0 8px 0;font-weight:700}
+.rail-cat:first-of-type{margin-top:4px}
+.rail-item{padding:9px 10px;border-radius:10px;display:flex;flex-direction:column;gap:3px;cursor:pointer;border:1px solid transparent}
+.rail-item:hover{background:rgba(255,255,255,0.03)}
+.rail-item.active{background:rgba(209,138,90,0.10);border-color:rgba(209,138,90,0.4)}
+.rail-item .t{font-size:15px;color:var(--ink)}
+.rail-item .tags{display:flex;gap:4px;flex-wrap:wrap}
+.rail-item .tags span{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:rgba(143,212,214,0.10);color:var(--teal)}
+.case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
+.case-hero{height:180px;background:linear-gradient(160deg,#2a525c,#0f2c33);display:flex;align-items:center;justify-content:center;color:var(--ink-quiet);border-bottom:1px solid var(--glass-edge);position:relative}
+.case-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.case-hero .badge{position:absolute;top:14px;left:14px;padding:6px 12px;border-radius:999px;background:rgba(10,30,35,0.6);backdrop-filter:blur(10px);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper)}
+.case-body{padding:22px 26px;flex:1;display:flex;flex-direction:column;min-height:0}
+.case-title{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:34px;margin:0 0 4px 0}
+.case-title em{font-style:italic;color:var(--copper)}
+.case-sub{font-size:15px;color:var(--ink-dim);margin:0 0 16px 0}
+.chapters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.chapter-tab{padding:9px 18px;border-radius:999px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);color:var(--ink-dim);cursor:pointer;font-weight:600;font-family:inherit}
+.chapter-tab.on{background:var(--copper);color:#1a1108;border-color:var(--copper);font-weight:700;box-shadow:0 0 0 3px rgba(209,138,90,0.18)}
+.chapter-body{font-size:17px;line-height:1.65;color:var(--ink-dim);display:none}
+.chapter-body.on{display:block}
+.chapter-body::-webkit-scrollbar{width:6px}
+.chapter-body::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
+.chapter-body p{margin:0 0 12px 0}
+.chapter-body p strong{color:var(--ink)}
+.chapter-body .ab-section{margin-bottom:14px}
+.chapter-body .ab-section:last-child{margin-bottom:0}
+.chapter-body .ab-lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:6px;display:block}
+.chapter-body figure{margin:6px 0 14px 0}
+.chapter-body figure img{width:100%;border-radius:14px;border:1px solid var(--glass-edge);display:block}
+.chapter-body figcaption{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-quiet);margin-top:6px}
+.chapter-body .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px 0}
+.chapter-body .compare figure{margin:0}
+.chapter-body .compare figcaption{font-weight:700}
+.chapter-body .compare figcaption.before{color:#d99090}
+.chapter-body .compare figcaption.after{color:#9fd8a3}
+.chapter-body .stat-call{font-family:'Fraunces',Georgia,serif;font-size:42px;line-height:1;color:var(--copper);font-weight:500;margin:6px 0 4px 0}
+.chapter-body .stat-call span{display:block;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-quiet);margin-top:6px;font-weight:600}
+/* Right side-stack cards */
+.side-stack{width:300px}
+.stack-card{padding:16px;margin-bottom:0}
+.stack-card h4{margin:0 0 12px 0;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.stat-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:14px}
+.stat-row:last-child{border:0}
+.stat-row .k{color:var(--ink-quiet)}
+.stat-row .v{color:var(--ink);font-weight:600;text-align:right}
+.tool-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool-chips span{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);font-size:13px;letter-spacing:0.08em;color:var(--ink-dim)}
+/* Tablet scale */
+@media (max-width:1100px) and (min-width:768px){
+  .frame{gap:16px;padding-left:20px;padding-right:20px}
+  .rail{width:220px;height:600px}
+  .case{width:560px;height:600px}
+  .side-stack{width:260px}
+  .case-title{font-size:28px}
+}
+/* ===== CONTACT CHIP ===== */
+.contact-chip{position:fixed;bottom:24px;right:24px;z-index:60;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:10px;pointer-events:none}
+.contact-chip > *{pointer-events:auto}
+.contact-chip .chip-toggle{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:var(--copper);color:#1a1108;border:0;cursor:pointer;box-shadow:0 12px 32px rgba(209,138,90,0.4), 0 0 0 1px rgba(255,255,255,0.06) inset;transition:background .15s, transform .15s}
+.contact-chip .chip-toggle:hover{background:#e29867;transform:translateY(-1px)}
+.contact-chip .chip-toggle svg{width:24px;height:24px;display:block}
+.contact-chip .chip-panel{display:none;flex-direction:column;gap:6px;padding:12px;border-radius:16px;background:var(--glass-strong);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-edge);box-shadow:var(--shadow);min-width:260px}
+.contact-chip.open .chip-panel{display:flex}
+.contact-chip.open .chip-toggle{background:#1a1108;color:var(--copper)}
+.contact-chip.open .chip-toggle:hover{background:#241710}
+.chip-panel a{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);transition:border-color .15s, background .15s}
+.chip-panel a:hover{border-color:var(--copper);background:rgba(209,138,90,0.08)}
+.chip-panel a .lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.chip-panel a .val{font-size:14px;color:var(--ink)}
+@media (max-width:1100px){
+  .contact-chip{bottom:18px;right:18px}
+  .contact-chip .chip-toggle{width:48px;height:48px}
+  .contact-chip .chip-toggle svg{width:22px;height:22px}
+  .contact-chip .chip-panel{min-width:230px}
+}
+/* ===== CUSTOM CURSOR (reduced-motion guarded) ===== */
+@media (prefers-reduced-motion: no-preference){
+  body.cursor-hidden, body.cursor-hidden *{cursor:none !important}
+  #cursor-layer{position:fixed;inset:0;pointer-events:none;z-index:9999}
+  #cursor-layer .ck{position:absolute;top:0;left:0;transform:translate3d(-50%,-50%,0);will-change:transform;display:none}
+  #cursor-layer.active .ck-bb,
+  #cursor-layer.active .ck-bb-dot,
+  #cursor-layer.active .ck-bubble-trail{display:block}
+  .ck-bb{width:20px;height:20px;border-radius:50%;border:2px solid #e8a777;background:radial-gradient(circle at 35% 30%, rgba(143,212,214,0.55), rgba(143,212,214,0.12) 60%, transparent 85%);box-shadow:0 0 18px rgba(143,212,214,0.45), 0 0 6px rgba(209,138,90,0.35), inset 0 0 8px rgba(255,255,255,0.22);transition:width .15s ease,height .15s ease,border-color .15s ease}
+  .ck-bb-dot{width:4px;height:4px;border-radius:50%;background:var(--copper,#d18a5a);box-shadow:0 0 6px rgba(209,138,90,0.8)}
+  #cursor-layer.hot .ck-bb{width:30px;height:30px;border-color:#ffbb86}
+  .ck-bubble-trail{width:6px;height:6px;border-radius:50%;border:1px solid rgba(209,138,90,0.55);background:rgba(143,212,214,0.18)}
+  .ck-bubble-trail.t2{width:4px;height:4px;opacity:.7}
+  .ck-bubble-trail.t3{width:3px;height:3px;opacity:.5}
+  .ck-pop{position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;border:2px solid var(--copper,#d18a5a);transform:translate3d(-50%,-50%,0);pointer-events:none;animation:ckpop .35s ease-out forwards}
+  @keyframes ckpop{0%{opacity:1;width:20px;height:20px}100%{opacity:0;width:60px;height:60px}}
+}
+</style>
 </head>
 <body>
-    <audio id="oceanAudio" loop><source src="underwaterambiance.mp3" type="audio/mpeg"></audio>
-
-    <nav class="top-nav">
-        <button onclick="history.length > 1 ? history.back() : window.location='project-management.html'" class="nav-btn">← Back</button>
-        <a href="index.html" class="nav-btn">Home</a>
-        <div class="sound-toggle" onclick="toggleSound()">Sound Off</div>
+<header class="topbar">
+  <div class="row">
+    <a href="mockup.html#frame-a" class="brand">
+      <img src="LOGO_white.png" alt="Marina DiPonio logo" />
+      <span class="name">Marina <b>DiPonio</b></span>
+    </a>
+    <div class="audio-pill">
+      <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
+      <button id="aud-toggle" aria-label="toggle ambient audio">â¶</button>
+      <span>Ambient Â· Underwater</span>
+    </div>
+  </div>
+  <div class="row nav-row">
+    <nav class="nav-pill" aria-label="primary">
+      <a href="mockup.html#frame-a">Home</a>
+      <a href="mockup.html#frame-b" class="active">Work</a>
+      <a href="mockup.html#frame-d">About</a>
+      <a href="mockup.html#frame-e">Contact</a>
     </nav>
+  </div>
+</header>
+<audio id="ambient" src="underwaterambiance.mp3" loop preload="auto"></audio>
 
-    <div class="depth-meter">
-        <div class="depth-line">
-            <div class="depth-marker active" style="top: 0;" onclick="scrollToSection('overview')"><div class="depth-label">Overview</div></div>
-            <div class="depth-marker" style="top: 33%;" onclick="scrollToSection('challenge')"><div class="depth-label">The Challenge</div></div>
-            <div class="depth-marker" style="top: 66%;" onclick="scrollToSection('process')"><div class="depth-label">Process</div></div>
-            <div class="depth-marker" style="top: 100%;" onclick="scrollToSection('learned')"><div class="depth-label">What I Learned</div></div>
-        </div>
+<section class="frame">
+  <aside class="pane rail">
+    <h3>Project Index</h3>
+    <input class="rail-search" placeholder="Search projectsâ¦" aria-label="Search projects" />
+    <div class="rail-cat">Research</div>
+    <a class="rail-item" href="learn-to-leap.html">
+      <div class="t">Learn To Leap</div>
+      <div class="tags"><span>PM</span><span>UI/UX</span></div>
+    </a>
+    <a class="rail-item" href="ice-accessibility.html">
+      <div class="t">ICE Accessibility Audit</div>
+      <div class="tags"><span>UI/UX</span></div>
+    </a>
+    <div class="rail-cat">Product Management</div>
+    <a class="rail-item" href="tick-tock-trivia.html">
+      <div class="t">Tick Tock Trivia</div>
+      <div class="tags"><span>UI/UX</span><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="cosmic-catch.html">
+      <div class="t">Cosmic Catch</div>
+      <div class="tags"><span>UI/UX</span></div>
+    </a>
+    <div class="rail-item active" aria-current="page">
+      <div class="t">Yuumi-Chan: Rent is Due!</div>
+      <div class="tags"><span>Research</span></div>
     </div>
-
-    <div class="project-content">
-        <div class="project-header">
-            <div class="header-role-tags">
-                <span class="role-tag role-pm">Project Management</span>
-                <span class="role-tag role-uiux">UI/UX Design</span>
-                <span class="role-tag role-research">User Research</span>
-            </div>
-            <h1 class="project-title">Yuumi-Chan: Rent is Due!</h1>
-            <p class="project-subtitle">Magical Girl Beat 'Em Up</p>
-            <div class="project-meta">
-                <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">4 Months</div></div>
-                <div class="meta-item"><div class="meta-label">Team Size</div><div class="meta-value">25 Members</div></div>
-                <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-value">Unity, Miro, Canva, Discord</div></div>
-            </div>
-            <div class="project-links">
-                <a href="https://store.steampowered.com/app/4559300/YuumiChan_Rent_is_Due/" target="_blank" class="project-link">Play on Steam</a>
-                <a href="https://krillshot-games.itch.io/yuumi-chan-rent-is-due" target="_blank" class="project-link">Play on Itch.io</a>
-                <a href="https://youtu.be/w-xKYRG757g" target="_blank" class="project-link">Watch Gameplay</a>
-            </div>
-        </div>
-
-        <div class="contributions-section">
-            <h2 class="contributions-title">My Contributions</h2>
-            <div class="contributions-grid">
-                <div class="contribution-column pm">
-                    <h3 class="contribution-role-title">Project Management</h3>
-                    <ul class="contribution-list">
-                        <li>Led 25-person cross-functional team across art, design, and programming</li>
-                        <li>Ran weekly standups with 8 department leads</li>
-                        <li>Coordinated with executive producer on team dynamics and solutions</li>
-                        <li>Guided project from concept through Gold milestone release</li>
-                    </ul>
-                </div>
-                <div class="contribution-column uiux">
-                    <h3 class="contribution-role-title">UI/UX Design</h3>
-                    <ul class="contribution-list">
-                        <li>Designed in-game UI elements and menus</li>
-                        <li>Wore multiple hats to support team needs</li>
-                        <li>Iterated on designs based on playtest feedback</li>
-                    </ul>
-                </div>
-                <div class="contribution-column research">
-                    <h3 class="contribution-role-title">User Research</h3>
-                    <ul class="contribution-list">
-                        <li>Analyzed feedback from 11 playtesters</li>
-                        <li>Prioritized bug fixes based on player impact</li>
-                        <li>Synthesized qualitative data into action items</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <section class="content-section clearfix" id="overview">
-            <h2 class="section-title">Overview</h2>
-            <div class="image-bubble float-right"><img src="images/yuumi-gameplay.png" alt="Yuumi-Chan Gameplay Screenshot"></div>
-            <p class="section-text">
-                Yuumi-Chan: Rent is Due! is a magical girl life simulation game where players balance the demands 
-                of saving the world with the very real pressure of making rent. As Producer, I led a 25-person 
-                team through four months of development, managing three departments and wearing whatever hat 
-                the team needed on any given day.
-            </p>
-            <p class="section-text">
-                The game launched on Itch.io in December 2025 and is now available on Steam. Within the first 
-                10 days of the Itch.io release—with zero advertising—we achieved organic traction that validated 
-                our concept and execution.
-            </p>
-            
-            <div class="stats-grid">
-                <div class="stat-item"><div class="stat-number">401</div><div class="stat-label">Views</div></div>
-                <div class="stat-item"><div class="stat-number">181</div><div class="stat-label">Browser Plays</div></div>
-                <div class="stat-item"><div class="stat-number">33</div><div class="stat-label">Downloads</div></div>
-                <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">YouTubers</div></div>
-                <div class="stat-item"><div class="stat-number">2.8K</div><div class="stat-label">Impressions</div></div>
-                <div class="stat-item"><div class="stat-number">1.73%</div><div class="stat-label">CTR</div></div>
-            </div>
-            
-            <p class="section-text">
-                The game caught the attention of content creators organically, including a YouTuber who played 
-                and uploaded the full game in Japanese—reaching an audience we never expected to connect with.
-            </p>
-        </section>
-
-        <section class="content-section clearfix" id="challenge">
-            <h2 class="section-title">The Challenge</h2>
-            <div class="image-bubble float-left"><img src="images/yuumi-team.png" alt="Team Collaboration Session"></div>
-            <p class="section-text">
-                This was the largest team most of us had ever worked on, and that inexperience created real 
-                friction. Department leads were learning how to lead at the same time they were learning the 
-                project itself. Getting alignment across 25 people—many of whom had different visions for what 
-                the game should be—tested every communication skill I had.
-            </p>
-            <p class="section-text">
-                The core challenge wasn't technical; it was human. How do you get a team of new leaders to 
-                execute on decisions they didn't all agree with? How do you maintain momentum when the scope 
-                keeps shifting? I worked closely with our executive producer, Nick Heitzman, to navigate these 
-                dynamics, but much of it came down to showing up consistently, running structured standups, and 
-                being present in every department meeting.
-            </p>
-        </section>
-
-        <section class="content-section clearfix" id="process">
-            <h2 class="section-title">Process</h2>
-            <div class="image-bubble float-right"><img src="images/yuumi-playtest.png" alt="Playtest Feedback Session"></div>
-            <p class="section-text">
-                My workflow centered on weekly standups with all 8 leads, where we reviewed progress, flagged 
-                blockers, and aligned on priorities for the coming week. I participated in every department 
-                meeting—art, design, programming—not to micromanage, but to understand where I could help and 
-                to catch disconnects before they became crises.
-            </p>
-            <p class="section-text">
-                Playtesting drove our final polish decisions. We collected feedback from 11 testers and 
-                prioritized fixes based on player impact. One example: testers reported confusion about the 
-                $7,000 rent due at the end of the week. The information existed in the pause menu, but players 
-                weren't seeing it in time. We added explicit dialogue early in the game to set expectations—a 
-                small change that significantly improved the experience.
-            </p>
-            <div class="image-bubble"><img src="images/yuumi-presentation.png" alt="Team Presentation"></div>
-        </section>
-
-        <section class="content-section clearfix" id="learned">
-            <h2 class="section-title">What I Learned</h2>
-            <p class="section-text">
-                I tried to be everything this team needed—flexible, supportive, decisive when required. And we 
-                shipped. The game exists, people are playing it, YouTubers are covering it, and it's now on Steam. 
-                That's a win.
-            </p>
-            <p class="section-text">
-                But I also learned a harder lesson: not every problem can be solved with more effort or better 
-                communication. When team members actively work against the group's decisions—changing things 
-                behind the team's back, undermining agreed-upon direction—the right move is to address it 
-                directly, even if that means removing people from the project. I was too slow to recognize 
-                that, and it cost us time and morale.
-            </p>
-            <p class="section-text">
-                The flip side: I now know what it takes to ship a game with a large team. I know how to run 
-                standups that actually move projects forward, how to translate playtest data into action items, 
-                and how to keep 25 people pointed in roughly the same direction. Next time, I'll be faster to 
-                protect the team from dysfunction—because protecting the team is part of the job.
-            </p>
-        </section>
+    <a class="rail-item" href="startea.html">
+      <div class="t">StarTea</div>
+      <div class="tags"><span>UI/UX</span><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="insane-wizard.html">
+      <div class="t">Insane Wizard Goes Crazy Everywhere</div>
+      <div class="tags"><span>UI/UX</span><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="social-media-cys.html">
+      <div class="t">The Courtyards Apartments Social Media Campaign</div>
+      <div class="tags"></div>
+    </a>
+    <div class="rail-cat">UI / UX</div>
+    <a class="rail-item" href="nutrition-app.html">
+      <div class="t">Nutrition Tracking App</div>
+      <div class="tags"><span>PM</span></div>
+    </a>
+    <a class="rail-item" href="uf-club-software.html">
+      <div class="t">UF Anthology Engage</div>
+      <div class="tags"><span>Research</span></div>
+    </a>
+  </aside>
+  <div class="pane case">
+    <div class="case-hero">
+      <img src="images/yuumi-gameplay.png" alt="Yuumi-Chan gameplay" />
+      <span class="badge">★ 25-Person Team · Shipped & Covered</span>
     </div>
+    <div class="case-body">
+      <h2 class="case-title">Yuumi-Chan: <em>Rent is Due!</em></h2>
+      <p class="case-sub">Magical girl life simulation · 25-Person Team · Producer</p>
+      <div class="chapters" data-chapters="yc">
+        <button class="chapter-tab on" data-target="yc-overview">Overview</button>
+        <button class="chapter-tab" data-target="yc-challenge">The Challenge</button>
+        <button class="chapter-tab" data-target="yc-process">Process</button>
+        <button class="chapter-tab" data-target="yc-outcome">Outcome</button>
+      </div>
+      <div class="chapter-body on" id="yc-overview">
+        <div class="ab-section"><span class="ab-lbl">The Game</span><p>Yuumi-Chan: Rent is Due! is a magical girl life simulation game where players balance the demands of saving the world with the very real pressure of making rent. As Producer, I led a 25-person team through four months of development, managing three departments and wearing whatever hat the team needed on any given day.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The Role</span><p>The game launched on Itch.io in December 2025 and is now available on Steam. Within the first 10 days of the Itch.io releaseâwith zero advertisingâwe achieved organic traction that validated our concept and execution.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The Scale</span><p>The game caught the attention of content creators organically, including a YouTuber who played and uploaded the full game in Japaneseâreaching an audience we never expected to connect with.</p></div>
+      </div>
+      <div class="chapter-body" id="yc-challenge">
+        <div class="ab-section"><span class="ab-lbl">Inexperienced Leadership</span><p>This was the largest team most of us had ever worked on, and that inexperience created real friction. Department leads were learning how to lead at the same time they were learning the project itself. Getting alignment across 25 peopleâmany of whom had different visions for what the game should beâtested every communication skill I had.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Communication Gaps</span><p>The core challenge wasn't technical; it was human. How do you get a team of new leaders to execute on decisions they didn't all agree with? How do you maintain momentum when the scope keeps shifting? I worked closely with our executive producer, Nick Heitzman, to navigate these dynamics, but much of it came down to showing up consistently, running structured standups, and being present in every department meeting.</p></div>
+      </div>
+      <div class="chapter-body" id="yc-process">
+        <div class="ab-section"><span class="ab-lbl">Weekly Cadence</span><p>My workflow centered on weekly standups with all 8 leads, where we reviewed progress, flagged blockers, and aligned on priorities for the coming week. I participated in every department meetingâart, design, programmingânot to micromanage, but to understand where I could help and to catch disconnects before they became crises.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Servant Leadership</span><p>Playtesting drove our final polish decisions. We collected feedback from 11 testers and prioritized fixes based on player impact. One example: testers reported confusion about the $7,000 rent due at the end of the week. The information existed in the pause menu, but players weren't seeing it in time. We added explicit dialogue early in the game to set expectationsâa small change that significantly improved the experience.</p></div>
+      </div>
+      <div class="chapter-body" id="yc-outcome">
+        <div class="ab-section"><span class="ab-lbl">We Shipped</span><p>I tried to be everything this team neededâflexible, supportive, decisive when required. And we shipped. The game exists, people are playing it, YouTubers are covering it, and it's now on Steam. That's a win.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Producer As Glue</span><p>But I also learned a harder lesson: not every problem can be solved with more effort or better communication. When team members actively work against the group's decisionsâchanging things behind the team's back, undermining agreed-upon directionâthe right move is to address it directly, even if that means removing people from the project. I was too slow to recognize that, and it cost us time and morale.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Lessons</span><p>The flip side: I now know what it takes to ship a game with a large team. I know how to run standups that actually move projects forward, how to translate playtest data into action items, and how to keep 25 people pointed in roughly the same direction. Next time, I'll be faster to protect the team from dysfunctionâbecause protecting the team is part of the job.</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="side-stack">
+    <div class="pane stack-card">
+      <h4>Quick Stats</h4>
+      <div class="stat-row"><span class="k">Role</span><span class="v">Producer</span></div>
+      <div class="stat-row"><span class="k">Timeline</span><span class="v">4 Months</span></div>
+      <div class="stat-row"><span class="k">Team</span><span class="v">25 Members · 8 Leads</span></div>
+      <div class="stat-row"><span class="k">Reception</span><span class="v">YouTube Coverage</span></div>
+    </div>
+    <div class="pane stack-card">
+      <h4>Methods</h4>
+      <div class="tool-chips">
+        <span>Producer Standups</span><span>Cross-Department Sync</span><span>Leadership Coaching</span><span>Scope Triage</span><span>Playtesting</span>
+      </div>
+    </div>
+    <div class="pane stack-card">
+      <h4>Tools</h4>
+      <div class="tool-chips">
+        <span>Unity</span><span>Miro</span><span>Canva</span><span>Discord</span>
+      </div>
+    </div>
+  </aside>
+</section>
+<div class="contact-chip" id="contact-chip">
+  <div class="chip-panel">
+    <a href="mailto:marinadiponio@proton.me"><span class="lbl">Email</span><span class="val">marinadiponio@proton.me</span></a>
+    <a href="https://www.linkedin.com/in/marinadiponio" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span><span class="val">/in/marinadiponio</span></a>
+    <a href="https://www.behance.net/marinadiponio" target="_blank" rel="noopener"><span class="lbl">Behance</span><span class="val">/marinadiponio</span></a>
+    <a href="https://calendly.com/marinadiponio-proton/30min" target="_blank" rel="noopener"><span class="lbl">Calendly</span><span class="val">marinadiponio-proton/30min</span></a>
+  </div>
+  <button class="chip-toggle" id="chip-toggle" aria-expanded="false" aria-controls="contact-chip" aria-label="Open contact options" title="Get in touch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+</div>
 
-    <script>
-        function createParticles() { for (let i = 0; i < 15; i++) { const particle = document.createElement('div'); particle.className = 'particle'; particle.style.width = Math.random() * 4 + 2 + 'px'; particle.style.height = particle.style.width; particle.style.left = Math.random() * 100 + '%'; particle.style.animationDuration = Math.random() * 15 + 20 + 's'; particle.style.animationDelay = Math.random() * 10 + 's'; document.body.appendChild(particle); } }
-        createParticles();
-        let soundOn = false; const audio = document.getElementById('oceanAudio'); audio.volume = 0.4;
-        if (localStorage.getItem('soundEnabled') === 'true') { soundOn = true; audio.play(); document.querySelector('.sound-toggle').textContent = 'Sound On'; document.querySelector('.sound-toggle').classList.add('active'); }
-        function toggleSound() { soundOn = !soundOn; const toggle = document.querySelector('.sound-toggle'); if (soundOn) { toggle.textContent = 'Sound On'; toggle.classList.add('active'); audio.play(); localStorage.setItem('soundEnabled', 'true'); } else { toggle.textContent = 'Sound Off'; toggle.classList.remove('active'); audio.pause(); localStorage.setItem('soundEnabled', 'false'); } }
-        function scrollToSection(sectionId) { document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        window.addEventListener('scroll', () => { const sections = ['overview', 'challenge', 'process', 'learned']; const markers = document.querySelectorAll('.depth-marker'); let currentSection = 0; sections.forEach((section, index) => { const element = document.getElementById(section); const rect = element.getBoundingClientRect(); if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) { currentSection = index; } }); markers.forEach((marker, index) => { if (index === currentSection) { marker.classList.add('active'); } else { marker.classList.remove('active'); } }); });
-    </script>
+<div id="cursor-layer" aria-hidden="true">
+  <div class="ck ck-bubble-trail t3" data-trail="3"></div>
+  <div class="ck ck-bubble-trail t2" data-trail="2"></div>
+  <div class="ck ck-bubble-trail t1" data-trail="1"></div>
+  <div class="ck ck-bb"></div>
+  <div class="ck ck-bb-dot"></div>
+</div>
+<script>
+// Audio toggle
+(function(){
+  var btn = document.getElementById('aud-toggle');
+  var aud = document.getElementById('ambient');
+  if(!btn || !aud) return;
+  btn.addEventListener('click', function(){
+    if(aud.paused){ aud.play().then(function(){btn.textContent='â¸';}).catch(function(){}); }
+    else { aud.pause(); btn.textContent='â¶'; }
+  });
+})();
+// Chapter tabs
+(function(){
+  var groups = document.querySelectorAll('[data-chapters]');
+  groups.forEach(function(g){
+    var tabs = g.querySelectorAll('.chapter-tab');
+    var key = g.getAttribute('data-chapters');
+    tabs.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var targetId = btn.getAttribute('data-target');
+        if (!targetId) return;
+        tabs.forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        var siblings = document.querySelectorAll('[id^="'+key+'-"]');
+        siblings.forEach(function(p){ p.classList.remove('on'); });
+        var target = document.getElementById(targetId);
+        if (target){ target.classList.add('on'); target.scrollTop = 0; }
+      });
+    });
+  });
+})();
+// Contact chip
+(function(){
+  var chip = document.getElementById("contact-chip");
+  var btn = document.getElementById("chip-toggle");
+  if(!chip || !btn) return;
+  btn.addEventListener("click", function(e){
+    e.stopPropagation();
+    var open = chip.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.addEventListener("click", function(e){
+    if(!chip.contains(e.target)){
+      chip.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+    }
+  });
+})();
+// Cursor (reduced-motion guarded)
+(() => {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layer = document.getElementById('cursor-layer');
+  if (!layer) return;
+  layer.classList.add('active');
+  document.body.classList.add('cursor-hidden');
+  const t1 = layer.querySelector('[data-trail="1"]');
+  const t2 = layer.querySelector('[data-trail="2"]');
+  const t3 = layer.querySelector('[data-trail="3"]');
+  const bb = layer.querySelector('.ck-bb');
+  const bbDot = layer.querySelector('.ck-bb-dot');
+  let mx = -100, my = -100;
+  const hist = new Array(80).fill(0).map(() => ({x:mx,y:my}));
+  let head = 0;
+  function sample(n){ return hist[(head - n + hist.length) % hist.length]; }
+  window.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; });
+  const HOT = 'a, button, input, textarea, select, [role="button"], label';
+  function tick(){
+    hist[head] = {x: mx, y: my};
+    head = (head + 1) % hist.length;
+    const base = 'translate3d(' + mx + 'px, ' + my + 'px, 0) translate3d(-50%,-50%,0)';
+    bb.style.transform = base;
+    bbDot.style.transform = base;
+    const b1 = sample(5), b2 = sample(12), b3 = sample(20);
+    t1.style.transform = 'translate3d(' + b1.x + 'px, ' + b1.y + 'px, 0) translate3d(-50%,-50%,0)';
+    t2.style.transform = 'translate3d(' + b2.x + 'px, ' + b2.y + 'px, 0) translate3d(-50%,-50%,0)';
+    t3.style.transform = 'translate3d(' + b3.x + 'px, ' + b3.y + 'px, 0) translate3d(-50%,-50%,0)';
+    const el = document.elementFromPoint(mx, my);
+    const hot = !!(el && el.closest && el.closest(HOT));
+    layer.classList.toggle('hot', hot);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  window.addEventListener('pointerdown', (e) => {
+    const pop = document.createElement('div');
+    pop.className = 'ck-pop';
+    pop.style.left = e.clientX + 'px';
+    pop.style.top = e.clientY + 'px';
+    layer.appendChild(pop);
+    setTimeout(() => pop.remove(), 500);
+  });
+})();
+</script>
 </body>
 </html>
