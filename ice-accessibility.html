@@ -76,7 +76,7 @@ a{color:inherit;text-decoration:none}
 .rail-item .t{font-size:15px;color:var(--ink)}
 .rail-item .tags{display:flex;gap:4px;flex-wrap:wrap}
 .rail-item .tags span{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:rgba(143,212,214,0.10);color:var(--teal)}
-.case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow:hidden}
+.case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
 .case-hero{height:180px;background:linear-gradient(160deg,#2a525c,#0f2c33);display:flex;align-items:center;justify-content:center;color:var(--ink-quiet);border-bottom:1px solid var(--glass-edge);position:relative}
 .case-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .case-hero .badge{position:absolute;top:14px;left:14px;padding:6px 12px;border-radius:999px;background:rgba(10,30,35,0.6);backdrop-filter:blur(10px);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper)}
@@ -87,7 +87,7 @@ a{color:inherit;text-decoration:none}
 .chapters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .chapter-tab{padding:9px 18px;border-radius:999px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);color:var(--ink-dim);cursor:pointer;font-weight:600;font-family:inherit}
 .chapter-tab.on{background:var(--copper);color:#1a1108;border-color:var(--copper);font-weight:700;box-shadow:0 0 0 3px rgba(209,138,90,0.18)}
-.chapter-body{flex:1;overflow-y:auto;padding-right:8px;font-size:17px;line-height:1.65;color:var(--ink-dim);scrollbar-width:thin;scrollbar-color:var(--copper) transparent;display:none}
+.chapter-body{font-size:17px;line-height:1.65;color:var(--ink-dim);display:none}
 .chapter-body.on{display:block}
 .chapter-body::-webkit-scrollbar{width:6px}
 .chapter-body::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
