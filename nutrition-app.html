@@ -172,8 +172,8 @@ a{color:inherit;text-decoration:none}
     </a>
     <div class="audio-pill">
       <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
-      <button id="aud-toggle" aria-label="toggle ambient audio">Ã¢ÂÂ¶</button>
-      <span>Ambient Ã· Underwater</span>
+      <button id="aud-toggle" aria-label="toggle ambient audio">▶</button>
+      <span>Ambient · Underwater</span>
     </div>
   </div>
   <div class="row nav-row">
@@ -190,7 +190,7 @@ a{color:inherit;text-decoration:none}
 <section class="frame">
   <aside class="pane rail">
     <h3>Project Index</h3>
-    <input class="rail-search" placeholder="Search projectsÃ¢ÂÂ¦" aria-label="Search projects" />
+    <input class="rail-search" placeholder="Search projects…" aria-label="Search projects" />
     <div class="rail-cat">Research</div>
     <a class="rail-item" href="learn-to-leap.html">
       <div class="t">Learn To Leap</div>
@@ -238,7 +238,7 @@ a{color:inherit;text-decoration:none}
   <div class="pane case">
     <div class="case-hero">
       <img src="images/nutrition-app.png" alt="Nutrition tracking app screen" />
-      <span class="badge">â Functional MVP · Solo Build</span>
+      <span class="badge">★ Functional MVP · Solo Build</span>
     </div>
     <div class="case-body">
       <h2 class="case-title">Nutrition <em>Tracker</em></h2>
@@ -250,20 +250,20 @@ a{color:inherit;text-decoration:none}
         <button class="chapter-tab" data-target="na-next">Next Steps</button>
       </div>
       <div class="chapter-body on" id="na-overview">
-        <div class="ab-section"><span class="ab-lbl">Why This Exists</span><p>Tracking calories and macros is essential for many peopleÃ¢ÂÂathletes optimizing performance, individuals managing health conditions, anyone trying to understand what they're actually eating. But manual food logging is tedious enough that most people abandon it within weeks. The friction isn't motivation; it's the process itself.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Why This Exists</span><p>Tracking calories and macros is essential for many people—athletes optimizing performance, individuals managing health conditions, anyone trying to understand what they're actually eating. But manual food logging is tedious enough that most people abandon it within weeks. The friction isn't motivation; it's the process itself.</p></div>
         <div class="ab-section"><span class="ab-lbl">The Approach</span><p>I built a nutrition tracking app that uses AI photo recognition to extract macro nutritional data from images of food. Snap a photo, get your calories, protein, carbs, and fats. The goal was eliminating the manual entry barrier that kills most tracking habits before they form.</p></div>
       </div>
       <div class="chapter-body" id="na-problem">
         <div class="ab-section"><span class="ab-lbl">Friction</span><p>Traditional nutrition apps require users to search databases, select portion sizes, and manually enter every item in every meal. For a single lunch, that might mean five separate entries with estimated weights and brand selections. Multiply that by three meals plus snacks, and you're spending significant time on data entry instead of actually eating.</p></div>
-        <div class="ab-section"><span class="ab-lbl">Why People Quit</span><p>The people who need tracking mostÃ¢ÂÂthose managing diabetes, recovering from eating disorders, or following strict dietary protocolsÃ¢ÂÂare often the same people for whom the cognitive load of manual logging creates the most friction. A simpler input method doesn't just save time; it makes consistent tracking actually sustainable.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Why People Quit</span><p>The people who need tracking most—those managing diabetes, recovering from eating disorders, or following strict dietary protocols—are often the same people for whom the cognitive load of manual logging creates the most friction. A simpler input method doesn't just save time; it makes consistent tracking actually sustainable.</p></div>
       </div>
       <div class="chapter-body" id="na-solution">
         <div class="ab-section"><span class="ab-lbl">One Action</span><p>The app reduces food logging to a single action: take a photo. The AI analyzes the image, identifies the food items, estimates portions, and outputs calorie and macro data. Users get immediate feedback without searching databases or guessing serving sizes.</p></div>
-        <div class="ab-section"><span class="ab-lbl">Under The Hood</span><p>I built the processing pipeline using n8n for automation, connecting the photo input to an LLM for image analysis and nutrition estimation. The interface was designed in Figma and built with Lovable, prioritizing speed and clarity over feature bloat. The current MVP is fully functionalÃ¢ÂÂyou can use it today to track meals.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Under The Hood</span><p>I built the processing pipeline using n8n for automation, connecting the photo input to an LLM for image analysis and nutrition estimation. The interface was designed in Figma and built with Lovable, prioritizing speed and clarity over feature bloat. The current MVP is fully functional—you can use it today to track meals.</p></div>
       </div>
       <div class="chapter-body" id="na-next">
         <div class="ab-section"><span class="ab-lbl">Improving Accuracy</span><p>The MVP proves the concept works. The next milestone is improving accuracy, which requires upgrading the LLM's capacity and processing power. Better models mean more reliable food identification, more accurate portion estimation, and more precise macro calculations.</p></div>
-        <div class="ab-section"><span class="ab-lbl">What MVP Proved</span><p>With additional funding, I'd also expand the feature set: meal history tracking, daily/weekly summaries, goal setting, and integration with fitness apps. But the core insight remains the sameÃ¢ÂÂreduce friction to the absolute minimum, and people will actually track. Everything else is iteration on that foundation.</p></div>
+        <div class="ab-section"><span class="ab-lbl">What MVP Proved</span><p>With additional funding, I'd also expand the feature set: meal history tracking, daily/weekly summaries, goal setting, and integration with fitness apps. But the core insight remains the same—reduce friction to the absolute minimum, and people will actually track. Everything else is iteration on that foundation.</p></div>
       </div>
     </div>
   </div>
@@ -315,8 +315,8 @@ a{color:inherit;text-decoration:none}
   var aud = document.getElementById('ambient');
   if(!btn || !aud) return;
   btn.addEventListener('click', function(){
-    if(aud.paused){ aud.play().then(function(){btn.textContent='Ã¢ÂÂ¸';}).catch(function(){}); }
-    else { aud.pause(); btn.textContent='Ã¢ÂÂ¶'; }
+    if(aud.paused){ aud.play().then(function(){btn.textContent='⏸';}).catch(function(){}); }
+    else { aud.pause(); btn.textContent='▶'; }
   });
 })();
 // Chapter tabs
