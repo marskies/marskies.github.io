@@ -487,6 +487,9 @@ Marina pasted a fresh list at end-of-session. This supersedes the previous 17-it
 - The 10 project pages are now visually + behaviorally consistent: clean Unicode rendering, persistent rail scroll, snappy cursor trail. Treat them as a locked baseline unless Marina says otherwise.
 - If Marina asks to tune the trail further: `sample(1), sample(3), sample(6)` is "nearly glued", `sample(3), sample(7), sample(13)` is "looser". The buffer size (80) is fine to leave alone.
 
+### Repo additions this session
+- `Marina_DiPonio_Resume.pdf` (344 KB) added at repo root. Marina finished her resume and dropped it in the repo directly. Live at `https://marskies.github.io/Marina_DiPonio_Resume.pdf` and accessible via raw.githubusercontent.com. Not yet linked from any project page — Marina will decide where/how to surface it in a future pass.
+
 ---
 
 End of context doc. Good luck.
