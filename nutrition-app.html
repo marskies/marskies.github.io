@@ -317,14 +317,29 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
       </div>
       <div class="chapter-body" id="na-problem">
         <div class="ab-section"><span class="ab-lbl">Friction</span><p>Traditional nutrition apps require users to search databases, select portion sizes, and manually enter every item in every meal. For a single lunch, that might mean five separate entries with estimated weights and brand selections. Multiply that by three meals plus snacks, and you're spending significant time on data entry instead of actually eating.</p></div>
+        <figure>
+          <img src="images/nutrition-problem.png" alt="Manual logging · pain points" />
+          <figcaption>Manual logging · pain points</figcaption>
+        </figure>
+
         <div class="ab-section"><span class="ab-lbl">Why People Quit</span><p>The people who need tracking most—those managing diabetes, recovering from eating disorders, or following strict dietary protocols—are often the same people for whom the cognitive load of manual logging creates the most friction. A simpler input method doesn't just save time; it makes consistent tracking actually sustainable.</p></div>
       </div>
       <div class="chapter-body" id="na-solution">
         <div class="ab-section"><span class="ab-lbl">One Action</span><p>The app reduces food logging to a single action: take a photo. The AI analyzes the image, identifies the food items, estimates portions, and outputs calorie and macro data. Users get immediate feedback without searching databases or guessing serving sizes.</p></div>
+        <figure>
+          <img src="images/nutrition-results.png" alt="Macro results display" />
+          <figcaption>Macro results display</figcaption>
+        </figure>
+
         <div class="ab-section"><span class="ab-lbl">Under The Hood</span><p>I built the processing pipeline using n8n for automation, connecting the photo input to an LLM for image analysis and nutrition estimation. The interface was designed in Figma and built with Lovable, prioritizing speed and clarity over feature bloat. The current MVP is fully functional—you can use it today to track meals.</p></div>
       </div>
       <div class="chapter-body" id="na-next">
         <div class="ab-section"><span class="ab-lbl">Improving Accuracy</span><p>The MVP proves the concept works. The next milestone is improving accuracy, which requires upgrading the LLM's capacity and processing power. Better models mean more reliable food identification, more accurate portion estimation, and more precise macro calculations.</p></div>
+        <figure>
+          <img src="images/nutrition-future.png" alt="Future development roadmap" />
+          <figcaption>Future development roadmap</figcaption>
+        </figure>
+
         <div class="ab-section"><span class="ab-lbl">What MVP Proved</span><p>With additional funding, I'd also expand the feature set: meal history tracking, daily/weekly summaries, goal setting, and integration with fitness apps. But the core insight remains the same—reduce friction to the absolute minimum, and people will actually track. Everything else is iteration on that foundation.</p></div>
       </div>
     </div>
