@@ -1,7 +1,7 @@
 # Submerged · Portfolio Mockup · Context Doc
 
 > Handoff doc for resuming work on the Submerged portfolio mockup with Claude.
-> Last updated: end of session that produced mockup v5.2 (accessibility menu added site-wide).
+> Last updated: session that added the site-wide image lightbox (v5.3) and fixed the cursor z-index so it shows above the overlay.
 
 ---
 
@@ -165,6 +165,7 @@ Three columns:
 | v5.0 | Accessibility menu (a11y chip) added to mockup.html: pop-out panel stacked ON TOP of the contact/communication chip (bottom-right). Four user toggles — normal cursor, reduce motion, bigger text (+12%), high contrast — plus always-on focus-visible rings and no-arrow-key keyboard operability for the album shelf. |
 | v5.1 | Bigger-text fix: the old inert `body.a11y-large-text{font-size:19px}` rule did nothing (page uses ~77 hardcoded px font rules, zero rem/em). Replaced with 73 per-selector +12% px overrides so the toggle actually scales type. |
 | v5.2 | Rolled the a11y chip out to all 10 standalone project pages (shelf-keyboard handler omitted there — they use a rail of normal links, not an album shelf; rail links still get focus rings). |
+| v5.3 | Image lightbox added site-wide (mockup.html + all 10 project pages): click or keyboard to expand any content image into a darkened, blurred full-screen overlay with an X button, click-off, and Esc to close. Then fixed a z-index tie so the custom cursor stays visible above the overlay (overlay dropped to 9990, cursor layer stays 9999). |
 
 ---
 
@@ -180,6 +181,7 @@ Three columns:
 - Audio toggle wired, intersection-observer nav active state
 - Custom "Bubble Bright" cursor ported into mockup.html (already present; not rebuilt)
 - Accessibility menu live on mockup.html AND all 10 project pages (see Accessibility section below)
+- Image lightbox live on mockup.html AND all 10 project pages: any content image expands into a darkened overlay (X / click-off / Esc to close), and the custom cursor renders above the overlay (see Image lightbox section below)
 
 ## Accessibility menu (a11y chip)
 
@@ -201,6 +203,16 @@ A user-facing accessibility toggle, present on **mockup.html and all 10 project 
 **Why bigger-text needed a real fix:** the page has ~77 hardcoded px font rules and zero rem/em, so a single `body{font-size}` rule had no effect. The working approach is per-selector +12% px overrides scoped under the large-text body class (73 rules on mockup.html, 23 rules on each project page).
 
 **Implementation notes for next-Claude:** the chip is one self-contained block (CSS before the last `</style>`, markup before `<div class="contact-chip">`, JS IIFE before `</body>`). It guards against re-injection via `id="a11y-chip"`. Project pages share an identical template, so one injection pattern works across all 10.
+
+## Image lightbox
+
+Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers expand any content image to a higher-resolution view.
+
+- **What it does:** click (or focus + Enter/Space) any zoomable image to open a fixed, full-screen overlay with a darkened + blurred backdrop, the image centered (max-height 92vh), an X button top-right, and a caption. Close with the X, by clicking off the dark area, or with Esc.
+- **Where the code lives:** one self-contained block per file, CSS wrapped in the markers `/* === image lightbox === */` ... `/* === /image lightbox === */`, plus `<div id="img-lightbox" role="dialog" aria-modal="true">` markup and an IIFE (guarded by `window.__lbInit`) before `</body>`. CSS reuses the locked design tokens; `body.a11y-reduce-motion` drops the blur and `body.a11y-high-contrast` darkens the backdrop further.
+- **Which images are zoomable:** every `<img>` EXCEPT those inside `.topbar`, `.brand`, `.contact-chip`, `#a11y-chip`, `#img-lightbox`, or with class `cursor-bubble`. The top-bar logo is excluded; content images are included.
+- **z-index / cursor fix (v5.3):** the overlay and the custom cursor layer (`#cursor-layer`) both sat at z-index 9999, so the overlay painted over the cursor and hid it. Fix: overlay lowered to **9990**, cursor layer stays **9999**. The cursor layer is `pointer-events:none`, so this does not affect the X button or click-off.
+- **Gotcha:** when first added, the CSS landed orphaned between two `</style>` tags on the 10 project pages (rendered as an inline image, not a modal); it was moved inside the valid style block. mockup.html was never affected.
 
 ## What's open / known issues
 
