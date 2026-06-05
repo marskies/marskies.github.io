@@ -549,3 +549,39 @@ Session closed.
 ---
 
 End of context doc. Good luck.
+
+
+---
+
+## Session 2026-06-05 — Project-page image embedding (Marina's instructions + cosmic-catch proof)
+
+### New info from Marina (treat as current truth, supersedes older "open" notes)
+- **Formspree is DONE and hooked up.** Stop listing it as open. (Endpoint already wired in mockup.html Frame E in v5.20.)
+- **ICE accessibility page (`ice-accessibility.html`) is THE BLUEPRINT.** Marina loves how it looks. Every other project page should mirror its case-study image rhythm: `.ab-section` (copper `.ab-lbl` label + paragraph) interleaved with `<figure><img><figcaption></figure>` blocks inside each `.chapter-body`, plus the occasional `.stat-call`. The Applied chapter on ICE uses a before/after figure pair. Hero image sits in `.case-hero` with the badge.
+- **Project images need to be embedded throughout each project's description** — the "words, image, words" flow. The structural shells (chapters/rail/case-hero) were already rebuilt; what was missing was the in-chapter figures. Only ICE had them before this session.
+- **Image ORDER / sectioning is sourced from the OLD v2.5 versions of each project page** (the pre-Submerged-rebuild commit, i.e. the commit immediately before each "v5.3x … Submerged rebuild" commit). Those old pages have the real words-image-words section ordering. Fetch via contents API with `?ref=<priorSha>`. NOTE: the *current/live* standalone pages only carry the single hero image, so the order is NOT there — it's in git history.
+- **Frame assets are FINAL, not placeholders.** All project images in `/images/` are up to date and uploaded. Do not treat them as placeholders.
+- **Logo is FIXED already.** Stop listing the top-left logo render as an open issue.
+- **Mobile is LAST.** Do not touch until all content is locked.
+- **Animations come AFTER all content is done** (Phase 4 polish bundle), per the hard constraint.
+
+### Image-order source map (from old v2.5 commits)
+Sections that had body images in v2.5, mapped to the new Submerged chapter ids. Hero image is EXCLUDED from body figures to avoid duplicates.
+- cosmic-catch (hero cc-award): Overview→cc-menu; Concept→cc-gameplay, cc-collect, cc-melody; Process→cc-fish1, cc-fish2; Outcome→(none; award is hero)
+- nutrition-app (hero nutrition-app): Problem→nutrition-problem; Solution→nutrition-results; Next Steps→nutrition-future
+- social-media-cys (hero cys-instagram): Strategy→cys-content; Execution→cys-posts; Results→cys-analytics
+- uf-club-software (hero uf-platform): Research→uf-research; Findings→uf-findings; Recommendations→uf-recommendations
+- yuumi-chan (hero yuumi-gameplay): Challenge→yuumi-team; Process→yuumi-playtest, yuumi-presentation
+- tick-tock-trivia, insane-wizard, startea had NO body images in v2.5 → order INFERRED from filenames following the same Overview→Process→Outcome flow (Marina approved inferring):
+  - tick-tock (hero ttt-gameplay): Overview→ttt-menu; Final Piece→ttt-characters, ttt-design-system; Process→ttt-wireframes, ttt-sprint, ttt-springo, ttt-team; Outcome→ttt-award
+  - insane-wizard (hero wizard-screenshot): Overview→wizard-ui; Final Piece→wizard-action, wizard-missile; Process→wizard-v1, wizard-v2, wizard-team
+  - startea (hero startea-hero): Research→startea-personas; Design→startea-design-system, startea-final; Outcome→startea-timeline
+
+### Figure insertion recipe (used for cosmic-catch, reuse for the rest)
+- Find each `.chapter-body` by its `id="…"`, walk to its matching `</div>` (div-depth counter), insert the `<figure>` block(s) just before that close. Keeps "words then image" order and matches ICE.
+- Figure markup: `<figure><img src="images/…" alt="…" /><figcaption>…</figcaption></figure>`. Captions use the copper-dot `·` separator style like ICE (e.g. "Main menu · first impression"). The site-wide lightbox auto-zooms any content `<img>`, so no extra wiring needed.
+- GitHub editor: CodeMirror view at `document.querySelector('.cm-content').cmTile.view`; dispatch `view.dispatch({changes:{from:0,to:view.state.doc.length,insert:html}})`. Don't type.
+
+### Status this session
+- ✅ cosmic-catch.html (v5.77) — 6 figures embedded across Overview/Concept/Process, verified live (renders ICE-style, captions show, panel scrolls as a whole, no broken imgs). Proof page approved direction.
+- ⏳ Remaining 7 (nutrition-app, social-media-cys, uf-club-software, yuumi-chan, tick-tock-trivia, insane-wizard, startea) — queued, mappings above ready to apply.
