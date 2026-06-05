@@ -1,7 +1,7 @@
 # Submerged · Portfolio Mockup · Context Doc
 
 > Handoff doc for resuming work on the Submerged portfolio mockup with Claude.
-> Last updated: end of session that produced mockup v4.4.
+> Last updated: end of session that produced mockup v5.2 (accessibility menu added site-wide).
 
 ---
 
@@ -162,6 +162,9 @@ Three columns:
 | v4.2 | Loaded Cormorant + Inter via Google Fonts (had been referenced but not loaded — fonts were falling back to system serif). Switched frames from grid-fill-100vh to flex-content-sized. Big type pass: 23 sizing bumps. |
 | v4.3 | Fixed nav-pill centering (specificity bump on `.nav-row` so it overrode the topbar row's space-between) |
 | v4.4 | Swapped Cormorant Garamond → Fraunces. Enlarged Learn To Leap "On Deck" card to a featured variant with a 160px image slot, copper-tinted background, and bigger title (17px). |
+| v5.0 | Accessibility menu (a11y chip) added to mockup.html: pop-out panel stacked ON TOP of the contact/communication chip (bottom-right). Four user toggles — normal cursor, reduce motion, bigger text (+12%), high contrast — plus always-on focus-visible rings and no-arrow-key keyboard operability for the album shelf. |
+| v5.1 | Bigger-text fix: the old inert `body.a11y-large-text{font-size:19px}` rule did nothing (page uses ~77 hardcoded px font rules, zero rem/em). Replaced with 73 per-selector +12% px overrides so the toggle actually scales type. |
+| v5.2 | Rolled the a11y chip out to all 10 standalone project pages (shelf-keyboard handler omitted there — they use a rail of normal links, not an album shelf; rail links still get focus rings). |
 
 ---
 
@@ -175,6 +178,29 @@ Three columns:
 - Nav properly centered, two-row top bar
 - Copper scrollbars on internal scroll areas
 - Audio toggle wired, intersection-observer nav active state
+- Custom "Bubble Bright" cursor ported into mockup.html (already present; not rebuilt)
+- Accessibility menu live on mockup.html AND all 10 project pages (see Accessibility section below)
+
+## Accessibility menu (a11y chip)
+
+A user-facing accessibility toggle, present on **mockup.html and all 10 project pages**. It is a small chip stacked directly ON TOP of the existing contact/communication chip (bottom-right). Clicking it pops out a panel with four checkboxes.
+
+**Toggles (all persist via `localStorage` key `marskies_a11y`):**
+- **Normal cursor** — disables the custom Bubble Bright cursor, restores the OS pointer.
+- **Reduce motion** — stops/neutralizes animations and transitions.
+- **Bigger text (+12%)** — applies per-selector px overrides (see note). Marina chose +12% as the noticeable-but-safe step.
+- **High contrast** — boosts text/background contrast using the locked token palette.
+
+**Always-on baseline (not a toggle):**
+- Focus-visible outlines on interactive elements (item 5 from the original options list).
+- Album-shelf keyboard operability on mockup.html — Tab/Enter only, **no arrow keys** (Marina chose no-arrow-keys for now). Project pages have a rail of normal links instead of a shelf, so the shelf-keyboard handler is intentionally omitted there; rail links still receive focus rings.
+
+**Deliberately NOT done (Marina deferred):**
+- `aria-current="page"` + skip-link (item 6) — skipped for now; revisit if requested.
+
+**Why bigger-text needed a real fix:** the page has ~77 hardcoded px font rules and zero rem/em, so a single `body{font-size}` rule had no effect. The working approach is per-selector +12% px overrides scoped under the large-text body class (73 rules on mockup.html, 23 rules on each project page).
+
+**Implementation notes for next-Claude:** the chip is one self-contained block (CSS before the last `</style>`, markup before `<div class="contact-chip">`, JS IIFE before `</body>`). It guards against re-injection via `id="a11y-chip"`. Project pages share an identical template, so one injection pattern works across all 10.
 
 ## What's open / known issues
 
@@ -433,7 +459,7 @@ Marina pasted a fresh list at end-of-session. This supersedes the previous 17-it
 **Status of project page rebuilds:**
 - ✅ ice-accessibility.html — full Submerged rebuild + scroll-the-panel fix
 - ✅ mockup.html Frame C (LL preview) — chapter sub-labels + scroll-the-panel fix
-- ⏳ Standalone learn-to-leap.html — still old v2.5 style; NOT yet rebuilt. Marina has not asked for the standalone rebuild yet. v5.29 fixed the LL mockup frame only.
+- ✅ Standalone learn-to-leap.html — CORRECTION: this page already had the full Submerged template (NOT old v2.5 as previously noted), so the a11y chip grafted in cleanly during the v5.2 rollout.
 - ⏳ cosmic-catch, tick-tock-trivia, insane-wizard, nutrition-app, social-media-cys, startea, uf-club-software, yuumi-chan — all still old v2.5 style, queued for Marina to pick
 
 **Next session pickup:** Marina drives which project to rebuild next. When rebuilding, mirror ice-accessibility.html's structure AND remember to apply the two scroll edits above (the v5.25 template did NOT have them yet — it had the old `.chapter-body` flex:1 overflow:auto pattern).
