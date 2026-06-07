@@ -229,6 +229,9 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 .title-links a{display:inline-flex;align-items:center;gap:5px;font-family:'Inter',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--copper);text-decoration:none;padding:5px 11px;border:1px solid color-mix(in srgb,var(--copper) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--copper) 8%,transparent);transition:background .15s,border-color .15s}
 .title-links a:hover{background:color-mix(in srgb,var(--copper) 18%,transparent);border-color:var(--copper)}
 .title-links a .arr{font-size:11px;opacity:.8}
+
+/* ===== LOCK-PAGE PATCH: no page scroll / no overscroll bounce ===== */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 </style>
 </style>
 </head>
