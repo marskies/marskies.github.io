@@ -87,7 +87,7 @@ Album-shelf layout. Centered column. Heading "Selected *Work*" + category filter
 
 ### Frame C · #frame-c · Case study
 Three columns:
-- **Left rail:** flat project index with category headers + tag chips. All 10 projects listed under primary category (Research / Product Management / UI/UX). Search input at top.
+- **Left rail:** flat project index with category headers + tag chips. All 10 projects listed under primary category (Research / Project Management / UI/UX). Search input at top.
 - **Center case pane:** hero image, title in Fraunces, subtitle, chapter tabs (Overview / Research / Synthesis / Design / Outcome), scrollable chapter body with copper scrollbar.
 - **Right side-stack:** Quick Stats, Methods chips, Tools chips.
 
@@ -111,12 +111,12 @@ Three columns:
 |---|---|---|
 | Learn To Leap | Research | Senior Capstone (FEATURED) |
 | ICE Accessibility Audit | Research | UI/UX |
-| Tick Tock Trivia | Product Management | UI/UX, Research |
-| Cosmic Catch | Product Management | UI/UX |
-| Yuumi-Chan: Rent is Due! | Product Management | Research |
-| StarTea | Product Management | UI/UX, Research |
-| Insane Wizard | Product Management | UI/UX, Research |
-| Social Media Campaign | Product Management | — |
+| Tick Tock Trivia | Project Management | UI/UX, Research |
+| Cosmic Catch | Project Management | UI/UX |
+| Yuumi-Chan: Rent is Due! | Project Management | Research |
+| StarTea | Project Management | UI/UX, Research |
+| Insane Wizard | Project Management | UI/UX, Research |
+| Social Media Campaign | Project Management | — |
 | Nutrition Tracking App | UI/UX | PM |
 | UF Club Software | UI/UX | Research |
 
@@ -585,3 +585,31 @@ Sections that had body images in v2.5, mapped to the new Submerged chapter ids. 
 ### Status this session
 - ✅ cosmic-catch.html (v5.77) — 6 figures embedded across Overview/Concept/Process, verified live (renders ICE-style, captions show, panel scrolls as a whole, no broken imgs). Proof page approved direction.
 - ⏳ Remaining 7 (nutrition-app, social-media-cys, uf-club-software, yuumi-chan, tick-tock-trivia, insane-wizard, startea) — queued, mappings above ready to apply.
+
+## Session 2026-06-07 — Project links audit, Canva demo, layout fixes, PM→PM rename
+
+### What shipped this session
+- **Title-row links added across project pages.** Moved the external project links (itch.io / Behance) out of the overflowing right-side stack-card and into a `.title-row` flex beside the case title, so the Learn To Leap frame stays locked to no-scroll again. Reusable `.title-row` / `.title-links` copper-pill CSS shared across pages; long titles use a `.title-row--stack` modifier (links stacked below the title).
+- **Per-project links:**
+  - Learn To Leap — Behance + Play Prototype, beside title.
+  - Cosmic Catch — Play Prototype + Behance, beside title.
+  - Tick Tock Trivia — Play Prototype + Behance, beside title.
+  - StarTea — Behance, beside title.
+  - Yuumi-Chan: Rent is Due! — Play Prototype + Behance, **stacked below** title (long title; added line-height / spacing fixes).
+  - Insane Wizard — title corrected to full **"Insane Wizard Goes Crazy Everywhere"**, Play Prototype link **stacked below**, title font-size reduced to 28px so it fits on one line.
+  - Nutrition Tracking App — **View Presentation** link (Canva demo/walkthrough deck), beside title.
+- **mockup.html Frame C** updated to match (links beside title, side card removed).
+- **StarTea layout:** moved the project-timeline image to sit under the Parallel Work section.
+- **Copy rename:** changed "Product Management" → "Project Management" everywhere it appeared across all project pages (rail category labels + one prose mention in mockup.html). Verified 0 "product management" left in the rendered site; this doc's table/notes updated to match.
+
+### Status this session
+- ✅ All project pages audited by Marina — content is up to date / locked.
+- ✅ Title-row link pattern shipped to every project page + mockup Frame C.
+- ✅ "Project Management" rename live and verified.
+- ✅ StarTea timeline image relocated under Parallel Work.
+- ⏳ Mobile + interaction-polish phases remain (deferred, per hard constraints — do after desktop content is fully locked).
+
+### Notes for next-Claude
+- Title-row pattern: short titles → plain `.title-row` (links to the right); long titles → add `.title-row--stack` (links below). Insane Wizard also needs font-size:28px on the stacked title to keep it one line.
+- When editing project pages via the GitHub web editor: dispatch into CodeMirror, then VERIFY `view.state.doc` contains the change BEFORE committing — a silent commit-without-change happened once and had to be redone.
+- Commit dialog can toggle; confirm it's open (find/screenshot) before clicking the green confirm.
