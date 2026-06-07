@@ -578,19 +578,19 @@ section.frame .side-stack,section.frame .rail,section.frame .about-left,section.
       <div class="album-cats">
         <button class="on" data-cat="all">All</button>
         <button data-cat="research">Research</button>
-        <button data-cat="pm">Product Mgmt</button>
+        <button data-cat="pm">Project Mgmt</button>
         <button data-cat="uiux">UI / UX</button>
       </div>
     </div>
     <div class="shelf" id="album-shelf">
-      <div class="album-card" data-cat="pm uiux" data-href="cosmic-catch.html"><div class="thumb"><img src="images/cc-gameplay.png" alt="Cosmic Catch" /></div><div class="meta"><div class="t">Cosmic Catch</div><div class="c">Product Mgmt</div></div></div>
-      <div class="album-card" data-cat="pm uiux research" data-href="tick-tock-trivia.html"><div class="thumb"><img src="images/ttt-gameplay.png" alt="Tick Tock Trivia" /></div><div class="meta"><div class="t">Tick Tock Trivia</div><div class="c">Product Mgmt</div></div></div>
+      <div class="album-card" data-cat="pm uiux" data-href="cosmic-catch.html"><div class="thumb"><img src="images/cc-gameplay.png" alt="Cosmic Catch" /></div><div class="meta"><div class="t">Cosmic Catch</div><div class="c">Project Mgmt</div></div></div>
+      <div class="album-card" data-cat="pm uiux research" data-href="tick-tock-trivia.html"><div class="thumb"><img src="images/ttt-gameplay.png" alt="Tick Tock Trivia" /></div><div class="meta"><div class="t">Tick Tock Trivia</div><div class="c">Project Mgmt</div></div></div>
       <div class="album-card" data-cat="research pm uiux" data-href="learn-to-leap.html"><div class="thumb"><img src="images/learntoleap-prototype.png" alt="Learn To Leap" /></div><div class="meta"><div class="t">Learn To Leap</div><div class="c">Senior Project · UX Research</div></div></div>
       <div class="album-card" data-cat="research uiux" data-href="ice-accessibility.html"><div class="thumb"><img src="images/ice-research.png" alt="ICE Accessibility" /></div><div class="meta"><div class="t">ICE Accessibility</div><div class="c">Research</div></div></div>
       <div class="album-card" data-cat="uiux" data-href="nutrition-app.html"><div class="thumb"><img src="images/nutrition-app.png" alt="Nutrition App" /></div><div class="meta"><div class="t">Nutrition App</div><div class="c">UI / UX</div></div></div>
       <div class="album-card" data-cat="pm uiux research" data-href="startea.html"><div class="thumb"><img src="images/startea-hero.png" alt="StarTea" /></div><div class="meta"><div class="t">StarTea</div><div class="c">UI / UX · Research</div></div></div>
-      <div class="album-card" data-cat="pm research" data-href="yuumi-chan.html"><div class="thumb"><img src="images/yuumi-gameplay.png" alt="Yuumi-Chan" /></div><div class="meta"><div class="t">Yuumi-Chan</div><div class="c">Product Mgmt · Research</div></div></div>
-      <div class="album-card" data-cat="pm uiux" data-href="insane-wizard.html"><div class="thumb"><img src="images/wizard-screenshot.png" alt="Insane Wizard" /></div><div class="meta"><div class="t">Insane Wizard</div><div class="c">Product Mgmt</div></div></div>
+      <div class="album-card" data-cat="pm research" data-href="yuumi-chan.html"><div class="thumb"><img src="images/yuumi-gameplay.png" alt="Yuumi-Chan" /></div><div class="meta"><div class="t">Yuumi-Chan</div><div class="c">Project Mgmt · Research</div></div></div>
+      <div class="album-card" data-cat="pm uiux" data-href="insane-wizard.html"><div class="thumb"><img src="images/wizard-screenshot.png" alt="Insane Wizard" /></div><div class="meta"><div class="t">Insane Wizard</div><div class="c">Project Mgmt</div></div></div>
       <div class="album-card" data-cat="uiux research" data-href="uf-club-software.html"><div class="thumb"><img src="images/uf-platform.png" alt="UF Club Software" /></div><div class="meta"><div class="t">UF Club Software</div><div class="c">UI / UX · Research</div></div></div>
     </div>
     <div class="shelf-dots" id="shelf-dots"></div>
@@ -1357,6 +1357,12 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  .channel .mc-ico svg{width:18px;height:18px;display:block}
  /* lay channel chips in a tight wrapping row */
  .channels,.contact-channels,.reach-list,.channel-list{display:flex !important;flex-wrap:wrap !important;gap:8px !important}
+}
+
+/* ===== MOBILE-CAROUSEL-V5: clip Work shelf at hotbar gutter + label fix ===== */
+@media (max-width:700px){
+ #frame-b .shelf-wrap{overflow:hidden !important;border-radius:18px;padding-right:0 !important}
+ #frame-b .shelf{overflow:hidden !important}
 }
 </style>
 <div id="cursor-layer" aria-hidden="true">
