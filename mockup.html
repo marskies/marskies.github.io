@@ -1322,6 +1322,13 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  /* hide the second (right) side-stack on Home to avoid duplicate stacks; keep left info */
  #frame-a .side-stack:last-of-type{display:none !important}
 }
+
+/* ===== MOBILE-CAROUSEL-V3: fixed-position stage so document never scrolls ===== */
+@media (max-width:700px){
+ section.frame{position:fixed !important;left:0;right:0;top:0;height:100vh;overflow:hidden}
+ section.frame.mc-active{overflow-y:auto !important;-webkit-overflow-scrolling:touch}
+ html,body{height:100vh !important;max-height:100vh !important;overflow:hidden !important;overscroll-behavior:none !important;position:fixed;width:100%}
+}
 </style>
 <div id="cursor-layer" aria-hidden="true">
   <div class="ck ck-bubble-trail t3" data-trail="3"></div>
