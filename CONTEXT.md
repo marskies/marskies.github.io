@@ -675,3 +675,18 @@ Built the mobile experience for `mockup.html` as a **vertical swipe carousel** (
 **Known polish items (next iteration):** faint peek bleed at top of Home; project/Case pages (`frame-c` + standalone project pages) still need the same mobile carousel treatment — agreed to iterate. One Work category pill still reads "PRODUCT MGMT" (abbreviated label) — flagged for the PM→Project rename follow-up.
 
 **Agreed next order remains:** mobile (in progress) → BG animation → page-selection transition → panel-change transition.
+
+
+### Mobile carousel — compact-fit pass (V4 + V5)
+
+Refinements after Marina tested swipe/flow in person:
+- **Hotbar gutter:** every card reserves a right gutter (`padding-right:76px`) so content never slides under/over the hotbar. The Work shelf (a horizontal carousel that intentionally overflows) was still bleeding under the hotbar; fixed in **`MOBILE-CAROUSEL-V5`** by clipping `#frame-b .shelf-wrap{overflow:hidden !important}` (right edge 582px, clears hotbar at ~600px). Note: V2's `section.frame > *{overflow:visible !important}` had to be overridden with higher specificity.
+- **Smaller hotbar** (thumb-test approved): buttons 44→38px, icons 22→19px, tighter padding/gap.
+- **Cursor removed on mobile:** `#cursor-layer{display:none !important}` (the site's custom cursor overlay).
+- **Compact icon channel chips:** the 8 `.channel` links (Email/LinkedIn/Behance/Calendly × Home + Contact) become small inline-SVG icon + tiny-label pills in a wrapping row (`.val` hidden). Icons injected by a small decorate() script keyed off label/href; brand glyphs for LinkedIn/Behance, line icons for Email/Calendly.
+- **Tighter overall fit:** reduced frame gap, `clamp()`-scaled h1/h2, smaller pane/side-stack padding.
+- **Label fix:** the Work filter pill read "Product Mgmt" (an abbreviation missed by the earlier Product→Project rename) — replaced all 5 "Product Mgmt" → "Project Mgmt" in mockup.html.
+
+**Markers:** `MOBILE-CAROUSEL-V4` (gutter/hotbar-size/cursor/icon-chips/tighten), `MOBILE-CAROUSEL-V5` (Work-shelf clip + label fix). All additive + idempotent.
+
+**Still open:** project/Case pages need the same mobile carousel; faint peek-bleed at top of Home card still to polish.
