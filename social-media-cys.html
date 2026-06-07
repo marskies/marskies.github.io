@@ -222,6 +222,9 @@ img.lb-zoomable:focus-visible{outline:3px solid var(--teal,#8fd4d6);outline-offs
 body.a11y-reduce-motion #img-lightbox{backdrop-filter:none;}
 body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 /* === /image lightbox === */
+
+/* ===== LOCK-PAGE PATCH: no page scroll / no overscroll bounce ===== */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 </style>
 </style>
 </head>
