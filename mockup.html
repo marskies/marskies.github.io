@@ -1296,6 +1296,32 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  #mc-hotbar a.mc-on{background:var(--accent,#e0a366);color:#10222e;transform:scale(1.06)}
 }
 @media (min-width:701px){ #mc-hotbar{display:none} }
+
+/* ===== MOBILE-CAROUSEL-V2: single-column card reflow + hotbar clearance ===== */
+@media (max-width:700px){
+ /* each active card scrolls internally; page stays locked */
+ section.frame{padding:62px 64px 24px 16px;align-items:flex-start !important}
+ section.frame.mc-active{overflow-y:auto;-webkit-overflow-scrolling:touch}
+ /* collapse the multi-column desktop frames into one vertical column */
+ section.frame{flex-direction:column !important;flex-wrap:nowrap !important;gap:16px !important}
+ section.frame > *{width:100% !important;max-width:520px !important;margin:0 auto !important;flex:0 0 auto !important;max-height:none !important;overflow:visible !important}
+ /* center the primary content first, side panels after */
+ #frame-a .center-card{order:0}
+ #frame-a .side-stack{order:1}
+ #frame-d .about-center{order:0}
+ #frame-d .about-left{order:1}
+ #frame-d .side-stack{order:2}
+ #frame-e .contact-center{order:0}
+ #frame-e .pane{order:1}
+ #frame-e .contact-right{order:2}
+ /* the work shelf stays as its own horizontal carousel, just center it */
+ #frame-b .shelf-wrap{max-width:560px !important}
+ /* tighten huge desktop display type so cards fit phone width */
+ section.frame h1{font-size:clamp(34px,11vw,52px) !important;line-height:1.02 !important}
+ section.frame h2{font-size:clamp(26px,8vw,38px) !important}
+ /* hide the second (right) side-stack on Home to avoid duplicate stacks; keep left info */
+ #frame-a .side-stack:last-of-type{display:none !important}
+}
 </style>
 <div id="cursor-layer" aria-hidden="true">
   <div class="ck ck-bubble-trail t3" data-trail="3"></div>
