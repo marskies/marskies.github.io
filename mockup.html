@@ -1364,6 +1364,16 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  #frame-b .shelf-wrap{overflow:hidden !important;border-radius:18px;padding-right:0 !important}
  #frame-b .shelf{overflow:hidden !important}
 }
+
+/* ===== MOBILE-CAROUSEL-V6: Home/card flow fixes (top-align + hide Case bleed) ===== */
+@media (max-width:700px){
+ /* top-align so tall content never overflows upward and clips (fixes Home photo cut-off) */
+ section.frame{justify-content:flex-start !important}
+ /* the Case view (frame-c) isn't in the mobile carousel; hide it so it doesn't ghost behind cards */
+ #frame-c{display:none !important}
+ /* a touch more breathing room at the top of each card */
+ section.frame{padding-top:52px !important}
+}
 </style>
 <div id="cursor-layer" aria-hidden="true">
   <div class="ck ck-bubble-trail t3" data-trail="3"></div>
