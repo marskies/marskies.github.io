@@ -613,3 +613,35 @@ Sections that had body images in v2.5, mapped to the new Submerged chapter ids. 
 - Title-row pattern: short titles → plain `.title-row` (links to the right); long titles → add `.title-row--stack` (links below). Insane Wizard also needs font-size:28px on the stacked title to keep it one line.
 - When editing project pages via the GitHub web editor: dispatch into CodeMirror, then VERIFY `view.state.doc` contains the change BEFORE committing — a silent commit-without-change happened once and had to be redone.
 - Commit dialog can toggle; confirm it's open (find/screenshot) before clicking the green confirm.
+
+## Session 2026-06-07 (late) — Discrete locked screens (mockup frames + project-page scroll lock)
+
+Phase 1 content is locked/audited, so we started Phase: "no-scroll, screen-per-page" behavior across the whole site. Marina's chosen build order for what's left: (1) Mobile app-ish version, (2) BG animation, (3) page-selection animation, (4) panel-change animation. Rationale agreed: do mobile first (it can invalidate layout/transitions), then BG (isolated), then the two transitions together (they share the same nav/panel hooks). All swaps below are INSTANT for now — the transitions are a later, separate pass.
+
+### What shipped this session
+- **mockup.html — frames are now discrete, locked, instant-switch screens (not scroll-snap sections).**
+  - Before: 5 `<section class="frame">` stacked in one tall scrolling page; nav pill used anchor links (`href="#frame-a"`…) that just scroll-jumped to a section; an IntersectionObserver scroll-spy lit the active nav item.
+  - After: page is locked (`html,body{height:100vh;overflow:hidden}`); each frame is `position:absolute;inset:0;height:100vh` and `display:none` by default, only the `.is-active` one shows. A small script intercepts clicks on `a[href^="#frame-"]` (nav pill + in-page links like the Work cards' `#frame-c`), calls `showFrame(id)` to toggle `.is-active` + the pill's `.active`, honors the URL hash on load and on `hashchange`. No scroll anywhere.
+  - **Gotcha that bit us:** an existing `.frame{display:flex}` rule lives in a LATER `<style>` block (mockup has 6 style blocks), so my equal-specificity `.frame{display:none}` lost the cascade and ALL 5 frames rendered stacked/invisible on top of each other. Fix: bump specificity to `section.frame{...display:none !important}` / `section.frame.is-active{display:flex !important}`. Lesson: in mockup.html, beat the later `.frame` rule with `section.frame` + `!important`.
+  - Tall frames (About/Case) keep their inner columns (`.side-stack/.rail/.about-left/.contact-right/.case`) on `overflow-y:auto` so nothing is clipped on short viewports — same approach the project pages use.
+- **All 10 project pages — added a no-scroll LOCK-PAGE patch.** They were `height:100vh` but had no overflow/overscroll lock, so they could rubber-band/nudge a few px (Marina noticed "they move slightly"; reproduced a ~44px stray scroll). Added before `</style>` on each:
+  ```
+  /* ===== LOCK-PAGE PATCH: no page scroll / no overscroll bounce ===== */
+  html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+  ```
+  Pages patched: cosmic-catch, ice-accessibility, insane-wizard, learn-to-leap, nutrition-app, social-media-cys, startea, tick-tock-trivia, uf-club-software, yuumi-chan. Verified live: scrollTo(0,N) leaves scrollY at 0, overflow:hidden, overscroll:none, frames still fit (content not clipped; inner panes still scroll internally if needed).
+
+### Status this session
+- ✅ mockup.html: nav (Home/Work/About/Contact) + Case (frame-c) each render as their own locked screen, instant swap, zero page scroll — verified live by clicking through all of them.
+- ✅ All 10 project pages locked to no-scroll / no-overscroll — verified live.
+- ✅ Whole site now consistent: every screen is a locked, single-viewport, no-scroll page.
+- ⏳ Next (Marina's order): Mobile app-ish version → BG animation → page-selection transition → panel-change transition. Mobile is next.
+
+### Markers (for grep / idempotency)
+- `FRAME-SWITCH PATCH` — the mockup.html CSS + script for discrete screens.
+- `LOCK-PAGE PATCH` — the html,body lock on each project page (skip a page if this marker already present).
+
+### Notes for next-Claude
+- Editing project pages via GitHub web editor: dispatch into CodeMirror, VERIFY `view.state.doc` contains the change BEFORE committing (a silent commit-without-change happened earlier in the project). Commit dialog toggles open/closed — confirm it's open (find/screenshot) before clicking the green confirm.
+- GitHub Pages caches/builds slowly: after commit, confirm via contents API (sha changes), then wait ~30s+ and reload with a fresh `?bust=` param before judging the live page.
+- When locking a page, prefer adding the small html,body lock rule rather than editing existing rules — it's additive and idempotent (guard on the marker).
