@@ -222,6 +222,13 @@ img.lb-zoomable:focus-visible{outline:3px solid var(--teal,#8fd4d6);outline-offs
 body.a11y-reduce-motion #img-lightbox{backdrop-filter:none;}
 body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 /* === /image lightbox === */
+
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.title-row .case-title{flex:1 1 auto}
+.title-links{display:flex;gap:8px;flex-shrink:0;margin-top:6px}
+.title-links a{display:inline-flex;align-items:center;gap:5px;font-family:'Inter',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--copper);text-decoration:none;padding:5px 11px;border:1px solid color-mix(in srgb,var(--copper) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--copper) 8%,transparent);transition:background .15s,border-color .15s}
+.title-links a:hover{background:color-mix(in srgb,var(--copper) 18%,transparent);border-color:var(--copper)}
+.title-links a .arr{font-size:11px;opacity:.8}
 </style>
 </style>
 </head>
@@ -303,7 +310,7 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
       <span class="badge">★ Full E-Commerce Prototype</span>
     </div>
     <div class="case-body">
-      <h2 class="case-title">Star<em>Tea</em></h2>
+      <div class="title-row"><h2 class="case-title">Star<em>Tea</em></h2><div class="title-links"><a href="https://www.behance.net/gallery/235886391/StarTea-Website-Design" target="_blank" rel="noopener">Behance <span class="arr">↗</span></a></div></div>
       <p class="case-sub">Wellness brand website · 30 Days · 5 Phases · UX Lead</p>
       <div class="chapters" data-chapters="st">
         <button class="chapter-tab on" data-target="st-overview">Overview</button>
