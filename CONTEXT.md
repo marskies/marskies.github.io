@@ -645,3 +645,33 @@ Phase 1 content is locked/audited, so we started Phase: "no-scroll, screen-per-p
 - Editing project pages via GitHub web editor: dispatch into CodeMirror, VERIFY `view.state.doc` contains the change BEFORE committing (a silent commit-without-change happened earlier in the project). Commit dialog toggles open/closed — confirm it's open (find/screenshot) before clicking the green confirm.
 - GitHub Pages caches/builds slowly: after commit, confirm via contents API (sha changes), then wait ~30s+ and reload with a fresh `?bust=` param before judging the live page.
 - When locking a page, prefer adding the small html,body lock rule rather than editing existing rules — it's additive and idempotent (guard on the marker).
+
+
+---
+
+## Session 2026-06-07 (mobile) — Mobile vertical carousel (app-ish)
+
+Built the mobile experience for `mockup.html` as a **vertical swipe carousel** (the vertical analog of the desktop horizontal Work shelf), inspired by a Vision Pro–style stacked-panel reference Marina shared.
+
+**Behaviour (mobile only, `@media (max-width:700px)`):**
+- The four nav frames — Home (`frame-a`), Work (`frame-b`), About (`frame-d`), Contact (`frame-e`) — stack as full-screen vertical cards. Swipe up = next, swipe down = previous.
+- The active card is centered at full opacity/scale; the prev/next cards peek above/below at ~0.32 opacity + 0.86 scale (+ slight blur) for a floating, depth-y feel. Slide + opacity-fade transition (~0.42s).
+- A right-edge vertical glass **hotbar** (`#mc-hotbar`, thumb zone) with inline-SVG icons: Home, Work, About, Contact. Active icon highlighted in accent. Tapping jumps to that card. Hidden ≥701px.
+- Page is fully locked: no document scroll, no overscroll bounce. Only the *active card* scrolls internally if its content is tall.
+
+**Integration:** Navigation drives `location.hash` / the existing `hashchange` listener so it stays in sync with the desktop `showFrame()` mechanism (single source of truth). Inputs handled: touch swipe, wheel/trackpad (with inner-scroll edge detection + debounce), arrow keys, and hotbar taps.
+
+**Content reflow:** Each frame's desktop multi-column layout collapses to a single centered column on mobile (`flex-direction:column`, children full-width `max-width:520px`, primary/center content ordered first, side-stacks below). Home hides its duplicate second side-stack. Display type scaled down with `clamp()`. The Work shelf keeps its own horizontal carousel.
+
+**Patch markers (in `mockup.html`, all additive + idempotent, guarded):**
+- `MOBILE-CAROUSEL PATCH` — base CSS (stacking/peek/hotbar) + the carousel script (ORDER `['frame-a','frame-b','frame-d','frame-e']`, hotbar build, swipe/wheel/key handlers).
+- `MOBILE-CAROUSEL-V2` — single-column reflow, hotbar clearance padding, display-type scaling.
+- `MOBILE-CAROUSEL-V3` — `position:fixed` frames + fixed/locked root so the document never scrolls or bounces (fixes a residual `scrollTo` leak where stacked absolute frames extended doc height past viewport).
+
+**Test hook:** add class `force-mobile` to `<html>` to apply mobile rules at any width (the env's window won't shrink below ~658px inner-width; the `@media (max-width:700px)` triggers at 658 for live preview).
+
+**Verified live** at 658px: swipe up/down switches cards, hotbar active state + tap-jump work, hash syncs, cards reflow to single column (Home/About/Contact), page fully locked (`scrollHeight===clientHeight`, `scrollTo` no-op).
+
+**Known polish items (next iteration):** faint peek bleed at top of Home; project/Case pages (`frame-c` + standalone project pages) still need the same mobile carousel treatment — agreed to iterate. One Work category pill still reads "PRODUCT MGMT" (abbreviated label) — flagged for the PM→Project rename follow-up.
+
+**Agreed next order remains:** mobile (in progress) → BG animation → page-selection transition → panel-change transition.
