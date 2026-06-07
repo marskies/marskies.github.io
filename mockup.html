@@ -92,11 +92,10 @@
 
 /* ===== FRAME-SWITCH PATCH: discrete locked screens (no page scroll) ===== */
 html,body{height:100vh;overflow:hidden}
-.frame{position:absolute;top:0;left:0;right:0;bottom:0;height:100vh;width:100%;display:none;overflow:hidden}
-.frame.is-active{display:flex}
-/* let inner content stay within the screen; scroll internally only if a short viewport forces it */
-.frame > *{max-height:calc(100vh - 200px)}
-.frame .side-stack,.frame .rail,.frame .about-left,.frame .contact-right{overflow-y:auto;scrollbar-width:thin}
+section.frame{position:absolute !important;top:0;left:0;right:0;bottom:0;height:100vh;min-height:0;width:100%;max-width:none;margin:0;display:none !important;overflow:hidden}
+section.frame.is-active{display:flex !important}
+/* keep inner columns within the screen; scroll internally only if a short viewport forces it */
+section.frame .side-stack,section.frame .rail,section.frame .about-left,section.frame .contact-right,section.frame .case{overflow-y:auto;scrollbar-width:thin}
 </style>
 </head>
 <body>
