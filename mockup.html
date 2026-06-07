@@ -1391,7 +1391,7 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
     var lastFocus=null;
     function open(src,alt){lastFocus=document.activeElement;bImg.src=src;bImg.alt=alt||"";bCap.textContent=alt||"";box.classList.add("open");document.body.style.overflow="hidden";bClose.focus();}
     function close(){box.classList.remove("open");bImg.src="";document.body.style.overflow="";if(lastFocus&&lastFocus.focus)lastFocus.focus();}
-    function excluded(img){return img.closest(".topbar")||img.closest(".brand")||img.closest(".contact-chip")||img.closest("#a11y-chip")||img.closest("#img-lightbox")||img.classList.contains("cursor-bubble");}
+    function excluded(img){return img.closest(".topbar")||img.closest(".brand")||img.closest(".contact-chip")||img.closest("#a11y-chip")||img.closest("#img-lightbox")||img.closest(".album-card")||img.classList.contains("cursor-bubble");}
     Array.prototype.forEach.call(document.images,function(img){
       if(excluded(img)) return;
       img.classList.add("lb-zoomable");
