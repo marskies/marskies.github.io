@@ -1374,6 +1374,31 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  /* a touch more breathing room at the top of each card */
  section.frame{padding-top:52px !important}
 }
+
+/* ===== MOBILE-HOME-FIT: condense Home into one non-scrolling card ===== */
+@media (max-width:700px){
+ /* center the single column and let it fill vertically without scroll */
+ #frame-a{justify-content:center !important;overflow:hidden !important}
+ #frame-a > *{margin:0 auto !important}
+ /* smaller rounded portrait */
+ #frame-a .portrait{width:118px !important;height:118px !important;min-height:0 !important;border-radius:50% !important;margin:0 auto 10px !important;overflow:hidden}
+ #frame-a .portrait img{width:100% !important;height:100% !important;object-fit:cover !important}
+ /* tighter name + one-line clamped tagline */
+ #frame-a .center-card h1{font-size:clamp(30px,9vw,42px) !important;margin:0 0 6px !important}
+ #frame-a .tagline{font-size:14px !important;line-height:1.35 !important;margin:0 auto 14px !important;max-width:340px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ #frame-a .center-card{gap:0 !important}
+ #frame-a .chat-cta{margin:2px auto 0 !important}
+ /* hide the bulky ON DECK image panel + CURRENTLY blurb; replaced by a slim chip */
+ #frame-a .side-stack .pane{display:none !important}
+ #frame-a .side-stack{height:auto !important;padding:0 !important;margin-top:14px !important}
+ /* the injected compact latest-work chip */
+ .mc-latest{display:flex;align-items:center;gap:11px;width:100%;max-width:360px;margin:0 auto;padding:9px 12px;border-radius:14px;background:var(--glass,rgba(20,40,52,.5));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-edge,rgba(255,255,255,.12));text-decoration:none;color:inherit}
+ .mc-latest .mc-latest-thumb{width:44px;height:44px;border-radius:10px;object-fit:cover;flex:0 0 44px;background:#0c1f29}
+ .mc-latest .mc-latest-body{flex:1;min-width:0;text-align:left}
+ .mc-latest .mc-latest-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,#e0a366);margin-bottom:2px}
+ .mc-latest .mc-latest-title{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .mc-latest .mc-latest-arrow{flex:0 0 auto;color:var(--ink-dim,#9fb6c2);font-size:18px}
+}
 </style>
 <div id="cursor-layer" aria-hidden="true">
   <div class="ck ck-bubble-trail t3" data-trail="3"></div>
@@ -1639,6 +1664,32 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   });
  }
  if(document.readyState!=='loading')decorate(); else document.addEventListener('DOMContentLoaded',decorate);
+})();
+</script>
+
+<script>
+/* ===== MOBILE-HOME-FIT (script): build compact latest-work chip from ON DECK data ===== */
+(function(){
+ function build(){
+  var frame=document.getElementById('frame-a'); if(!frame)return;
+  var ss=frame.querySelector('.side-stack'); if(!ss)return;
+  if(frame.querySelector('.mc-latest'))return;
+  var srcLink=frame.querySelector('.ondeck-row, .side-stack .pane a'); 
+  var img=frame.querySelector('.side-stack img');
+  var title='Learn To Leap';
+  var t=frame.querySelector('.ondeck-meta, .ondeck-row .t, .side-stack .pane a strong');
+  if(t&&t.textContent.trim())title=t.textContent.trim().split('\n')[0].slice(0,32);
+  var a=document.createElement('a'); a.className='mc-latest'; a.href='#frame-b';
+  a.addEventListener('click',function(e){e.preventDefault(); location.hash='#frame-b';});
+  var thumb=document.createElement('img'); thumb.className='mc-latest-thumb'; thumb.alt=''; if(img&&img.getAttribute('src'))thumb.src=img.getAttribute('src');
+  var body=document.createElement('div'); body.className='mc-latest-body';
+  body.innerHTML='<div class="mc-latest-kicker">Latest work</div><div class="mc-latest-title"></div>';
+  body.querySelector('.mc-latest-title').textContent=title;
+  var arr=document.createElement('span'); arr.className='mc-latest-arrow'; arr.textContent='\u2192';
+  a.appendChild(thumb); a.appendChild(body); a.appendChild(arr);
+  ss.appendChild(a);
+ }
+ if(document.readyState!=='loading')build(); else document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
 </body>
