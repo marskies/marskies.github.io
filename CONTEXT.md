@@ -702,3 +702,15 @@ Two real bugs found on the Home card (`frame-a`) at mobile width and fixed in **
 **Verified live:** Home portrait fully visible + no ghosting; Work/About/Contact all top-align cleanly with no bleed.
 
 **Minor polish still open:** on Work/About the top heading/photo sits close to the brand wordmark (could add a few px clearance); project/Case pages still need the mobile carousel.
+
+
+### Mobile Home redesign — condense to fit one screen (MOBILE-HOME-FIT)
+
+Marina's note: top-aligning just made Home scroll; she wanted the content *restructured* to actually fit one non-scrolling card. Done as **`MOBILE-HOME-FIT`** (mobile-only, desktop untouched):
+- Portrait shrunk to a 118px circle; name tightened; tagline clamped to 2 lines.
+- The bulky ON DECK image panel + CURRENTLY blurb (`.side-stack .pane`) are hidden on mobile and replaced by a single slim **'Latest work' chip** (`.mc-latest`): thumbnail + clean title (`Learn To Leap`, pulled from `.ondeck-meta .t`) + subtitle (`.c`) + arrow, linking to `#frame-b` (Work).
+- Result: `#frame-a` scrollHeight === clientHeight (fits exactly, no internal scroll), content vertically centered.
+
+**Gotcha logged:** when string-patching the injected `<script>` via JS, escaped `\\n` written into a replacement string landed as a *literal* backslash-n in the source, causing `SyntaxError: Invalid or unexpected token` and the chip silently failed to build. Fix: replace literal `\\n` in the script region with real newlines, and syntax-check with `new Function(scriptBody)` before committing. Lesson: prefer building injected scripts with real newlines, not escaped ones, and always console-check after deploy.
+
+**Marker:** `MOBILE-HOME-FIT` (CSS + chip-builder script). Additive, idempotent.
