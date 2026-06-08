@@ -690,3 +690,15 @@ Refinements after Marina tested swipe/flow in person:
 **Markers:** `MOBILE-CAROUSEL-V4` (gutter/hotbar-size/cursor/icon-chips/tighten), `MOBILE-CAROUSEL-V5` (Work-shelf clip + label fix). All additive + idempotent.
 
 **Still open:** project/Case pages need the same mobile carousel; faint peek-bleed at top of Home card still to polish.
+
+
+### Mobile Home-card layout fix (V6)
+
+Two real bugs found on the Home card (`frame-a`) at mobile width and fixed in **`MOBILE-CAROUSEL-V6`**:
+- **Upward overflow clipping:** the mobile frames inherited `justify-content:center` from the base rule. When a card's content is taller than the viewport (Home: ~1027px content vs 786px), centered flexbox pushed the first item's top *above* the visible area (center-card top was -103px), clipping the top of Marina's portrait. Fixed with `section.frame{justify-content:flex-start !important}` so content top-aligns and scrolls down naturally. (Applies to all cards.)
+- **Case-view bleed-through:** `frame-c` (the Case/project-detail view) is NOT in the carousel ORDER array, so it never got a `--mc-i` index — its transform defaulted to `translateY(0)`, parking it at the top behind the active card at the default 0.32 peek opacity, ghosting faint text behind every card. Fixed with `#frame-c{display:none !important}` on mobile (it'll get proper mobile treatment when we do project/Case pages).
+- Also nudged `padding-top` to 52px for a bit of top breathing room.
+
+**Verified live:** Home portrait fully visible + no ghosting; Work/About/Contact all top-align cleanly with no bleed.
+
+**Minor polish still open:** on Work/About the top heading/photo sits close to the brand wordmark (could add a few px clearance); project/Case pages still need the mobile carousel.
