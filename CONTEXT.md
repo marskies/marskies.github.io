@@ -714,3 +714,44 @@ Marina's note: top-aligning just made Home scroll; she wanted the content *restr
 **Gotcha logged:** when string-patching the injected `<script>` via JS, escaped `\\n` written into a replacement string landed as a *literal* backslash-n in the source, causing `SyntaxError: Invalid or unexpected token` and the chip silently failed to build. Fix: replace literal `\\n` in the script region with real newlines, and syntax-check with `new Function(scriptBody)` before committing. Lesson: prefer building injected scripts with real newlines, not escaped ones, and always console-check after deploy.
 
 **Marker:** `MOBILE-HOME-FIT` (CSS + chip-builder script). Additive, idempotent.
+
+---
+
+## SESSION LOG — Mobile carousel wrap-up (2026-06-07)
+
+Built the mobile experience for `mockup.html` as a VERTICAL carousel (mobile analog of the desktop horizontal Work shelf). One source of truth: same file, responsive behind `@media (max-width:700px)` plus a `.force-mobile` test hook on `<html>`. NOTE: this environment's window will not shrink below ~658px innerWidth, so the 700px breakpoint was verified at 658px; a real phone will look more phone-shaped.
+
+### Behavior
+- Swipe up = next page, swipe down = previous. Also wheel (with inner-scroll edge detection + ~520ms debounce), arrow keys, and hotbar taps.
+- Carousel ORDER = ['frame-a','frame-b','frame-d','frame-e'] = Home, Work, About, Contact. (frame-c = Case is hidden on mobile.)
+- Active card centered at full opacity/scale; prev/next peek above/below at reduced opacity + scale (Vision-Pro stacked feel).
+- Right-edge vertical hotbar (#mc-hotbar) in the thumb zone: Home / Works / About / Contact icons, active highlighted, tap to jump.
+- Single source of truth: carousel drives `location.hash` -> existing `hashchange`/`showFrame`; sets `--mc-a` on <html> and `--mc-i` per frame.
+
+### Patch markers added this session (all additive, idempotent, guarded; inserted before last </style> or </body>)
+- `MOBILE-CAROUSEL` (V1): stacked frames, transform/opacity carousel, hotbar with inline-SVG icons, touch/wheel/key/tap nav, hash sync.
+- `MOBILE-CAROUSEL-V2`: single-column content reflow per card; hide Home duplicate side-stack; clamp() display type.
+- `MOBILE-CAROUSEL-V3`: `section.frame{position:fixed !important}` + locked root (`html,body{position:fixed;overflow:hidden;overscroll-behavior:none}`) so the document never scrolls/bounces (scrollHeight===clientHeight).
+- `MOBILE-CAROUSEL-V4`: hotbar gutter (`padding:56px 76px 20px 16px`), smaller hotbar (38px buttons / 19px icons), `#cursor-layer{display:none}` (cursor removed), `.channel` links -> compact icon chips (Email/LinkedIn/Behance/Calendly SVGs, value text hidden).
+- `MOBILE-CAROUSEL-V5`: `#frame-b .shelf-wrap{overflow:hidden !important}` clips the Work shelf at the gutter; renamed 'Product Mgmt' -> 'Project Mgmt' (5 occurrences).
+- `MOBILE-CAROUSEL-V6`: top-align cards (`justify-content:flex-start`) to fix Home photo clipping; `#frame-c{display:none}` to kill Case bleed-through ghost text.
+- `MOBILE-HOME-FIT`: Home condensed to ONE non-scrolling card — 118px round portrait, tight name, 2-line tagline clamp, 'LET'S CHAT!' CTA, plus a slim 'LATEST WORK' chip (thumbnail + 'Learn To Leap' + 'Senior Capstone · Games User Research' + arrow, links to #frame-b).
+
+### Gotchas / lessons (carry forward)
+- Escaped-newline bug: writing escaped `\n` into a JS replacement string landed as LITERAL backslash-n in source -> SyntaxError, chip silently failed. Fix: use REAL newlines in injected scripts and syntax-check with `new Function(scriptBody)` before commit; console-check after deploy.
+- After dispatching into CodeMirror, ALWAYS verify the editor doc contains the change before committing.
+- Commit dialog toggles open/closed on each click — verify it's open (find confirm button / screenshot) before confirming; don't double-click.
+- Window resizes mid-commit-flow — use find/ref for buttons, not fixed coordinates.
+- GitHub Pages serves stale cache after commit — confirm via contents API sha/length, wait ~20-40s, reload with a fresh `?bust=` param (can take 2-3 cycles).
+- api.github.com is cross-origin-blocked while ON marskies.github.io — must be on github.com to use the contents API.
+- CSS specificity: V2's `overflow:visible !important` had to be overridden with higher-specificity rules in V5; FRAME-SWITCH's absolute positioning needed `!important` in the media query to beat inline `position:fixed`.
+
+### Current state
+- All mobile work above is committed and verified live (Home/Work/About/Contact each fit one non-scrolling screen at 658px; hotbar in its clear gutter; cursor hidden; compact link chips).
+- DO NOT touch index.html or projects.js.
+
+### Next steps (agreed order)
+1. Decide on Home: keep the condensed MOBILE-HOME-FIT version OR prototype the user's 'another idea' for a different container direction (bento / card-deck) to compare.
+2. Extend the vertical carousel format to the project/Case pages (frame-c + standalone project pages).
+3. Minor polish: add a few px clearance between the Work/About headings/photo and the brand wordmark.
+4. Then: background animation -> page-selection transition -> panel-change transition.
