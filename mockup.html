@@ -1679,13 +1679,15 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   var img=frame.querySelector('.side-stack img');
   var title='Learn To Leap';
   var t=frame.querySelector('.ondeck-meta .t, .ondeck-row .t');
-  if(t&&t.textContent.trim())title=t.textContent.trim().slice(0,40);\n  var subEl=frame.querySelector('.ondeck-meta .c'); var sub=subEl?subEl.textContent.trim():'';
+  if(t&&t.textContent.trim())title=t.textContent.trim().slice(0,40);
+  var subEl=frame.querySelector('.ondeck-meta .c'); var sub=subEl?subEl.textContent.trim():'';
   var a=document.createElement('a'); a.className='mc-latest'; a.href='#frame-b';
   a.addEventListener('click',function(e){e.preventDefault(); location.hash='#frame-b';});
   var thumb=document.createElement('img'); thumb.className='mc-latest-thumb'; thumb.alt=''; if(img&&img.getAttribute('src'))thumb.src=img.getAttribute('src');
   var body=document.createElement('div'); body.className='mc-latest-body';
   body.innerHTML='<div class="mc-latest-kicker">Latest work</div><div class="mc-latest-title"></div><div class="mc-latest-sub"></div>';
-  body.querySelector('.mc-latest-title').textContent=title;\n  var sE=body.querySelector('.mc-latest-sub'); if(sub&&sE)sE.textContent=sub;
+  body.querySelector('.mc-latest-title').textContent=title;
+  var sE=body.querySelector('.mc-latest-sub'); if(sub&&sE)sE.textContent=sub;
   var arr=document.createElement('span'); arr.className='mc-latest-arrow'; arr.textContent='\u2192';
   a.appendChild(thumb); a.appendChild(body); a.appendChild(arr);
   ss.appendChild(a);
