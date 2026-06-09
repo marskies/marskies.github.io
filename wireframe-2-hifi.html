@@ -56,6 +56,7 @@
   /* ====== STATE A: MENU ====== */
   #menu{display:flex;flex-direction:column;align-items:center;padding:54px 20px 28px;overflow-y:auto;}
   .brand{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:8px;}
+  .brand .logo{width:48px;height:48px;object-fit:contain;margin-bottom:6px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));}
   .brand .name{font-family:'Fraunces',serif;font-weight:500;font-size:26px;letter-spacing:.01em;}
   .brand .name em{font-style:italic;color:var(--copper);}
   .brand .role{font-size:11px;color:var(--ink-dim);letter-spacing:.04em;}
@@ -118,6 +119,7 @@
   <!-- ===== STATE A : MENU ===== -->
   <section class="view" id="menu">
     <div class="brand">
+      <img class="logo" src="LOGO_blue.png" alt="Marina DiPonio logo" />
       <div class="name fr">Marina <em>DiPonio</em></div>
       <div class="role">Games User Researcher · Player Experience Designer</div>
     </div>
@@ -148,10 +150,10 @@
 (function(){
   // ---- the four top-level destinations (the app tiles) ----
   var SECTIONS = [
+    {key:'home',   name:'Home',    sub:'Start here',         thumb:'images/portrait2.JPG'},
     {key:'work',   name:'Work',    sub:'Selected projects', thumb:'images/learntoleap-prototype.png'},
     {key:'about',  name:'About',   sub:'Who I am',          thumb:'images/portrait.JPG'},
-    {key:'contact',name:'Contact', sub:'Reach out',         thumb:'images/learntoleap-booth.jpg'},
-    {key:'home',   name:'Home',    sub:'Start here',         thumb:'images/portrait2.JPG'}
+    {key:'contact',name:'Contact', sub:'Reach out',         thumb:'images/learntoleap-booth.jpg'}
   ];
 
   // ---- carousel content per section ----
