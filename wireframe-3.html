@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Wireframe 3 — Floating Icon Menu (lo-fi)</title>
+<style>
+  :root{--line:#9a9a9a;--box:#e4e4e4;--ink:#444;--ink-dim:#777;--bg:#f4f4f4;--frame:#bdbdbd;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;height:100%;width:100%;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    overflow:hidden;overscroll-behavior:none;position:fixed;touch-action:none;}
+  .pill{position:fixed;left:50%;top:12px;transform:translateX(-50%);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);background:rgba(255,255,255,.75);padding:4px 12px;border-radius:12px;border:1px solid var(--frame);z-index:50;}
+  .hint{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);font-size:11px;color:var(--ink-dim);letter-spacing:.06em;z-index:50;text-align:center;}
+
+  /* viewport masks the pannable canvas */
+  .viewport{position:fixed;inset:0;overflow:hidden;}
+  .canvas{position:absolute;left:0;top:0;will-change:transform;}
+  /* honeycomb-ish floating circular icons; scale by distance from center for depth */
+  .node{position:absolute;width:96px;height:96px;border-radius:50%;
+    border:2px dashed var(--line);background:var(--box);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    color:var(--ink-dim);font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+    cursor:pointer;transition:transform .12s;}
+  .node:active{transform:scale(.92);}
+  .node.big{width:120px;height:120px;}
+  .node.sm{width:76px;height:76px;font-size:10px;}
+  /* fixed center crosshair, like the watch focus point */
+  .focus{position:fixed;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);
+    border:2px dotted var(--ink-dim);border-radius:7px;z-index:40;pointer-events:none;opacity:.6;}
+</style>
+</head>
+<body>
+  <div class="pill">Wireframe 3 · Floating Icon Menu</div>
+  <div class="viewport" id="viewport">
+    <div class="canvas" id="canvas"></div>
+  </div>
+  <div class="focus"></div>
+  <div class="hint">drag in any direction to explore · tap an icon</div>
+
+<script>
+(function(){
+  var ITEMS = ['Home','Work','About','Contact','Shop','Journal','Events','Resume','Play','Research','Design','Games'];
+  var canvas = document.getElementById('canvas');
+  var viewport = document.getElementById('viewport');
+
+  // lay nodes out in a hex/honeycomb grid spread over a large canvas
+  var cols = 4, gapX = 150, gapY = 132;
+  var W = (cols)*gapX + 200;
+  var rows = Math.ceil(ITEMS.length/cols);
+  var H = (rows)*gapY + 200;
+  canvas.style.width = W+'px';
+  canvas.style.height = H+'px';
+
+  ITEMS.forEach(function(name,i){
+    var col = i % cols;
+    var row = Math.floor(i/cols);
+    var offset = (row % 2) * (gapX/2); // honeycomb stagger
+    var n = document.createElement('div');
+    n.className = 'node' + (i%5===0?' big':'') + (i%4===2?' sm':'');
+    n.textContent = name;
+    n.style.left = (100 + col*gapX + offset) + 'px';
+    n.style.top  = (100 + row*gapY) + 'px';
+    n.addEventListener('click', function(){
+      // lo-fi: just nudge focus to it (no destination yet)
+      centerOn(n);
+    });
+    canvas.appendChild(n);
+  });
+
+  // pan state (omni-directional drag) ----
+  var tx = 0, ty = 0, sx=0, sy=0, startTx=0, startTy=0, dragging=false;
+  // center the canvas initially
+  function clamp(){
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var minX = vw - W, minY = vh - H;
+    if(W < vw){ tx = (vw - W)/2; } else { tx = Math.min(0, Math.max(minX, tx)); }
+    if(H < vh){ ty = (vh - H)/2; } else { ty = Math.min(0, Math.max(minY, ty)); }
+  }
+  function apply(){ canvas.style.transform = 'translate('+tx+'px,'+ty+'px)'; }
+  function init(){ tx = (window.innerWidth - W)/2; ty = (window.innerHeight - H)/2; clamp(); apply(); }
+  function centerOn(node){
+    var nx = parseFloat(node.style.left) + node.offsetWidth/2;
+    var ny = parseFloat(node.style.top) + node.offsetHeight/2;
+    tx = window.innerWidth/2 - nx;
+    ty = window.innerHeight/2 - ny;
+    clamp();
+    canvas.style.transition='transform .4s cubic-bezier(.4,0,.2,1)';
+    apply();
+    setTimeout(function(){ canvas.style.transition=''; },420);
+  }
+
+  function down(x,y){ dragging=true; sx=x; sy=y; startTx=tx; startTy=ty; canvas.style.transition=''; }
+  function move(x,y){ if(!dragging) return; tx = startTx + (x-sx); ty = startTy + (y-sy); clamp(); apply(); }
+  function up(){ dragging=false; }
+
+  viewport.addEventListener('touchstart',function(e){ var t=e.touches[0]; down(t.clientX,t.clientY); },{passive:true});
+  viewport.addEventListener('touchmove',function(e){ var t=e.touches[0]; move(t.clientX,t.clientY); },{passive:true});
+  viewport.addEventListener('touchend',up,{passive:true});
+  viewport.addEventListener('mousedown',function(e){ down(e.clientX,e.clientY); });
+  window.addEventListener('mousemove',function(e){ move(e.clientX,e.clientY); });
+  window.addEventListener('mouseup',up);
+  // trackpad/wheel pans both axes
+  viewport.addEventListener('wheel',function(e){ tx -= e.deltaX; ty -= e.deltaY; clamp(); apply(); e.preventDefault(); },{passive:false});
+  window.addEventListener('resize',clamp);
+
+  init();
+})();
+</script>
+</body>
+</html>
