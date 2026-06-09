@@ -91,6 +91,10 @@
   .sr-item .sr-s{font-size:11px;color:var(--ink-quiet);letter-spacing:.04em;text-transform:uppercase;}
   .sr-item .sr-tx{display:flex;flex-direction:column;gap:1px;}
   .sr-empty{padding:11px;color:var(--ink-quiet);font-size:12px;text-align:center;}
+  .sr-answer{padding:11px 13px;border-radius:13px;background:rgba(209,138,90,.13);border:1px solid rgba(209,138,90,.30);margin-bottom:4px;cursor:pointer;}
+  .sr-answer .sr-q{font-size:11px;color:var(--copper);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;}
+  .sr-answer .sr-a{font-family:"Inter",sans-serif;font-size:13px;color:var(--ink);line-height:1.35;}
+  .sr-answer .sr-go{font-size:11px;color:var(--teal);margin-top:5px;}
 
   /* ====== STATE B: CAROUSEL ====== */
   #carousel{}
@@ -299,31 +303,79 @@
       INDEX.push({key:sec.key, idx:i, title:it.t, sub:DATA[sec.key].title+" · "+it.s});
     });
   });
-  function jumpTo(key, i){
-    openSection(key);
-    idx = Math.max(0, Math.min(cards.length-1, i));
-    renderC();
-    hideResults();
-    sInput.value = "";
-    sClear.style.display = "none";
+  // ---- Q&A intents (answers drawn from real content) ----
+  var QA = [
+    {kw:["where","located","location","based","live","city","from"], q:"Where is Marina located?", a:"Based in Jacksonville, Florida \u2014 by way of Puerto Rico and Gainesville.", key:"about", idx:0},
+    {kw:["contact","reach","get in touch","talk","hire","email","mail"], q:"How do I get in touch?", a:"Email marinadiponio@proton.me \u2014 best for project inquiries.", key:"contact", idx:0},
+    {kw:["linkedin"], q:"LinkedIn?", a:"LinkedIn: /marinadiponio \u2014 roles, experience, and updates.", key:"contact", idx:1},
+    {kw:["behance","portfolio","case study","case studies"], q:"Portfolio / case studies?", a:"Behance: /marinadiponio \u2014 visual case studies and design work.", key:"contact", idx:2},
+    {kw:["meeting","call","schedule","book","chat","calendly","available","availability","meet"], q:"Can we set up a chat?", a:"Yes \u2014 grab a 30-min slot via Calendly.", key:"contact", idx:3},
+    {kw:["school","education","degree","study","studied","college","university","major","uf","florida"], q:"Education?", a:"BA in Digital Arts & Sciences from the University of Florida, Summa Cum Laude.", key:"about", idx:0},
+    {kw:["who","what does","do for","job","role","title","work as","profession"], q:"What does Marina do?", a:"Games user researcher & player-experience designer \u2014 six shipped games in two years.", key:"about", idx:1},
+    {kw:["award","awards","honor","honors","recognition","accolades","achievement"], q:"Awards & recognition?", a:"Summa Cum Laude, President\u2019s & Dean\u2019s List, Best in Show, Most Innovative.", key:"about", idx:2}
+  ];
+  // ---- fuzzy matching helpers ----
+  function lev(a,b){
+    a=a||""; b=b||""; var m=a.length, n=b.length; if(!m) return n; if(!n) return m;
+    var prev=[], cur=[], i, j;
+    for(j=0;j<=n;j++) prev[j]=j;
+    for(i=1;i<=m;i++){ cur[0]=i;
+      for(j=1;j<=n;j++){ var cost=a.charAt(i-1)===b.charAt(j-1)?0:1; cur[j]=Math.min(prev[j]+1, cur[j-1]+1, prev[j-1]+cost); }
+      for(j=0;j<=n;j++) prev[j]=cur[j];
+    }
+    return prev[n];
   }
-  function hideResults(){ sResults.classList.add("hidden"); sResults.innerHTML = ""; }
+  function fuzzy(q, text){
+    q=q.toLowerCase(); text=(text||"").toLowerCase();
+    if(!q) return 0;
+    if(text.indexOf(q) > -1) return 1.0;
+    var words = text.split(/[^a-z0-9]+/).filter(Boolean);
+    var best = 0;
+    words.forEach(function(w){
+      if(w.indexOf(q) > -1 || q.indexOf(w) > -1){ best = Math.max(best, 0.9); return; }
+      var dist = lev(q, w); var maxLen = Math.max(q.length, w.length);
+      var sim = maxLen ? 1 - dist/maxLen : 0;
+      if(sim > best) best = sim;
+    });
+    var dAll = lev(q, text); var simAll = text.length ? 1 - dAll/Math.max(q.length, text.length) : 0;
+    return Math.max(best, simAll*0.6);
+  }
+  function jumpToAnswer(key, i){ jumpTo(key, i); }
   function runSearch(q){
-    q = (q||"").trim().toLowerCase();
+    q = (q||"").trim();
     if(!q){ hideResults(); return; }
-    var hits = INDEX.filter(function(e){
-      return e.title.toLowerCase().indexOf(q) > -1 || e.sub.toLowerCase().indexOf(q) > -1;
-    }).slice(0, 8);
+    var ql = q.toLowerCase();
     sResults.innerHTML = "";
-    if(!hits.length){
+    // 1) Q&A intent match
+    var qaHit = null, qaBest = 0;
+    QA.forEach(function(item){
+      var score = 0;
+      item.kw.forEach(function(k){ if(ql.indexOf(k) > -1) score += k.length >= 4 ? 2 : 1; });
+      if(score > qaBest){ qaBest = score; qaHit = item; }
+    });
+    var isQuestion = /\?$/.test(q) || /^(where|what|who|how|when|can|does|is|do|tell)\b/.test(ql);
+    if(qaHit && (qaBest >= 2 || (isQuestion && qaBest >= 1))){
+      var ans = document.createElement("div"); ans.className = "sr-answer";
+      ans.innerHTML = "<div class=\"sr-q\">"+qaHit.q+"</div><div class=\"sr-a\">"+qaHit.a+"</div><div class=\"sr-go\">Tap to open \u2192</div>";
+      ans.addEventListener("click", function(){ jumpToAnswer(qaHit.key, qaHit.idx); });
+      sResults.appendChild(ans);
+    }
+    // 2) fuzzy index matches
+    var scored = INDEX.map(function(e){
+      var s = Math.max(fuzzy(ql, e.title), fuzzy(ql, e.sub)*0.85);
+      return {e:e, s:s};
+    }).filter(function(x){ return x.s >= 0.5; })
+     .sort(function(a,b){ return b.s - a.s; })
+     .slice(0, 8);
+    scored.forEach(function(x){
+      var h = x.e;
+      var row = document.createElement("div"); row.className = "sr-item";
+      row.innerHTML = "<div class=\"sr-tx\"><span class=\"sr-s\">"+h.sub+"</span><span class=\"sr-t\">"+h.title+"</span></div>";
+      row.addEventListener("click", function(){ jumpTo(h.key, h.idx); });
+      sResults.appendChild(row);
+    });
+    if(!sResults.children.length){
       var em = document.createElement("div"); em.className = "sr-empty"; em.textContent = "No matches"; sResults.appendChild(em);
-    } else {
-      hits.forEach(function(h){
-        var row = document.createElement("div"); row.className = "sr-item";
-        row.innerHTML = "<div class=\"sr-tx\"><span class=\"sr-s\">"+h.sub+"</span><span class=\"sr-t\">"+h.title+"</span></div>";
-        row.addEventListener("click", function(){ jumpTo(h.key, h.idx); });
-        sResults.appendChild(row);
-      });
     }
     sResults.classList.remove("hidden");
   }
