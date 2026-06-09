@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Marina DiPonio — Menu / Carousel (hi-fi mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a1f24;
+    --glass:rgba(18,42,48,0.55);
+    --glass-strong:rgba(20,48,55,0.72);
+    --glass-edge:rgba(255,255,255,0.10);
+    --ink:#eaf6f7;
+    --ink-dim:#b9d2d4;
+    --ink-quiet:#7fa2a5;
+    --teal:#8fd4d6;
+    --copper:#d18a5a;
+    --copper-dim:#a86a44;
+    --shadow:0 18px 60px rgba(0,0,0,0.45);
+    --radius:22px;
+    --radius-sm:14px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{
+    margin:0;padding:0;height:100%;width:100%;
+    background:var(--bg-deep);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    overflow:hidden;overscroll-behavior:none;position:fixed;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-2;
+    background:url('images/background.jpg') center/cover no-repeat;
+    background-attachment:fixed;
+  }
+  body::after{
+    content:'';position:fixed;inset:0;z-index:-1;
+    background:linear-gradient(180deg, rgba(10,31,36,.55), rgba(10,31,36,.78));
+  }
+  .glass{
+    background:var(--glass);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border:1px solid var(--glass-edge);
+    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .eyebrow{font-size:11px;letter-spacing:.20em;text-transform:uppercase;color:var(--teal);}
+  .fr{font-family:'Fraunces',serif;}
+
+  /* ====== VIEW SWITCH ====== */
+  .view{position:fixed;inset:0;transition:opacity .42s ease, transform .42s ease;}
+  .view.hidden{opacity:0;pointer-events:none;transform:scale(.97);}
+
+  /* ====== STATE A: MENU ====== */
+  #menu{display:flex;flex-direction:column;align-items:center;padding:54px 20px 28px;overflow-y:auto;}
+  .brand{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:8px;}
+  .brand .name{font-family:'Fraunces',serif;font-weight:500;font-size:26px;letter-spacing:.01em;}
+  .brand .name em{font-style:italic;color:var(--copper);}
+  .brand .role{font-size:11px;color:var(--ink-dim);letter-spacing:.04em;}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:100%;max-width:360px;margin-top:22px;}
+  .tile{
+    position:relative;aspect-ratio:1/1;border-radius:24px;overflow:hidden;cursor:pointer;
+    border:1px solid var(--glass-edge);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+    transition:transform .18s ease, box-shadow .18s ease;
+    background:var(--glass-strong);
+  }
+  .tile:active{transform:scale(.95);}
+  .tile .thumb{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.92) brightness(.92);}
+  .tile .veil{position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,31,36,.05) 30%, rgba(10,31,36,.82));}
+  .tile .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;}
+  .tile .cap .t{font-family:'Fraunces',serif;font-weight:500;font-size:17px;line-height:1.1;}
+  .tile .cap .s{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-top:3px;}
+  .menu-chip{
+    margin-top:22px;width:100%;max-width:330px;border-radius:24px;padding:13px 18px;
+    display:flex;align-items:center;gap:10px;color:var(--ink-dim);font-size:13px;
+  }
+  .menu-chip .dot{width:26px;height:26px;border-radius:50%;background:var(--copper);flex:0 0 26px;display:flex;align-items:center;justify-content:center;color:#0a1f24;}
+  .menu-chip .send{margin-left:auto;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);}
+
+  /* ====== STATE B: CAROUSEL ====== */
+  #carousel{}
+  .c-stage{position:absolute;inset:0;}
+  .c-card{
+    position:absolute;left:50%;top:50%;width:84vw;max-width:400px;height:72vh;
+    transform:translate(-50%,-50%);border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--glass-edge);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+    background:var(--glass-strong);
+    transition:transform .44s cubic-bezier(.4,0,.2,1),opacity .44s,filter .44s;opacity:0;
+    display:flex;flex-direction:column;
+  }
+  .c-card.active{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  .c-card.prev{opacity:.28;transform:translate(-50%,calc(-50% - 76vh)) scale(.84);filter:blur(2px);}
+  .c-card.next{opacity:.28;transform:translate(-50%,calc(-50% + 76vh)) scale(.84);filter:blur(2px);}
+  .c-card.hide{opacity:0;}
+  .c-hero{flex:1;position:relative;background-size:cover;background-position:center;}
+  .c-hero .badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);background:rgba(10,31,36,.6);padding:5px 10px;border-radius:12px;backdrop-filter:blur(6px);}
+  .c-hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,36,0) 45%,rgba(10,31,36,.88));}
+  .c-meta{position:relative;padding:0 18px 18px;margin-top:-64px;}
+  .c-meta .s{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);}
+  .c-meta .t{font-family:'Fraunces',serif;font-weight:500;font-size:26px;line-height:1.08;margin:4px 0 6px;}
+  .c-meta .d{font-size:13px;line-height:1.5;color:var(--ink-dim);}
+
+  /* top bar in carousel */
+  .c-top{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:40;}
+  .back{display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:20px;color:var(--ink);font-size:13px;cursor:pointer;}
+  .c-title{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);}
+  /* side actions */
+  .actions{position:fixed;right:14px;bottom:96px;display:flex;flex-direction:column;gap:14px;z-index:40;}
+  .act{width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:transform .15s;}
+  .act:active{transform:scale(.92);}
+  .act svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .c-hint{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);font-size:11px;color:var(--ink-quiet);letter-spacing:.08em;z-index:40;}
+</style>
+</head>
+<body>
+  <!-- ===== STATE A : MENU ===== -->
+  <section class="view" id="menu">
+    <div class="brand">
+      <div class="name fr">Marina <em>DiPonio</em></div>
+      <div class="role">Games User Researcher · Player Experience Designer</div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="menu-chip glass">
+      <span class="dot">?</span>
+      <span>What can I help you find?</span>
+      <span class="send">Ask</span>
+    </div>
+  </section>
+
+  <!-- ===== STATE B : CAROUSEL ===== -->
+  <section class="view hidden" id="carousel">
+    <div class="c-top">
+      <div class="back glass" id="back">‹ Menu</div>
+      <div class="c-title" id="ctitle">Work</div>
+      <div style="width:78px"></div>
+    </div>
+    <div class="c-stage" id="cstage"></div>
+    <div class="actions">
+      <div class="act glass" title="Expand"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
+      <div class="act glass" title="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+    </div>
+    <div class="c-hint">swipe up / down to browse</div>
+  </section>
+
+<script>
+(function(){
+  // ---- the four top-level destinations (the app tiles) ----
+  var SECTIONS = [
+    {key:'work',   name:'Work',    sub:'Selected projects', thumb:'images/learntoleap-prototype.jpg'},
+    {key:'about',  name:'About',   sub:'Who I am',          thumb:'images/portrait.JPG'},
+    {key:'contact',name:'Contact', sub:'Reach out',         thumb:'images/learntoleap-booth.jpg'},
+    {key:'home',   name:'Home',    sub:'Start here',         thumb:'images/portrait2.JPG'}
+  ];
+
+  // ---- carousel content per section ----
+  var DATA = {
+    work: {title:'Work', items:[
+      {s:'Senior Project · UX Research', t:'Learn To Leap', d:'Capstone study on tutorial design and the value of player choice.', img:'images/learntoleap-award.jpg', badge:'Featured Case Study'},
+      {s:'Project Management', t:'Cosmic Catch', d:'Best in Show — a melodic fishing arcade game.', img:'images/cc-gameplay.jpg'},
+      {s:'Project Management', t:'Tick Tock Trivia', d:'Most Innovative — a fast-paced trivia party game.', img:'images/ttt-gameplay.jpg'},
+      {s:'Research', t:'ICE Accessibility Audit', d:'Accessibility heuristic audit and recommendations.', img:'images/ice-research.jpg'},
+      {s:'UI/UX', t:'StarTea', d:'Cozy tea-shop management concept.', img:'images/startea-hero.jpg'},
+      {s:'Project Management', t:'Yuumi-Chan: Rent is Due!', d:'On Steam — a chaotic rent-collecting romp.', img:'images/yuumi-gameplay.jpg'}
+    ]},
+    about: {title:'About', items:[
+      {s:'About Marina', t:'Roots', d:'Puerto Rico to Gainesville to Jacksonville. BA in Digital Arts & Sciences, UF.', img:'images/portrait.JPG'},
+      {s:'About Marina', t:'What I Make', d:'Six shipped games in two years as a games user researcher and player-experience designer.', img:'images/portrait2.JPG'},
+      {s:'Recognition', t:'Honors', d:'Summa Cum Laude · President\'s & Dean\'s List · Best in Show · Most Innovative.', img:'images/learntoleap-award.jpg'}
+    ]},
+    contact: {title:'Contact', items:[
+      {s:'Email', t:'marinadiponio@proton.me', d:'Best for project inquiries and detailed questions.', img:'images/background.jpg'},
+      {s:'LinkedIn', t:'/marinadiponio', d:'Roles, experience, and professional updates.', img:'images/background.jpg'},
+      {s:'Behance', t:'/marinadiponio', d:'Visual case studies and design work.', img:'images/background.jpg'},
+      {s:'Calendly', t:'30-min chat', d:'Grab a time that works — marinadiponio-proton/30min.', img:'images/background.jpg'}
+    ]},
+    home: {title:'Home', items:[
+      {s:'Marina DiPonio', t:'Games User Researcher', d:'Award-winning player experience designer. Just graduated Summa Cum Laude from UF.', img:'images/portrait.JPG', badge:'Welcome'},
+      {s:'On Deck', t:'Learn To Leap', d:'Senior capstone in games user research — now out.', img:'images/learntoleap-booth.jpg'}
+    ]}
+  };
+
+  var grid = document.getElementById('grid');
+  var menu = document.getElementById('menu');
+  var carousel = document.getElementById('carousel');
+  var cstage = document.getElementById('cstage');
+  var ctitle = document.getElementById('ctitle');
+  var back = document.getElementById('back');
+  var idx = 0, current = null;
+
+  // build tiles
+  SECTIONS.forEach(function(sec){
+    var tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.innerHTML =
+      '<div class="thumb" style="background-image:url(\''+sec.thumb+'\')"></div>'+
+      '<div class="veil"></div>'+
+      '<div class="cap"><div class="t fr">'+sec.name+'</div><div class="s">'+sec.sub+'</div></div>';
+    tile.addEventListener('click', function(){ openSection(sec.key); });
+    grid.appendChild(tile);
+  });
+
+  function buildCards(key){
+    cstage.innerHTML='';
+    var items = DATA[key].items;
+    items.forEach(function(it){
+      var c = document.createElement('section');
+      c.className='c-card';
+      c.innerHTML =
+        '<div class="c-hero" style="background-image:url(\''+it.img+'\')">'+
+          (it.badge?'<span class="badge">● '+it.badge+'</span>':'')+
+          '<div class="veil"></div>'+
+        '</div>'+
+        '<div class="c-meta">'+
+          '<div class="s">'+it.s+'</div>'+
+          '<div class="t fr">'+it.t+'</div>'+
+          '<div class="d">'+it.d+'</div>'+
+        '</div>';
+      cstage.appendChild(c);
+    });
+    return Array.prototype.slice.call(cstage.children);
+  }
+
+  var cards = [];
+  function renderC(){
+    cards.forEach(function(c,i){
+      c.classList.remove('active','prev','next','hide');
+      if(i===idx) c.classList.add('active');
+      else if(i===idx-1) c.classList.add('prev');
+      else if(i===idx+1) c.classList.add('next');
+      else c.classList.add('hide');
+    });
+  }
+  function openSection(key){
+    current=key; idx=0;
+    ctitle.textContent = DATA[key].title;
+    cards = buildCards(key);
+    renderC();
+    menu.classList.add('hidden');
+    carousel.classList.remove('hidden');
+  }
+  function closeSection(){
+    carousel.classList.add('hidden');
+    menu.classList.remove('hidden');
+  }
+  back.addEventListener('click', closeSection);
+
+  function next(){ idx=Math.min(cards.length-1, idx+1); renderC(); }
+  function prev(){ idx=Math.max(0, idx-1); renderC(); }
+
+  var startY=null;
+  document.addEventListener('touchstart',function(e){ startY=e.touches[0].clientY; },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(startY===null||carousel.classList.contains('hidden')){startY=null;return;}
+    var dy=e.changedTouches[0].clientY-startY;
+    if(Math.abs(dy)>50){ if(dy<0) next(); else prev(); }
+    startY=null;
+  },{passive:true});
+  var wlock=false;
+  document.addEventListener('wheel',function(e){
+    if(carousel.classList.contains('hidden')) return;
+    if(wlock) return; wlock=true; setTimeout(function(){wlock=false;},520);
+    if(e.deltaY>0) next(); else prev();
+  },{passive:true});
+  document.addEventListener('keydown',function(e){
+    if(carousel.classList.contains('hidden')) return;
+    if(e.key==='ArrowDown') next();
+    if(e.key==='ArrowUp') prev();
+    if(e.key==='Escape') closeSection();
+  });
+})();
+</script>
+</body>
+</html>
