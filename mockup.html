@@ -1400,6 +1400,12 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  .mc-latest .mc-latest-arrow{flex:0 0 auto;color:var(--ink-dim,#9fb6c2);font-size:18px}
  .mc-latest .mc-latest-sub{font-size:11px;color:var(--ink-dim,#9fb6c2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
 }
+
+/* === HOME-FRAME-DESKTOP-FIX: mobile icon-chips + latest chip must not render on desktop === */
+@media (min-width:701px){
+  .channel .mc-ico{display:none !important;}
+  .mc-latest{display:none !important;}
+}
 </style>
 <div id="cursor-layer" aria-hidden="true">
   <div class="ck ck-bubble-trail t3" data-trail="3"></div>
