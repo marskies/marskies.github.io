@@ -295,6 +295,7 @@
   var sInput = document.getElementById("searchInput");
   var sResults = document.getElementById("searchResults");
   var sClear = document.getElementById("searchClear");
+  function hideResults(){ sResults.classList.add("hidden"); sResults.innerHTML = ""; }
   var INDEX = [];
   SECTIONS.forEach(function(sec){
     INDEX.push({key:sec.key, idx:0, title:sec.name, sub:"Section · "+sec.sub});
