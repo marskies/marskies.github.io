@@ -755,3 +755,32 @@ Built the mobile experience for `mockup.html` as a VERTICAL carousel (mobile ana
 2. Extend the vertical carousel format to the project/Case pages (frame-c + standalone project pages).
 3. Minor polish: add a few px clearance between the Work/About headings/photo and the brand wordmark.
 4. Then: background animation -> page-selection transition -> panel-change transition.
+
+
+---
+
+## Session log - 2026-06-09 (wireframe-2-hifi.html)
+
+All work this session was on wireframe-2-hifi.html only. Workflow: scoped plan -> approve -> edit via GitHub web editor -> commit -> wait for Pages -> verify live.
+
+What changed:
+
+1. Photos corrected. Home now uses the graduation portrait (images/portrait.JPG), About uses the flame portrait (images/portrait2.JPG). Set in the SECTIONS array thumbs.
+
+2. Functional search built and approved as-is by Marina. Replaced the static menu chip with a live input + results dropdown. Architecture: SECTIONS (menu tiles) + DATA (per-section carousel items) feed an INDEX; runSearch() filters; jumpTo() navigates to section+card; hideResults() clears/hides the dropdown.
+
+3. Typo tolerance + Q&A layer added (also approved). Levenshtein lev() + word-scoring fuzzy() at threshold 0.5 (e.g. "yummi-chan" -> Yuumi-Chan). QA intent array (8 intents, copper .sr-answer card) answers questions like "where is marina located?" -> Jacksonville. Threshold: qaBest>=2, or isQuestion && qaBest>=1. All Q&A answers pulled from REAL About/Contact content (location, contact/email, LinkedIn, Behance, Calendly meeting, education/UF degree, role, awards).
+
+4. Logo swapped to LOGO_white.png. Size iterated 48 -> 72 -> 104 -> 140px. LOCKED at 140px ("size is perfect" - do not resize unless asked).
+
+5. Logo spacing tightened. The floaty gap below the logo was internal transparent padding baked into the PNG (2160x1620 4:3 artwork in a contain box). Final .logo CSS: width:140px; height:auto; object-fit:contain; margin-bottom:-22px; plus drop-shadow. Reduced top empty space via #menu padding-top 54 -> 24px; .brand gap 4 -> 2px.
+
+Bug found and fixed:
+
+- The fuzzy/Q&A rewrite dropped the hideResults() definition; it was called 5x but never defined, throwing a silent ReferenceError on every close path (empty, Escape, Clear, outside-click, blur) so the dropdown would not collapse when emptied. Fixed by restoring: function hideResults(){ sResults.classList.add("hidden"); sResults.innerHTML = ""; } and added a blur handler that hides on empty after a 150ms delay.
+
+Commits: afb2674 (photos + search + white logo), 0fdbdd3 (fuzzy + Q&A), 612e12b (bigger logo + collapse on blur), 8d5a28b (restore hideResults), 7b4073a (logo 104px), e458381 (logo 140px + tighter gaps), 2dc4249 (logo auto-height + negative margin to sit closer to name).
+
+Status at wrap: all committed and live, verified. Logo 140px locked; search approved as-is.
+
+Open follow-ups Marina mentioned earlier (not started): prototype an alternate container direction (bento / card-deck) to compare; extend the vertical carousel to project/Case pages; then background animation -> page-selection transition -> panel-change transition.
