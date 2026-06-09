@@ -756,31 +756,22 @@ Built the mobile experience for `mockup.html` as a VERTICAL carousel (mobile ana
 3. Minor polish: add a few px clearance between the Work/About headings/photo and the brand wordmark.
 4. Then: background animation -> page-selection transition -> panel-change transition.
 
-
 ---
 
-## Session log - 2026-06-09 (wireframe-2-hifi.html)
+## Session log - 2026-06-09
 
-All work this session was on wireframe-2-hifi.html only. Workflow: scoped plan -> approve -> edit via GitHub web editor -> commit -> wait for Pages -> verify live.
+Headline: we ran the wireframe exploration to a decision and WIREFRAME-2 WON. It is now the chosen direction (wireframe-2-hifi.html). With that locked, we started work on the NEW MOBILE LAYOUT - this session was the first pass on it.
 
-What changed:
+Mobile layout work this session (on wireframe-2-hifi.html, the winning direction):
 
-1. Photos corrected. Home now uses the graduation portrait (images/portrait.JPG), About uses the flame portrait (images/portrait2.JPG). Set in the SECTIONS array thumbs.
+1. Photos placed: Home uses the graduation portrait (images/portrait.JPG), About uses the flame portrait (images/portrait2.JPG).
 
-2. Functional search built and approved as-is by Marina. Replaced the static menu chip with a live input + results dropdown. Architecture: SECTIONS (menu tiles) + DATA (per-section carousel items) feed an INDEX; runSearch() filters; jumpTo() navigates to section+card; hideResults() clears/hides the dropdown.
+2. Functional search built and approved as-is. SECTIONS + DATA feed an INDEX; runSearch() filters, jumpTo() navigates, hideResults() collapses the dropdown. Added typo tolerance (Levenshtein lev() + fuzzy() at 0.5, e.g. "yummi-chan" -> Yuumi-Chan) and a Q&A intent layer (8 intents, copper answer card) answering things like "where is marina located?" - all answers from REAL About/Contact content.
 
-3. Typo tolerance + Q&A layer added (also approved). Levenshtein lev() + word-scoring fuzzy() at threshold 0.5 (e.g. "yummi-chan" -> Yuumi-Chan). QA intent array (8 intents, copper .sr-answer card) answers questions like "where is marina located?" -> Jacksonville. Threshold: qaBest>=2, or isQuestion && qaBest>=1. All Q&A answers pulled from REAL About/Contact content (location, contact/email, LinkedIn, Behance, Calendly meeting, education/UF degree, role, awards).
+3. Logo: switched to LOGO_white.png, sized to 140px (LOCKED - "size is perfect"), and tightened the spacing so it sits snug above the name (the gap was transparent padding in the PNG; fixed with height:auto + margin-bottom:-22px, plus #menu padding-top 54->24px).
 
-4. Logo swapped to LOGO_white.png. Size iterated 48 -> 72 -> 104 -> 140px. LOCKED at 140px ("size is perfect" - do not resize unless asked).
+Bug fixed: the fuzzy/Q&A rewrite had dropped the hideResults() definition (called 5x, defined 0x -> silent ReferenceError on every close path), so the dropdown would not collapse. Restored the function and added a blur-to-collapse handler.
 
-5. Logo spacing tightened. The floaty gap below the logo was internal transparent padding baked into the PNG (2160x1620 4:3 artwork in a contain box). Final .logo CSS: width:140px; height:auto; object-fit:contain; margin-bottom:-22px; plus drop-shadow. Reduced top empty space via #menu padding-top 54 -> 24px; .brand gap 4 -> 2px.
+Status at wrap: wireframe-2 is the winner; mobile layout first pass done, committed, and live/verified. Logo locked at 140px; search approved as-is.
 
-Bug found and fixed:
-
-- The fuzzy/Q&A rewrite dropped the hideResults() definition; it was called 5x but never defined, throwing a silent ReferenceError on every close path (empty, Escape, Clear, outside-click, blur) so the dropdown would not collapse when emptied. Fixed by restoring: function hideResults(){ sResults.classList.add("hidden"); sResults.innerHTML = ""; } and added a blur handler that hides on empty after a 150ms delay.
-
-Commits: afb2674 (photos + search + white logo), 0fdbdd3 (fuzzy + Q&A), 612e12b (bigger logo + collapse on blur), 8d5a28b (restore hideResults), 7b4073a (logo 104px), e458381 (logo 140px + tighter gaps), 2dc4249 (logo auto-height + negative margin to sit closer to name).
-
-Status at wrap: all committed and live, verified. Logo 140px locked; search approved as-is.
-
-Open follow-ups Marina mentioned earlier (not started): prototype an alternate container direction (bento / card-deck) to compare; extend the vertical carousel to project/Case pages; then background animation -> page-selection transition -> panel-change transition.
+Next: continue building out the mobile layout on the winning wireframe-2 direction.
