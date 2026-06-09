@@ -780,18 +780,43 @@ Next: continue building out the mobile layout on the winning wireframe-2 directi
 
 ## Current to-do list - Mobile version (app-ish)
 
+Ordered by phase. Logic: lock structure first, then content inside it, then polish, then motion last - animations and type tuning are wasted if the layout underneath still shifts.
+
+### Phase 1 - Structure / layout foundation
+The container everything else sits in; build it before anything that lives inside it.
+
+- [ ] Create pages inside of each section with new layout, bento box style
+- [ ] Header within section change
+
+### Phase 2 - Navigation & core interactions
+How you move around interior pages; depends on those pages existing. Touch the nav/control layer once.
+
+- [ ] Make search button work on interior pages
+- [ ] Change menu "back" button to be more accessible (maybe new location or simplified?)
+- [ ] Remove expand button and replace with accessibility button
+
+### Phase 3 - Content inside the layout
+Fill the bento boxes once the template is real.
+
+- [ ] Make contact cards smaller, more of like a bento list, make sure they link
+- [ ] Fix images across site
+- [ ] Make sure the page name is accurate
+
+### Phase 4 - Polish
+Refine things that already exist; stable to touch now, pointless earlier.
+
+- [ ] Improve font size
 - [ ] Make search snap down
 - [ ] Make more obvious that you can swipe without telling
-- [ ] Make search button work on interior pages
-- [ ] Remove expand button and replace with accessibility button
-- [ ] Change menu "back" button to be more accessible (maybe new location or simplified?)
-- [ ] Create pages inside of each section with new layout, bento box style
-- [ ] Fix images across site
-- [ ] Header within section change
-- [ ] Improve font size
-- [ ] Make contact cards smaller, more of like a bento list, make sure they link
+
+### Phase 5 - Integration
+Merge a finished thing, not a moving target. (Judgment call: could go earlier for real-device testing.)
+
 - [ ] Hook up this into the current site's mobile version
-- [ ] Make sure the page name is accurate
+
+### Phase 6 - Motion (last)
+Animation decorates final layouts and final transitions; animating elements still being repositioned means redoing the work.
+
 - [ ] BG animation
 - [ ] Animation between page selection
 - [ ] Animation between panels on page change
