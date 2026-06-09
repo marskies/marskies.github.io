@@ -775,3 +775,23 @@ Bug fixed: the fuzzy/Q&A rewrite had dropped the hideResults() definition (calle
 Status at wrap: wireframe-2 is the winner; mobile layout first pass done, committed, and live/verified. Logo locked at 140px; search approved as-is.
 
 Next: continue building out the mobile layout on the winning wireframe-2 direction.
+
+---
+
+## Current to-do list - Mobile version (app-ish)
+
+- [ ] Make search snap down
+- [ ] Make more obvious that you can swipe without telling
+- [ ] Make search button work on interior pages
+- [ ] Remove expand button and replace with accessibility button
+- [ ] Change menu "back" button to be more accessible (maybe new location or simplified?)
+- [ ] Create pages inside of each section with new layout, bento box style
+- [ ] Fix images across site
+- [ ] Header within section change
+- [ ] Improve font size
+- [ ] Make contact cards smaller, more of like a bento list, make sure they link
+- [ ] Hook up this into the current site's mobile version
+- [ ] Make sure the page name is accurate
+- [ ] BG animation
+- [ ] Animation between page selection
+- [ ] Animation between panels on page change
