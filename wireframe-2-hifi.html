@@ -56,7 +56,7 @@
   /* ====== STATE A: MENU ====== */
   #menu{display:flex;flex-direction:column;align-items:center;padding:54px 20px 28px;overflow-y:auto;}
   .brand{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:8px;}
-  .brand .logo{width:48px;height:48px;object-fit:contain;margin-bottom:6px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));}
+  .brand .logo{width:72px;height:72px;object-fit:contain;margin-bottom:10px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));}
   .brand .name{font-family:'Fraunces',serif;font-weight:500;font-size:26px;letter-spacing:.01em;}
   .brand .name em{font-style:italic;color:var(--copper);}
   .brand .role{font-size:11px;color:var(--ink-dim);letter-spacing:.04em;}
@@ -386,6 +386,7 @@
       if(e.key === "Escape"){ hideResults(); sInput.value=""; sClear.style.display="none"; }
     });
     sClear.addEventListener("click", function(){ sInput.value=""; sClear.style.display="none"; hideResults(); sInput.focus(); });
+    sInput.addEventListener("blur", function(){ setTimeout(function(){ if(!sInput.value){ hideResults(); sClear.style.display = "none"; } }, 150); });
     document.addEventListener("click", function(e){ if(!e.target.closest(".search-wrap")) hideResults(); });
   }
 })();
