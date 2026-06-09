@@ -79,6 +79,18 @@
   }
   .menu-chip .dot{width:26px;height:26px;border-radius:50%;background:var(--copper);flex:0 0 26px;display:flex;align-items:center;justify-content:center;color:#0a1f24;}
   .menu-chip .send{margin-left:auto;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);}
+  .search-wrap{margin-top:22px;width:100%;max-width:330px;position:relative;display:flex;flex-direction:column;align-items:center;}
+  .search-wrap .menu-chip{margin-top:0;}
+  #searchInput{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--ink);font-family:"Inter",sans-serif;font-size:13px;}
+  #searchInput::placeholder{color:var(--ink-dim);}
+  .search-results{position:absolute;top:54px;left:0;right:0;border-radius:18px;padding:6px;max-height:300px;overflow-y:auto;z-index:30;display:flex;flex-direction:column;gap:2px;}
+  .search-results.hidden{display:none;}
+  .sr-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:12px;cursor:pointer;text-align:left;}
+  .sr-item:hover{background:var(--glass-edge);}
+  .sr-item .sr-t{font-family:"Inter",sans-serif;font-size:13px;color:var(--ink);line-height:1.2;}
+  .sr-item .sr-s{font-size:11px;color:var(--ink-quiet);letter-spacing:.04em;text-transform:uppercase;}
+  .sr-item .sr-tx{display:flex;flex-direction:column;gap:1px;}
+  .sr-empty{padding:11px;color:var(--ink-quiet);font-size:12px;text-align:center;}
 
   /* ====== STATE B: CAROUSEL ====== */
   #carousel{}
@@ -119,15 +131,18 @@
   <!-- ===== STATE A : MENU ===== -->
   <section class="view" id="menu">
     <div class="brand">
-      <img class="logo" src="LOGO_blue.png" alt="Marina DiPonio logo" />
+      <img class="logo" src="LOGO_white.png" alt="Marina DiPonio logo" />
       <div class="name fr">Marina <em>DiPonio</em></div>
       <div class="role">Games User Researcher · Player Experience Designer</div>
     </div>
     <div class="grid" id="grid"></div>
-    <div class="menu-chip glass">
-      <span class="dot">?</span>
-      <span>What can I help you find?</span>
-      <span class="send">Ask</span>
+    <div class="search-wrap">
+      <div class="menu-chip glass" id="searchChip">
+        <span class="dot"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0a1f24" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+        <input id="searchInput" type="text" placeholder="Search projects, sections..." autocomplete="off" />
+        <span class="send" id="searchClear" style="display:none;cursor:pointer">Clear</span>
+      </div>
+      <div class="search-results glass hidden" id="searchResults"></div>
     </div>
   </section>
 
@@ -150,9 +165,9 @@
 (function(){
   // ---- the four top-level destinations (the app tiles) ----
   var SECTIONS = [
-    {key:'home',   name:'Home',    sub:'Start here',         thumb:'images/portrait2.JPG'},
+    {key:'home',   name:'Home',    sub:'Start here',         thumb:'images/portrait.JPG'},
     {key:'work',   name:'Work',    sub:'Selected projects', thumb:'images/learntoleap-prototype.png'},
-    {key:'about',  name:'About',   sub:'Who I am',          thumb:'images/portrait.JPG'},
+    {key:'about',  name:'About',   sub:'Who I am',          thumb:'images/portrait2.JPG'},
     {key:'contact',name:'Contact', sub:'Reach out',         thumb:'images/learntoleap-booth.jpg'}
   ];
 
@@ -271,6 +286,56 @@
     if(e.key==='ArrowUp') prev();
     if(e.key==='Escape') closeSection();
   });
+
+  /* ---- functional search: filter + jump ---- */
+  var sInput = document.getElementById("searchInput");
+  var sResults = document.getElementById("searchResults");
+  var sClear = document.getElementById("searchClear");
+  var INDEX = [];
+  SECTIONS.forEach(function(sec){
+    INDEX.push({key:sec.key, idx:0, title:sec.name, sub:"Section · "+sec.sub});
+    var items = (DATA[sec.key]||{}).items || [];
+    items.forEach(function(it,i){
+      INDEX.push({key:sec.key, idx:i, title:it.t, sub:DATA[sec.key].title+" · "+it.s});
+    });
+  });
+  function jumpTo(key, i){
+    openSection(key);
+    idx = Math.max(0, Math.min(cards.length-1, i));
+    renderC();
+    hideResults();
+    sInput.value = "";
+    sClear.style.display = "none";
+  }
+  function hideResults(){ sResults.classList.add("hidden"); sResults.innerHTML = ""; }
+  function runSearch(q){
+    q = (q||"").trim().toLowerCase();
+    if(!q){ hideResults(); return; }
+    var hits = INDEX.filter(function(e){
+      return e.title.toLowerCase().indexOf(q) > -1 || e.sub.toLowerCase().indexOf(q) > -1;
+    }).slice(0, 8);
+    sResults.innerHTML = "";
+    if(!hits.length){
+      var em = document.createElement("div"); em.className = "sr-empty"; em.textContent = "No matches"; sResults.appendChild(em);
+    } else {
+      hits.forEach(function(h){
+        var row = document.createElement("div"); row.className = "sr-item";
+        row.innerHTML = "<div class=\"sr-tx\"><span class=\"sr-s\">"+h.sub+"</span><span class=\"sr-t\">"+h.title+"</span></div>";
+        row.addEventListener("click", function(){ jumpTo(h.key, h.idx); });
+        sResults.appendChild(row);
+      });
+    }
+    sResults.classList.remove("hidden");
+  }
+  if(sInput){
+    sInput.addEventListener("input", function(){ sClear.style.display = sInput.value ? "block" : "none"; runSearch(sInput.value); });
+    sInput.addEventListener("keydown", function(e){
+      if(e.key === "Enter"){ var first = sResults.querySelector(".sr-item"); if(first) first.click(); }
+      if(e.key === "Escape"){ hideResults(); sInput.value=""; sClear.style.display="none"; }
+    });
+    sClear.addEventListener("click", function(){ sInput.value=""; sClear.style.display="none"; hideResults(); sInput.focus(); });
+    document.addEventListener("click", function(e){ if(!e.target.closest(".search-wrap")) hideResults(); });
+  }
 })();
 </script>
 </body>
