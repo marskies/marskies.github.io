@@ -308,6 +308,14 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout — v13 — Fix Work card expand zoom glitch
+
+Problem (Marina): the expanded photo in the scroll-expand Work view did a "zoom out then in" animation while a card expanded.
+
+Root cause: `.c-hero` was `position:absolute; inset:0; background-size:cover`. With inset:0 the hero box tracks the card's animating height (64px -> 58vh over .5s). `cover` re-fit the image every frame as the box grew, producing the visible scale shimmer.
+
+Fix: pin `.c-hero` to a stable box — `top:0;left:0;right:0;height:58vh` (replaced `inset:0`). Hero is now a constant 58vh-tall element, clipped by the collapsed card (overflow:hidden) and revealed as the card grows. background-size:cover no longer reflows, so the image just reveals/clips with no zoom. Verified in sandbox at 390px: hero height constant 452px whether card collapsed (64px) or expanded (452px); scroll re-expand still works one-at-a-time. Commit on wireframe-2-hifi.html (file now 51729 bytes).
+
 ## Session closeout — v12 — Work view redesign: scroll-expand accordion (replaces peek)
 
 **Marina / mobile direction (wireframe-2-hifi.html). She did not love the v11 coverflow/peek carousel; replaced it with a scroll-driven expand/collapse list per a new reference image (Death Valley national-parks app).**
