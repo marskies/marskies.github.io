@@ -820,3 +820,23 @@ Animation decorates final layouts and final transitions; animating elements stil
 - [ ] BG animation
 - [ ] Animation between page selection
 - [ ] Animation between panels on page change
+
+
+---
+
+## Session log - 2026-06-10
+
+**Mobile edit target is now `wireframe-2-hifi.html`.** Per Marina's direction this session, the winning wireframe-2 hi-fi file is the file to edit for the app-style mobile build (alongside the existing edit-scope of mockup.html / index.html / projects.js). mockup.html remains the desktop content source of truth.
+
+**Phase 1 structure landed (Home / About / Contact interiors + header):**
+
+- `openSection()` now branches: **Work keeps the existing swipe carousel** (cstage + actions + swipe hint shown); **Home / About / Contact** render a scrolling bento layout into a new `#cbento` `.c-scroll` container instead (carousel-only chrome hidden). Additive + idempotent; closeSection unchanged (next openSection restores Work state).
+- New `BENTO` content object + `renderBento(key)` builder, populated from the real mockup.html copy. Design decision per Marina: Work = swipe carousel; **About = scrolling bento page** (hero + Timeline + Recognition + Now); **Contact = bento list** (Direct Channels as tappable rows -> mailto / LinkedIn / Behance / Calendly, plus Reach Out For cards, no message form); **Home = bento overview** (identity hero + Let's chat + On Deck + Currently + testimonial).
+- **Section header made prominent:** `.c-title` is now Fraunces 22px ink (was 11px uppercase teal), so the bar reads Home / Work / About / Contact clearly.
+- New additive CSS block (`.c-scroll`, `.bento`, `.b-card`, `.b-hero`, `.b-row`, `.b-list-item`, etc.) reusing existing glass/radius/type tokens. No new fonts or colors.
+
+Verified live at mobile width: all four tiles open correctly, Work carousel intact, Contact channel rows link out (mailto + profile URLs), menu fully hidden behind interiors.
+
+To-do checked off this session: "Create pages inside of each section with new layout, bento box style" and "Header within section change" (Phase 1). The Contact bento-list also advances the Phase 3 item "Make contact cards smaller, more of like a bento list, make sure they link."
+
+Next: Phase 2 navigation (search on interior pages, more accessible Menu/back, swap expand button for accessibility button).
