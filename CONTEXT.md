@@ -308,6 +308,26 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout — SESSION SUMMARY (v10–v13) — Mobile Work view overhaul + Learn To Leap page
+
+This entry consolidates the full arc of this session (the per-change details live in the v10–v13 entries below). All edits were on `wireframe-2-hifi.html` (the winning mobile direction) and this `CONTEXT.md`. Nothing else was touched.
+
+**1. All projects represented in Work (v10, commit 1a2e088).** Added the 4 missing projects to `DATA.work.items` so the Work carousel now has 10 cards. Marina asked for them ordered BY THEME and to reuse the most representative EXISTING image for each (she delegated the image pick). Order: Learn To Leap (featured) → Cosmic Catch → Tick Tock Trivia → Yuumi-Chan → Insane Wizard → ICE Accessibility Audit → UF Club Software → StarTea → Nutrition Tracking App → Social Media Campaign. Images used (real existing files, the projects.js *-thumb.png paths do NOT exist): cys-instagram.png, nutrition-app.png, uf-platform.png, wizard-screenshot.png — all confirmed loading.
+
+**2. Learn To Leap mobile project page (v11, commit 4903a3f).** Built a detail page for Learn To Leap, content KEPT THE SAME (pulled verbatim from learn-to-leap.html — it is a standalone 5-chapter case study, NOT in projects.js and NOT using the pm/uiux/research model the other 9 use). Embedded as `PROJECTS["learn-to-leap"]`: header + Featured badge + Fraunces title + subtitle + award + Behance/Play Prototype links + a chapter-chip switcher (Overview/Research/Synthesis/Design/Outcome) that swaps the body in place, with Quick Stats / Methods / Tools panes below. `#back` closes detail and returns to the carousel (detailOpen-guarded closeSection). This page is RETAINED.
+
+**3. Peek carousel — built then RETIRED (v11).** Marina first asked the Work carousel to show more of the above/below projects at an angle + opacity (coverflow/peek). Built it, but she said "i ended up not loving that." Peek model is gone.
+
+**4. Scroll-expand accordion Work view (v12, commit 99f9fa9).** Replaced peek per a Death Valley national-parks reference: Work is now a vertical list of slim labeled pill bars (`.c-card` height 64px, `.c-bar` Fraunces label) where the scroll-centered card expands into a full image card (`.expanded` → height 58vh, `.c-hero` photo revealed). One expanded at a time; tapping a collapsed bar centers+expands it; tapping the expanded card opens its detail; scroll re-expands the new centered card. Adjustable dials: expanded height 58vh, bar height 64px, gap 12px.
+
+**5. Zoom-glitch fix (v13, this commit's predecessor).** Marina noticed the expanding photo did a "zoom out then in." Cause: `.c-hero` was `inset:0`, so its box tracked the animating card height and background-size:cover re-fit every frame. Fix: pinned `.c-hero` to a stable box — `top:0;left:0;right:0;height:58vh` — so the photo box never changes size and just reveals/clips cleanly. Verified in 390px sandbox.
+
+**Working notes that bit us this session:** github.com CSP blocks eval/new Function (do all parsing as pure string ops + balanced-brace scanning; validate syntax on the marskies.github.io tab, functional-test in a sandbox iframe at 390px). A security filter blocks readbacks containing URLs/paths/img refs (mask strings, return only booleans/offsets, or strip to letters). window vars are lost on navigation → carry the final file string via localStorage (same-origin github.com persists across the navigate-to-editor step). Editor write path is `.cm-content`→`.cmTile.view`→`view.dispatch({changes:{from:0,to:len,insert:text}})` (NOT .cmView.view). The commit modal often doesn't open on the first click — screenshot-confirm and click again. API/CDN lags after commit — verify committed source with a cache-busting query param.
+
+**Not yet done:** detail pages for the other 9 projects (these ARE in projects.js using pm/uiux/research roleDescriptions — flat ~25-word blurbs per role). Open question for next session: reuse the chapter-chip switcher component for the three role perspectives, wire a `detail` key per work item, build each payload.
+
+---
+
 ## Session closeout — v13 — Fix Work card expand zoom glitch
 
 Problem (Marina): the expanded photo in the scroll-expand Work view did a "zoom out then in" animation while a card expanded.
