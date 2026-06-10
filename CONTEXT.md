@@ -308,6 +308,20 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout — v11 — Carousel peek + Learn To Leap project page
+
+**Marina / mobile direction (wireframe-2-hifi.html). Task: carousel peek effect + first individual project page (Learn To Leap), content kept the same.**
+
+**Carousel peek:** Neighbor cards above & below now peek into view, tilted at an angle with reduced opacity (coverflow-style depth), per Marina reference image. Implemented purely in CSS: card height 72vh->56vh, .prev/.next offset 76vh->50vh with scale(.9) rotateX(+/-10deg) opacity .5 blur(1px), and perspective:1300px on .c-stage. JS render logic (active/prev/next/hide) untouched.
+
+**Learn To Leap project page:** New tappable detail view. Tapping the ACTIVE (centered) Work card with a detail key opens it. NOTE: Learn To Leap is NOT in projects.js (it is a standalone case study, learn-to-leap.html). Its "different sides of the story" = 5 chapters (Overview/Research/Synthesis/Design/Outcome), not the pm/uiux/research roleDescriptions model. Content pulled verbatim from learn-to-leap.html.
+
+**Layout (per Marina, switcher above body):** hero + badge, title (Fraunces), subtitle, award line, Behance/Play Prototype links, then a horizontal chapter-chip switcher ABOVE a swap-in-place chapter body, then Quick Stats / Methods / Tools panes below. Uses existing design tokens. Lives in #cdetail inside #carousel; back button (#back) closes the detail and returns to the carousel (closeSection guarded by detailOpen).
+
+**Verified:** Committed source [4903a3f] loaded in a sandbox: detail opens, all 5 chapters present, chapter switching swaps content, 4 stats + 10 method/tool tags + 2 links render, back returns to Work carousel (not menu). Peek transform confirmed live. CDN was still lagging at verify time.
+
+**Next:** Templatize the remaining project pages. The other 9 projects ARE in projects.js with the pm/uiux/research roleDescriptions model (flat ~25-word blurbs per role) + thumbnail/links/etc. Decide whether to reuse the same chapter-chip component for role perspectives, and wire detail keys for each. Get Marina to react to the Learn To Leap page first.
+
 ## Session closeout — v10 — Work carousel — all projects represented
 
 **Marina / mobile direction (wireframe-2-hifi.html). Task: "finish the work pages" — step 1, ensure all projects are represented in the mobile Work carousel.**
