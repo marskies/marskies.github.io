@@ -308,6 +308,22 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout · v8 (About — fix pass)
+
+**Marina's report:** mostly liked v7 but flagged two formatting issues: “no tabs” on desktop and “strange indentation” on phone (About section).
+
+**Diagnosis:**
+- Other sections (Home/Work/Contact) inject cards as `bento.innerHTML = renderBento(key)`, so cards are direct children of `<div class="bento">` (flex column, gap:14px). The About accordion renderer returned cards WITHOUT that wrapper, so they landed in `.c-scroll` (display:block, no gap) and touched — reading as one wall instead of separate cards.
+- Timeline/Recognition rows reused `.b-row` (justify-content:space-between) with a variable-width `.b-k`, so role titles started at ragged x-positions = the “strange indentation.”
+
+**Fix (commit 529f77f):**
+- Wrapped the About renderer output in `<div class="bento">…</div>` (changed the renderer’s `var h='';` init and final `return h;`). Cards now get the same 14px flex gap as every other section.
+- Added CSS: `.b-acc-body .b-row{justify-content:flex-start;align-items:flex-start;}` with a fixed `.b-k{flex:0 0 64px;width:64px;}` and `.b-text{flex:1 1 auto;margin:0;}`. Year column is now a consistent 64px (renders ~62px), titles align.
+
+**Verified:** committed file in a 390px sandbox — card gaps all 14px, Timeline key columns all equal width, parent is `.bento`.
+
+**Note for next-Claude:** the About accordion path bypasses `.bento` unless the renderer adds it itself — keep that wrapper if editing the renderer.
+
 ## Session closeout · v7 (About — digestibility pass)
 
 **Goal:** Marina found the expanded About too long to scroll. We chose option A: trim/merge + accordion nesting.
