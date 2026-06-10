@@ -98,9 +98,9 @@
 
   /* ====== STATE B: CAROUSEL ====== */
   #carousel{}
-  .c-stage{position:absolute;inset:0;}
+  .c-stage{position:absolute;inset:0;perspective:1300px;perspective-origin:50% 50%;}
   .c-card{
-    position:absolute;left:50%;top:50%;width:84vw;max-width:400px;height:72vh;
+    position:absolute;left:50%;top:50%;width:84vw;max-width:400px;height:56vh;
     transform:translate(-50%,-50%);border-radius:var(--radius);overflow:hidden;
     border:1px solid var(--glass-edge);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
     background:var(--glass-strong);
@@ -108,8 +108,8 @@
     display:flex;flex-direction:column;
   }
   .c-card.active{opacity:1;transform:translate(-50%,-50%) scale(1);}
-  .c-card.prev{opacity:.28;transform:translate(-50%,calc(-50% - 76vh)) scale(.84);filter:blur(2px);}
-  .c-card.next{opacity:.28;transform:translate(-50%,calc(-50% + 76vh)) scale(.84);filter:blur(2px);}
+  .c-card.prev{opacity:.5;transform:translate(-50%,calc(-50% - 50vh)) scale(.9) rotateX(10deg);filter:blur(1px);}
+  .c-card.next{opacity:.5;transform:translate(-50%,calc(-50% + 50vh)) scale(.9) rotateX(-10deg);filter:blur(1px);}
   .c-card.hide{opacity:0;}
   .c-hero{flex:1;position:relative;background-size:cover;background-position:center;}
   .c-hero .badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);background:rgba(10,31,36,.6);padding:5px 10px;border-radius:12px;backdrop-filter:blur(6px);}
@@ -187,7 +187,46 @@
 .b-acc-body .b-row{justify-content:flex-start;align-items:flex-start;}
 .b-acc-body .b-row .b-k{flex:0 0 64px;width:64px;padding-top:2px;}
 .b-acc-body .b-row .b-text{flex:1 1 auto;margin:0;}
-</style>
+
+   /* ===== PROJECT DETAIL VIEW ===== */
+   .c-detail{position:absolute;inset:64px 0 0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 0 120px;display:none;}
+   .c-detail::-webkit-scrollbar{display:none;}
+   .c-detail.on{display:block;}
+   .cd-wrap{max-width:420px;margin:0 auto;padding:6px 18px 0;display:flex;flex-direction:column;gap:14px;}
+   .cd-hero{position:relative;height:230px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-edge);background-size:cover;background-position:center;}
+   .cd-hero .cd-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,36,0) 40%,rgba(10,31,36,.9));}
+   .cd-hero .badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);background:rgba(10,31,36,.6);padding:5px 10px;border-radius:12px;backdrop-filter:blur(6px);}
+   .cd-head{position:relative;margin-top:-58px;padding:0 4px;}
+   .cd-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+   .cd-title{font-family:'Fraunces',serif;font-weight:500;font-size:30px;line-height:1.04;margin:0 0 8px;color:var(--ink);}
+   .cd-sub{font-size:13px;line-height:1.5;color:var(--ink-dim);margin:0;}
+   .cd-award{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;color:var(--copper);margin:10px 0 0;}
+   .cd-award .star{flex:0 0 auto;}
+   .cd-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+   .cd-link{font-size:13px;color:var(--ink);background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:999px;padding:9px 16px;text-decoration:none;}
+   .cd-link.primary{background:var(--copper-dim);border-color:transparent;color:#0a1f24;font-weight:600;}
+   /* chapter switcher */
+   .cd-chaprow{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 0 2px;scrollbar-width:none;}
+   .cd-chaprow::-webkit-scrollbar{display:none;}
+   .cd-chip{flex:0 0 auto;font-size:13px;color:var(--ink-dim);background:var(--glass);border:1px solid var(--glass-edge);border-radius:999px;padding:9px 15px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;white-space:nowrap;}
+   .cd-chip.on{background:var(--teal);color:#0a1f24;border-color:transparent;font-weight:600;}
+   .cd-chapbody{background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:var(--radius);padding:18px;font-size:14px;line-height:1.62;color:var(--ink-dim);}
+   .cd-chapbody h4{font-family:'Fraunces',serif;font-weight:500;font-size:16px;color:var(--ink);margin:14px 0 6px;}
+   .cd-chapbody h4:first-child{margin-top:0;}
+   .cd-chapbody p{margin:0 0 10px;}
+   .cd-chapbody p:last-child{margin-bottom:0;}
+   .cd-chapbody strong{color:var(--ink);font-weight:600;}
+   /* meta panes */
+   .cd-pane{background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:var(--radius);padding:16px 18px;}
+   .cd-pane .cd-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-quiet);margin:0 0 12px;}
+   .cd-stat{display:flex;gap:10px;align-items:flex-start;margin:0 0 9px;font-size:13.5px;line-height:1.45;}
+   .cd-stat:last-child{margin-bottom:0;}
+   .cd-stat .cd-k{flex:0 0 96px;color:var(--ink-quiet);}
+   .cd-stat .cd-v{flex:1 1 auto;color:var(--ink);}
+   .cd-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+   .cd-tag{font-size:12px;color:var(--ink-dim);background:var(--glass);border:1px solid var(--glass-edge);border-radius:999px;padding:6px 12px;}
+  
+  </style>
 </head>
 <body>
   <!-- ===== STATE A : MENU ===== -->
@@ -221,6 +260,7 @@
       <div class="act glass" title="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
     </div>
     <div class="c-hint">swipe up / down to browse</div>
+    <div class="c-detail" id="cdetail" aria-hidden="true"></div>
   </section>
 
 <script>
@@ -235,7 +275,7 @@
 
   // ---- carousel content per section ----
   var DATA = {
-    work: {title:'Work', items:[{s:'Senior Project · UX Research', t:'Learn To Leap', d:'Capstone study on tutorial design and the value of player choice.', img:'images/learntoleap-award.jpg', badge:'Featured Case Study'},{s:'Project Management', t:'Cosmic Catch', d:'Best in Show — a melodic fishing arcade game.', img:'images/cc-gameplay.png'},{s:'Project Management', t:'Tick Tock Trivia', d:'Most Innovative — a fast-paced trivia party game.', img:'images/ttt-gameplay.png'},{s:'Project Management', t:'Yuumi-Chan: Rent is Due!', d:'On Steam — a chaotic rent-collecting romp.', img:'images/yuumi-gameplay.png'},{s:'Project Management · UI/UX',t:'Insane Wizard Goes Crazy Everywhere',d:'Chaotic action game built in 2 weeks.',img:'images/wizard-screenshot.png'},{s:'Research', t:'ICE Accessibility Audit', d:'Accessibility heuristic audit and recommendations.', img:'images/ice-research.png'},{s:'UI/UX · Research',t:'UF Club Software',d:'University platform usability study.',img:'images/uf-platform.png'},{s:'UI/UX', t:'StarTea', d:'Cozy tea-shop management concept.', img:'images/startea-hero.png'},{s:'UI/UX',t:'Nutrition Tracking App',d:'AI-powered food logging, in development.',img:'images/nutrition-app.png'},{s:'Project Management',t:'Social Media Campaign',d:'Strategic marketing at CYS.',img:'images/cys-instagram.png'}]},
+    work: {title:'Work', items:[{s:'Senior Project · UX Research', t:'Learn To Leap', d:'Capstone study on tutorial design and the value of player choice.', img:'images/learntoleap-award.jpg',detail:'learn-to-leap', badge:'Featured Case Study'},{s:'Project Management', t:'Cosmic Catch', d:'Best in Show — a melodic fishing arcade game.', img:'images/cc-gameplay.png'},{s:'Project Management', t:'Tick Tock Trivia', d:'Most Innovative — a fast-paced trivia party game.', img:'images/ttt-gameplay.png'},{s:'Project Management', t:'Yuumi-Chan: Rent is Due!', d:'On Steam — a chaotic rent-collecting romp.', img:'images/yuumi-gameplay.png'},{s:'Project Management · UI/UX',t:'Insane Wizard Goes Crazy Everywhere',d:'Chaotic action game built in 2 weeks.',img:'images/wizard-screenshot.png'},{s:'Research', t:'ICE Accessibility Audit', d:'Accessibility heuristic audit and recommendations.', img:'images/ice-research.png'},{s:'UI/UX · Research',t:'UF Club Software',d:'University platform usability study.',img:'images/uf-platform.png'},{s:'UI/UX', t:'StarTea', d:'Cozy tea-shop management concept.', img:'images/startea-hero.png'},{s:'UI/UX',t:'Nutrition Tracking App',d:'AI-powered food logging, in development.',img:'images/nutrition-app.png'},{s:'Project Management',t:'Social Media Campaign',d:'Strategic marketing at CYS.',img:'images/cys-instagram.png'}]},
     about: {title:'About', items:[
       {s:'About Marina', t:'Roots', d:'Puerto Rico to Gainesville to Jacksonville. BA in Digital Arts & Sciences, UF.', img:'images/portrait.JPG'},
       {s:'About Marina', t:'What I Make', d:'Six shipped games in two years as a games user researcher and player-experience designer.', img:'images/portrait2.JPG'},
@@ -289,7 +329,7 @@
           '<div class="t fr">'+it.t+'</div>'+
           '<div class="d">'+it.d+'</div>'+
         '</div>';
-      cstage.appendChild(c);
+      if(it.detail){ c.style.cursor="pointer"; c.addEventListener("click",function(){ if(c.classList.contains("active")) openDetail(it.detail); }); } cstage.appendChild(c);
     });
     return Array.prototype.slice.call(cstage.children);
   }
@@ -304,6 +344,67 @@
       else c.classList.add('hide');
     });
   }
+
+  /* ===== PROJECT DETAIL DATA + RENDER ===== */
+  var PROJECTS = {};
+  PROJECTS["learn-to-leap"] = {"id":"learn-to-leap","title":"Learn To Leap","subtitle":"Rethinking tutorial design through player choice · Senior Capstone · 2026","badge":"Featured","award":"Outstanding Achievement in Experience Design","img":"images/learntoleap-award.jpg","stats":[{"k":"Role","v":"Lead Researcher & Designer"},{"k":"Timeline","v":"Fall 2025 – Spring 2026"},{"k":"Participants","v":"11 (ages 18–26)"},{"k":"Venue","v":"Convergence 2026"}],"methods":["Mixed-Methods","Thematic Analysis","Semi-Structured Interviews","Behavioral Logging","Pre-Play Surveys"],"tools":["Unity 2D","Canva","Miro","Monday.com","Slipbox"],"links":[{"t":"Behance ↗","h":"https://www.behance.net/gallery/245484657/Learn-To-Leap"},{"t":"Play Prototype ↗","h":"https://marskies.itch.io/learn-to-leap-prototype"}],"chapters":[{"key":"ll-overview","label":"Overview","html":"<div><span>The Question</span><p>Many platformer games use static, one-size-fits-all tutorials that don’t account for differences in player experience. Learn To Leap asks whether gaming experience level correlates with a player’s preferred tutorial guidance — and, more practically, whether letting players choose their own guidance is a better design pattern than guessing for them.</p></div> <div><span>The Prototype</span><p>I built a custom Unity 2D platformer as the research instrument, focused on a single double-jump mechanic. Players could switch between three tutorial modes — Minimal, Guided, and Explicit — at any time, and the prototype logged every switch and time in state.</p></div>"},{"key":"ll-research","label":"Research","html":"<div><span>Method</span><p>Mixed-methods design, IRB exempt (UF Protocol ET00049273). Eleven participants aged 18–26 completed one session each over five days in March 2026, recruited via Discord and personal networks and distributed across four self-reported gaming-frequency bands.</p></div> <div><span>Session Flow</span><p>Each session ran ~20 minutes: a short pre-play survey, a 5–7 minute gameplay session with no instruction beyond “pick the mode that feels right,” and a 5–7 minute semi-structured interview. Quantitative gameplay data was paired with qualitative interview data analyzed via Braun and Clarke’s six-phase thematic analysis.</p></div>"},{"key":"ll-synthesis","label":"Synthesis","html":"<div><span>What the Data Said</span><p>Gaming frequency did not reliably predict tutorial preference. But eight themes surfaced across interviews, and two were unusually strong: all 11 participants affirmed that being able to select their own guidance level was a positive experience.</p></div> <div><span>The Gap</span><p>Stated preference diverged from behavioral usage — several participants who said they preferred Explicit actually spent the majority of their session in Minimal.</p></div>"},{"key":"ll-design","label":"Design","html":"<div><span>Choices as Artifact</span><p>The prototype was designed to be the artifact. Jump was intentionally mapped to “B” rather than space bar to neutralize prior muscle memory — a choice that surfaced in interviews as a design decision in its own right. Placeholder art was used throughout so visual polish wouldn’t introduce unintended differences between tutorial states.</p></div>"},{"key":"ll-outcome","label":"Outcome","html":"<div><span>Recognition</span><p>The project won “Outstanding Achievement in Experience Design” at Convergence 2026. The thesis now sits behind my senior capstone, alongside a full process gallery on Behance where you are invited to play it yourself!</p></div> <div><span>Takeaway</span><p>The broader takeaway: adaptive tutorial systems built only on performance data — or only on stated preference — miss part of the picture. The most reliable signal across 11 participants wasn’t which mode they picked; it was that being allowed to pick at all mattered to every one of them.</p></div>"}]};
+  var cdetailEl = document.getElementById("cdetail");
+  function esc2(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function buildDetail(key){
+    var p = PROJECTS[key]; if(!p){return "";}
+    var h = '<div class="cd-wrap">';
+    h += '<div class="cd-hero" style="background-image:url('+p.img+')">' + (p.badge?'<span class="badge">'+esc2(p.badge)+'</span>':'') + '<div class="cd-veil"></div></div>';
+    h += '<div class="cd-head">';
+    h += '<div class="cd-eyebrow">Featured Case Study</div>';
+    h += '<div class="cd-title">'+esc2(p.title)+'</div>';
+    h += '<div class="cd-sub">'+esc2(p.subtitle)+'</div>';
+    if(p.award){ h += '<div class="cd-award"><span class="star">\u2605</span><span>'+esc2(p.award)+'</span></div>'; }
+    h += '</div>';
+    if(p.links && p.links.length){ h += '<div class="cd-links">'; p.links.forEach(function(l,i){ h += '<a class="cd-link'+(i===0?" primary":"")+'" href="'+l.h+'" target="_blank" rel="noopener">'+esc2(l.t)+'</a>'; }); h += '</div>'; }
+    /* chapter switcher */
+    h += '<div class="cd-chaprow" id="cdChaprow">';
+    p.chapters.forEach(function(c,i){ h += '<button class="cd-chip'+(i===0?" on":"")+'" data-chap="'+c.key+'">'+esc2(c.label)+'</button>'; });
+    h += '</div>';
+    h += '<div class="cd-chapbody" id="cdChapbody">'+p.chapters[0].html+'</div>';
+    /* meta panes */
+    if(p.stats && p.stats.length){ h += '<div class="cd-pane"><div class="cd-label">Quick Stats</div>'; p.stats.forEach(function(s){ h += '<div class="cd-stat"><span class="cd-k">'+esc2(s.k)+'</span><span class="cd-v">'+esc2(s.v)+'</span></div>'; }); h += '</div>'; }
+    if(p.methods && p.methods.length){ h += '<div class="cd-pane"><div class="cd-label">Methods</div><div class="cd-chips">'; p.methods.forEach(function(m){ h += '<span class="cd-tag">'+esc2(m)+'</span>'; }); h += '</div></div>'; }
+    if(p.tools && p.tools.length){ h += '<div class="cd-pane"><div class="cd-label">Tools</div><div class="cd-chips">'; p.tools.forEach(function(m){ h += '<span class="cd-tag">'+esc2(m)+'</span>'; }); h += '</div></div>'; }
+    h += '</div>';
+    return h;
+  }
+  function wireChapters(p){
+    var row = document.getElementById("cdChaprow"); var body = document.getElementById("cdChapbody");
+    if(!row||!body) return;
+    row.addEventListener("click", function(e){
+      var btn = e.target.closest(".cd-chip"); if(!btn) return;
+      var k = btn.getAttribute("data-chap");
+      var chap = p.chapters.filter(function(c){return c.key===k;})[0]; if(!chap) return;
+      Array.prototype.forEach.call(row.children, function(b){ b.classList.remove("on"); });
+      btn.classList.add("on");
+      body.innerHTML = chap.html; body.scrollIntoView({block:"nearest"});
+    });
+  }
+  function openDetail(key){
+    var p = PROJECTS[key]; if(!p) return;
+    cdetailEl.innerHTML = buildDetail(key);
+    cdetailEl.classList.add("on"); cdetailEl.setAttribute("aria-hidden","false");
+    cdetailEl.scrollTop = 0;
+    var carEls=[cstage,document.querySelector(".actions"),document.querySelector(".c-hint")];
+    carEls.forEach(function(el){ if(el) el.style.display="none"; });
+    ctitle.textContent = p.title;
+    detailOpen = true;
+    wireChapters(p);
+  }
+  function closeDetail(){
+    cdetailEl.classList.remove("on"); cdetailEl.setAttribute("aria-hidden","true"); cdetailEl.innerHTML="";
+    var carEls=[cstage,document.querySelector(".actions"),document.querySelector(".c-hint")];
+    carEls.forEach(function(el){ if(el) el.style.display=""; });
+    ctitle.textContent = (DATA[current]&&DATA[current].title)||"Work";
+    detailOpen = false;
+  }
+  var detailOpen = false;
+
   var BENTO = {"home":{"hero":{"eyebrow":"Marina DiPonio","title":"Games User Researcher & Player Experience Designer","sub":"Six shipped games in two years. Award-winning senior capstone, Learn To Leap.","img":"images/portrait.JPG","action":{"label":"Let's chat","href":"#contact"}},"cards":[{"label":"On Deck","t":"Learn To Leap","d":"Senior Capstone · Games User Research"},{"label":"Currently","d":"Just graduated Summa Cum Laude from UF (BA, Digital Arts & Sciences). Most recent game — Yuumi-Chan: Rent is Due! — on Steam. Award winner at Convergence 2026."},{"label":"Said About Marina","quote":"\"Marina brought our vision to life with thoughtful design and a level of polish that genuinely surprised us. A rare find.\""}]},"about":{"hero":{"eyebrow":"About Marina","title":"Who I Am","sub":"I'm a Games User Researcher and Player Experience Designer, just out of the University of Florida with a BA in Digital Arts & Sciences. Originally from Puerto Rico, currently in Gainesville, moving to Jacksonville. My work sits at the seam between research and play. I've shipped six games in two years and I'm happiest when I'm helping teams make informed, motivated decisions.","img":"images/portrait2.JPG","action":{"label":"Download Résumé ↓","href":"Marina_DiPonio_Resume.pdf"}},"sections":[{"type":"blocks","label":"How I Work","teaser":"My background, what I make, and how I approach the craft.","blocks":[{"h":"Roots","d":"I'm a designer who grew up between the Midwest, Puerto Rico, and Florida. The first half of my life was spent in the middle of nowhere with three siblings, which taught me pretty much everything I know about multiplayer experiences, indoors and out."},{"h":"What I Make","d":"These days, I research and design social games — the kind that bring people closer instead of burning them out, with a soft spot for systems that make players a little kinder to each other. When I'm not prototyping, you can usually find me fishing or losing ranked Overwatch with friends."},{"h":"Method","d":"Research first, opinions second. Every design decision I make is a hypothesis I'd rather test than defend, so I lean on playtesting, user interviews, and a healthy obsession with how real people actually move through an experience."},{"h":"Craft","d":"I care about the little things — the pause before a player understands what to do, the weight of a sound effect, whether a menu feels like a doorway or a wall."}]},{"type":"list","label":"Timeline","teaser":"My path so far — most recent roles, with the full history one tap away.","items":[{"k":"2026 · Spring","t":"Senior Capstone · Learn To Leap","d":"Convergence 2026"},{"k":"2026","t":"Freelance Web Designer · Parasole Properties","d":"Luxury real estate launch site"},{"k":"2025","t":"UX Research Intern · University of Florida","d":"UF club software usability & accessibility"}],"more":[{"k":"2025","t":"Leasing Consultant · Contemporary Management Concepts","d":"Top performer · social campaigns · CRM"},{"k":"2024","t":"Customer Experience Intern · ICE Mortgage Technology","d":"WCAG 2.1 audit · UX research synthesis"},{"k":"2024","t":"Transferred to UF · BA Digital Arts & Sciences","d":"Summa Cum Laude · 2026"},{"k":"2021","t":"IT Consultant · Abeytu Naturals","d":"Ongoing technical support & training"}]},{"type":"groups","label":"Skills & Tools","teaser":"The tools and methods I work with.","items":[{"k":"Research","v":"Usability testing · Accessibility audits (WCAG 2.1) · Affinity mapping · Playtest observation · Thematic analysis · UX documentation"},{"k":"Design","v":"Figma · Adobe Creative Suite · Canva · Procreate"},{"k":"Game","v":"Unity 2D · Unity 3D · Unreal · Itch.io"},{"k":"Planning","v":"Monday.com · Miro · Slipbox · Notion · Google Workspace"},{"k":"AI / Automation","v":"Claude · ChatGPT API · Lovable · n8n · AI image analysis"},{"k":"Marketing / Ops","v":"CRM · Analytics · Content planning"},{"k":"Certifications","v":"Generative AI UX Design — Uizard (2025) · Figma for UX Design (2024)"}]},{"type":"list","label":"Recognition","teaser":"Honors and awards.","items":[{"k":"2026","t":"Summa Cum Laude · UF","d":"BA, Digital Arts & Sciences"},{"k":"🏆","t":"Outstanding Achievement in Experience Design · Learn To Leap","d":"Senior capstone · Convergence 2026"},{"k":"🏆","t":"Best in Show · Tick Tock Trivia","d":"6-person team · Project Manager · ChatGPT API"},{"k":"🏆","t":"Most Innovative · Cosmic Catch","d":"12-hour game jam"}]},{"type":"blocks","label":"Currently","teaser":"What I’m up to right now, on and off the clock.","blocks":[{"h":"Now","d":"Fresh off presenting my award-winning senior capstone, Learn to Leap, at Convergence 2026, and celebrating the Steam launch of Yuumi-Chan: Rent is Due! with the Krillshot Games team. Freelancing as a web designer for Parasole Properties and packing up Gainesville for a fresh start in Jacksonville. Open to full-time roles in Games User Research and web design."},{"h":"Off the Clock","d":"Heading to Italy soon to visit family, and making the most of the sun with a swim every day until I go."},{"h":"Fun Facts","d":"Originally from Puerto Rico. My favorite game is Overwatch — I've been playing for ten years. Outside the studio: spending time with loved ones, eating delicious food, and daydreaming."}]}]},"contact":{"hero":{"eyebrow":"Contact","title":"Let's chat","sub":"Tell me a little about what you're working on — tap a channel to reach me directly."},"channels":[{"k":"Email","v":"marinadiponio@proton.me","href":"mailto:marinadiponio@proton.me"},{"k":"LinkedIn","v":"/marinadiponio","href":"https://www.linkedin.com/in/marinadiponio"},{"k":"Behance","v":"/marinadiponio","href":"https://www.behance.net/marinadiponio"},{"k":"Calendly","v":"30 min chat","href":"https://calendly.com/marinadiponio-proton/30min"}],"reach":[{"k":"Full-Time","t":"Games User Research & Player Experience roles","d":"Open to remote, hybrid, or Jacksonville on-site."},{"k":"Freelance","t":"Research sprints, usability, and web design","d":"Usability passes, accessibility reviews, and small-brand web work."},{"k":"Coffee (or chai!)","t":"Just to talk shop","d":"Always — especially games, craft, or a good research rabbit hole."}]}};
   function renderBento(key){
     var d = BENTO[key]; if(!d) return '';
@@ -426,6 +527,7 @@
     carousel.classList.remove('hidden');
   }
   function closeSection(){
+    if(detailOpen){ closeDetail(); return; }
     carousel.classList.add('hidden');
     menu.classList.remove('hidden');
   }
