@@ -840,3 +840,16 @@ Verified live at mobile width: all four tiles open correctly, Work carousel inta
 To-do checked off this session: "Create pages inside of each section with new layout, bento box style" and "Header within section change" (Phase 1). The Contact bento-list also advances the Phase 3 item "Make contact cards smaller, more of like a bento list, make sure they link."
 
 Next: Phase 2 navigation (search on interior pages, more accessible Menu/back, swap expand button for accessibility button).
+
+
+---
+
+## Session log - 2026-06-10 (cont.) - About content build-out
+
+Expanded the About bento on `wireframe-2-hifi.html` from a thin placeholder to the FULL About content pulled from mockup.html. Order (top to bottom): **hero** (portrait + bio + Download Résumé action -> Marina_DiPonio_Resume.pdf), **Story** (Roots / What I Make), **Approach** (Method / Craft), **Timeline** (all 7 roles 2026->2021), **Recognition** (4 awards), **Skills & Tools** (Research / Design / Game / Planning / AI-Automation / Marketing-Ops / Certifications), **Currently** (Now / Off the Clock), **Fun Facts** (3 bullets).
+
+`renderBento()` gained reusable block types so other sections can use them later: `hero.action` (renders a real link; mailto/http open in new tab, relative PDF inline), multi-paragraph `cards`/`nowcard` via a `blocks:[{h,d}]` array, a `groups` block (label + {k,v} rows, used for Skills & Tools), and a `facts` block (bulleted list). New additive CSS: `.b-block`, `.b-block-h`, `.b-group`, `.b-group-k/v`, `.b-facts`. No new fonts/colors. Home and Contact unchanged.
+
+Verified rendered output (8 About cards, full timeline + skills groups + fun facts) from the committed source; GitHub Pages CDN was lagging at verification time but the committed file is correct.
+
+Note for next session: there was a brief editor mishap where a commit-message string got typed into the CodeMirror doc; it was caught and overwritten with the correct content before committing, so the committed file is clean. Be careful that the GitHub commit modal is actually open before typing a message.
