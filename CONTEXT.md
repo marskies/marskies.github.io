@@ -308,6 +308,18 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout · v9 (About hero — image fix)
+
+**Marina's report:** About hero portrait wasn’t showing on her phone.
+
+**Root cause:** the accordion hero renderer built the image div as `style="background-image:url('+JSON.stringify(he.img)+')"`. `JSON.stringify` wraps the path in double quotes, which collided with the style attribute’s own double quotes and truncated it to `url(` — computed background became `url("")`, so no image. The file `images/portrait2.JPG` was fine and present all along.
+
+**Fix (commit b30e3b4):** changed `JSON.stringify(he.img)` → `he.img`, so the output is `background-image:url(images/portrait2.JPG)` — unquoted, exactly like the working Home/Work heroes.
+
+**Verified:** committed file in a 390px sandbox — hero background resolves to the live portrait URL and the image loads (naturalWidth 5732).
+
+**Note for next-Claude:** when emitting inline `style="..."` with a url, don’t wrap the value in double quotes (no JSON.stringify); use the bare path or single quotes to avoid breaking the attribute.
+
 ## Session closeout · v8 (About — fix pass)
 
 **Marina's report:** mostly liked v7 but flagged two formatting issues: “no tabs” on desktop and “strange indentation” on phone (About section).
