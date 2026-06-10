@@ -122,13 +122,39 @@
   /* top bar in carousel */
   .c-top{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:40;}
   .back{display:flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:20px;color:var(--ink);font-size:13px;cursor:pointer;}
-  .c-title{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);}
+  .c-title{font-family:Fraunces,serif;font-weight:500;font-size:22px;letter-spacing:.01em;color:var(--ink);text-transform:none;line-height:1;}
   /* side actions */
   .actions{position:fixed;right:14px;bottom:96px;display:flex;flex-direction:column;gap:14px;z-index:40;}
   .act{width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:transform .15s;}
   .act:active{transform:scale(.92);}
   .act svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
   .c-hint{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);font-size:11px;color:var(--ink-quiet);letter-spacing:.08em;z-index:40;}
+  /* ===== scrolling bento interiors (Home/About/Contact) ===== */
+  .c-scroll{position:absolute;inset:64px 0 0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:6px 18px 120px;}
+  .c-scroll::-webkit-scrollbar{display:none;}
+  .bento{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .b-card{background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:var(--radius);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,0.08);padding:18px;}
+  .b-card.tight{padding:14px 16px;}
+  .b-hero{padding:0;overflow:hidden;}
+  .b-hero .b-img{width:100%;height:200px;background-size:cover;background-position:center;}
+  .b-hero .b-body{padding:16px 18px 18px;}
+  .b-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+  .b-title{font-family:Fraunces,serif;font-weight:500;font-size:24px;line-height:1.05;margin:0 0 6px;}
+  .b-sub{font-size:13px;color:var(--ink-dim);line-height:1.5;margin:0;}
+  .b-text{font-size:14px;color:var(--ink-dim);line-height:1.6;margin:6px 0 0;}
+  .b-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-quiet);margin:0 0 10px;}
+  .b-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--glass-edge);text-decoration:none;color:var(--ink);}
+  .b-row:first-of-type{border-top:0;}
+  .b-row .b-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-quiet);}
+  .b-row .b-v{font-size:14px;color:var(--ink);}
+  .b-row .b-arrow{color:var(--copper);font-size:16px;}
+  .b-list-item{padding:12px 0;border-top:1px solid var(--glass-edge);}
+  .b-list-item:first-child{border-top:0;}
+  .b-list-item .li-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:3px;}
+  .b-list-item .li-t{font-size:15px;color:var(--ink);margin-bottom:2px;}
+  .b-list-item .li-d{font-size:13px;color:var(--ink-dim);line-height:1.5;}
+  .b-action{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:10px 18px;border-radius:22px;background:var(--copper);color:#0a1f24;font-size:14px;font-weight:600;text-decoration:none;}
+  .b-quote{font-family:Fraunces,serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--ink-dim);margin:0;}
 </style>
 </head>
 <body>
@@ -253,11 +279,75 @@
       else c.classList.add('hide');
     });
   }
+  var BENTO = {"home":{"hero":{"eyebrow":"Marina DiPonio","title":"Games User Researcher & Player Experience Designer","sub":"Six shipped games in two years. Award-winning senior capstone, Learn To Leap.","img":"images/portrait.JPG","action":{"label":"Let's chat","href":"#contact"}},"cards":[{"label":"On Deck","t":"Learn To Leap","d":"Senior Capstone · Games User Research"},{"label":"Currently","d":"Just graduated Summa Cum Laude from UF (BA, Digital Arts & Sciences). Most recent game — Yuumi-Chan: Rent is Due! — on Steam. Award winner at Convergence 2026."},{"label":"Said About Marina","quote":"\"Marina brought our vision to life with thoughtful design and a level of polish that genuinely surprised us. A rare find.\""}]},"about":{"hero":{"eyebrow":"About Marina","title":"Who I Am","sub":"I'm a Games User Researcher and Player Experience Designer, just out of UF with a BA in Digital Arts & Sciences. My work sits at the seam between research and play.","img":"images/portrait2.JPG"},"lists":[{"label":"Timeline","items":[{"k":"2026 · Spring","t":"Senior Capstone · Learn To Leap","d":"Convergence 2026"},{"k":"2026","t":"Freelance Web Designer · Parasole Properties","d":"Luxury real estate launch site"},{"k":"2025","t":"UX Research Intern · University of Florida","d":"Club software usability & accessibility"}]},{"label":"Recognition","items":[{"k":"2026","t":"Summa Cum Laude · UF","d":"BA, Digital Arts & Sciences"},{"k":"Award","t":"Outstanding Achievement in Experience Design","d":"Learn To Leap · Convergence 2026"},{"k":"Award","t":"Best in Show · Tick Tock Trivia","d":"6-person team · Project Manager"}]},{"label":"Now","items":[{"t":"Open to full-time Games User Research & web design roles","d":"Packing up Gainesville for a fresh start in Jacksonville. Off the clock: a swim every day and a trip to Italy soon."}]}]},"contact":{"hero":{"eyebrow":"Contact","title":"Let's chat","sub":"Tell me a little about what you're working on — tap a channel to reach me directly."},"channels":[{"k":"Email","v":"marinadiponio@proton.me","href":"mailto:marinadiponio@proton.me"},{"k":"LinkedIn","v":"/marinadiponio","href":"https://www.linkedin.com/in/marinadiponio"},{"k":"Behance","v":"/marinadiponio","href":"https://www.behance.net/marinadiponio"},{"k":"Calendly","v":"30 min chat","href":"https://calendly.com/marinadiponio-proton/30min"}],"reach":[{"k":"Full-Time","t":"Games User Research & Player Experience roles","d":"Open to remote, hybrid, or Jacksonville on-site."},{"k":"Freelance","t":"Research sprints, usability, and web design","d":"Usability passes, accessibility reviews, and small-brand web work."},{"k":"Coffee (or chai!)","t":"Just to talk shop","d":"Always — especially games, craft, or a good research rabbit hole."}]}};
+  function renderBento(key){
+    var d = BENTO[key]; if(!d) return '';
+    var h = '<div class="bento">';
+    if(d.hero){
+      var he = d.hero;
+      h += '<div class="b-card b-hero">';
+      if(he.img){ h += '<div class="b-img" style="background-image:url(' + he.img + ')"></div>'; }
+      h += '<div class="b-body">';
+      if(he.eyebrow){ h += '<div class="b-eyebrow">' + he.eyebrow + '</div>'; }
+      h += '<h2 class="b-title fr">' + he.title + '</h2>';
+      if(he.sub){ h += '<p class="b-sub">' + he.sub + '</p>'; }
+      if(he.action){ h += '<a class="b-action" href="' + he.action.href + '">' + he.action.label + ' &rarr;</a>'; }
+      h += '</div></div>';
+    }
+    if(d.cards){ d.cards.forEach(function(c){
+      h += '<div class="b-card">';
+      if(c.label){ h += '<div class="b-label">' + c.label + '</div>'; }
+      if(c.t){ h += '<div class="b-title fr" style="font-size:20px">' + c.t + '</div>'; }
+      if(c.d){ h += '<p class="b-text">' + c.d + '</p>'; }
+      if(c.quote){ h += '<p class="b-quote">' + c.quote + '</p>'; }
+      h += '</div>';
+    }); }
+    if(d.lists){ d.lists.forEach(function(g){
+      h += '<div class="b-card"><div class="b-label">' + g.label + '</div>';
+      g.items.forEach(function(it){
+        h += '<div class="b-list-item">';
+        if(it.k){ h += '<div class="li-k">' + it.k + '</div>'; }
+        if(it.t){ h += '<div class="li-t">' + it.t + '</div>'; }
+        if(it.d){ h += '<div class="li-d">' + it.d + '</div>'; }
+        h += '</div>';
+      });
+      h += '</div>';
+    }); }
+    if(d.channels){
+      h += '<div class="b-card"><div class="b-label">Direct Channels</div>';
+      d.channels.forEach(function(c){
+        h += '<a class="b-row" href="' + c.href + '" target="_blank" rel="noopener"><span><span class="b-k">' + c.k + '</span><br><span class="b-v">' + c.v + '</span></span><span class="b-arrow">&rarr;</span></a>';
+      });
+      h += '</div>';
+    }
+    if(d.reach){
+      h += '<div class="b-card"><div class="b-label">Reach Out For</div>';
+      d.reach.forEach(function(c){
+        h += '<div class="b-list-item"><div class="li-k">' + c.k + '</div><div class="li-t">' + c.t + '</div><div class="li-d">' + c.d + '</div></div>';
+      });
+      h += '</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
   function openSection(key){
     current=key; idx=0;
     ctitle.textContent = DATA[key].title;
-    cards = buildCards(key);
-    renderC();
+    var carEls = [cstage, document.querySelector('.actions'), document.querySelector('.c-hint')];
+    var bento = document.getElementById('cbento');
+    if(key === 'work'){
+      carEls.forEach(function(el){ if(el) el.style.display=''; });
+      if(bento){ bento.style.display='none'; bento.innerHTML=''; }
+      cards = buildCards(key);
+      renderC();
+    } else {
+      carEls.forEach(function(el){ if(el) el.style.display='none'; });
+      if(!bento){ bento = document.createElement('div'); bento.id='cbento'; bento.className='c-scroll'; carousel.appendChild(bento); }
+      bento.style.display='block';
+      bento.scrollTop = 0;
+      bento.innerHTML = renderBento(key);
+    }
     menu.classList.add('hidden');
     carousel.classList.remove('hidden');
   }
