@@ -308,6 +308,20 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout — v10 — Work carousel — all projects represented
+
+**Marina / mobile direction (wireframe-2-hifi.html). Task: "finish the work pages" — step 1, ensure all projects are represented in the mobile Work carousel.**
+
+**What changed:** Added the 4 projects that existed in projects.js but were missing from the mobile Work carousel — Insane Wizard Goes Crazy Everywhere, UF Club Software, Nutrition Tracking App, Social Media Campaign. Carousel now shows 10 cards (was 6). Cards live in the DATA work.items array, schema {s,t,d,img,badge?}.
+
+**Ordering (by theme, per Marina):** Learn To Leap (featured) > Cosmic Catch > Tick Tock Trivia > Yuumi-Chan > Insane Wizard (games cluster) > ICE Accessibility Audit > UF Club Software (research cluster) > StarTea > Nutrition Tracking App (UI/UX cluster) > Social Media Campaign (marketing, end).
+
+**Images:** projects.js thumbnail paths (*-thumb.png) do NOT exist in the repo. Used the most representative REAL images instead, confirmed loading: wizard-screenshot.png, uf-platform.png, nutrition-app.png, cys-instagram.png.
+
+**Verified:** Sandbox iframe at 390px renders all 10 cards in the right order; all 4 new background images resolve (naturalWidth>0). Committed to main [1a2e088].
+
+**Next:** Step 2 — redesign the individual project pages for mobile. Plan: keep the desktop "click to see different sides of the story" interaction (roleDescriptions keyed by pm/uiux/research in projects.js), fold the right-side rail into an expandable section (decide above vs below per content). Propose concrete layout for approval BEFORE building.
+
 ## Session closeout · v9 (About hero — image fix)
 
 **Marina's report:** About hero portrait wasn’t showing on her phone.
