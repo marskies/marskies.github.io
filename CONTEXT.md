@@ -308,6 +308,20 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout — v12 — Work view redesign: scroll-expand accordion (replaces peek)
+
+**Marina / mobile direction (wireframe-2-hifi.html). She did not love the v11 coverflow/peek carousel; replaced it with a scroll-driven expand/collapse list per a new reference image (Death Valley national-parks app).**
+
+**New Work view:** Vertical scroll list. Collapsed cards = thin labeled pill bars (64px) showing the project title (Fraunces, uppercase). Whichever card is nearest the vertical center EXPANDS into a large image card (58vh) with the hero photo + title/subtitle overlaid; all others stay collapsed. One expanded at a time.
+
+**Mechanics:** #cstage is now a scroll container (scroll-snap-type:y proximity, top/bottom padding calc(50vh - 130px) so first/last can center). On scroll, updateCentered() picks the card nearest center -> sets idx -> renderC() toggles .expanded. The old absolute-position active/prev/next/hide transform model and the swipe/wheel paging were removed. NOTE: used a setTimeout-throttled scroll handler, NOT requestAnimationFrame (rAF is throttled in hidden iframes and was unreliable; direct call works).
+
+**Taps:** tapping a collapsed bar smooth-scrolls/centers it (centerCardTo). Tapping the already-expanded card opens its detail (only Learn To Leap has a detail key so far). Keyboard Up/Down still navigate. The Learn To Leap detail page + chapter switcher from v11 is unchanged and still works.
+
+**Verified:** sandbox at 390px: 10 cards each with a title bar, exactly one expanded, scrolling re-expands the centered one (tested cards 0/3/4), tap-collapsed centers, tap-expanded-LTL opens detail, back returns to list. Committed to main [99f9fa9].
+
+**Next:** same as before — wire detail pages for the other 9 projects (they use the projects.js pm/uiux/research roleDescriptions model). Get Marina to react to the new scroll-expand Work view first; peek model is retired.
+
 ## Session closeout — v11 — Carousel peek + Learn To Leap project page
 
 **Marina / mobile direction (wireframe-2-hifi.html). Task: carousel peek effect + first individual project page (Learn To Leap), content kept the same.**
