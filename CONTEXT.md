@@ -308,6 +308,26 @@ Site-wide image lightbox on mockup.html and all 10 project pages. Lets viewers e
 5. **Session E (polish):** Phase 4 animation pass as one coherent bundle.
 6. **Session F (mobile):** Phase 5.
 
+## Session closeout · v7 (About — digestibility pass)
+
+**Goal:** Marina found the expanded About too long to scroll. We chose option A: trim/merge + accordion nesting.
+
+**What changed in wireframe-2-hifi.html (commit d83f288):**
+- About data restructured into an ordered `sections` array under `BENTO.about` (alongside `hero`).
+- Merged Story + Approach → one **How I Work** section (4 blocks: Roots, What I Make, Method, Craft).
+- Folded **Fun Facts** into **Currently** as a third block; removed the separate `facts` key.
+- **Timeline** now shows 3 most-recent roles inline + a nested `Full history · 4 more` expander.
+- New order: Hero → How I Work → Timeline → Skills & Tools → Recognition → Currently.
+- Each section is a native `<details>` accordion: heading + one-line teaser + ± chevron, body hidden until tapped. Zero added JS for the toggle (uses native details/summary).
+
+**Renderer:** added an early branch in `renderBento` — `if(d.sections){...}` — that renders the accordion markup and returns. All other sections (Home/Work/Contact) untouched; they still use the cards/lists/groups/channels paths. The accordion renderer is self-contained (its own inner `esc`).
+
+**CSS:** added `.b-acc*` and `.b-more*` classes before `</style>`; reuses existing tokens (Fraunces, --teal, --glass-edge) and existing `.b-hero/.b-block/.b-row/.b-group` classes. No new fonts/colors.
+
+**Verified:** rendered the committed file in an iframe at 430px on the live origin — 5 collapsed accordions + working Timeline `Full history` expand. GitHub Pages CDN lagged at commit time (normal 1–2 min).
+
+**Open thread:** Marina wanted to try A first and said “we can try others if it doesn’t work” (tabbed strip / trim-only are the fallbacks).
+
 ## Session closeout · v5 (Phase 1 copy swap)
 
 **Where we stopped:** Marina paused after the Phase 1 copy swap landed. Mockup is now running on real copy from her thesis, LinkedIn, index.html, Behance, and mdwebdesign. Two commits this session: the big copy swap, then a Fun Facts / Recognition trim.
