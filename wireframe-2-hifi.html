@@ -98,7 +98,7 @@
 
   /* ====== STATE B: CAROUSEL ====== */
   #carousel{}
-  .c-stage{position:absolute;inset:64px 0 0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:y proximity;padding:calc(50vh - 130px) 0 calc(50vh - 130px);display:flex;flex-direction:column;align-items:center;gap:12px;}.c-stage::-webkit-scrollbar{display:none;}.c-card{position:relative;width:84vw;max-width:400px;flex:0 0 auto;height:64px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-edge);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,0.08);background:var(--glass-strong);scroll-snap-align:center;transition:height .5s cubic-bezier(.4,0,.2,1),box-shadow .4s;cursor:pointer;}.c-card .c-bar{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 18px;font-family:'Fraunces',serif;font-weight:500;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:1;transition:opacity .35s;z-index:3;}.c-card.expanded{height:58vh;box-shadow:var(--shadow),0 0 0 1px var(--glass-edge),0 22px 50px rgba(0,0,0,.45);}.c-card.expanded .c-bar{opacity:0;pointer-events:none;}
+  .c-stage{position:absolute;inset:64px 0 0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scroll-snap-type:y proximity;padding:calc(50vh - 130px) 0 calc(50vh - 130px);display:flex;flex-direction:column;align-items:center;gap:12px;}.c-stage::-webkit-scrollbar{display:none;}.c-card{position:relative;width:84vw;max-width:400px;flex:0 0 auto;height:64px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-edge);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,0.08);background:var(--glass-strong);scroll-snap-align:center;transition:height .5s cubic-bezier(.4,0,.2,1),box-shadow .4s;cursor:pointer;}.c-card .c-bar{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 18px;font-family:'Fraunces',serif;font-weight:500;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:1;transition:opacity .35s;z-index:3;}.c-card.expanded{height:58vh;box-shadow:var(--shadow),0 0 0 1px var(--glass-edge),0 22px 50px rgba(0,0,0,.45);}.c-card.expanded .c-bar{opacity:0;pointer-events:none;}
   .c-hero{position:absolute;top:0;left:0;right:0;height:58vh;background-size:cover;background-position:center;opacity:0;transition:opacity .45s;}
   .c-card.expanded .c-hero{opacity:1;}
   .c-hero .badge{position:absolute;top:12px;left:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);background:rgba(10,31,36,.6);padding:5px 10px;border-radius:12px;backdrop-filter:blur(6px);}
@@ -249,7 +249,6 @@
       <div class="act glass" title="Expand"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
       <div class="act glass" title="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
     </div>
-    <div class="c-hint">swipe up / down to browse</div>
     <div class="c-detail" id="cdetail" aria-hidden="true"></div>
   </section>
 
