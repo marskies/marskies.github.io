@@ -288,7 +288,7 @@
   var cstage = document.getElementById('cstage');
   var ctitle = document.getElementById('ctitle');
   var back = document.getElementById('back');
-  var idx = 0, current = null;
+  var idx = 0, current = null, centering = false;
 
   // build tiles
   SECTIONS.forEach(function(sec){
@@ -529,11 +529,19 @@
     if(i<0||i>=cards.length) return;
     var c=cards[i]; if(!c) return;
     idx=i; renderC();
-    void cstage.offsetHeight;
-    var target=c.offsetTop-(cstage.clientHeight/2)+(c.offsetHeight/2);
-    cstage.scrollTo({top:target,behavior:"smooth"});
+    centering=true;
+    var start=null;
+    function step(ts){
+      if(start===null) start=ts;
+      var target=c.offsetTop-(cstage.clientHeight/2)+(c.offsetHeight/2);
+      cstage.scrollTop=target;
+      if(ts-start<560){ requestAnimationFrame(step); }
+      else { centering=false; }
+    }
+    requestAnimationFrame(step);
   }
   function updateCentered(){
+    if(centering) return;
     if(!cards.length) return;
     var mid=cstage.scrollTop+cstage.clientHeight/2;
     var best=0,bestD=Infinity;
