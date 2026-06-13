@@ -1059,3 +1059,18 @@ Marina picked option C from the back-button options and asked for chevron-only (
 - CSS (#back, inserted with the other round controls): position:fixed; left:16px; bottom:18px; 46px circle; glass-strong + glass-edge + shadow + blur (matches #searchFab exactly but mirrored to the left). Teal chevron SVG (var(--teal), stroke-width 2.2, round caps). :active scale .92. Visibility: display:none by default; body.section-open #back{display:flex} (shows whenever a section/detail is open, same trigger as the search fab); hidden on body.search-open and body.a11y-open.
 - Result: back (bottom-left) and search (bottom-right) now sit symmetrically in the phone thumb zone; #a11yTop stays top-right; page title centered up top. Verified live (?bust=back3): chevron renders, tapping returns to the full menu grid and the button correctly disappears on the menu. 44px+ target + aria-label keeps it accessible despite being icon-only.
 Commit on wireframe-2-hifi.html. The old .back/.c-title flex CSS for the header pill is now effectively unused for #back positioning (left in place; harmless).
+
+
+## PROJECT-PAGES log 2026-06-13 (Cosmic Catch proof)
+
+Started item #2 (build the 9 remaining mobile project detail pages from the Learn To Leap template). Marina approved: small batches, start with one proof, pull real desktop copy as-is.
+
+TEMPLATE recap: each project is a JS data object PROJECTS["id"] = {id,title,subtitle,badge,award,img,stats:[{k,v}],methods:[],tools:[],links:[{t,h}],chapters:[{key,label,html}]}. The detail renderer (buildDetail / openDetail / wireChapters) is generic, so adding a project = add its PROJECTS object + set detail:"id" on its Work card in DATA.work.items. Chapter html is concatenated <div><span>Subhead</span><p>copy</p></div> blocks (text-only; desktop figure images are dropped). Apostrophes in copy use the right-single-quote char (U+2019) so they do not break the JS strings. The PROJECTS object literal is double-quoted JSON-style.
+
+SOURCE: each project’s full case-study copy lives in its own desktop page in the repo root (cosmic-catch.html, tick-tock-trivia.html, yuumi-chan.html, insane-wizard.html, ice-accessibility.html, uf-club-software.html, startea.html, nutrition-app.html, social-media-cys.html). Each has a chapter-tab nav + sections that map onto the mobile chapters. Tab sets vary per project (preserve each one).
+
+DONE: Cosmic Catch (proof-of-concept). Added PROJECTS["cosmic-catch"] with award Most Innovative / Create-A-Thon, stats (Role / Format / Team / Recognition), methods, tools (Unity / Procreate / Canva), Play Prototype + Behance links, and 4 chapters Overview / Concept / Process / Outcome (faithful copy, lightly trimmed). Wired detail:"cosmic-catch" on the card. Committed on wireframe-2-hifi.html. Verified live (?bust=cc3): card opens the detail on first tap, hero/award/links render, all four tabs switch correctly with real copy, bottom-left back returns to the carousel with Cosmic Catch centered.
+
+FLAG for Marina (not fixed, unrequested): the detail render hardcodes the eyebrow text Featured Case Study above every project title (cd-eyebrow), so non-featured projects also show FEATURED CASE STUDY. Worth making per-project or dropping it. Awaiting her call.
+
+REMAINING project pages (8): Tick Tock Trivia (Best in Show), Yuumi-Chan, Insane Wizard, ICE Accessibility Audit, UF Club Software, StarTea, Nutrition App, Social Media CYS. Same template approach, in small batches.
