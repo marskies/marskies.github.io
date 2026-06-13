@@ -222,6 +222,13 @@
    .cd-tag{font-size:12px;color:var(--ink-dim);background:var(--glass);border:1px solid var(--glass-edge);border-radius:999px;padding:6px 12px;}
   
     /* === SEARCH-OVERLAY PATCH === */
+    /* BACK-FAB bottom-left round back button */
+  #back{position:fixed;left:16px;bottom:18px;z-index:60;width:46px;height:46px;border-radius:50%;display:none;align-items:center;justify-content:center;background:var(--glass-strong);border:1px solid var(--glass-edge);box-shadow:var(--shadow);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;padding:0;}
+  #back svg{width:22px;height:22px;fill:none;stroke:var(--teal);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+  #back:active{transform:scale(.92);}
+  body.section-open #back{display:flex;}
+  body.search-open #back{display:none;}
+  body.a11y-open #back{display:none;}
   #searchFab{position:fixed;right:16px;bottom:18px;z-index:60;width:46px;height:46px;border-radius:50%;display:none;align-items:center;justify-content:center;background:var(--glass-strong);border:1px solid var(--glass-edge);box-shadow:var(--shadow);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;}
   #searchFab svg{width:20px;height:20px;fill:none;stroke:var(--teal);stroke-width:2.2;}
   body.section-open #searchFab{display:flex;}
@@ -286,7 +293,8 @@
   <!-- ===== STATE B : CAROUSEL ===== -->
   <section class="view hidden" id="carousel">
     <div class="c-top">
-      <div class="back glass" id="back">‹ Menu</div>
+      <button class="back-fab glass" id="back" aria-label="Back to menu"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+      <div style="width:78px"></div>
       <div class="c-title" id="ctitle">Work</div>
       <div style="width:78px"></div>
     </div>
