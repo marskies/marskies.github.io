@@ -1108,3 +1108,15 @@ METHOD NOTE: chapter html was extracted from each desktop page by walking subhea
 FLAG for Marina (badge ribbon): Learn To Leap has badge:"Featured" in its data, which renders as an absolutely-positioned ribbon. With the new title-below-image layout it now sits at the bottom-left of the image and clips against the rounded corner (looks broken). Options: drop the badge on LTL, or restyle/reposition the .badge ribbon. (Cosmic Catch / TTT / Yuumi have empty badge so they are unaffected.) Awaiting her call.
 
 PROJECT PAGES STATUS: DONE = Learn To Leap (full), Cosmic Catch, Tick Tock Trivia, Yuumi-Chan. REMAINING (6): Insane Wizard (7 imgs), ICE Accessibility Audit (5), UF Club Software (4), StarTea (5), Nutrition App (4), Social Media CYS (4).
+
+---
+
+## Work-screen polish pass (Marina feedback round)
+
+Commit 2c5f937. Three fixes to wireframe-2-hifi.html, all verified live (?bust):
+
+1. **Removed broken Learn To Leap "Featured" badge.** Dropped `badge:’Featured Case Study’` from the LTL Work card (the absolutely-positioned ribbon was clipping at the rounded corner). Also cleared the redundant `"badge":"Featured"` on the LTL PROJECTS detail object.
+2. **Fixed swapped award labels on the Work cards.** Cosmic Catch card now reads "Most Innovative" (was "Best in Show"); Tick Tock Trivia card now reads "Best in Show" (was "Most Innovative"). Detail-page `award` fields were already correct (CC = Most Innovative · Create-A-Thon, TTT = Best in Show); only the card `d:` strings changed.
+3. **Header no longer clips the first folded card.** `.c-stage` used `scroll-snap-align:center` on a 58vh expanded card with no header buffer, so on shorter viewports the folded card above the expanded one rose under the fixed `.c-top` (64px). Added `scroll-padding-top:92px` to `.c-stage` + `scroll-margin-top:92px` to `.c-card.expanded`. Clearance below header went from ~37px to ~140px. Marker WORK-POLISH.
+
+**Note / heads-up:** Marina made her own follow-up commit f98f89d directly in the GitHub web UI right after (~18:45→19:03), message "reduce folded-card top gap to ~10px; add UI/UX Designer t..." (+2/-2 lines). So the current HEAD of wireframe-2-hifi.html is HERS, not the agent build (she tightened the ~140px gap toward ~10px and added a UI/UX Designer subtitle/tag). Future edits must pull the live HEAD first and not overwrite her tweak.
