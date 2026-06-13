@@ -255,6 +255,9 @@
   .a11y-sw::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:var(--ink-dim);transition:transform .18s,background .18s;}
   .a11y-opt[aria-checked="true"] .a11y-sw{background:var(--copper);}
   .a11y-opt[aria-checked="true"] .a11y-sw::after{transform:translateX(19px);background:#fff;}
+  /* DEFAULT-LARGE: baseline bigger type on every page */
+  #menu .grid{zoom:1.12;}
+  #carousel{zoom:1.12;}
   body.a11y-large-text #menu .grid{zoom:1.25;}
   body.a11y-large-text #carousel{zoom:1.25;}
   body.a11y-contrast{--glass:rgba(6,20,24,0.94);--glass-strong:rgba(4,16,20,0.97);--glass-edge:rgba(255,255,255,0.42);--ink:#ffffff;--ink-dim:#eaf6f7;--ink-quiet:#cfe4e6;--teal:#aef0f2;--copper:#ffb27a;}
