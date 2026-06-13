@@ -1074,3 +1074,20 @@ DONE: Cosmic Catch (proof-of-concept). Added PROJECTS["cosmic-catch"] with award
 FLAG for Marina (not fixed, unrequested): the detail render hardcodes the eyebrow text Featured Case Study above every project title (cd-eyebrow), so non-featured projects also show FEATURED CASE STUDY. Worth making per-project or dropping it. Awaiting her call.
 
 REMAINING project pages (8): Tick Tock Trivia (Best in Show), Yuumi-Chan, Insane Wizard, ICE Accessibility Audit, UF Club Software, StarTea, Nutrition App, Social Media CYS. Same template approach, in small batches.
+
+
+## DETAIL-GALLERY log 2026-06-13 — project detail: image gallery + role eyebrow + title-below-image
+
+Three changes Marina asked for on the project detail view (wireframe-2-hifi.html), built and verified on Cosmic Catch first. These now become part of the per-project template for the remaining 8.
+
+1. ROLE EYEBROW (was hardcoded). The detail render previously printed a hardcoded "Featured Case Study" eyebrow above every project title. Replaced with a per-project role: render h += (p.role ? cd-eyebrow with esc2(p.role) : ""). So non-featured projects show their actual role and never the wrong label. Added role to the data, per project. Cosmic Catch role = "Product Lead · UI/UX".
+
+2. TITLE SITS BELOW THE IMAGE (was overlapping). .cd-head had margin-top:-58px, which pulled the eyebrow/title up over the bottom of the photo (the overlap Marina saw). Changed .cd-head to {position:relative;margin-top:14px;padding:0 4px;} so the whole text block (role/title/sub/award/links) sits cleanly below the images.
+
+3. SWIPEABLE IMAGE GALLERY (was a single background-image hero). Added a gallery field per project (array of image paths). The render now builds a .cd-gallery with a horizontal scroll-snap .cd-track of .cd-slide divs (one per image), prev/next .cd-arrow buttons (chevron SVGs, aria-labels Previous/Next image) shown only when >1 image, and a .cd-dots row of indicators. New wireGallery(p) JS (called from openDetail right after wireChapters): arrows scroll one slide via scrollTo smooth; a scroll listener (rAF-throttled) syncs the active dot. Gallery falls back to [p.img] if no gallery. CSS added after the .cd-hero rule (cd-gallery/cd-track/cd-slide/cd-arrow/cd-dots/cd-dot, copper active dot). The old .cd-hero rule is now unused by the render but left in place (harmless).
+
+Cosmic Catch gallery = 7 images: cc-gameplay, cc-menu, cc-collect, cc-melody, cc-fish1, cc-fish2, cc-award (all confirmed present in /images). Verified live (?bust=gal1): title sits below image, eyebrow shows PRODUCT LEAD · UI/UX, next/prev arrows advance the strip and move the active dot, swipe-drag also scrolls and syncs the dot, chapter tabs still switch (Outcome tested), bottom-left back still returns to the carousel.
+
+IMAGE COUNTS for the remaining projects (first item is the existing card hero): tick-tock-trivia 9, yuumi-chan 4, insane-wizard 7, ice-accessibility 5, uf-club-software 4, startea 5, nutrition-app 4, social-media-cys 4. Roles to pull from each project stats (per Marina: per-project, use actual role text). Include all photos per project (Marina: do all photos).
+
+TEMPLATE now (each project): PROJECTS["id"] = {id,title,subtitle,role,badge,award,img,gallery:[...],stats,methods,tools,links,chapters:[{key,label,html}]} + detail:"id" on the Work card.
