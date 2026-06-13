@@ -1155,3 +1155,14 @@ Root cause: .c-stage top padding was calc(50vh - 130px) (~352px at default zoom)
 Change: .c-stage padding top only calc(50vh - 130px) -> calc(50vh - 430px) (bottom padding unchanged so last card still centers). Now first card centered position == scrollTop 0, so the browsers native scroll floor (0) clamps overscroll-up. No JS scroll-clamp needed (avoids momentum jank).
 Verified live (bust 810): padTop 52px, scrollAtRest 0, forced scrollTop -500 clamps to 0; screenshot shows LTL centered, tidy gap under header, neighbors peek below. Robust across zoom: at Bigger Text the computed target goes negative and clamps to 0 (never produces above-void).
 Commit: Carousel clamp top so first card cant overscroll above center.
+
+
+## PROJECT-PAGES-BATCH-2 (Insane Wizard, ICE Accessibility Audit, UF Club Software)
+Added 3 more project detail pages to wireframe-2-hifi.html (now 7 of 10 built).
+Source of truth: pulled faithful copy, role, stats, methods, tools, chapters, and ALL gallery images from each projects dedicated desktop detail HTML (insane-wizard.html, ice-accessibility.html, uf-club-software.html) via DOMParser. Chapter prose ported from .ab-section/.ab-lbl blocks into the wireframes div span label p format; figure images stripped from chapter html and moved into the gallery array (renderer shows swipe gallery + title-below-image automatically).
+1) insane-wizard: title Insane Wizard Goes Crazy Everywhere, role Producer & UX, 7 gallery imgs, chapters Overview/Final Piece/Process/Outcome.
+2) ice-accessibility: title ICE Accessibility Audit, role UI/UX & User Research, 5 gallery imgs, chapters Overview/The Audit/Findings/Applied/Impact.
+3) uf-club-software: detail title UF Anthology Engage (the projects real name; Work card label stays UF Club Software per Marinas existing labeling), role UX Researcher, 4 gallery imgs, chapters Overview/Research/Findings/Recommendations.
+Wiring: inserted PROJECTS[id]={...} objects after the yuumi-chan object; added detail:id to each matching DATA.work card (cards previously had no detail key so were inert).
+File 84477 -> 100905 chars. Verified live (bust 820): all 3 open from Work, render role eyebrow + swipe gallery (correct dot counts 7/5/4) + chapter tabs switch correctly + faithful copy. Syntax-checked before commit.
+REMAINING project pages (3 of 10): StarTea, Nutrition Tracking App, Social Media Campaign (CYS).
