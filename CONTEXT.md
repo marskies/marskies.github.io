@@ -1147,3 +1147,11 @@ Marina: the first card (Learn To Leap) had a ton of space above it and its botto
 - On-open settle delay `30ms` → **`120ms`** so centering runs after layout/zoom settle (fixes the intermittent uncentered-on-open).
 
 Verified live (default zoom): first card (Learn To Leap), a middle card (Cosmic Catch), and the list all center cleanly → tight top gap, full card visible, no bottom clip, neighbors peek below. Note: getBoundingClientRect measurements are unreliable here because the `.view` zoom desyncs layout vs visual coords → screenshots are ground truth. File length 84473 → 84477. Committed + verified on main and live. Marker: CAROUSEL-FIRSTCARD-FIX.
+
+
+## CAROUSEL-OVERSCROLL-CLAMP (work carousel first-card top)
+Fix: stop being able to scroll/overscroll UP past the first card (Learn To Leap), which left a void above it.
+Root cause: .c-stage top padding was calc(50vh - 130px) (~352px at default zoom). centerCardTo(0) rests at scrollTop~300, but the large top padding let scrollTop go down to 0, ~300px of empty space above the centered first card.
+Change: .c-stage padding top only calc(50vh - 130px) -> calc(50vh - 430px) (bottom padding unchanged so last card still centers). Now first card centered position == scrollTop 0, so the browsers native scroll floor (0) clamps overscroll-up. No JS scroll-clamp needed (avoids momentum jank).
+Verified live (bust 810): padTop 52px, scrollAtRest 0, forced scrollTop -500 clamps to 0; screenshot shows LTL centered, tidy gap under header, neighbors peek below. Robust across zoom: at Bigger Text the computed target goes negative and clamps to 0 (never produces above-void).
+Commit: Carousel clamp top so first card cant overscroll above center.
