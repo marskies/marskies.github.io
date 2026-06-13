@@ -1166,3 +1166,14 @@ Source of truth: pulled faithful copy, role, stats, methods, tools, chapters, an
 Wiring: inserted PROJECTS[id]={...} objects after the yuumi-chan object; added detail:id to each matching DATA.work card (cards previously had no detail key so were inert).
 File 84477 -> 100905 chars. Verified live (bust 820): all 3 open from Work, render role eyebrow + swipe gallery (correct dot counts 7/5/4) + chapter tabs switch correctly + faithful copy. Syntax-checked before commit.
 REMAINING project pages (3 of 10): StarTea, Nutrition Tracking App, Social Media Campaign (CYS).
+
+
+## PROJECT-PAGES-BATCH-3 (final 3) + CHAPTER-SUBLABEL-STYLE
+A) Added the last 3 project detail pages -> ALL 10 now built. Same pipeline (faithful copy/role/stats/methods/tools/chapters/images from each desktop detail HTML via DOMParser; figures moved to gallery array).
+  - startea (card StarTea): title StarTea, role UX & Project Lead, 5 imgs, chapters Overview/Research/Design/Outcome.
+  - nutrition-app (card Nutrition Tracking App): detail title Nutrition Tracker, role Solo Build, 4 imgs, chapters Overview/The Problem/The Solution/Next Steps.
+  - social-media-cys (card Social Media Campaign): title Social Media Campaign, role Social Media & CRM, 4 imgs, chapters Overview/Strategy/Execution/Results.
+  Wired detail: onto each Work card (startea-hero / nutrition-app / cys-instagram imgs).
+B) CHAPTER SUB-LABEL DIVIDER STYLE (Marina request): the sub-section labels inside each chapter (e.g. The Game, The Question, The Brand, My Role) were previously UNSTYLED inline spans flush against their paragraph. There was NO .cd-chapbody span rule. Added: .cd-chapbody>div>span{display:block;font-weight:700;color:var(--ink);margin:18px 0 8px;} and .cd-chapbody>div:first-child>span{margin-top:0;}. Result: each sub-label now bold + bright + on its own line with a line-space below (and space above to separate from prior paragraph). Single CSS rule => applies to EVERY project automatically.
+File 100905 -> 112134 chars. Verified live (bust 830): StarTea, Nutrition Tracker, Social Media Campaign all open from Work with gallery dots 5/4/4, role eyebrow, chapter tabs; bold-spaced sub-labels confirmed on StarTea + Nutrition + Social + Learn To Leap.
+STATUS: all 10 project detail pages complete.
