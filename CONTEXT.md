@@ -1188,3 +1188,10 @@ NOTE for future image tweaks: to shift any card thumbnail, add pos:<css backgrou
 
 ## WORK-THUMB-LTL-REFINE
 Marina: pos:right pushed Learn To Leap too far (its a very wide 4926x1783 ~2.76:1 panoramic 3-person award photo; the two subjects she wants are the woman in green + the woman holding the award on the RIGHT side). Changed Learn To Leap pos right -> 58% center so those two are centered/balanced in the card (small sliver of the left man remains for context). Tested 55% and 58% live; 58% chosen. File 112208 -> 112213. Verified live bust 870 (ltlPos=58% center).
+
+
+## RESUME-LINKS + LTL-MAN-OUT (bust 880)
+- Learn To Leap thumbnail: pushed background-position from 58% center to 70% center so the man on the far left is fully out of frame; only the two women (green dress + award holder) remain, centered. Tested 65% (man's shoulder still showing) and 70% (clean) live; 70% chosen.
+- About / Who I Am page: the resume action button now renders TWO buttons. Existing 'Download Résumé' still points at Marina_DiPonio_Resume.pdf (Marina re-committed/replaced that file in her 'Resumes' commit, so the swap is automatic). Added a second action2 -> 'ATS-Friendly Résumé' pointing at Marina_DiPonio_Resume_ATS.pdf.
+- Implementation: added optional he.action2 to the about BENTO data object; extended the home/about renderer to emit a second <a class=b-action> when he.action2 exists (mirrors action1's ext/target logic byte-for-byte). Renderer unchanged for pages without action2.
+- File wireframe-2-hifi.html 112213 -> 112508. Syntax checked. Verified on main + live (both hrefs correct, no console errors).
