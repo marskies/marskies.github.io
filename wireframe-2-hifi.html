@@ -448,7 +448,7 @@
       if(he.eyebrow){ h += '<div class="b-eyebrow">' + he.eyebrow + '</div>'; }
       h += '<h2 class="b-title fr">' + he.title + '</h2>';
       if(he.sub){ h += '<p class="b-sub">' + he.sub + '</p>'; }
-      if(he.action){ var tgt = /^(mailto:|https?:)/.test(he.action.href) ? ' target="_blank" rel="noopener"' : ''; h += '<a class="b-action" href="' + he.action.href + '"' + tgt + '>' + he.action.label + '</a>'; }
+      if(he.action){ var tgt = /^(mailto:|https?:)/.test(he.action.href) ? ' target="_blank" rel="noopener"' : ''; /* HOME-NAV PATCH 2 */ var dn = (he.action.href && he.action.href.charAt(0)==='#') ? ' data-nav="'+he.action.href+'"' : ''; h += '<a class="b-action" href="' + he.action.href + '"' + dn + tgt + '>' + he.action.label + '</a>'; }
       h += '</div></div>';
     }
     function block(c){
