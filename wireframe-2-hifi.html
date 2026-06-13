@@ -221,6 +221,18 @@
    .cd-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
    .cd-tag{font-size:12px;color:var(--ink-dim);background:var(--glass);border:1px solid var(--glass-edge);border-radius:999px;padding:6px 12px;}
   
+    /* === SEARCH-OVERLAY PATCH === */
+  #searchFab{position:fixed;right:16px;bottom:18px;z-index:60;width:46px;height:46px;border-radius:50%;display:none;align-items:center;justify-content:center;background:var(--glass-strong);border:1px solid var(--glass-edge);box-shadow:var(--shadow);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;}
+  #searchFab svg{width:20px;height:20px;fill:none;stroke:var(--teal);stroke-width:2.2;}
+  body.section-open #searchFab{display:flex;}
+  body.search-open #searchFab{display:none;}
+  #searchOverlay{position:fixed;inset:0;z-index:120;display:none;flex-direction:column;background:rgba(6,18,21,0.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:calc(env(safe-area-inset-top) + 56px) 18px 24px;}
+  body.search-open #searchOverlay{display:flex;}
+  #searchOverlay .so-head{display:flex;align-items:center;justify-content:space-between;margin:0 2px 16px;}
+  #searchOverlay .so-title{font-family:Fraunces,serif;font-size:20px;color:var(--ink);}
+  #searchOverlay .so-close{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-edge);color:var(--ink);font-size:20px;cursor:pointer;line-height:1;}
+  #searchOverlay .search-wrap{margin-top:0;max-width:100%;width:100%;}
+  /* === /SEARCH-OVERLAY PATCH === */
   </style>
 </head>
 <body>
@@ -525,11 +537,13 @@
     }
     menu.classList.add('hidden');
     carousel.classList.remove('hidden');
+    document.body.classList.add('section-open'); /* SEARCH-OVERLAY PATCH */
   }
   function closeSection(){
     if(detailOpen){ closeDetail(); return; }
     carousel.classList.add('hidden');
     menu.classList.remove('hidden');
+    document.body.classList.remove('section-open'); if(typeof closeSearch==='function') closeSearch(); /* SEARCH-OVERLAY PATCH */
     try{sessionStorage.removeItem('mk_view');}catch(e){}
   }
   back.addEventListener('click', closeSection);
@@ -647,6 +661,44 @@
     return Math.max(best, simAll*0.6);
   }
   function jumpToAnswer(key, i){ jumpTo(key, i); }
+  /* === SEARCH-OVERLAY PATCH (logic) === */
+  function jumpTo(key, idx){
+    closeSearch();
+    if(typeof hideResults==='function') hideResults();
+    var si=document.getElementById('searchInput'); if(si){ si.value=''; }
+    var sc=document.getElementById('searchClear'); if(sc){ sc.style.display='none'; }
+    if(!key || !DATA[key]) return;
+    if(key==='work'){
+      openSection('work');
+      var items=(DATA.work&&DATA.work.items)||[];
+      var it=items[idx];
+      if(it && it.detail && PROJECTS[it.detail]){ setTimeout(function(){ openDetail(it.detail); }, 60); }
+      else { setTimeout(function(){ if(typeof centerCardTo==='function') centerCardTo(idx||0); }, 80); }
+    } else {
+      openSection(key);
+    }
+  }
+  var soBody=document.getElementById('searchOverlayBody');
+  var sFab=document.getElementById('searchFab');
+  var sOverlayClose=document.getElementById('searchOverlayClose');
+  function openSearch(){
+    var sw=document.querySelector('.search-wrap');
+    if(sw && soBody && sw.parentNode!==soBody){ soBody.appendChild(sw); }
+    document.body.classList.add('search-open');
+    var si=document.getElementById('searchInput'); if(si){ setTimeout(function(){ si.focus(); }, 50); }
+  }
+  function closeSearch(){
+    if(!document.body.classList.contains('search-open')) { /* still ensure parent */ }
+    document.body.classList.remove('search-open');
+    var sw=document.querySelector('.search-wrap');
+    var mn=document.getElementById('menu');
+    if(sw && mn && sw.parentNode!==mn){ mn.appendChild(sw); }
+    if(typeof hideResults==='function') hideResults();
+  }
+  if(sFab){ sFab.addEventListener('click', openSearch); sFab.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openSearch(); } }); }
+  if(sOverlayClose){ sOverlayClose.addEventListener('click', closeSearch); sOverlayClose.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); closeSearch(); } }); }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && document.body.classList.contains('search-open')){ closeSearch(); } });
+  (function(){ var sa=document.querySelector('.act[title="Search"]'); if(sa){ sa.style.cursor='pointer'; sa.addEventListener('click', openSearch); } })();
   function runSearch(q){
     q = (q||"").trim();
     if(!q){ hideResults(); return; }
@@ -696,7 +748,19 @@
     document.addEventListener("click", function(e){ if(!e.target.closest(".search-wrap")) hideResults(); });
   }
   try{var _v=sessionStorage.getItem('mk_view'); if(_v&&DATA[_v]) openSection(_v);}catch(e){}
-})();
-</script>
+})();</script>
+  <!-- ===== SEARCH-OVERLAY PATCH (markup) ===== -->
+  <div id="searchFab" role="button" tabindex="0" aria-label="Search" title="Search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  </div>
+  <div id="searchOverlay" aria-hidden="true">
+    <div class="so-head">
+      <div class="so-title fr">Search</div>
+      <div class="so-close" id="searchOverlayClose" role="button" tabindex="0" aria-label="Close search">✕</div>
+    </div>
+    <div id="searchOverlayBody"></div>
+  </div>
+
+
 </body>
 </html>
