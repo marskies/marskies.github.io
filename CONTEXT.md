@@ -1091,3 +1091,20 @@ Cosmic Catch gallery = 7 images: cc-gameplay, cc-menu, cc-collect, cc-melody, cc
 IMAGE COUNTS for the remaining projects (first item is the existing card hero): tick-tock-trivia 9, yuumi-chan 4, insane-wizard 7, ice-accessibility 5, uf-club-software 4, startea 5, nutrition-app 4, social-media-cys 4. Roles to pull from each project stats (per Marina: per-project, use actual role text). Include all photos per project (Marina: do all photos).
 
 TEMPLATE now (each project): PROJECTS["id"] = {id,title,subtitle,role,badge,award,img,gallery:[...],stats,methods,tools,links,chapters:[{key,label,html}]} + detail:"id" on the Work card.
+
+
+## PROJECT-PAGES batch 2 log 2026-06-13 — Learn To Leap upgraded + Tick Tock Trivia + Yuumi-Chan
+
+Applied the new detail template (gallery + role + title-below-image) to Learn To Leap, and built 2 more full project pages. All on wireframe-2-hifi.html. Committed in one feature commit + this log.
+
+LEARN TO LEAP (upgrade): the render fixes (role eyebrow, title below image, gallery) already applied automatically since the renderer is generic; just needed data. Added role:"Lead Researcher & Designer" and a gallery of all 8 LTL images (prototype, tutorials, framework, dataviz, data, booth, visitors, award). Verified live: role eyebrow shows, title sits below, arrows + 8 dots work.
+
+TICK TOCK TRIVIA (new): role Producer & UX Lead, award Best in Show, 9-image gallery, stats (Role/Timeline 3 Months/Team 6 Developers/Recognition Best in Show), methods, tools (Unity/Figma/Canva/ChatGPT API), Play Prototype + Behance links, 4 chapters Overview/Final Piece/Process/Outcome. detail:"tick-tock-trivia" wired on the card. Verified live: opens on first tap, gallery/role/award/links render, Process tab switches with real copy.
+
+YUUMI-CHAN: RENT IS DUE! (new): role Producer, no formal award so award field used for status line "On Steam · YouTube Coverage", 4-image gallery, stats (Role/Timeline 4 Months/Team 25 Members · 8 Leads/Reception YouTube Coverage), methods, tools (Unity/Miro/Canva/Discord), Play Prototype (krillshot-games itch) + Behance links, 4 chapters Overview/The Challenge/Process/Outcome. detail:"yuumi-chan" wired. Verified live: opens, full title renders, The Challenge tab shows correct copy incl. question marks.
+
+METHOD NOTE: chapter html was extracted from each desktop page by walking subhead (span/ab-lbl/strong) + <p> pairs into <div><span>head</span><p>..</p></div> blocks (figure images dropped), then the whole PROJECTS object serialized with JSON.stringify so all quotes/apostrophes/specials escape safely (cleaner than hand-using U+2019).
+
+FLAG for Marina (badge ribbon): Learn To Leap has badge:"Featured" in its data, which renders as an absolutely-positioned ribbon. With the new title-below-image layout it now sits at the bottom-left of the image and clips against the rounded corner (looks broken). Options: drop the badge on LTL, or restyle/reposition the .badge ribbon. (Cosmic Catch / TTT / Yuumi have empty badge so they are unaffected.) Awaiting her call.
+
+PROJECT PAGES STATUS: DONE = Learn To Leap (full), Cosmic Catch, Tick Tock Trivia, Yuumi-Chan. REMAINING (6): Insane Wizard (7 imgs), ICE Accessibility Audit (5), UF Club Software (4), StarTea (5), Nutrition App (4), Social Media CYS (4).
