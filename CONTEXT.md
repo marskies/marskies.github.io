@@ -1219,3 +1219,24 @@ Marina: pos:right pushed Learn To Leap too far (its a very wide 4926x1783 ~2.76:
 - NOTE for Marina: social crawlers (FB/LinkedIn/iMessage) cache aggressively, so a preview may need a re-scrape / take time to refresh. Also the og:image is ~3MB which is large for a card; could swap to a smaller/optimized version later if it loads slowly.
 - PARKED PER MARINA (do after animations): move this new site to root marskies.github.io and shift the current homepage to marskies.github.io/version1. This is a structural index.html rename/restructure for Marina to drive when animations are done.
 - REMAINING roadmap: app-ish mobile version; the three animation items (BG, page selection, panel transitions = motion phase, parked for last); then the root/version1 swap.
+
+
+---
+
+## ANIM-1: BACKGROUND LIGHT RAYS (committed, live)
+Animation phase started. Item 1 of 3 (background animation) DONE.
+
+What: animated underwater god-rays / sunbeams streaming down from the top of the menu/page background, brightest at top and fading toward the bottom.
+
+Marina's iteration path: started with drifting glow blobs (rejected as not shiny enough), then caustic interference blobs (closer), then she asked for downward light-ray LINES like a reference photo she shared, then asked for randomized non-uniform behaviour, then asked for soft feathered edges (bright core fading to transparent) that blend into the bg + animated per-beam width. Approved the feathered version.
+
+Final implementation (identical in both files):
+- A blurred (blur 8px), screen-blended #mk-rays-wrap fixed layer at z-index -1, masked to fade out toward the bottom (~88%).
+- 8 individual .mk-beam elements (id mk-beam-0..7) at IRREGULAR left% / widths, each containing an inner <i> whose linear-gradient is transparent at both edges -> bright core (feathered, no hard lines).
+- Each beam runs 3 desynced animations on mismatched timers: move/rotate (transform on .mk-beam, 19-33s), brightness flicker (opacity on <i>, 5-9s), width breathe (scaleX 0.55->1.4 on <i>, 8-15s). Transform split across outer/inner so move and scaleX don't collide.
+- Gated behind @media (prefers-reduced-motion: reduce) -> animation:none.
+- Self-contained: <style id=mk-rays-style> before </head> + static beam markup right after <body>. No JS dependency. +6445 chars per file.
+
+Commits: wireframe-2-hifi.html 113824->120269 ('Add animated underwater light rays to menu background'); mockup.html 98579->105024 ('Add animated underwater light rays to website background'). Both verified live (rays render over the real underwater photo on both mobile wireframe and desktop site).
+
+NEXT: animation item 2 = page-selection transitions, then item 3 = panel transitions. Root/version1 swap still parked for after all animations.
