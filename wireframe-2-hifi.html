@@ -664,6 +664,15 @@
   /* === SEARCH-OVERLAY PATCH (logic) === */
   function jumpTo(key, idx){
     closeSearch();
+    /* SEARCH-JUMP DETAIL-RESET: drop any open project detail before switching sections */
+    try{
+      if(typeof detailOpen!=="undefined" && detailOpen){
+        if(cdetailEl){ cdetailEl.classList.remove("on"); cdetailEl.setAttribute("aria-hidden","true"); cdetailEl.innerHTML=""; }
+        var __jce=[cstage,document.querySelector(".actions"),document.querySelector(".c-hint")];
+        __jce.forEach(function(el){ if(el) el.style.display=""; });
+        detailOpen=false; if(typeof returnToBento!=="undefined") returnToBento=null;
+      }
+    }catch(e){}
     if(typeof hideResults==='function') hideResults();
     var si=document.getElementById('searchInput'); if(si){ si.value=''; }
     var sc=document.getElementById('searchClear'); if(sc){ sc.style.display='none'; }
