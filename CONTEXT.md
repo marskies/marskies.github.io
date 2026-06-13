@@ -1184,3 +1184,7 @@ A) Per-card thumbnail image positioning. The carousel card image is a CSS backgr
 B) Renamed nutrition-app detail page title from Nutrition Tracker to Nutrition Tracking App so the detail header matches the Work card label (Marina asked to align nutrition naming).
 File 112134 -> 112208 chars. Verified live (bust 850).
 NOTE for future image tweaks: to shift any card thumbnail, add pos:<css background-position value> (e.g. right, left, top, 70% 30%) to that items DATA.work entry; the renderer handles it.
+
+
+## WORK-THUMB-LTL-REFINE
+Marina: pos:right pushed Learn To Leap too far (its a very wide 4926x1783 ~2.76:1 panoramic 3-person award photo; the two subjects she wants are the woman in green + the woman holding the award on the RIGHT side). Changed Learn To Leap pos right -> 58% center so those two are centered/balanced in the card (small sliver of the left man remains for context). Tested 55% and 58% live; 58% chosen. File 112208 -> 112213. Verified live bust 870 (ltlPos=58% center).
