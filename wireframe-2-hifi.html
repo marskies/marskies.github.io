@@ -235,6 +235,12 @@
   /* === /SEARCH-OVERLAY PATCH === */
   
   /* === A11Y PATCH: accessibility panel (mirrors desktop mockup) === */
+  #a11yTop{position:fixed;top:13px;right:16px;z-index:90;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--glass-strong);border:1px solid var(--glass-edge);box-shadow:var(--shadow);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;}
+  #a11yTop svg{width:20px;height:20px;fill:none;stroke:var(--teal);stroke-width:2.2;}
+  #a11yTop:active{transform:scale(.92);}
+  body.a11y-open #a11yTop{display:none;}
+  body.a11y-reduce-motion *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
+
   #a11yOverlay{position:fixed;inset:0;z-index:130;display:none;flex-direction:column;background:rgba(6,18,21,0.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:18px 16px;}
   body.a11y-open #a11yOverlay{display:flex;}
   body.a11y-open #searchFab{display:none;}
@@ -249,8 +255,8 @@
   .a11y-sw::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:var(--ink-dim);transition:transform .18s,background .18s;}
   .a11y-opt[aria-checked="true"] .a11y-sw{background:var(--copper);}
   .a11y-opt[aria-checked="true"] .a11y-sw::after{transform:translateX(19px);background:#fff;}
-  body.a11y-large-text #menu .grid{zoom:1.12;}
-  body.a11y-large-text #carousel{zoom:1.12;}
+  body.a11y-large-text #menu .grid{zoom:1.25;}
+  body.a11y-large-text #carousel{zoom:1.25;}
   body.a11y-contrast{--glass:rgba(6,20,24,0.94);--glass-strong:rgba(4,16,20,0.97);--glass-edge:rgba(255,255,255,0.42);--ink:#ffffff;--ink-dim:#eaf6f7;--ink-quiet:#cfe4e6;--teal:#aef0f2;--copper:#ffb27a;}
   body.a11y-contrast *{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
 </style>
@@ -283,7 +289,6 @@
     </div>
     <div class="c-stage" id="cstage"></div>
     <div class="actions">
-      <div class="act glass" id="a11yFab" role="button" tabindex="0" title="Accessibility options" aria-label="Accessibility options"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="1.6"/><path d="M3 8h18M12 8v6m0 0l-3.5 6m3.5-6l3.5 6"/></svg></div>
       <div class="act glass" title="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
     </div>
     <div class="c-detail" id="cdetail" aria-hidden="true"></div>
@@ -734,7 +739,7 @@
   /* === A11Y PATCH: panel open/close + persistent toggles (key marskies_a11y, shared with desktop) === */
   function openA11y(){ document.body.classList.add("a11y-open"); var ov=document.getElementById("a11yOverlay"); if(ov) ov.setAttribute("aria-hidden","false"); }
   function closeA11y(){ document.body.classList.remove("a11y-open"); var ov=document.getElementById("a11yOverlay"); if(ov) ov.setAttribute("aria-hidden","true"); }
-  var A11Y_MAP={ "a11y-large-text":"a11y-large-text", "a11y-contrast":"a11y-contrast" };
+  var A11Y_MAP={ "a11y-large-text":"a11y-large-text", "a11y-contrast":"a11y-contrast", "a11y-reduce-motion":"a11y-reduce-motion" };
   var A11Y_STORE="marskies_a11y";
   function a11yLoad(){ try{ return JSON.parse(localStorage.getItem(A11Y_STORE))||{}; }catch(_){ return {}; } }
   function a11ySave(st){ try{ localStorage.setItem(A11Y_STORE, JSON.stringify(st)); }catch(_){} }
@@ -742,8 +747,7 @@
   function a11yToggle(id){ var st=a11yLoad(); st[id]=!st[id]; a11ySave(st); a11yApply(st); }
   function a11yInit(){
     a11yApply(a11yLoad());
-    var fab=document.getElementById("a11yFab");
-    if(fab && !fab.__wired){ fab.__wired=1; fab.addEventListener("click", openA11y); fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openA11y(); } }); }
+    ["a11yFab","a11yTop"].forEach(function(fid){ var fab=document.getElementById(fid); if(fab && !fab.__wired){ fab.__wired=1; fab.addEventListener("click", openA11y); fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openA11y(); } }); } });
     var cl=document.getElementById("a11yClose");
     if(cl && !cl.__wired){ cl.__wired=1; cl.addEventListener("click", closeA11y); cl.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); closeA11y(); } }); }
     Object.keys(A11Y_MAP).forEach(function(id){ var el=document.getElementById(id); if(el && !el.__wired){ el.__wired=1; el.addEventListener("click", function(){ a11yToggle(id); }); el.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); a11yToggle(id); } }); } });
@@ -811,6 +815,7 @@
     </div>
     <div id="searchOverlayBody"></div>
   </div>
+  <div id="a11yTop" role="button" tabindex="0" title="Accessibility options" aria-label="Accessibility options"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="1.6"/><path d="M3 8h18M12 8v6m0 0l-3.5 6m3.5-6l3.5 6"/></svg></div>
   <div id="a11yOverlay" aria-hidden="true">
     <div class="so-head">
       <div class="so-title fr">Accessibility</div>
@@ -823,6 +828,10 @@
       </div>
       <div class="a11y-opt" id="a11y-contrast" role="checkbox" tabindex="0" aria-checked="false">
         <div><div class="a11y-name">High contrast</div><div class="a11y-desc">Boost contrast for readability</div></div>
+        <div class="a11y-sw" aria-hidden="true"></div>
+      </div>
+      <div class="a11y-opt" id="a11y-reduce-motion" role="checkbox" tabindex="0" aria-checked="false">
+        <div><div class="a11y-name">Reduce motion</div><div class="a11y-desc">Minimize animations and transitions</div></div>
         <div class="a11y-sw" aria-hidden="true"></div>
       </div>
     </div>
