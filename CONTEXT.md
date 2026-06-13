@@ -1041,7 +1041,7 @@ DONE this arc (not on her current list but completed earlier in these sessions):
 - Accessibility panel — replaced the dead Expand button with a working a11y panel; made it a persistent fixed top-right button (#a11yTop) on EVERY screen; three toggles: Bigger text, High contrast, Reduce motion; persisted in localStorage marskies_a11y (shares key/IDs with the desktop mockup).
 
 REMAINING (Marina's order):
-1. Change menu "back" control to be more accessible (new location and/or simplified) — OPEN. Last open Phase 2 item. Current back control lives in the .c-top fixed header (left, .back glass #back, 38px); #a11yTop now sits top-right.
+1. Change menu "back" control to be more accessible — DONE. Replaced the small "‹ Menu" text pill with a round glass back button (chevron only) in the BOTTOM-LEFT thumb zone, mirroring the bottom-right search button. 46px tap target, aria-label "Back to menu" for screen readers, teal chevron on glass-strong. Shows on body.section-open, hides on search/a11y open. Same closeSection handler (#back preserved). Page title now centers cleanly in the header.
 2. Create work/project pages using Learn To Leap as the template, with all content pulled from the web version — OPEN (NEW). Learn To Leap mobile detail already exists and is the pattern; build the other projects to match, copy sourced from the desktop site / per-project HTML.
 3. Fix images across the site — OPEN. Hero images already live in /images; per-page wiring still needs doing on mobile.
 4. Improve font size — DONE. Base type larger by default everywhere (zoom 1.12 on #menu .grid and #carousel, marker DEFAULT-LARGE); Bigger text toggle raises to 1.25. Verified formatting holds across menu / Home bento / Work detail. Easy to retune (the two zoom numbers).
@@ -1050,3 +1050,12 @@ REMAINING (Marina's order):
 7. BG animation — OPEN. Motion bundle, saved for LAST per Marina.
 8. Animation between page selection — OPEN. Motion bundle (last).
 9. Animation between panels on page change — OPEN. Motion bundle (last). Reduce-motion toggle CSS is already in place to gate all of these.
+
+
+## BACK-FAB feature log 2026-06-13 — round bottom-left back button (wireframe-2-hifi.html)
+
+Marina picked option C from the back-button options and asked for chevron-only (no text). Implemented (marker BACK-FAB):
+- Markup: the header back div (<div class="back glass" id="back">‹ Menu</div>) became <button class="back-fab glass" id="back" aria-label="Back to menu"> with a chevron-only inline SVG (polyline). Kept id="back" so the existing back.addEventListener click→closeSection handler still wires it. Added a matching left spacer so .c-top keeps the title centered now that the button is out of flow.
+- CSS (#back, inserted with the other round controls): position:fixed; left:16px; bottom:18px; 46px circle; glass-strong + glass-edge + shadow + blur (matches #searchFab exactly but mirrored to the left). Teal chevron SVG (var(--teal), stroke-width 2.2, round caps). :active scale .92. Visibility: display:none by default; body.section-open #back{display:flex} (shows whenever a section/detail is open, same trigger as the search fab); hidden on body.search-open and body.a11y-open.
+- Result: back (bottom-left) and search (bottom-right) now sit symmetrically in the phone thumb zone; #a11yTop stays top-right; page title centered up top. Verified live (?bust=back3): chevron renders, tapping returns to the full menu grid and the button correctly disappears on the menu. 44px+ target + aria-label keeps it accessible despite being icon-only.
+Commit on wireframe-2-hifi.html. The old .back/.c-title flex CSS for the header pill is now effectively unused for #back positioning (left in place; harmless).
