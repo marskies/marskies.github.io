@@ -1030,3 +1030,23 @@ Feature (Accessibility panel, marker A11Y PATCH): replaced the dead Expand butto
 A11y follow-ups (same A11Y PATCH feature): (1) Moved the accessibility button to a PERSISTENT fixed top-right home (#a11yTop, top:13px right:16px, glass circle, teal glyph) so it appears on EVERY screen incl. the menu (previously it was only in .actions and missing on the menu). Removed the old #a11yFab from .actions. Both ids are wired in a11yInit via a forEach so either works. (2) Added a third toggle "Reduce motion" (#a11y-reduce-motion) to the panel + A11Y_MAP; CSS body.a11y-reduce-motion * kills animation/transition durations (ready for Phase 6 motion). (3) LARGER DEFAULT TYPE everywhere (marker DEFAULT-LARGE): added always-on baseline zoom 1.12 on #menu .grid and #carousel so all pages render bigger by DEFAULT (no toggle needed). The "Bigger text" toggle (body.a11y-large-text rules) overrides the baseline to zoom 1.25 when ON (zoom does NOT stack across rules — the more-specific toggle rule replaces the 1.12 value). Tested live across menu/Home bento/Work detail at both 1.12 default and 1.25 toggle-on: formatting holds, panes still hug + scroll their own content, no overflow/clipping, single-viewport rule intact. Levels are easy to tune (change the two zoom numbers). NOTE: brand block (logo+name) on the menu is outside .grid so it does NOT scale — looked intentional/balanced, left as-is.
 
 Phase 2 mobile to-do status: 'search button works on interior pages' = DONE. Still open in Phase 2: replace expand button with accessibility button; more accessible Menu/back control. Then Phase 3 content, Phase 4 polish, motion last.
+
+
+## MOBILE TODO SNAPSHOT 2026-06-13b — Marina's mobile list (status reconciled)
+
+Marina pasted her current mobile to-do and asked to record done vs remaining. Her list, in her order, with status. All work is on wireframe-2-hifi.html (the winning mobile direction); mockup.html stays read-only reference; index.html / projects.js untouched.
+
+DONE this arc (not on her current list but completed earlier in these sessions):
+- Search-result stacking bug — jumpTo now drops any open project detail before switching sections, so tapping a search result fully replaces the page (no more contact-over-project overlay).
+- Accessibility panel — replaced the dead Expand button with a working a11y panel; made it a persistent fixed top-right button (#a11yTop) on EVERY screen; three toggles: Bigger text, High contrast, Reduce motion; persisted in localStorage marskies_a11y (shares key/IDs with the desktop mockup).
+
+REMAINING (Marina's order):
+1. Change menu "back" control to be more accessible (new location and/or simplified) — OPEN. Last open Phase 2 item. Current back control lives in the .c-top fixed header (left, .back glass #back, 38px); #a11yTop now sits top-right.
+2. Create work/project pages using Learn To Leap as the template, with all content pulled from the web version — OPEN (NEW). Learn To Leap mobile detail already exists and is the pattern; build the other projects to match, copy sourced from the desktop site / per-project HTML.
+3. Fix images across the site — OPEN. Hero images already live in /images; per-page wiring still needs doing on mobile.
+4. Improve font size — DONE. Base type larger by default everywhere (zoom 1.12 on #menu .grid and #carousel, marker DEFAULT-LARGE); Bigger text toggle raises to 1.25. Verified formatting holds across menu / Home bento / Work detail. Easy to retune (the two zoom numbers).
+5. Hook this into the current site's mobile version — OPEN. Phase 5 (integration), after content + images are settled.
+6. Make sure the page name is accurate — OPEN. Audit titles / labels across screens.
+7. BG animation — OPEN. Motion bundle, saved for LAST per Marina.
+8. Animation between page selection — OPEN. Motion bundle (last).
+9. Animation between panels on page change — OPEN. Motion bundle (last). Reduce-motion toggle CSS is already in place to gate all of these.
