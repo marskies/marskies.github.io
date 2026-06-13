@@ -108,8 +108,58 @@ section.frame.is-active{display:flex !important}
 /* keep inner columns within the screen; scroll internally only if a short viewport forces it */
 section.frame .side-stack,section.frame .rail,section.frame .about-left,section.frame .contact-right,section.frame .case{overflow-y:auto;scrollbar-width:thin}
 </style>
+<style id="mk-rays-style">
+/* === Underwater light rays (animated god-rays) === */
+#mk-rays-wrap{position:fixed;inset:0;z-index:-1;pointer-events:none;mix-blend-mode:screen;filter:blur(8px);overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,0.8) 35%,rgba(0,0,0,0) 88%);mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,0.8) 35%,rgba(0,0,0,0) 88%);}
+.mk-beam{position:absolute;top:-20%;height:140%;transform-origin:50% 0%;will-change:transform;}
+.mk-beam>i{display:block;width:100%;height:100%;transform-origin:50% 0%;will-change:transform,opacity;}
+#mk-beam-0{left:8%;width:9vw;margin-left:-4.5vw;animation:mkMv0 21s ease-in-out infinite alternate;}
+#mk-beam-0>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.056) 28%,rgba(238,253,253,0.16) 50%,rgba(220,248,248,0.056) 72%,rgba(220,248,248,0) 100%);animation:mkFl0 6.5s ease-in-out infinite alternate,mkWd0 10.3s ease-in-out infinite alternate;}
+@keyframes mkMv0{0%{transform:translateX(-1.5%) rotate(-8deg);}100%{transform:translateX(1.5%) rotate(-6deg);}}
+@keyframes mkFl0{0%{opacity:0.35;}45%{opacity:1;}100%{opacity:0.50;}}
+@keyframes mkWd0{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-1{left:19%;width:5vw;margin-left:-2.5vw;animation:mkMv1 29s ease-in-out infinite alternate;}
+#mk-beam-1>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.038) 28%,rgba(238,253,253,0.11) 50%,rgba(220,248,248,0.038) 72%,rgba(220,248,248,0) 100%);animation:mkFl1 8.1s ease-in-out infinite alternate,mkWd1 13.7s ease-in-out infinite alternate;}
+@keyframes mkMv1{0%{transform:translateX(-1.5%) rotate(-5deg);}100%{transform:translateX(1.5%) rotate(-3deg);}}
+@keyframes mkFl1{0%{opacity:0.45;}45%{opacity:1;}100%{opacity:0.58;}}
+@keyframes mkWd1{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-2{left:31%;width:12vw;margin-left:-6vw;animation:mkMv2 24s ease-in-out infinite alternate;}
+#mk-beam-2>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.063) 28%,rgba(238,253,253,0.18) 50%,rgba(220,248,248,0.063) 72%,rgba(220,248,248,0) 100%);animation:mkFl2 5.3s ease-in-out infinite alternate,mkWd2 9.1s ease-in-out infinite alternate;}
+@keyframes mkMv2{0%{transform:translateX(-1.5%) rotate(-10deg);}100%{transform:translateX(1.5%) rotate(-8deg);}}
+@keyframes mkFl2{0%{opacity:0.55;}45%{opacity:1;}100%{opacity:0.66;}}
+@keyframes mkWd2{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-3{left:46%;width:6vw;margin-left:-3vw;animation:mkMv3 33s ease-in-out infinite alternate;}
+#mk-beam-3>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.035) 28%,rgba(238,253,253,0.1) 50%,rgba(220,248,248,0.035) 72%,rgba(220,248,248,0) 100%);animation:mkFl3 9.4s ease-in-out infinite alternate,mkWd3 12.2s ease-in-out infinite alternate;}
+@keyframes mkMv3{0%{transform:translateX(-1.5%) rotate(-3deg);}100%{transform:translateX(1.5%) rotate(-1deg);}}
+@keyframes mkFl3{0%{opacity:0.35;}45%{opacity:1;}100%{opacity:0.74;}}
+@keyframes mkWd3{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-4{left:58%;width:10vw;margin-left:-5vw;animation:mkMv4 19s ease-in-out infinite alternate;}
+#mk-beam-4>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.052) 28%,rgba(238,253,253,0.15) 50%,rgba(220,248,248,0.052) 72%,rgba(220,248,248,0) 100%);animation:mkFl4 7.7s ease-in-out infinite alternate,mkWd4 11.5s ease-in-out infinite alternate;}
+@keyframes mkMv4{0%{transform:translateX(-1.5%) rotate(2deg);}100%{transform:translateX(1.5%) rotate(4deg);}}
+@keyframes mkFl4{0%{opacity:0.45;}45%{opacity:1;}100%{opacity:0.50;}}
+@keyframes mkWd4{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-5{left:70%;width:5vw;margin-left:-2.5vw;animation:mkMv5 27s ease-in-out infinite alternate;}
+#mk-beam-5>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.032) 28%,rgba(238,253,253,0.09) 50%,rgba(220,248,248,0.032) 72%,rgba(220,248,248,0) 100%);animation:mkFl5 6s ease-in-out infinite alternate,mkWd5 14.6s ease-in-out infinite alternate;}
+@keyframes mkMv5{0%{transform:translateX(-1.5%) rotate(5deg);}100%{transform:translateX(1.5%) rotate(7deg);}}
+@keyframes mkFl5{0%{opacity:0.55;}45%{opacity:1;}100%{opacity:0.58;}}
+@keyframes mkWd5{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-6{left:80%;width:13vw;margin-left:-6.5vw;animation:mkMv6 23s ease-in-out infinite alternate;}
+#mk-beam-6>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.059) 28%,rgba(238,253,253,0.17) 50%,rgba(220,248,248,0.059) 72%,rgba(220,248,248,0) 100%);animation:mkFl6 8.8s ease-in-out infinite alternate,mkWd6 8.7s ease-in-out infinite alternate;}
+@keyframes mkMv6{0%{transform:translateX(-1.5%) rotate(7deg);}100%{transform:translateX(1.5%) rotate(9deg);}}
+@keyframes mkFl6{0%{opacity:0.35;}45%{opacity:1;}100%{opacity:0.66;}}
+@keyframes mkWd6{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+#mk-beam-7{left:91%;width:7vw;margin-left:-3.5vw;animation:mkMv7 31s ease-in-out infinite alternate;}
+#mk-beam-7>i{background:linear-gradient(90deg,rgba(220,248,248,0) 0%,rgba(220,248,248,0.042) 28%,rgba(238,253,253,0.12) 50%,rgba(220,248,248,0.042) 72%,rgba(220,248,248,0) 100%);animation:mkFl7 5.9s ease-in-out infinite alternate,mkWd7 12.9s ease-in-out infinite alternate;}
+@keyframes mkMv7{0%{transform:translateX(-1.5%) rotate(4deg);}100%{transform:translateX(1.5%) rotate(6deg);}}
+@keyframes mkFl7{0%{opacity:0.45;}45%{opacity:1;}100%{opacity:0.74;}}
+@keyframes mkWd7{0%{transform:scaleX(0.55);}55%{transform:scaleX(1.4);}100%{transform:scaleX(0.85);}}
+@media (prefers-reduced-motion: reduce){.mk-beam,.mk-beam>i{animation:none !important;}}
+</style>
 </head>
 <body>
+<!-- Underwater light rays -->
+<div id="mk-rays-wrap" aria-hidden="true"><div class="mk-beam" id="mk-beam-0"><i></i></div><div class="mk-beam" id="mk-beam-1"><i></i></div><div class="mk-beam" id="mk-beam-2"><i></i></div><div class="mk-beam" id="mk-beam-3"><i></i></div><div class="mk-beam" id="mk-beam-4"><i></i></div><div class="mk-beam" id="mk-beam-5"><i></i></div><div class="mk-beam" id="mk-beam-6"><i></i></div><div class="mk-beam" id="mk-beam-7"><i></i></div></div>
+
 <style>
   /* ===== FRAME SHELL ===== */
   .frame{
