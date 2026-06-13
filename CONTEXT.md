@@ -1177,3 +1177,10 @@ A) Added the last 3 project detail pages -> ALL 10 now built. Same pipeline (fai
 B) CHAPTER SUB-LABEL DIVIDER STYLE (Marina request): the sub-section labels inside each chapter (e.g. The Game, The Question, The Brand, My Role) were previously UNSTYLED inline spans flush against their paragraph. There was NO .cd-chapbody span rule. Added: .cd-chapbody>div>span{display:block;font-weight:700;color:var(--ink);margin:18px 0 8px;} and .cd-chapbody>div:first-child>span{margin-top:0;}. Result: each sub-label now bold + bright + on its own line with a line-space below (and space above to separate from prior paragraph). Single CSS rule => applies to EVERY project automatically.
 File 100905 -> 112134 chars. Verified live (bust 830): StarTea, Nutrition Tracker, Social Media Campaign all open from Work with gallery dots 5/4/4, role eyebrow, chapter tabs; bold-spaced sub-labels confirmed on StarTea + Nutrition + Social + Learn To Leap.
 STATUS: all 10 project detail pages complete.
+
+
+## WORK-THUMB-POSITION + NUTRITION-RENAME
+A) Per-card thumbnail image positioning. The carousel card image is a CSS background-image on .c-hero (background-position was center for all). Added optional pos field on Work card items: buildCards now appends ;background-position:<pos> to the c-hero inline style when it.pos exists (hero line: ...url(it.img) + (it.pos? ;background-position:+it.pos : ) ...). Set Learn To Leap pos:right (image anchored to RIGHT edge) and Cosmic Catch pos:left (anchored to LEFT edge), per Marina. Other cards unchanged (still center). Tested live first via injected backgroundPosition then committed; verified fresh build shows ltlPos=right center, ccPos=left center.
+B) Renamed nutrition-app detail page title from Nutrition Tracker to Nutrition Tracking App so the detail header matches the Work card label (Marina asked to align nutrition naming).
+File 112134 -> 112208 chars. Verified live (bust 850).
+NOTE for future image tweaks: to shift any card thumbnail, add pos:<css background-position value> (e.g. right, left, top, 70% 30%) to that items DATA.work entry; the renderer handles it.
