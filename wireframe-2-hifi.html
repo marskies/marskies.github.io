@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-<title>Marina DiPonio — Menu / Carousel (hi-fi mockup)</title>
+<title>Marina DiPonio · Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -477,7 +477,7 @@
     cdetailEl.scrollTop = 0;
     var carEls=[cstage,document.querySelector(".actions"),document.querySelector(".c-hint")];
     carEls.forEach(function(el){ if(el) el.style.display="none"; });
-    ctitle.textContent = p.title;
+    ctitle.textContent = p.title;document.title=ctitle.textContent+' · Marina DiPonio';
     detailOpen = true;
     wireChapters(p);
     wireGallery(p);
@@ -486,10 +486,10 @@
     cdetailEl.classList.remove("on"); cdetailEl.setAttribute("aria-hidden","true"); cdetailEl.innerHTML="";
     var carEls=[cstage,document.querySelector(".actions"),document.querySelector(".c-hint")];
     carEls.forEach(function(el){ if(el) el.style.display=""; });
-    ctitle.textContent = (DATA[current]&&DATA[current].title)||"Work";
+    ctitle.textContent = (DATA[current]&&DATA[current].title)||"Work";document.title=ctitle.textContent+' · Marina DiPonio';
     detailOpen = false;
     /* HOME-NAV PATCH: restore originating bento */
-    if(returnToBento){ var __rk=returnToBento; returnToBento=null; var __bn=document.getElementById('cbento'); if(__rk!=='work' && __bn){ var __ce=[cstage,document.querySelector('.actions'),document.querySelector('.c-hint')]; __ce.forEach(function(el){ if(el) el.style.display='none'; }); __bn.style.display='block'; __bn.scrollTop=0; __bn.innerHTML=renderBento(__rk); ctitle.textContent=DATA[__rk].title; } }
+    if(returnToBento){ var __rk=returnToBento; returnToBento=null; var __bn=document.getElementById('cbento'); if(__rk!=='work' && __bn){ var __ce=[cstage,document.querySelector('.actions'),document.querySelector('.c-hint')]; __ce.forEach(function(el){ if(el) el.style.display='none'; }); __bn.style.display='block'; __bn.scrollTop=0; __bn.innerHTML=renderBento(__rk); ctitle.textContent=DATA[__rk].title;document.title=ctitle.textContent+' · Marina DiPonio'; } }
   }
   var detailOpen = false;
 
@@ -599,7 +599,7 @@
     function openSection(key){
     current=key; idx=0;
     try{sessionStorage.setItem('mk_view',key);}catch(e){}
-    ctitle.textContent = DATA[key].title;
+    ctitle.textContent = DATA[key].title;document.title=ctitle.textContent+' · Marina DiPonio';
     var carEls = [cstage, document.querySelector('.actions'), document.querySelector('.c-hint')];
     var bento = document.getElementById('cbento');
     if(key === 'work'){
@@ -621,7 +621,7 @@
   function closeSection(){
     if(detailOpen){ closeDetail(); return; }
     carousel.classList.add('hidden');
-    menu.classList.remove('hidden');
+    menu.classList.remove('hidden');document.title='Marina DiPonio · Portfolio';
     document.body.classList.remove('section-open'); if(typeof closeSearch==='function') closeSearch(); /* SEARCH-OVERLAY PATCH */
     try{sessionStorage.removeItem('mk_view');}catch(e){}
   }
