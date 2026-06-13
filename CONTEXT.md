@@ -1134,3 +1134,16 @@ Marina reported the Work screen was still broken (big empty void above the first
 **Fix (the JS-centering proposal Marina chose):** removed the vertical scroll-snap from the Work carousel so JS centering is authoritative → deleted `scroll-snap-type:y proximity` + `scroll-padding-top` from `.c-stage` and `scroll-snap-align:center` from both `.c-card` and `.c-card.expanded`. Kept `centerCardTo()` as-is (proven correct once snap stops fighting it). The horizontal `scroll-snap-type:x mandatory` on the detail `.cd-track` image gallery was left intact (separate, intentional).
 
 Verified live at default zoom AND with Bigger Text (1.25) on: first card, a middle card (Cosmic Catch), and last card all center cleanly with folded neighbors visible above/below and no header clip. File length 84576 → 84473. Committed + verified on main and live. Marker: CAROUSEL-SNAP-FIX.
+
+---
+
+## Work carousel first-card fix (top void + bottom clip)
+
+Marina: the first card (Learn To Leap) had a ton of space above it and its bottom was cut off / cutting into the card below. Root cause: the expanded card was `58vh` → too tall for the stage once the 1.12 reading-zoom is applied, so even when centered it overflowed the bottom; and on open it sometimes did not center at all (the on-open `centerCardTo(0)` fired after only 30ms, before layout/images/zoom settled, leaving scrollTop at 0 with a ~440px void).
+
+**Fix (all measured live before committing):**
+- Expanded card + hero height `58vh` → **`46vh`** (fits with the next cards peeking; no bottom clip).
+- `centerCardTo()` target biased **up by 80px** so the active card sits slightly above dead-center → less empty space at the top, more of the following cards visible below (Marina wanted less top space, still centered feel).
+- On-open settle delay `30ms` → **`120ms`** so centering runs after layout/zoom settle (fixes the intermittent uncentered-on-open).
+
+Verified live (default zoom): first card (Learn To Leap), a middle card (Cosmic Catch), and the list all center cleanly → tight top gap, full card visible, no bottom clip, neighbors peek below. Note: getBoundingClientRect measurements are unreliable here because the `.view` zoom desyncs layout vs visual coords → screenshots are ground truth. File length 84473 → 84477. Committed + verified on main and live. Marker: CAROUSEL-FIRSTCARD-FIX.
