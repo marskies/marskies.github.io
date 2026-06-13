@@ -1122,3 +1122,15 @@ Commit 2c5f937. Three fixes to wireframe-2-hifi.html, all verified live (?bust):
 **Note / heads-up:** Marina made her own follow-up commit f98f89d directly in the GitHub web UI right after (~18:45→19:03), message "reduce folded-card top gap to ~10px; add UI/UX Designer t..." (+2/-2 lines). So the current HEAD of wireframe-2-hifi.html is HERS, not the agent build (she tightened the ~140px gap toward ~10px and added a UI/UX Designer subtitle/tag). Future edits must pull the live HEAD first and not overwrite her tweak.
 
 **Correction follow-up:** the header gap was overshot on the first try (92px → ~140px clearance). Dialed `scroll-padding-top` / `scroll-margin-top` back to **74px** (header 64 + ~10px) → folded-card-above clearance now ~26px, snug. Also added **UI/UX Designer** to Yuumi-Chan role (`Producer · UI/UX Designer`). wireframe length 84559 → 84576.
+
+---
+
+## Work carousel "messed up" → root cause found + fixed
+
+Marina reported the Work screen was still broken (big empty void above the first expanded card; folded cards clipping under the header / off the bottom). Earlier spacing tweaks (74px etc.) did not fix it because the gap was not the real issue.
+
+**Root cause (diagnosed via DOM measurement + screenshots):** the accessibility "comfortable reading" zoom on the `.view` content (1.12 default, 1.25 with Bigger Text) scales the carousel visually, and `scroll-snap` on `.c-stage` was fighting the JS `centerCardTo()` positioning. Measured the exact visual/layout ratio = 1.120 (stage layout height 797px rendered at 893px). After `centerCardTo()` set the centered scrollTop, proximity snapping yanked it to a different card-snap point → producing the void above the first card and the header/bottom clipping. The centering math itself is correct in layout space (verified: removing snap gave a clean symmetric center).
+
+**Fix (the JS-centering proposal Marina chose):** removed the vertical scroll-snap from the Work carousel so JS centering is authoritative → deleted `scroll-snap-type:y proximity` + `scroll-padding-top` from `.c-stage` and `scroll-snap-align:center` from both `.c-card` and `.c-card.expanded`. Kept `centerCardTo()` as-is (proven correct once snap stops fighting it). The horizontal `scroll-snap-type:x mandatory` on the detail `.cd-track` image gallery was left intact (separate, intentional).
+
+Verified live at default zoom AND with Bigger Text (1.25) on: first card, a middle card (Cosmic Catch), and last card all center cleanly with folded neighbors visible above/below and no header clip. File length 84576 → 84473. Committed + verified on main and live. Marker: CAROUSEL-SNAP-FIX.
