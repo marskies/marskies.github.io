@@ -1210,3 +1210,12 @@ Marina: pos:right pushed Learn To Leap too far (its a very wide 4926x1783 ~2.76:
 - wireframe-2-hifi.html: added a subtle teal 'View desktop site' link in the #menu (centered, below the search-wrap) -> mockup.html?desktop=1. File 112747 -> 112976.
 - Verified live: desktop (1480px in automation) stays on mockup, no console errors; routing logic validated across phone/tablet/desktop + desktop-param + previously-forced cases; full round-trip clicked live: wireframe 'View desktop site' -> mockup.html?desktop=1 and sessionStorage mk_forceDesktop set to 1. NOTE: automation viewport is locked ~1480px so the actual phone redirect couldn't be triggered visually, but the decision logic was unit-checked and the desktop path confirmed.
 - REMAINING roadmap: app-ish mobile version; the three animation items (BG, page selection, panel transitions = motion phase, parked for last).
+
+
+## SOCIAL-PREVIEW META (Open Graph + Twitter)
+- Added OG + Twitter Card meta to BOTH mockup.html and wireframe-2-hifi.html (inserted right after the viewport meta in <head>). So a pasted link unfurls as 'Marina DiPonio's Portfolio' on social/chat.
+- Tags: og:type=website, og:site_name + og:title + twitter:title = "Marina DiPonio's Portfolio"; og:description + twitter:description = "Games User Researcher & Player Experience Designer · Six shipped games in two years"; og:image + twitter:image = ABSOLUTE https://marskies.github.io/images/portrait2.JPG (graduation portrait, ~3MB, returns 200 live); twitter:card=summary_large_image; og:url is per-page (mockup.html vs wireframe-2-hifi.html).
+- mockup.html 97741 -> 98579; wireframe-2-hifi.html 112976 -> 113824. Verified live: rendered meta read back correct, image URL 200.
+- NOTE for Marina: social crawlers (FB/LinkedIn/iMessage) cache aggressively, so a preview may need a re-scrape / take time to refresh. Also the og:image is ~3MB which is large for a card; could swap to a smaller/optimized version later if it loads slowly.
+- PARKED PER MARINA (do after animations): move this new site to root marskies.github.io and shift the current homepage to marskies.github.io/version1. This is a structural index.html rename/restructure for Marina to drive when animations are done.
+- REMAINING roadmap: app-ish mobile version; the three animation items (BG, page selection, panel transitions = motion phase, parked for last); then the root/version1 swap.
