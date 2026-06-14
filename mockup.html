@@ -1842,5 +1842,33 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   if(document.readyState!=="loading"){ start(); } else { window.addEventListener("DOMContentLoaded", start); }
 })();
 </script>
+<script id="mk-panel-js">
+(function(){
+  if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var DUR=420;
+  function animateIn(el){
+    if(el.__mkAnim){ try{el.__mkAnim.cancel();}catch(e){} }
+    var a=el.animate(
+      [{opacity:0, transform:"translateY(10px)"},
+       {opacity:1, transform:"translateY(0)"}],
+      {duration:DUR, easing:"cubic-bezier(0.33,0.9,0.3,1)", fill:"both"}
+    );
+    el.__mkAnim=a;
+    a.onfinish=function(){ el.style.transform=""; el.style.opacity=""; el.__mkAnim=null; };
+  }
+  function start(){
+    var panels=document.querySelectorAll(".about-body, .chapter-body");
+    if(!panels.length) return;
+    var obs=new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        var el=m.target;
+        if(el.classList.contains("on")){ animateIn(el); }
+      });
+    });
+    panels.forEach(function(p){ obs.observe(p,{attributes:true,attributeFilter:["class"]}); });
+  }
+  if(document.readyState!=="loading"){ start(); } else { window.addEventListener("DOMContentLoaded", start); }
+})();
+</script>
 </body>
 </html>
