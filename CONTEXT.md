@@ -1,4 +1,22 @@
-# Submerged · Portfolio Mockup · Context Doc
+
+
+---
+
+## END-OF-SESSION SUMMARY (for next Claude)
+
+This session's work, all committed to main and live-verified:
+
+1. Off the Clock copy now consistent on BOTH desktop and mobile: "Just spent 2 weeks back home in Puerto Rico and I'm heading back to Florida to help my twin siblings move into college at UNF." (desktop index.html line 864 commit 964240b last session; mobile.html updated this session.)
+2.
+3. 2. Light rays (ANIM-1) are now actually VISIBLE on desktop AND mobile (they were rendering but buried). Desktop: #mk-rays-wrap z-index -1 -> 0 (commit d7f1665). Mobile: html,body background set to transparent so the body::before image + rays show through (committed). Rays are position:fixed body children, so they play continuously behind moving content (the "video background" Marina wanted) and persist across all sections.
+   3.
+   4. 3. ANIM-2 page-to-page bento morph: still DESKTOP ONLY (unchanged, per Marina).
+      4.
+      5. 4. ANIM-3 in-panel tab transition: ported to mobile (commit d2f3984) - on accordion (<details.b-acc>) open, .b-acc-body fades + slides up with the same params as desktop (420ms, cubic-bezier(0.33,0.9,0.3,1)). Respects reduced-motion.
+         5.
+         6. 5. Desktop audio pill: removed the "Ambient · Underwater" text; label now reads SOUND OFF / SOUND ON based on play state (commit b14a8e0). Icons kept. Driven by a small script hooking the <audio id="ambient"> play/pause events.
+            6.
+            7. Files touched: index.html, mobile.html, CONTEXT.md. mockup.html left untouched (unused). Standing rules still apply: plan before editing, edit only index.html + mobile.html, don't add unrequested features, match the design system.# Submerged · Portfolio Mockup · Context Doc
 
 > Handoff doc for resuming work on the Submerged portfolio mockup with Claude.
 > Last updated: session that added the site-wide image lightbox (v5.3) and fixed the cursor z-index so it shows above the overlay.
