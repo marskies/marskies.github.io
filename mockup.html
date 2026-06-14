@@ -1772,13 +1772,6 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 <style id="mk-morph-style">
 @media (prefers-reduced-motion: no-preference){
   .mk-morphing{ will-change: transform; }
-  .frame .pane.mk-morphing, .frame .side-stack.mk-morphing, .frame .shelf-wrap.mk-morphing{
-    background: rgba(20,54,60,0.92) !important;
-    border: 1.5px solid var(--teal,#8fd4d6) !important;
-    border-radius: 22px !important;
-    box-shadow: 0 0 0 1px rgba(143,212,214,0.25), 0 22px 60px rgba(0,0,0,0.55) !important;
-    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
-  }
   .mk-morph-content-fade > *{ animation: mkContentFade .62s ease both; }
   @keyframes mkContentFade{ 0%{opacity:0;} 45%{opacity:0;} 100%{opacity:1;} }
 }
