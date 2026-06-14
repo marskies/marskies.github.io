@@ -1772,8 +1772,8 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 <style id="mk-morph-style">
 @media (prefers-reduced-motion: no-preference){
   .mk-morphing{ will-change: transform; }
-  .mk-morph-content-fade > *{ animation: mkContentFade .42s ease both; }
-  @keyframes mkContentFade{ 0%{opacity:0;} 35%{opacity:0;} 100%{opacity:1;} }
+  .mk-morph-content-fade > *{ animation: mkContentFade .62s ease both; }
+  @keyframes mkContentFade{ 0%{opacity:0;} 45%{opacity:0;} 100%{opacity:1;} }
 }
 </style>
 <script id="mk-morph-js">
@@ -1798,7 +1798,7 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   function activeFrame(){ return document.querySelector(".frame.is-active"); }
   function refreshLast(){ var a=activeFrame(); if(a){ lastRects=captureRects(a); lastFrameId=a.id; } }
   function runMorph(inFrame){
-    var DUR=450;
+    var DUR=800;
     var outRects=lastRects.slice();
     topPanes(inFrame).forEach(function(p){
       var r=p.getBoundingClientRect();
