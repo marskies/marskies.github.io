@@ -1356,3 +1356,16 @@ ANIMATION BLOCKER DIAGNOSED ("the thing with an h"): the light rays (#mk-rays-wr
   - ANIM-3 MOBILE PORT (commit d2f3984): added a small script before </body> in mobile.html that mirrors the desktop in-panel transition. On open of each <details.b-acc> accordion card it animates the .b-acc-body with a fade + slide-up, using the SAME params as desktop ANIM-3: keyframes [{opacity:0,translateY(10px)} -> {opacity:1,translateY(0)}], duration 420ms, easing cubic-bezier(0.33,0.9,0.3,1), fill both. Respects prefers-reduced-motion. Verified live (How I Work card fades/slides on expand).
  
   - FILES TOUCHED this session: index.html (rays z-index), mobile.html (copy + bg transparency + ANIM-3 port), CONTEXT.md. mockup.html left untouched (unused).
+
+
+## SESSION UPDATE — Audio pill label now shows SOUND ON/OFF (desktop)
+
+Marina asked to remove the "Ambient · Underwater" text from the desktop sound player and instead show "SOUND ON" / "SOUND OFF" depending on whether audio is playing. The play/visualizer icons are left intact.
+
+DESKTOP (index.html, commit b14a8e0):
+- The audio pill is <div class="audio-pill">: a .wave visualizer span, the #aud-toggle play/pause button (▶/⏸), and a label span. The label span was <span>Ambient · Underwater</span> with no id.
+- - Edit 1: changed it to <span id="aud-label">SOUND OFF</span> (audio starts paused, so SOUND OFF is the correct initial state).
+  - - Edit 2: added a small self-contained script before </body> that hooks the <audio id="ambient"> element's native play/pause events and sets #aud-label.textContent to 'SOUND ON' (playing) or 'SOUND OFF' (paused), and runs once on load. This is decoupled from the existing minified toggle handler, so it stays in sync no matter how state changes.
+    - - Verified live: shows SOUND OFF on load, flips to SOUND ON on play, back to SOUND OFF on pause. Icons unchanged.
+     
+      - Note: this change was made to the desktop site only (index.html), per the request. mobile.html audio UI was not touched.
