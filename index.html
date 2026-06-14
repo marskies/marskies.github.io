@@ -559,7 +559,7 @@ section.frame .side-stack,section.frame .rail,section.frame .about-left,section.
     <div class="audio-pill">
       <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
       <button id="aud-toggle" aria-label="toggle ambient audio">▶</button>
-      <span>Ambient · Underwater</span>
+      <span id="aud-label">SOUND OFF</span>
     </div>
   </div>
   <div class="row nav-row">
@@ -1870,5 +1870,5 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   if(document.readyState!=="loading"){ start(); } else { window.addEventListener("DOMContentLoaded", start); }
 })();
 </script>
-</body>
+<script>/* Ambient audio label: reflect on/off state */(function(){var a=document.getElementById('ambient'),l=document.getElementById('aud-label');if(!a||!l)return;function sync(){l.textContent=a.paused?'SOUND OFF':'SOUND ON';}a.addEventListener('play',sync);a.addEventListener('pause',sync);sync();})();</script></body>
 </html>
