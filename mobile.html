@@ -952,5 +952,5 @@
   </div>
 
 
-</body>
+<script>/* ANIM-3 (mobile port): in-panel content reveal on accordion open. Fade+slide-up, mirrors desktop. */(function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;function play(card){var body=card.querySelector('.b-acc-body');if(!body)return;try{body.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,easing:'cubic-bezier(0.33,0.9,0.3,1)',fill:'both'});}catch(e){}}function init(){document.querySelectorAll('details.b-acc').forEach(function(c){if(c.__mkP)return;c.__mkP=1;c.addEventListener('toggle',function(){if(c.open)play(c);});});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}})();</script></body>
 </html>
