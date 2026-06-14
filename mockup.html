@@ -1769,66 +1769,41 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  if(document.readyState!=='loading')build(); else document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
-<style id="mk-morph-style">
+<style id="mk-fly-style">
 @media (prefers-reduced-motion: no-preference){
-  .mk-morphing{ will-change: transform; }
-  .mk-morph-content-fade > *{ animation: mkContentFade .62s ease both; }
-  @keyframes mkContentFade{ 0%{opacity:0;} 45%{opacity:0;} 100%{opacity:1;} }
+  .mk-fly-in{ will-change: transform, opacity; }
 }
 </style>
-<script id="mk-morph-js">
+<script id="mk-fly-js">
 (function(){
-  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(REDUCED) return;
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var DUR=620, STAGGER=90, DIST=46;
   function topPanes(fr){
     return Array.prototype.filter.call(fr.children, function(c){
-      return c.classList.contains("pane") || c.classList.contains("side-stack") || c.classList.contains("shelf-wrap");
+      return c.classList.contains("pane")||c.classList.contains("side-stack")||c.classList.contains("shelf-wrap");
     });
   }
-  function captureRects(fr){
-    return topPanes(fr).map(function(p){ var r=p.getBoundingClientRect(); return {x:r.left,y:r.top,w:r.width,h:r.height}; });
-  }
-  function nearest(rect, list){
-    var cx=rect.x+rect.w/2, cy=rect.y+rect.h/2, best=null, bd=Infinity;
-    list.forEach(function(o){ var ox=o.x+o.w/2, oy=o.y+o.h/2; var d=Math.hypot(ox-cx,oy-cy); if(d<bd){bd=d;best=o;} });
-    return best;
-  }
-  var lastRects=[];
-  var lastFrameId=null;
   function activeFrame(){ return document.querySelector(".frame.is-active"); }
-  function refreshLast(){ var a=activeFrame(); if(a){ lastRects=captureRects(a); lastFrameId=a.id; } }
-  function runMorph(inFrame){
-    var DUR=800;
-    var outRects=lastRects.slice();
-    topPanes(inFrame).forEach(function(p){
-      var r=p.getBoundingClientRect();
-      var tgt={x:r.left,y:r.top,w:r.width,h:r.height};
-      var src=nearest(tgt, outRects)||tgt;
-      var dx=src.x-tgt.x, dy=src.y-tgt.y;
-      var sx=(tgt.w?src.w/tgt.w:1), sy=(tgt.h?src.h/tgt.h:1);
-      p.classList.add("mk-morphing");
-      var anim=p.animate(
-        [
-          {transform:"translate("+dx+"px,"+dy+"px) scale("+sx+","+sy+")", opacity:0.65},
-          {transform:"translate(0,0) scale(1,1)", opacity:1}
-        ],
-        {duration:DUR, easing:"cubic-bezier(0.5,0,0.2,1)", fill:"both"}
+  var lastId=null;
+  function run(){
+    var fr=activeFrame(); if(!fr) return;
+    if(fr.id===lastId) return;
+    lastId=fr.id;
+    var panes=topPanes(fr);
+    panes.forEach(function(p,i){
+      var dx=(i===0?-DIST*0.5:(i===panes.length-1?DIST*0.5:0));
+      p.classList.add("mk-fly-in");
+      var a=p.animate(
+        [{transform:"translate("+dx+"px,"+DIST+"px) scale(0.965)",opacity:0},
+         {transform:"translate(0,0) scale(1)",opacity:1}],
+        {duration:DUR, delay:i*STAGGER, easing:"cubic-bezier(0.22,1,0.36,1)", fill:"both"}
       );
-      anim.onfinish=function(){ p.classList.remove("mk-morphing"); p.style.transform=""; };
-      p.classList.add("mk-morph-content-fade");
-      setTimeout(function(){ p.classList.remove("mk-morph-content-fade"); }, DUR+60);
+      a.onfinish=function(){ p.classList.remove("mk-fly-in"); p.style.transform=""; p.style.opacity=""; };
     });
-    setTimeout(refreshLast, DUR+80);
   }
-  function onChange(){
-    var inFrame=activeFrame();
-    if(!inFrame) return;
-    if(inFrame.id===lastFrameId){ return; }
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ runMorph(inFrame); }); });
-  }
-  window.addEventListener("hashchange", onChange);
-  window.addEventListener("resize", function(){ refreshLast(); });
-  if(document.readyState!=="loading"){ refreshLast(); } else { window.addEventListener("DOMContentLoaded", refreshLast); }
+  function init(){ var fr=activeFrame(); if(fr) lastId=fr.id; }
+  window.addEventListener("hashchange", function(){ requestAnimationFrame(function(){ requestAnimationFrame(run); }); });
+  if(document.readyState!=="loading"){ init(); } else { window.addEventListener("DOMContentLoaded", init); }
 })();
 </script>
 </body>
