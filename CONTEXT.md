@@ -1326,3 +1326,14 @@ Fix committed to main (commit f52c2f4): index.html line 5 redirect now also trig
 Per Marina: iPads SHOULD go to the mobile version (confirmed). mockup.html was intentionally left unchanged this session — Marina is no longer using mockup.html.
 
 Verified: logic tested against sample UAs — iPhone/Android/iPadOS/old iPad all redirect; desktop Mac (no touch) and desktop Windows stay on desktop; desktop Mac at 600px width still redirects (width fallback intact). Live: ?desktop=1 stays on root desktop; /mobile loads the bento layout fine.
+
+
+## SESSION UPDATE — Off the Clock copy + animation inventory
+
+COPY EDIT (committed to main, commit 964240b): index.html line 864, the "Off the Clock" blurb in the About > Currently panel changed from the old "Heading to Italy soon to visit family..." text to: "Just spent 2 weeks back home in Puerto Rico and I'm heading back to Florida to help my twin siblings move into college at UNF." Verified live on the desktop site (About > Currently). Note: this "Off the Clock" line lives only in index.html (and the unused mockup.html); the mobile bento site (mobile.html) does not have this About text at all, so no mobile edit was needed.
+
+ANIMATION INVENTORY (Marina asked "where are the animations, I want them on mobile AND desktop"). Findings after auditing index.html, mobile.html, and mockup.html:
+ANIM-1 background light rays (mk-beam / mk-rays): present on BOTH desktop (index.html) AND mobile (mobile.html, css starts ~line 298). Already on mobile. No action needed.
+ANIM-2 page-to-page bento morph (mk-fly-js / mk-morph, FLIP via MutationObserver on .frame .is-active): DESKTOP ONLY (index.html + mockup.html). NOT in mobile.html.
+ANIM-3 in-panel tab transition (mk-panel-js, MutationObserver on .about-body / .chapter-body for the "on" class): DESKTOP ONLY (index.html + mockup.html). NOT in mobile.html.
+So: of the 3 animations, only the light rays exist on mobile. ANIM-2 and ANIM-3 are desktop-only because the mobile site is a different layout (bento tiles + search, no multi-pane frames or in-panel tabs), so those two animations have no equivalent DOM to hook on mobile. Porting them would mean designing new mobile-appropriate motion, not a copy-paste. PARKED pending Marina's direction on what mobile motion she wants (e.g., tile entrance/tap animations) before building anything.
