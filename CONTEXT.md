@@ -1249,3 +1249,5 @@ NEXT: animation item 2 = page-selection transitions, then item 3 = panel transit
 - Duration 450ms, ease cubic-bezier(0.5,0,0.2,1). Gated behind prefers-reduced-motion: reduce (script early-returns).
 - Self-contained: <style id=mk-morph-style> + <script id=mk-morph-js> before </body>. Hooks click capture on a[href^=#frame-] + hashchange. +2622 chars (105024->107646).
 - History: first tried fly-in/settle (rejected: created hollow background cards behind side panels). Morph approved by Marina; sped up from 620ms to 450ms.
+
+- ANIM-2 FIX: first version captured outgoing rects on nav click, but the active frame had often already switched -> zero delta = no visible morph. Replaced with continuous lastRects tracking: cache current frame pane rects on load/resize, use as morph source on hashchange, refresh after settle. Now produces real delta. Verified live across HOME/WORK/ABOUT both directions.
