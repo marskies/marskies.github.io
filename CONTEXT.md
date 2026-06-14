@@ -1265,3 +1265,36 @@ Marina: cards should look like the SAME framed cards resizing/repositioning to f
 Marina approved: when switching in-page tabs, the incoming content panel fades in while rising 10px into place (420ms, cubic-bezier(0.33,0.9,0.3,1)). Outgoing panel vanishes instantly (snappy, no cross-fade dead time). Implemented in mockup.html mk-panel-js block (inserted right after mk-fly-js, before </body>). Trigger: MutationObserver on every .about-body (About card: STORY/APPROACH/TOOLS/CURRENTLY) and .chapter-body (case-study frame-c: ll-overview/research/synthesis/design/outcome) panel watching for the 'on' class being added -> animates that incoming panel. One observer covers both tab groups. Reduced-motion gated. Tabs are button.chapter-tab[data-target] toggling the 'on' class (display:block) on the matching panel; old panel loses 'on' (display:none). Verified live on committed page with REAL tab clicks (panel anim fired; active panel switched correctly). mockup.html now 109270 chars.
 
 ALL THREE ANIMATIONS NOW COMPLETE: ANIM-1 light rays (both files), ANIM-2 page morph (FLIP from prev card position, hero pages), ANIM-3 in-panel tab transition. Remaining work: (a) remove 'View desktop version' button from mobile view, (b) URL migration (new site to root marskies.github.io, old homepage to /version1, title 'Marina DiPonio''s Portfolio').
+
+## SESSION UPDATE — desktop button removed; URL migration mapped, DECISION PENDING
+
+### Done this session
+- ANIM-3 in-panel tab transition: COMMITTED & live (mockup.html mk-panel-js, 109270 chars). All 3 animations complete.
+- Removed 'View desktop site' link from mobile view: COMMITTED. Was a single self-contained <a class="desktop-link">View desktop site</a> in wireframe-2-hifi.html, sat between #searchResults and the carousel section. Removed cleanly (file 120269 -> 120040). Verified gone on committed file.
+
+### URL MIGRATION — full structure mapped, AWAITING MARINA'S DECISION (picking up tomorrow)
+GOAL: make root marskies.github.io serve the Submerged site (title 'Marina DiPonio's Portfolio'); move the current/old homepage to version1; auto-detect desktop vs mobile.
+
+KEY FINDING: mockup.html is ALREADY the auto-detecting entry point. Its <head> router script: if URL has ?desktop=1 -> sets sessionStorage mk_forceDesktop=1; if mk_forceDesktop set -> stay desktop; else if viewport width < 768 -> location.replace('wireframe-2-hifi.html'+hash) i.e. go mobile. So desktop visitors get mockup (Submerged desktop), mobile visitors get wireframe-2-hifi (mobile). Auto-detect requirement is already satisfied by mockup.html's logic.
+
+STRUCTURE MAPPED:
+- Old index.html (39685 bytes): self-contained portfolio, title already 'Marina DiPonio's Portfolio'. Does NOT reference mockup/wireframe/projects.js. Has its own 3 .html project links (older project pages). No viewport routing.
+- Submerged ecosystem = mockup.html (desktop, auto-router) + wireframe-2-hifi.html (mobile) + project detail pages (learn-to-leap.html etc.) + projects.js. Project pages' nav bar links back to mockup.html#frame-a/#frame-b/#frame-d/#frame-e (Home/Work/About/Contact). projects.js references wireframe twice.
+- mockup.html og:url = marskies.github.io/mockup.html ; redirect target = wireframe-2-hifi.html (1 ref each).
+- wireframe-2-hifi.html og:url = marskies.github.io/wireframe-2-hifi.html.
+- No version1.html exists yet (no collision).
+
+PROPOSED MIGRATION (the core swap, Marina to approve):
+1. Create version1.html = exact copy of current index.html content (old portfolio preserved at /version1.html). Using a .html file, not a folder, so no internal path rewrites needed.
+2. Overwrite index.html with current mockup.html content (the auto-detecting Submerged desktop entry). Inside the new index.html, update: redirect target stays 'wireframe-2-hifi.html'; set og:url to marskies.github.io/ (root); title -> 'Marina DiPonio's Portfolio'.
+3. Keep mockup.html in place so existing mockup.html#frame-x links from project pages keep working.
+
+OPEN DECISION (Marina to choose tomorrow):
+- OPTION A (SAFER, recommended): leave project pages + projects.js pointing at mockup.html. Zero breakage; root becomes a second door to the same desktop site. No edits to ~6 project files or projects.js.
+- OPTION B (tidier/canonical): rewrite project-page nav links + projects.js to point at '/' (root) so new index is the true canonical home. Touches ~6 project detail files + projects.js.
+- Claude's recommendation: do the index/version1 swap now with OPTION A (keep mockup.html links), zero breakage. Do OPTION B as a later cleanup pass if wanted.
+
+AUTHORIZATION NEEDED before executing (index.html and new files are on the ask-first list):
+- Confirm Claude may CREATE version1.html and OVERWRITE index.html per the plan above.
+- Confirm OPTION A (keep mockup.html links) vs OPTION B (rewrite to root).
+After approval: execute via CodeMirror, commit each, verify live that root serves Submerged (desktop) / redirects mobile to wireframe, and /version1.html serves the old site. Then log + commit CONTEXT.md.
