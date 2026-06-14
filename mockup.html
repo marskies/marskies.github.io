@@ -1783,12 +1783,7 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
       return c.classList.contains("pane")||c.classList.contains("side-stack")||c.classList.contains("shelf-wrap");
     });
   }
-  function activeFrame(){ return document.querySelector(".frame.is-active"); }
-  var lastId=null;
-  function run(){
-    var fr=activeFrame(); if(!fr) return;
-    if(fr.id===lastId) return;
-    lastId=fr.id;
+  function runFly(fr){
     var panes=topPanes(fr);
     panes.forEach(function(p,i){
       var dx=(i===0?-DIST*0.5:(i===panes.length-1?DIST*0.5:0));
@@ -1801,9 +1796,19 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
       a.onfinish=function(){ p.classList.remove("mk-fly-in"); p.style.transform=""; p.style.opacity=""; };
     });
   }
-  function init(){ var fr=activeFrame(); if(fr) lastId=fr.id; }
-  window.addEventListener("hashchange", function(){ requestAnimationFrame(function(){ requestAnimationFrame(run); }); });
-  if(document.readyState!=="loading"){ init(); } else { window.addEventListener("DOMContentLoaded", init); }
+  function start(){
+    var frames=document.querySelectorAll(".frame");
+    if(!frames.length) return;
+    var active=document.querySelector(".frame.is-active");
+    var currentId=active?active.id:null;
+    var obs=new MutationObserver(function(){
+      var a=document.querySelector(".frame.is-active");
+      if(!a) return;
+      if(a.id!==currentId){ currentId=a.id; runFly(a); }
+    });
+    frames.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:["class"]}); });
+  }
+  if(document.readyState!=="loading"){ start(); } else { window.addEventListener("DOMContentLoaded", start); }
 })();
 </script>
 </body>
