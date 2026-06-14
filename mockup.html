@@ -1793,8 +1793,13 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
     list.forEach(function(o){ var ox=o.x+o.w/2, oy=o.y+o.h/2; var d=Math.hypot(ox-cx,oy-cy); if(d<bd){bd=d;best=o;} });
     return best;
   }
-  function runMorph(outRects, inFrame){
+  var lastRects=[];
+  var lastFrameId=null;
+  function activeFrame(){ return document.querySelector(".frame.is-active"); }
+  function refreshLast(){ var a=activeFrame(); if(a){ lastRects=captureRects(a); lastFrameId=a.id; } }
+  function runMorph(inFrame){
     var DUR=450;
+    var outRects=lastRects.slice();
     topPanes(inFrame).forEach(function(p){
       var r=p.getBoundingClientRect();
       var tgt={x:r.left,y:r.top,w:r.width,h:r.height};
@@ -1813,20 +1818,17 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
       p.classList.add("mk-morph-content-fade");
       setTimeout(function(){ p.classList.remove("mk-morph-content-fade"); }, DUR+60);
     });
+    setTimeout(refreshLast, DUR+80);
   }
-  var pendingOut=null;
-  function capOut(){ var out=document.querySelector(".frame.is-active"); pendingOut = out? captureRects(out): []; }
-  document.addEventListener("click", function(e){
-    var a=e.target.closest && e.target.closest("a[href^=\"#frame-\"]");
-    if(a) capOut();
-  }, true);
-  window.addEventListener("hashchange", function(){
-    var id=location.hash.replace("#","");
-    var inFrame=document.getElementById(id);
-    if(!inFrame || !inFrame.classList.contains("frame")) return;
-    var outRects=pendingOut||[];
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ runMorph(outRects, inFrame); }); });
-  });
+  function onChange(){
+    var inFrame=activeFrame();
+    if(!inFrame) return;
+    if(inFrame.id===lastFrameId){ return; }
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ runMorph(inFrame); }); });
+  }
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("resize", function(){ refreshLast(); });
+  if(document.readyState!=="loading"){ refreshLast(); } else { window.addEventListener("DOMContentLoaded", refreshLast); }
 })();
 </script>
 </body>
