@@ -1769,5 +1769,65 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
  if(document.readyState!=='loading')build(); else document.addEventListener('DOMContentLoaded',build);
 })();
 </script>
+<style id="mk-morph-style">
+@media (prefers-reduced-motion: no-preference){
+  .mk-morphing{ will-change: transform; }
+  .mk-morph-content-fade > *{ animation: mkContentFade .42s ease both; }
+  @keyframes mkContentFade{ 0%{opacity:0;} 35%{opacity:0;} 100%{opacity:1;} }
+}
+</style>
+<script id="mk-morph-js">
+(function(){
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(REDUCED) return;
+  function topPanes(fr){
+    return Array.prototype.filter.call(fr.children, function(c){
+      return c.classList.contains("pane") || c.classList.contains("side-stack") || c.classList.contains("shelf-wrap");
+    });
+  }
+  function captureRects(fr){
+    return topPanes(fr).map(function(p){ var r=p.getBoundingClientRect(); return {x:r.left,y:r.top,w:r.width,h:r.height}; });
+  }
+  function nearest(rect, list){
+    var cx=rect.x+rect.w/2, cy=rect.y+rect.h/2, best=null, bd=Infinity;
+    list.forEach(function(o){ var ox=o.x+o.w/2, oy=o.y+o.h/2; var d=Math.hypot(ox-cx,oy-cy); if(d<bd){bd=d;best=o;} });
+    return best;
+  }
+  function runMorph(outRects, inFrame){
+    var DUR=450;
+    topPanes(inFrame).forEach(function(p){
+      var r=p.getBoundingClientRect();
+      var tgt={x:r.left,y:r.top,w:r.width,h:r.height};
+      var src=nearest(tgt, outRects)||tgt;
+      var dx=src.x-tgt.x, dy=src.y-tgt.y;
+      var sx=(tgt.w?src.w/tgt.w:1), sy=(tgt.h?src.h/tgt.h:1);
+      p.classList.add("mk-morphing");
+      var anim=p.animate(
+        [
+          {transform:"translate("+dx+"px,"+dy+"px) scale("+sx+","+sy+")", opacity:0.65},
+          {transform:"translate(0,0) scale(1,1)", opacity:1}
+        ],
+        {duration:DUR, easing:"cubic-bezier(0.5,0,0.2,1)", fill:"both"}
+      );
+      anim.onfinish=function(){ p.classList.remove("mk-morphing"); p.style.transform=""; };
+      p.classList.add("mk-morph-content-fade");
+      setTimeout(function(){ p.classList.remove("mk-morph-content-fade"); }, DUR+60);
+    });
+  }
+  var pendingOut=null;
+  function capOut(){ var out=document.querySelector(".frame.is-active"); pendingOut = out? captureRects(out): []; }
+  document.addEventListener("click", function(e){
+    var a=e.target.closest && e.target.closest("a[href^=\"#frame-\"]");
+    if(a) capOut();
+  }, true);
+  window.addEventListener("hashchange", function(){
+    var id=location.hash.replace("#","");
+    var inFrame=document.getElementById(id);
+    if(!inFrame || !inFrame.classList.contains("frame")) return;
+    var outRects=pendingOut||[];
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ runMorph(outRects, inFrame); }); });
+  });
+})();
+</script>
 </body>
 </html>
