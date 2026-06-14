@@ -1337,3 +1337,22 @@ ANIM-1 background light rays (mk-beam / mk-rays): present on BOTH desktop (index
 ANIM-2 page-to-page bento morph (mk-fly-js / mk-morph, FLIP via MutationObserver on .frame .is-active): DESKTOP ONLY (index.html + mockup.html). NOT in mobile.html.
 ANIM-3 in-panel tab transition (mk-panel-js, MutationObserver on .about-body / .chapter-body for the "on" class): DESKTOP ONLY (index.html + mockup.html). NOT in mobile.html.
 So: of the 3 animations, only the light rays exist on mobile. ANIM-2 and ANIM-3 are desktop-only because the mobile site is a different layout (bento tiles + search, no multi-pane frames or in-panel tabs), so those two animations have no equivalent DOM to hook on mobile. Porting them would mean designing new mobile-appropriate motion, not a copy-paste. PARKED pending Marina's direction on what mobile motion she wants (e.g., tile entrance/tap animations) before building anything.
+
+
+## SESSION UPDATE — Animations now visible on mobile+desktop + mobile copy fix
+
+CORRECTION to previous entry: mobile.html DOES contain the "Off the Clock" copy (it lives in the About view's accordion, under the "How I Work" card, as a .b-text block). It was missed earlier because it sits mid-way in a long minified line. It has now been updated too.
+
+COPY EDIT (mobile.html): "Off the Clock" .b-text changed from the old "Heading to Italy soon to visit family..." to "Just spent 2 weeks back home in Puerto Rico and I'm heading back to Florida to help my twin siblings move into college at UNF." Done via in-editor find/replace. Desktop (index.html line 864) was already updated last session (commit 964240b). Both now match.
+
+ANIMATION BLOCKER DIAGNOSED ("the thing with an h"): the light rays (#mk-rays-wrap) were rendering and animating fine, but were buried.
+- Desktop (index.html): rays were at z-index:-1, which paints BEHIND the body's own background-image. The "h" Marina remembered = the FRAME-SWITCH PATCH rule "html,body{height:100vh;overflow:hidden}". FIX: lifted #mk-rays-wrap to z-index:0 (commit d7f1665) — now rays paint above the background, below content (.frame z:1). Verified live.
+- - Mobile (mobile.html): bg image is on body::before (z:-2), rays at z:-1, but body had an opaque solid background-color (var(--bg-deep)) painting over both negative-z layers. FIX: set html,body background to transparent (committed) so the ::before image AND the rays show through. Verified live.
+ 
+  - CONTINUOUS "VIDEO" BACKGROUND: #mk-rays-wrap is position:fixed and a direct child of body in both files, so it is NOT re-mounted on section/view switches. Background + rays now play continuously behind the moving content on both desktop and mobile, as Marina requested. Rays persist across all mobile sections.
+ 
+  - ANIMATION SCOPE (per Marina): ANIM-2 page-to-page bento morph stays DESKTOP ONLY (unchanged). ANIM-3 in-panel tab transition now ALSO on mobile.
+ 
+  - ANIM-3 MOBILE PORT (commit d2f3984): added a small script before </body> in mobile.html that mirrors the desktop in-panel transition. On open of each <details.b-acc> accordion card it animates the .b-acc-body with a fade + slide-up, using the SAME params as desktop ANIM-3: keyframes [{opacity:0,translateY(10px)} -> {opacity:1,translateY(0)}], duration 420ms, easing cubic-bezier(0.33,0.9,0.3,1), fill both. Respects prefers-reduced-motion. Verified live (How I Work card fades/slides on expand).
+ 
+  - FILES TOUCHED this session: index.html (rays z-index), mobile.html (copy + bg transparency + ANIM-3 port), CONTEXT.md. mockup.html left untouched (unused).
