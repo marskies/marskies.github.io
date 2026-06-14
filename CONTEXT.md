@@ -1315,3 +1315,14 @@ DONE this session (all committed to main, verified live):
 - PARKED / still open: OPTION B (rewrite project pages + projects.js nav to point at root '/') as an optional later cleanup if Marina wants the new index to be the single canonical home.
 
 End of context doc. Good luck.
+
+
+## SESSION UPDATE — MOBILE REDIRECT FIX (device detection)
+
+Problem reported: visiting marskies.github.io on a phone still showed the desktop (Submerged) site instead of /mobile. Root cause: the root redirect (index.html line 5) was width-only (if clientWidth<=768 -> mobile.html), which can fail to fire on some devices/browsers.
+
+Fix committed to main (commit f52c2f4): index.html line 5 redirect now also triggers on user-agent. It redirects to mobile.html when ANY of these is true: width<=768, OR phone UA (Android/iPhone/iPod/BlackBerry/IEMobile/Opera Mini/Mobile/Mobi), OR iPad (UA contains iPad, OR Macintosh UA with maxTouchPoints>1 to catch modern iPadOS). The ?desktop=1 escape hatch + mk_forceDesktop sessionStorage flag are preserved, so desktop can still be forced on a phone.
+
+Per Marina: iPads SHOULD go to the mobile version (confirmed). mockup.html was intentionally left unchanged this session — Marina is no longer using mockup.html.
+
+Verified: logic tested against sample UAs — iPhone/Android/iPadOS/old iPad all redirect; desktop Mac (no touch) and desktop Windows stay on desktop; desktop Mac at 600px width still redirects (width fallback intact). Live: ?desktop=1 stays on root desktop; /mobile loads the bento layout fine.
