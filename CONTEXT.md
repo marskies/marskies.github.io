@@ -1240,3 +1240,12 @@ Final implementation (identical in both files):
 Commits: wireframe-2-hifi.html 113824->120269 ('Add animated underwater light rays to menu background'); mockup.html 98579->105024 ('Add animated underwater light rays to website background'). Both verified live (rays render over the real underwater photo on both mobile wireframe and desktop site).
 
 NEXT: animation item 2 = page-selection transitions, then item 3 = panel transitions. Root/version1 swap still parked for after all animations.
+
+
+## ANIM-2: page-to-page bento morph (done, mockup.html only)
+- Desktop website only (mockup.html); NOT applied to wireframe/mobile per Marina.
+- On nav between frames, top-level panes (.pane / .side-stack / .shelf-wrap) FLIP-morph: incoming panes animate FROM the nearest outgoing pane geometry (translate+scale) so boxes appear to grow/split/merge instead of fly in. Content cross-fades (mkContentFade) to avoid stretch. No hollow ghost boxes.
+- 3-col<->3-col maps column-to-column; 3-col<->Work(single shelf) merges/splits.
+- Duration 450ms, ease cubic-bezier(0.5,0,0.2,1). Gated behind prefers-reduced-motion: reduce (script early-returns).
+- Self-contained: <style id=mk-morph-style> + <script id=mk-morph-js> before </body>. Hooks click capture on a[href^=#frame-] + hashchange. +2622 chars (105024->107646).
+- History: first tried fly-in/settle (rejected: created hollow background cards behind side panels). Morph approved by Marina; sped up from 620ms to 450ms.
