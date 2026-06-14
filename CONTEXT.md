@@ -1298,3 +1298,20 @@ AUTHORIZATION NEEDED before executing (index.html and new files are on the ask-f
 - Confirm Claude may CREATE version1.html and OVERWRITE index.html per the plan above.
 - Confirm OPTION A (keep mockup.html links) vs OPTION B (rewrite to root).
 After approval: execute via CodeMirror, commit each, verify live that root serves Submerged (desktop) / redirects mobile to wireframe, and /version1.html serves the old site. Then log + commit CONTEXT.md.
+
+
+---
+
+## SESSION UPDATE — URL MIGRATION EXECUTED (Marina approved Option A + rename to /mobile)
+
+DONE this session (all committed to main, verified live):
+- version1.html created = exact copy of the old index.html; old portfolio now archived at /version1.html (verified live: original light-blue "Welcome / Marina DiPonio" landing).
+- Renamed wireframe-2-hifi.html -> mobile.html (git rename, history preserved); og:url updated to /mobile.html. Verified live: /mobile serves the bento mobile site.
+- Repointed the mobile redirect in mockup.html from wireframe-2-hifi.html -> mobile.html. projects.js NOT touched (it only has the word "wireframes" in prose, no file ref; the old CONTEXT note "projects.js references wireframe twice" was stale).
+- Overwrote index.html with current mockup.html content + 3 edits: redirect -> mobile.html; og:url -> https://marskies.github.io/ (root); title -> "Marina DiPonio's Portfolio". Verified live: root now serves the Submerged desktop (god-rays + all 3 anims); tab title correct.
+- OPTION A kept: mockup.html left unchanged (still og:url=.../mockup.html, title "Submerged · Mockup"), so existing project-page links (mockup.html#frame-a/b/c/d/e) keep working. Verified: learn-to-leap.html loads; its HOME nav link = mockup.html#frame-a resolves.
+- GOTCHA: the first index.html overwrite commit silently saved the STALE original content (GitHub web editor captured the pre-paste buffer). Fix: clear editor (cmd+a, Delete), paste fresh, confirm buffer = 1874 lines / 107KB BEFORE committing. Second commit (341fcbd) was correct.
+- Verification (all live, cache-busted): root -> Submerged desktop OK; /mobile -> bento mobile OK; /version1.html -> old portfolio OK; /mockup.html -> still desktop OK; project page + nav link OK. Note: automation viewport can't go below ~768px inner-width, so the width-based desktop->mobile auto-redirect couldn't be triggered live, but the redirect code (if w<=768 -> replace mobile.html) is confirmed present in both index.html and mockup.html.
+- PARKED / still open: OPTION B (rewrite project pages + projects.js nav to point at root '/') as an optional later cleanup if Marina wants the new index to be the single canonical home.
+
+End of context doc. Good luck.
