@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole Properties — Wireframes (v3, rentals-first / simple)</title>
+<style>
+  :root{
+    --ink:#2b2b2b; --ink-2:#555; --ink-3:#888;
+    --line:#cfcfcf; --line-2:#dedede;
+    --bg:#ffffff; --bg-2:#f4f4f4; --bg-3:#ececec;
+    --ph:#e4e4e4; --ph-line:#cdcdcd;
+    --btn:#3a3a3a; --btn-ink:#fff;
+    --note-bg:#eaf0f8; --note-bd:#b7cae3; --note-ink:#284c7a;
+    --own:#e9eef4; --own-bd:#b9c9dd;
+    --ten:#eef1ec; --ten-bd:#c3ccbb;
+    --maxw:1120px;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg-3);line-height:1.5}
+  a{color:inherit}
+  button{font-family:inherit}
+  /* ---------- Wireframe control bar ---------- */
+  .wf-bar{position:sticky;top:0;z-index:50;background:#1f1f1f;color:#eee;
+    padding:10px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #000}
+  .wf-bar .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    background:#000;color:#bdbdbd;padding:3px 7px;border-radius:3px;text-transform:uppercase}
+  .wf-bar .title{font-weight:600;font-size:14px}
+  .wf-bar .sub{font-size:12px;color:#9a9a9a}
+  .wf-bar .spacer{flex:1}
+  .wf-bar .pageind{font-size:12px;color:#cfcfcf}
+  .wf-bar .pageind b{color:#fff}
+  .wf-toggle{background:#333;color:#eee;border:1px solid #555;border-radius:5px;padding:6px 11px;font-size:12px;cursor:pointer}
+  .wf-toggle[aria-pressed="true"]{background:var(--note-ink);border-color:var(--note-ink);color:#fff}
+  .wf-toggle:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .wf-legend{background:#fafafa;border-bottom:1px solid var(--line-2);padding:8px 18px;
+    display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-2)}
+  .wf-legend .lg{display:flex;align-items:center;gap:6px}
+  .lg-swatch{width:18px;height:13px;border-radius:2px;display:inline-block}
+  .lg-img{background:var(--ph);border:1px solid var(--ph-line)}
+  .lg-txt{background:repeating-linear-gradient(180deg,var(--ph-line) 0 2px,transparent 2px 5px);border:0;height:11px;width:22px}
+  .lg-note{background:var(--note-bg);border:1px solid var(--note-bd)}
+  /* ---------- Prototype frame ---------- */
+  .frame{max-width:1260px;margin:18px auto;background:var(--bg);
+    box-shadow:0 1px 0 var(--line-2),0 10px 30px rgba(0,0,0,.08)}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  /* ---------- Utility bar (text-first) ---------- */
+  .util-bar{background:var(--bg-2);border-bottom:1px solid var(--line-2)}
+  .util-bar .row{display:flex;align-items:center;gap:12px;height:38px;font-size:12px;color:var(--ink-2)}
+  .util-bar .textus{display:flex;align-items:center;gap:8px}
+  .util-bar .textus b{color:var(--ink);font-weight:700}
+  .util-bar .textus .pill{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--ink);color:#fff;border-radius:4px;padding:2px 7px}
+  .util-bar .call{color:var(--ink-3)}
+  .util-bar .u-spacer{flex:1}
+  .util-link{border:1px solid var(--line);background:var(--bg);border-radius:5px;padding:5px 10px;
+    font-size:12px;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+  .util-link.tenant{background:var(--ten);border-color:var(--ten-bd)}
+  .util-link.owner{background:var(--own);border-color:var(--own-bd)}
+  .util-link:hover{color:var(--ink)}
+  .util-link:focus-visible{outline:2px solid var(--note-ink);outline-offset:1px}
+  /* ---------- Site header ---------- */
+  .site-head{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
+  .site-head .row{display:flex;align-items:center;gap:20px;height:72px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo .mark{width:40px;height:40px;border:1px dashed var(--line);border-radius:6px;
+    display:grid;place-items:center;color:var(--ink-3);font-size:8px;font-family:var(--mono);text-align:center;line-height:1.1}
+  .logo .name{font-weight:700;letter-spacing:.02em;color:var(--ink-2)}
+  .nav{display:flex;gap:2px;margin-left:6px;flex-wrap:wrap}
+  .nav-link{background:none;border:0;cursor:pointer;font-size:13.5px;color:var(--ink-2);padding:8px 11px;border-radius:6px}
+  .nav-link:hover{background:var(--bg-2);color:var(--ink)}
+  .nav-link.current{color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--ink)}
+  .nav-link:focus-visible{outline:2px solid var(--note-ink);outline-offset:1px}
+  .head-spacer{flex:1}
+  .head-cta{border:1px solid var(--btn);background:var(--btn);color:var(--btn-ink);border-radius:6px;
+    padding:9px 14px;font-size:12.5px;cursor:pointer;white-space:nowrap;font-weight:600}
+  .head-cta.ghost{background:none;color:var(--ink-2);border-color:var(--line)}
+  .head-cta:focus-visible{outline:2px solid var(--note-ink);outline-offset:2px}
+  /* ---------- Pages ---------- */
+  .page{display:none}
+  .page.active{display:block}
+  @media (prefers-reduced-motion:no-preference){
+    .page.active{animation:fade .18s ease}
+    @keyframes fade{from{opacity:.25}to{opacity:1}}
+  }
+  .section{padding:48px 0;border-bottom:1px solid var(--bg-2)}
+  .section.tight{padding:34px 0}
+  .section.alt{background:var(--bg-2)}
+  .section.band{background:var(--bg-3)}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
+  h1.wf{font-size:30px;margin:0 0 14px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+  h2.wf{font-size:21px;margin:0 0 12px;color:var(--ink);font-weight:700}
+  h3.wf{font-size:15px;margin:0 0 8px;color:var(--ink-2);font-weight:700}
+  .muted{color:var(--ink-3);font-size:13px}
+  .lines{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+  .line{height:11px;border-radius:3px;background:var(--ph-line);opacity:.65}
+  .line.w90{width:90%}.line.w80{width:80%}.line.w70{width:70%}.line.w60{width:60%}
+  .line.w50{width:50%}.line.w40{width:40%}.line.w30{width:30%}
+  .line.tall{height:13px}
+  .ph-img{background:var(--ph);border:1px solid var(--ph-line);border-radius:6px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--ink-3);text-align:center;padding:14px}
+  .ph-img .ic{width:30px;height:30px;opacity:.5}
+  .ph-img .cap{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+  .h-hero{height:300px}.h-280{height:280px}.h-220{height:220px}.h-180{height:180px}
+  .h-160{height:160px}.h-140{height:140px}.h-120{height:120px}.h-90{height:90px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--btn);color:var(--btn-ink);
+    border:1px solid var(--btn);border-radius:6px;padding:11px 18px;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:none}
+  .btn.ghost{background:none;color:var(--ink-2);border-color:var(--line)}
+  .btn.sm{padding:8px 13px;font-size:12.5px}
+  .btn:focus-visible{outline:2px solid var(--note-ink);outline-offset:2px}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+  .split.rev{grid-template-columns:.95fr 1.05fr}
+  .card{border:1px solid var(--line-2);border-radius:8px;padding:16px;background:var(--bg)}
+  .card.flat{background:var(--bg-2);border-color:var(--bg-3)}
+  .chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12px;color:var(--ink-2);background:var(--bg)}
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+  /* 3 quick-path tiles (RentAppeal style) */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tile{border:1px solid var(--line-2);border-radius:10px;padding:20px;background:var(--bg);cursor:pointer;display:flex;flex-direction:column;gap:6px}
+  .tile:hover{border-color:var(--ink-3)}
+  .tile .ti{width:26px;height:26px;color:var(--ink-3);margin-bottom:4px}
+  .tile h3{margin:0;font-size:15px;color:var(--ink)}
+  .tile .arr{color:var(--ink-3);font-weight:700;margin-top:6px}
+  .tile.tenant{background:var(--ten);border-color:var(--ten-bd)}
+  .tile.owner{background:var(--own);border-color:var(--own-bd)}
+  /* text-us band */
+  .textband{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;text-align:center}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .step{border:1px solid var(--line-2);border-radius:10px;padding:18px;background:var(--bg)}
+  .step .num{font-family:var(--mono);font-size:11px;color:var(--ink-3);border:1px solid var(--line);border-radius:5px;
+    width:24px;height:24px;display:grid;place-items:center;margin-bottom:10px}
+  .step.step1{background:var(--ten);border-color:var(--ten-bd)}
+  .req-list{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .req-list li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink)}
+  .req-list li .bx{width:15px;height:15px;border:1px solid var(--ink-3);border-radius:3px;flex:0 0 auto;margin-top:2px}
+  /* form */
+  .form{border:1px solid var(--line-2);border-radius:8px;padding:22px;background:var(--bg)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12px;color:var(--ink-2);margin-bottom:5px;font-weight:600}
+  .field .input{height:38px;border:1px solid var(--line);border-radius:5px;background:var(--bg-2)}
+  .field .input.area{height:88px}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .captcha{height:56px;border:1px dashed var(--line);border-radius:5px;background:var(--bg-2);
+    display:flex;align-items:center;gap:10px;padding:0 12px;color:var(--ink-3);font-size:12px;font-family:var(--mono)}
+  /* prequalify block at bottom of a listing */
+  .prequal{border:2px solid var(--ten-bd);background:var(--ten);border-radius:12px;padding:24px}
+  .prequal .flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--ink);color:#fff;border-radius:4px;padding:3px 8px;margin-bottom:10px}
+  /* listing card */
+  .listing{border:1px solid var(--line-2);border-radius:8px;overflow:hidden;background:var(--bg)}
+  .listing .meta{padding:13px}
+  .listing .price{font-weight:700;color:var(--ink);font-size:15px}
+  .listing .specs{display:flex;gap:14px;color:var(--ink-3);font-size:12px;margin:7px 0 10px}
+  .filterbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;border:1px solid var(--line-2);
+    border-radius:8px;padding:12px;background:var(--bg-2);margin-bottom:22px}
+  .sel{height:34px;min-width:130px;border:1px solid var(--line);border-radius:5px;background:var(--bg);
+    display:flex;align-items:center;padding:0 11px;color:var(--ink-2);font-size:12.5px;gap:8px}
+  .sel .ic{width:12px;height:12px;opacity:.5;margin-left:auto}
+  .breadcrumb{font-size:12px;color:var(--ink-3);margin-bottom:14px;font-family:var(--mono)}
+  .breadcrumb b{color:var(--ink-2)}
+  .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .logobox{height:52px;border:1px dashed var(--line);border-radius:6px;display:grid;place-items:center;color:var(--ink-3);font-family:var(--mono);font-size:10px}
+  .quote{border-left:3px solid var(--line);padding:6px 0 6px 16px}
+  .faq-row{border:1px solid var(--line-2);border-radius:8px;padding:14px 16px;background:var(--bg);
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  /* build notes */
+  .note{display:none;margin:14px 0;border:1px solid var(--note-bd);background:var(--note-bg);border-radius:7px;padding:11px 13px;font-size:12.5px;color:var(--note-ink)}
+  body.notes-on .note{display:block}
+  .note .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    display:inline-block;background:var(--note-ink);color:#fff;padding:2px 6px;border-radius:3px;margin-right:8px;vertical-align:1px}
+  .note .ref{font-family:var(--mono);font-size:11px;color:var(--note-ink);opacity:.85;display:block;margin-top:6px}
+  /* footer */
+  .site-foot{background:#2a2a2a;color:#cfcfcf;padding:40px 0 26px}
+  .site-foot .ftop{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:26px}
+  .site-foot .name{color:#fff;font-weight:700;margin-bottom:8px}
+  .site-foot .desc{font-size:12.5px;color:#9d9d9d;max-width:250px}
+  .site-foot .textbig{margin-top:12px;font-size:13px;color:#e6e6e6}
+  .site-foot .textbig b{color:#fff}
+  .site-foot h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8f8f8f;margin:0 0 12px;font-family:var(--mono)}
+  .site-foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13px}
+  .site-foot a.fl{color:#cfcfcf;text-decoration:none;cursor:pointer}
+  .site-foot a.fl:hover{color:#fff}
+  .site-foot .social{display:flex;gap:8px;margin-top:12px;align-items:center}
+  .site-foot .social span{height:30px;padding:0 10px;border:1px solid #4a4a4a;border-radius:6px;display:grid;place-items:center;font-size:10px;color:#cfcfcf;font-family:var(--mono)}
+  .site-foot .copy{border-top:1px solid #3d3d3d;margin-top:26px;padding-top:16px;font-size:11.5px;color:#8a8a8a;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  /* toast */
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1f1f1f;color:#fff;
+    padding:11px 16px;border-radius:8px;font-size:12.5px;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:60;max-width:90vw}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:880px){
+    .g3,.g4,.logos,.tiles{grid-template-columns:1fr 1fr}
+    .split,.split.rev,.site-foot .ftop,.steps{grid-template-columns:1fr}
+    .field-row{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){.g2,.g3,.g4,.logos,.tiles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></symbol>
+  <symbol id="ic-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="ic-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="ic-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M15 8l2 2"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></symbol>
+  <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="ic-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+</svg>
+<!-- ===== Wireframe control bar ===== -->
+<div class="wf-bar">
+  <span class="tag">Wireframe v3</span>
+  <span class="title">Parasole Properties</span>
+  <span class="sub">Rentals-first · Simple</span>
+  <span class="spacer"></span>
+  <span class="pageind">Viewing: <b id="pageName">Home</b></span>
+  <button class="wf-toggle" id="notesToggle" aria-pressed="false">Show build notes</button>
+</div>
+<div class="wf-legend">
+  <span style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-3)">LEGEND</span>
+  <span class="lg"><span class="lg-swatch lg-img"></span> image placeholder</span>
+  <span class="lg"><span class="lg-swatch lg-txt"></span> body copy</span>
+  <span class="lg"><span class="lg-swatch lg-note"></span> build note (toggle on)</span>
+  <span class="lg" style="color:var(--ink-3)">Short, rentals-first, text-forward. Modeled on RentAppeal's simplicity.</span>
+</div>
+<div class="frame">
+  <!-- ===== Utility bar: TEXT-FIRST ===== -->
+  <div class="util-bar">
+    <div class="container">
+      <div class="row">
+        <span class="textus"><span class="pill">Text us</span><b>000-000-0000</b></span>
+        <span class="call">or call 000-000-0000</span>
+        <span class="u-spacer"></span>
+        <button class="util-link tenant" id="tenantLogin">Resident Login ↗</button>
+        <button class="util-link owner" id="ownerLogin">Owner Login ↗</button>
+      </div>
+    </div>
+  </div>
+  <!-- ===== Site header ===== -->
+  <header class="site-head">
+    <div class="container">
+      <div class="row">
+        <span class="logo"><span class="mark">CURRENT<br>LOGO</span><span class="name">PARASOLE PROPERTIES</span></span>
+        <nav class="nav" aria-label="Primary">
+          <button class="nav-link current" data-goto="home">Home</button>
+          <button class="nav-link" data-goto="rentals">Available Rentals</button>
+          <button class="nav-link" data-goto="apply">How to Apply</button>
+          <button class="nav-link" data-goto="owners">Owners</button>
+          <button class="nav-link" data-goto="about">About</button>
+          <button class="nav-link" data-goto="contact">Contact</button>
+        </nav>
+        <span class="head-spacer"></span>
+        <button class="head-cta ghost" id="textHead">Text us</button>
+        <button class="head-cta" data-goto="rentals">View rentals</button>
+      </div>
+    </div>
+  </header>
+  <main>
+  <!-- ============================================================ HOME (short) -->
+  <section class="page active" id="pg-home">
+    <!-- 1. Hero -->
+    <div class="section">
+      <div class="container">
+        <div class="split">
+          <div>
+            <p class="eyebrow">Rentals in Scranton / Wilkes-Barre</p>
+            <h1 class="wf">[ Find your next place to rent ]</h1>
+            <div class="lines"><div class="line tall w80"></div></div>
+            <div class="btn-row">
+              <a class="btn" data-goto="rentals">View available rentals</a>
+              <a class="btn ghost" id="textHero">Text us a question</a>
+            </div>
+          </div>
+          <div class="ph-img h-280"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Hero image</span></div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Rentals-first hero, per Jessica: the site's main focus is rentals, not property management. Replaces the failing Slider Revolution hero with a clean static one. "Text us" sits beside the main action because texting is the preferred channel, not calling.
+          <span class="ref">Direction reference: RentAppeal — simple, uncluttered, easy to use.</span></div>
+      </div>
+    </div>
+    <!-- 2. Three quick-path tiles -->
+    <div class="section alt tight">
+      <div class="container">
+        <div class="tiles">
+          <div class="tile tenant" data-goto="rentals">
+            <svg class="ti"><use href="#ic-home"/></svg>
+            <h3>Browse rentals</h3>
+            <div class="muted">See what's available now.</div>
+            <span class="arr">→</span>
+          </div>
+          <div class="tile tenant" data-goto="apply">
+            <svg class="ti"><use href="#ic-doc"/></svg>
+            <h3>How to apply</h3>
+            <div class="muted">Prequalify, then apply. What you'll need.</div>
+            <span class="arr">→</span>
+          </div>
+          <div class="tile owner" data-goto="owners">
+            <svg class="ti"><use href="#ic-key"/></svg>
+            <h3>Own a property?</h3>
+            <div class="muted">Let us manage it.</div>
+            <span class="arr">→</span>
+          </div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Three quick paths, straight from RentAppeal's homepage pattern (Our Rentals / Our Services / List Your Property). Renters get the first two tiles; owners get one clearly secondary tile, keeping Ron's owner leads without making the site about management.</div>
+      </div>
+    </div>
+    <!-- 3. Featured rentals (compact) -->
+    <div class="section tight">
+      <div class="container">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <h2 class="wf" style="margin:0">Available now</h2>
+          <a class="muted" data-goto="rentals" style="cursor:pointer">View all rentals →</a>
+        </div>
+        <div class="grid g3" style="margin-top:16px">
+          <div class="listing"><div class="ph-img h-140"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-140"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-140"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Pulls live from the self-managed listings module. Kept to a single tidy row so the homepage stays short. This is the whole point of the "no 3-mile scroll" note: everything above fits within roughly two screens.</div>
+      </div>
+    </div>
+    <!-- 4. Text-us band -->
+    <div class="section band tight">
+      <div class="container">
+        <div class="textband">
+          <div>
+            <h2 class="wf" style="margin:0">Questions about a rental?</h2>
+            <div class="muted">Text is the fastest way to reach us.</div>
+          </div>
+          <div class="btn-row" style="margin:0">
+            <a class="btn" id="textBand"><svg class="ic" style="width:16px;height:16px"><use href="#ic-txt"/></svg> Text us</a>
+            <a class="btn ghost" data-goto="contact">Other ways to reach us</a>
+          </div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>One short closing prompt instead of the old long stack of sections. Texting leads; calling is offered as the fallback on the Contact page.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ AVAILABLE RENTALS (index) -->
+  <section class="page" id="pg-rentals">
+    <div class="section">
+      <div class="container">
+        <p class="eyebrow">Listings</p>
+        <h1 class="wf">Available Rentals</h1>
+        <div class="muted" style="max-width:640px">Browse current openings. Found one you like? Prequalify for a showing right on the listing.</div>
+        <div class="filterbar" style="margin-top:16px">
+          <span class="sel">Location <svg class="ic"><use href="#ic-chev"/></svg></span>
+          <span class="sel">Bedrooms <svg class="ic"><use href="#ic-chev"/></svg></span>
+          <span class="sel">Price range <svg class="ic"><use href="#ic-chev"/></svg></span>
+          <span class="sel">Sort by <svg class="ic"><use href="#ic-chev"/></svg></span>
+        </div>
+        <div class="grid g3">
+          <div class="listing"><div class="ph-img h-160"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-160"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-160"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-160"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-160"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+          <div class="listing"><div class="ph-img h-160"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Self-managed listings module: add, edit, remove without touching code. This is the front door of the whole site now, so it lives second in the nav, right after Home.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ LISTING DETAIL (prequal at BOTTOM) -->
+  <section class="page" id="pg-listing">
+    <div class="section">
+      <div class="container">
+        <p class="breadcrumb">Home / Available Rentals / <b>Listing name</b></p>
+        <div class="split">
+          <div class="ph-img h-280"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Primary photo</span></div>
+          <div>
+            <h1 class="wf" style="font-size:24px">Listing name</h1>
+            <div class="price" style="font-size:20px">$0,000 / mo</div>
+            <div class="chip-row" style="margin-top:10px"><span class="chip">0 bd</span><span class="chip">0 ba</span><span class="chip">0 sqft</span><span class="chip">City, PA</span></div>
+            <div class="btn-row">
+              <a class="btn" id="listingPrequal">Prequalify for a showing</a>
+              <a class="btn ghost" id="textListing">Text about this rental</a>
+            </div>
+            <div class="muted" style="margin-top:10px">The prequalify questionnaire is at the bottom of this page.</div>
+          </div>
+        </div>
+        <div class="grid g4" style="margin-top:22px">
+          <div class="ph-img h-90"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div>
+          <div class="ph-img h-90"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div>
+          <div class="ph-img h-90"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div>
+          <div class="ph-img h-90"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="section alt tight">
+      <div class="container">
+        <div class="split">
+          <div>
+            <p class="eyebrow">Description</p>
+            <div class="lines"><div class="line w90"></div><div class="line w90"></div><div class="line w80"></div><div class="line w50"></div></div>
+            <p class="eyebrow" style="margin-top:20px">Features</p>
+            <div class="chip-row"><span class="chip">Feature</span><span class="chip">Feature</span><span class="chip">Feature</span><span class="chip">Feature</span></div>
+          </div>
+          <div>
+            <p class="eyebrow">Location</p>
+            <div class="ph-img h-180"><svg class="ic"><use href="#ic-map"/></svg><span class="cap">Embedded map</span></div>
+          </div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>The description holds only the property itself. The long application-requirements wording that used to be crammed in here now lives once, on the How to Apply page, and is summarized in the prequalify block below. That fixes Jessica's note about the "really long wording in the actual property description."</div>
+      </div>
+    </div>
+    <!-- PREQUALIFY QUESTIONNAIRE — at the very bottom of the listing -->
+    <div class="section">
+      <div class="container">
+        <div class="prequal">
+          <span class="flag">Required to book a showing</span>
+          <h2 class="wf">Prequalify for a showing</h2>
+          <div class="muted" style="max-width:640px">A few quick questions. Completing this qualifies you to schedule a showing of this unit. It is not the full application.</div>
+          <div class="form" style="margin-top:16px;background:var(--bg)">
+            <div class="field-row">
+              <div class="field"><label>First name</label><div class="input"></div></div>
+              <div class="field"><label>Last name</label><div class="input"></div></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Mobile (for texting)</label><div class="input"></div></div>
+              <div class="field"><label>Email</label><div class="input"></div></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Desired move-in date</label><div class="input"></div></div>
+              <div class="field"><label>Monthly household income</label><div class="input"></div></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Number of occupants</label><div class="input"></div></div>
+              <div class="field"><label>Pets?</label><div class="input"></div></div>
+            </div>
+            <div class="btn-row"><a class="btn">Submit &amp; request a showing</a></div>
+          </div>
+          <div class="muted" style="margin-top:12px">Ready to lease? See <a data-goto="apply" style="cursor:pointer;color:var(--ink);font-weight:600">How to Apply</a> for the full application.</div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Placed at the very bottom of every listing, exactly as Jessica described the process: prequalifying for a showing means completing this questionnaire on the listing itself. It captures a mobile number first, since follow-up happens by text. This block is part of the reusable listing template, so it appears automatically on every property.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ HOW TO APPLY -->
+  <section class="page" id="pg-apply">
+    <div class="section">
+      <div class="container">
+        <p class="eyebrow">For renters</p>
+        <h1 class="wf">How to Apply</h1>
+        <div class="muted" style="max-width:660px">Two steps: prequalify to see the unit, then submit a full application to lease it.</div>
+        <div class="steps" style="margin-top:20px">
+          <div class="step step1">
+            <div class="num">1</div>
+            <h3 class="wf" style="font-size:16px">Prequalify for a showing</h3>
+            <div class="muted">Answer a short questionnaire found at the bottom of the listing you're interested in. Once you prequalify, we'll set up a showing.</div>
+            <div class="btn-row"><a class="btn sm" data-goto="rentals">Find a rental to prequalify</a></div>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3 class="wf" style="font-size:16px">Submit your full application</h3>
+            <div class="muted">Required to lease the unit. The full application includes:</div>
+            <ul class="req-list">
+              <li><span class="bx"></span> Proof of income</li>
+              <li><span class="bx"></span> Background and credit check</li>
+            </ul>
+            <div class="btn-row"><a class="btn ghost sm" id="applyPortal">Start full application ↗</a></div>
+          </div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>This page is the single home for the application requirements Jessica mentioned. Instead of repeating that "really long wording" in every listing description, it's stated once here (proof of income, background/credit check) and linked from each listing. Clearer for renters, far less to maintain.</div>
+      </div>
+    </div>
+    <div class="section alt tight">
+      <div class="container">
+        <p class="eyebrow">Good to know</p>
+        <div class="grid g3">
+          <div class="card"><h3 class="wf">Rental criteria</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+          <div class="card"><h3 class="wf">Pets &amp; policies</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+          <div class="card"><h3 class="wf">Fees &amp; deposits</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>RentAppeal keeps its application details on dedicated "How to Apply" and "Application Process & Guidelines" pages rather than in listings. Same idea here, trimmed to what Parasole actually needs.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ OWNERS (slim) -->
+  <section class="page" id="pg-owners">
+    <div class="section">
+      <div class="container">
+        <p class="eyebrow">For property owners</p>
+        <h1 class="wf">Own a property? Let us manage it.</h1>
+        <div class="lines" style="max-width:660px"><div class="line w90"></div><div class="line w60"></div></div>
+        <div class="btn-row">
+          <a class="btn" data-goto="contact">Request a management quote</a>
+          <a class="btn ghost" id="ownerLogin2">Owner login ↗</a>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Deliberately one slim page. The site's focus is rentals, so management lives in a single clear place for owners who seek it out, not spread across the nav. This also cleanly absorbs the removed Investment Opportunities page.
+          <span class="ref">SEO: 301-redirect the old /investment-opportunities URL here. Keep parasoleproperties.com as the primary domain so existing rankings are preserved.</span></div>
+      </div>
+    </div>
+    <div class="section alt tight">
+      <div class="container">
+        <p class="eyebrow">What we handle</p>
+        <div class="grid g3">
+          <div class="card"><h3 class="wf">Leasing &amp; marketing</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+          <div class="card"><h3 class="wf">Maintenance</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+          <div class="card"><h3 class="wf">Rent &amp; reporting</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+        </div>
+        <div class="btn-row"><a class="btn" data-goto="contact">Request a management quote</a></div>
+        <div class="note"><span class="lbl">Build note</span>A three-card summary is enough to convert an interested owner. If Ron wants the deeper service detail later, each card can expand into its own page without changing the homepage.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ ABOUT -->
+  <section class="page" id="pg-about">
+    <div class="section">
+      <div class="container">
+        <p class="eyebrow">Page heading</p>
+        <h1 class="wf">About</h1>
+        <div class="split" style="margin-top:6px">
+          <div><div class="lines"><div class="line w90"></div><div class="line w90"></div><div class="line w70"></div><div class="line w40"></div></div></div>
+          <div class="ph-img h-220"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Office / team image</span></div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Proper H1 and meta description (the old Press Releases page had neither). Kept short to match the simple direction; former press content can sit in a small "In the news" strip if there are items worth showing.</div>
+      </div>
+    </div>
+    <div class="section alt tight">
+      <div class="container">
+        <p class="eyebrow">In the news <span style="text-transform:none;letter-spacing:0;color:var(--ink-3)">(optional)</span></p>
+        <div class="logos"><div class="logobox">HEADLINE</div><div class="logobox">HEADLINE</div><div class="logobox">HEADLINE</div><div class="logobox">HEADLINE</div></div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ CONTACT (text-first) -->
+  <section class="page" id="pg-contact">
+    <div class="section">
+      <div class="container">
+        <p class="eyebrow">Page heading</p>
+        <h1 class="wf">Contact</h1>
+        <div class="split" style="margin-top:6px;align-items:start">
+          <div class="form">
+            <div class="field"><label>I am a</label><div class="input"></div></div>
+            <div class="field-row">
+              <div class="field"><label>First name</label><div class="input"></div></div>
+              <div class="field"><label>Last name</label><div class="input"></div></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Mobile (for texting)</label><div class="input"></div></div>
+              <div class="field"><label>Email</label><div class="input"></div></div>
+            </div>
+            <div class="field"><label>Message</label><div class="input area"></div></div>
+            <div class="captcha">reCAPTCHA — this page only</div>
+            <div class="btn-row"><a class="btn">Send message</a></div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <h3 class="wf"><svg class="ic" style="width:15px;height:15px;vertical-align:-2px"><use href="#ic-txt"/></svg> Text us (fastest)</h3>
+              <div class="line w50"></div>
+              <h3 class="wf" style="margin-top:14px">Call</h3><div class="line w50"></div>
+              <h3 class="wf" style="margin-top:14px">Email</h3><div class="line w70"></div>
+              <h3 class="wf" style="margin-top:14px">Office</h3><div class="line w80"></div>
+            </div>
+            <div class="ph-img h-160"><svg class="ic"><use href="#ic-map"/></svg><span class="cap">Embedded map</span></div>
+          </div>
+        </div>
+        <div class="note"><span class="lbl">Build note</span>Text is listed first and labeled "fastest," with call as the secondary option, per the request to emphasize texting over calling. The mobile field is labeled for texting. Every field has a visible, programmatic label (audit fix). reCAPTCHA loads on this page only. The map embed gets a title attribute for screen readers.</div>
+      </div>
+    </div>
+  </section>
+  </main>
+  <!-- ===== Footer ===== -->
+  <footer class="site-foot">
+    <div class="container">
+      <div class="ftop">
+        <div>
+          <div class="name">PARASOLE PROPERTIES</div>
+          <div class="desc">[ One-line descriptor ]</div>
+          <div class="textbig"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.06em">TEXT US</span> <b>000-000-0000</b></div>
+          <div class="social">
+            <span>Facebook</span>
+            <span>Miles Summit ↗</span>
+          </div>
+        </div>
+        <div>
+          <h4>Rent</h4>
+          <ul>
+            <li><a class="fl" data-goto="rentals">Available Rentals</a></li>
+            <li><a class="fl" data-goto="apply">How to Apply</a></li>
+            <li><a class="fl" id="tenantLoginFoot">Resident Login ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Owners</h4>
+          <ul>
+            <li><a class="fl" data-goto="owners">Management</a></li>
+            <li><a class="fl" data-goto="contact">Request a Quote</a></li>
+            <li><a class="fl" id="ownerLoginFoot">Owner Login ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a class="fl" data-goto="about">About</a></li>
+            <li><a class="fl" data-goto="contact">Contact</a></li>
+            <li><a class="fl" id="msFoot">Miles Summit ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© Parasole Properties. All rights reserved.</span>
+        <span style="font-family:var(--mono)">parasoleproperties.com · logins → HTTPS resident portal</span>
+      </div>
+    </div>
+  </footer>
+</div><!-- /frame -->
+<div class="toast" id="toast"></div>
+<script>
+  const labels = {
+    home:'Home', rentals:'Available Rentals', listing:'Listing detail (prequalify at bottom)',
+    apply:'How to Apply', owners:'Owners (management)', about:'About', contact:'Contact'
+  };
+  const navFor = {
+    home:'home', rentals:'rentals', listing:'rentals', apply:'apply',
+    owners:'owners', about:'about', contact:'contact'
+  };
+  const pages = document.querySelectorAll('.page');
+  const navLinks = document.querySelectorAll('.nav-link');
+  function show(id){
+    if(!labels[id]) id = 'home';
+    pages.forEach(p => p.classList.toggle('active', p.id === 'pg-' + id));
+    navLinks.forEach(a => a.classList.toggle('current', a.dataset.goto === navFor[id]));
+    document.getElementById('pageName').textContent = labels[id];
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    window.scrollTo({ top:0, behavior:'instant' });
+  }
+  document.querySelectorAll('[data-goto]').forEach(el=>{
+    el.addEventListener('click', e=>{ e.preventDefault(); show(el.dataset.goto); });
+  });
+  const nt = document.getElementById('notesToggle');
+  nt.addEventListener('click', ()=>{
+    const on = document.body.classList.toggle('notes-on');
+    nt.setAttribute('aria-pressed', on);
+    nt.textContent = on ? 'Hide build notes' : 'Show build notes';
+  });
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function ping(msg){ toast.textContent = msg; toast.classList.add('on');
+    clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('on'), 3600); }
+  function textNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this opens the phone’s SMS app to text Parasole (sms: link), the preferred contact method.'); }
+  function ownerNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this opens the owner login on the HTTPS resident portal (parasoleproperties.propertymanage.biz).'); }
+  function tenantNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this opens the resident login on the HTTPS resident portal (parasoleproperties.propertymanage.biz).'); }
+  function applyNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this starts the full application (proof of income + background/credit check), via the portal or an application form.'); }
+  function msNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this opens the Miles Summit website (milessummit.com) in a new tab.'); }
+  function prequalScroll(e){ e.preventDefault(); ping('Prequalify questionnaire is at the bottom of the listing. On the live site this scrolls you there.'); }
+  ['textHead','textHero','textBand','textListing'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', textNote);});
+  ['ownerLogin','ownerLogin2','ownerLoginFoot'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', ownerNote);});
+  ['tenantLogin','tenantLoginFoot'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', tenantNote);});
+  ['applyPortal'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', applyNote);});
+  ['msFoot'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', msNote);});
+  ['listingPrequal'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', prequalScroll);});
+  window.addEventListener('hashchange', ()=> show(location.hash.replace('#','')));
+  show(location.hash ? location.hash.replace('#','') : 'home');
+</script>
+</body>
+</html>
