@@ -257,8 +257,7 @@
           <button class="nav-link" data-goto="contact">Contact</button>
         </nav>
         <span class="head-spacer"></span>
-        <button class="head-cta ghost" id="textHead">Text us</button>
-        <button class="head-cta" data-goto="rentals">View rentals</button>
+        <button class="head-cta" id="textHead">Text us</button>
       </div>
     </div>
   </header>
@@ -274,55 +273,35 @@
             <h1 class="wf">[ Find your next place to rent ]</h1>
             <div class="lines"><div class="line tall w80"></div></div>
             <div class="btn-row">
-              <a class="btn" data-goto="rentals">View available rentals</a>
-              <a class="btn ghost" id="textHero">Text us a question</a>
+              <a class="btn" id="textHero"><svg class="ic" style="width:16px;height:16px"><use href="#ic-txt"/></svg> Text us a question</a>
             </div>
           </div>
           <div class="ph-img h-280"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Hero image</span></div>
         </div>
-        <div class="note"><span class="lbl">Build note</span>Rentals-first hero, per Jessica: the site's main focus is rentals, not property management. Replaces the failing Slider Revolution hero with a clean static one. "Text us" sits beside the main action because texting is the preferred channel, not calling.
-          <span class="ref">Direction reference: RentAppeal — simple, uncluttered, easy to use.</span></div>
+        <div class="note"><span class="lbl">Build note</span>Simplified per Jessica's feedback that the homepage felt busy. It previously had about four separate links to rentals (a header button, a hero button, a rentals tile, and an "Available now" listings grid). The hero now carries just the headline and a single Text us action, so the one clear path to rentals is the card below.
+          <span class="ref">Direction reference: RentAppeal — a short "here's what we offer" homepage that clicks through to each page.</span></div>
       </div>
     </div>
-    <!-- 2. Three quick-path tiles -->
-    <div class="section alt tight">
+    <!-- 2. What we offer (RentAppeal-style: clear paths that click through) -->
+    <div class="section alt">
       <div class="container">
-        <div class="tiles">
+        <p class="eyebrow">What we offer</p>
+        <h2 class="wf">How can we help?</h2>
+        <div class="tiles" style="grid-template-columns:1fr 1fr;margin-top:16px">
           <div class="tile tenant" data-goto="rentals">
             <svg class="ti"><use href="#ic-home"/></svg>
-            <h3>Browse rentals</h3>
-            <div class="muted">See what's available now.</div>
-            <span class="arr">→</span>
-          </div>
-          <div class="tile tenant" data-goto="apply">
-            <svg class="ti"><use href="#ic-doc"/></svg>
-            <h3>How to apply</h3>
-            <div class="muted">Prequalify, then apply. What you'll need.</div>
-            <span class="arr">→</span>
+            <h3>Rentals</h3>
+            <div class="muted">Browse available homes and apartments for rent.</div>
+            <span class="arr">See available rentals →</span>
           </div>
           <div class="tile owner" data-goto="owners">
             <svg class="ti"><use href="#ic-key"/></svg>
-            <h3>Own a property?</h3>
-            <div class="muted">Let us manage it.</div>
-            <span class="arr">→</span>
+            <h3>Property Management</h3>
+            <div class="muted">Own a property? We will take care of it for you.</div>
+            <span class="arr">See management services →</span>
           </div>
         </div>
-        <div class="note"><span class="lbl">Build note</span>Three quick paths, straight from RentAppeal's homepage pattern (Our Rentals / Our Services / List Your Property). Renters get the first two tiles; owners get one clearly secondary tile, keeping Ron's owner leads without making the site about management.</div>
-      </div>
-    </div>
-    <!-- 3. Featured rentals (compact) -->
-    <div class="section tight">
-      <div class="container">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
-          <h2 class="wf" style="margin:0">Available now</h2>
-          <a class="muted" data-goto="rentals" style="cursor:pointer">View all rentals →</a>
-        </div>
-        <div class="grid g3" style="margin-top:16px">
-          <div class="listing"><div class="ph-img h-140"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
-          <div class="listing"><div class="ph-img h-140"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
-          <div class="listing"><div class="ph-img h-140"><svg class="ic"><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing" style="width:100%;justify-content:center">View details</a></div></div>
-        </div>
-        <div class="note"><span class="lbl">Build note</span>Pulls live from the self-managed listings module. Kept to a single tidy row so the homepage stays short. This is the whole point of the "no 3-mile scroll" note: everything above fits within roughly two screens.</div>
+        <div class="note"><span class="lbl">Build note</span>Reworked to the "here's what we offer" pattern Jessica liked on RentAppeal: two clear offerings, each a single click to its own page. The old homepage had a separate rentals tile, an "Available now" listings grid, and two rentals buttons up top; those extra rentals links are gone, so there is now one obvious path to rentals. Confirmed against the site audit: Parasole offers property management and rentals, with no sales, so these are the two cards. How to Apply stays reachable from the nav, the Rentals page, and the footer.</div>
       </div>
     </div>
     <!-- 4. Text-us band -->
