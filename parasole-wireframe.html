@@ -148,6 +148,8 @@
   .field label{display:block;font-size:12px;color:var(--ink-2);margin-bottom:5px;font-weight:600}
   .field .input{height:38px;border:1px solid var(--line);border-radius:5px;background:var(--bg-2)}
   .field .input.area{height:88px}
+  .field select.rin,.field input.rin{width:100%;height:38px;border:1px solid var(--line);border-radius:5px;background:var(--bg-2);padding:0 11px;font-size:14px;font-family:inherit;color:var(--ink)}
+  .fstep{display:none}.fstep.on{display:block}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .captcha{height:56px;border:1px dashed var(--line);border-radius:5px;background:var(--bg-2);
     display:flex;align-items:center;gap:10px;padding:0 12px;color:var(--ink-3);font-size:12px;font-family:var(--mono)}
@@ -358,10 +360,10 @@
             <div class="price" style="font-size:20px">$0,000 / mo</div>
             <div class="chip-row" style="margin-top:10px"><span class="chip">0 bd</span><span class="chip">0 ba</span><span class="chip">0 sqft</span><span class="chip">City, PA</span></div>
             <div class="btn-row">
-              <a class="btn" id="listingPrequal">Prequalify for a showing</a>
+              <a class="btn" data-goto="prequal">See if you prequalify</a>
               <a class="btn ghost" id="textListing">Text about this rental</a>
             </div>
-            <div class="muted" style="margin-top:10px">The prequalify questionnaire is at the bottom of this page.</div>
+            <div class="muted" style="margin-top:10px">Answer a few quick questions to book a showing.</div>
           </div>
         </div>
         <div class="grid g4" style="margin-top:22px">
@@ -386,38 +388,18 @@
             <div class="ph-img h-180"><svg class="ic"><use href="#ic-map"/></svg><span class="cap">Embedded map</span></div>
           </div>
         </div>
-        <div class="note"><span class="lbl">Build note</span>The description holds only the property itself. The long application-requirements wording that used to be crammed in here now lives once, on the How to Apply page, and is summarized in the prequalify block below. That fixes Jessica's note about the "really long wording in the actual property description."</div>
+        <div class="note"><span class="lbl">Build note</span>The description holds only the property itself. The long application-requirements wording that used to be crammed in here now lives once, on the How to Apply page, and the button above opens the central prequalify flow. That fixes Jessica's note about the "really long wording in the actual property description."</div>
       </div>
     </div>
-    <!-- PREQUALIFY QUESTIONNAIRE — at the very bottom of the listing -->
     <div class="section">
       <div class="container">
         <div class="prequal">
-          <span class="flag">Required to book a showing</span>
-          <h2 class="wf">Prequalify for a showing</h2>
-          <div class="muted" style="max-width:640px">A few quick questions. Completing this qualifies you to schedule a showing of this unit. It is not the full application.</div>
-          <div class="form" style="margin-top:16px;background:var(--bg)">
-            <div class="field-row">
-              <div class="field"><label>First name</label><div class="input"></div></div>
-              <div class="field"><label>Last name</label><div class="input"></div></div>
-            </div>
-            <div class="field-row">
-              <div class="field"><label>Mobile (for texting)</label><div class="input"></div></div>
-              <div class="field"><label>Email</label><div class="input"></div></div>
-            </div>
-            <div class="field-row">
-              <div class="field"><label>Desired move-in date</label><div class="input"></div></div>
-              <div class="field"><label>Monthly household income</label><div class="input"></div></div>
-            </div>
-            <div class="field-row">
-              <div class="field"><label>Number of occupants</label><div class="input"></div></div>
-              <div class="field"><label>Pets?</label><div class="input"></div></div>
-            </div>
-            <div class="btn-row"><a class="btn">Submit &amp; request a showing</a></div>
-          </div>
-          <div class="muted" style="margin-top:12px">Ready to lease? See <a data-goto="apply" style="cursor:pointer;color:var(--ink);font-weight:600">How to Apply</a> for the full application.</div>
+          <span class="flag">Book a showing</span>
+          <h2 class="wf">See if you prequalify</h2>
+          <div class="muted" style="max-width:640px">Answer a few quick questions. If you prequalify, you can book a tour right away. It is not the full application.</div>
+          <div class="btn-row"><a class="btn" data-goto="prequal">See if you prequalify</a></div>
         </div>
-        <div class="note"><span class="lbl">Build note</span>Placed at the very bottom of every listing, exactly as Jessica described the process: prequalifying for a showing means completing this questionnaire on the listing itself. It captures a mobile number first, since follow-up happens by text. This block is part of the reusable listing template, so it appears automatically on every property.</div>
+        <div class="note"><span class="lbl">Build note</span>The listing's entry point opens the central prequalification flow, with this property carried in, instead of a form built into every listing. The questions and the income formula live in one place.</div>
       </div>
     </div>
   </section>
@@ -432,8 +414,8 @@
           <div class="step step1">
             <div class="num">1</div>
             <h3 class="wf" style="font-size:16px">Prequalify for a showing</h3>
-            <div class="muted">Answer a short questionnaire found at the bottom of the listing you're interested in. Once you prequalify, we'll set up a showing.</div>
-            <div class="btn-row"><a class="btn sm" data-goto="rentals">Find a rental to prequalify</a></div>
+            <div class="muted">Pick the home you want, answer a few quick questions, and get an instant result. Prequalifying lets you book a showing.</div>
+            <div class="btn-row"><a class="btn sm" data-goto="prequal">Start prequalification</a></div>
           </div>
           <div class="step">
             <div class="num">2</div>
@@ -545,6 +527,86 @@
       </div>
     </div>
   </section>
+  <!-- ============================================================ PREQUALIFY (central flow) -->
+  <section class="page" id="pg-prequal">
+    <div class="fstep on" data-step="quiz">
+      <div class="section">
+        <div class="container" style="max-width:720px">
+          <p class="breadcrumb">Available Rentals / <b>Prequalify</b></p>
+          <h1 class="wf">Prequalify for a showing</h1>
+          <div class="muted" style="max-width:620px">Pick the home you're interested in and answer a few quick questions. We check instantly. It is not the full application.</div>
+          <div class="form" style="margin-top:18px">
+            <div class="field"><label>Which home?</label><select class="rin" id="propSelect">
+              <option value="1000" data-name="Oak Street 2B">Oak Street 2B — $1,000 / mo</option>
+              <option value="850" data-name="Linden Ave 1B">Linden Ave 1B — $850 / mo</option>
+              <option value="1450" data-name="Center St 3B">Center St 3B — $1,450 / mo</option>
+              <option value="725" data-name="Wyoming Ave Studio">Wyoming Ave Studio — $725 / mo</option>
+            </select></div>
+            <div class="field"><label>Your gross monthly income</label><input class="rin" id="incomeInput" type="number" inputmode="numeric" placeholder="e.g. 3500"></div>
+            <div class="field-row">
+              <div class="field"><label>Desired move-in date</label><div class="input"></div></div>
+              <div class="field"><label>Number of occupants</label><div class="input"></div></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Pets?</label><div class="input"></div></div>
+              <div class="field"><label>First name</label><div class="input"></div></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label>Mobile (for texting)</label><div class="input"></div></div>
+              <div class="field"><label>Email</label><div class="input"></div></div>
+            </div>
+            <div class="btn-row"><a class="btn" id="seeResult">See my result</a></div>
+          </div>
+          <div class="note"><span class="lbl">Build note</span>Property is selected first. Each home's income requirement (rent × 40 ÷ 12, Jessica's formula) is calculated behind the scenes and shown in the result, not previewed here. Arriving from a listing pre-selects that home. One central flow, so the formula lives in one place. Try it: pick a home, type an income, then click See my result.</div>
+        </div>
+      </div>
+    </div>
+    <div class="fstep" data-step="result">
+      <div class="section">
+        <div class="container" style="max-width:720px">
+          <div id="resPass">
+            <div class="prequal">
+              <span class="flag">Prequalified</span>
+              <h1 class="wf" style="font-size:26px">Good news, you prequalify</h1>
+              <div class="muted"><b class="r-prop">Oak Street 2B</b> needs <b class="r-req">$3,333</b> / mo, and you entered <b class="r-inc">$0</b> / mo. Let's get you a tour.</div>
+              <div class="btn-row"><a class="btn" id="toBook">Pick a showing time</a></div>
+            </div>
+          </div>
+          <div id="resFail" style="display:none">
+            <div class="card">
+              <h1 class="wf" style="font-size:26px">Not a match just yet</h1>
+              <div class="muted"><b class="r-prop">Oak Street 2B</b> needs about <b class="r-req">$3,333</b> / mo in gross income. Based on the <b class="r-inc">$0</b> / mo entered, it is not a fit right now.</div>
+              <div class="btn-row"><a class="btn" data-goto="rentals">Browse other homes</a><a class="btn ghost" id="failText">Text us a question</a></div>
+            </div>
+          </div>
+          <div class="note"><span class="lbl">Build note</span>Instant, automated result using the selected home's requirement. No manual math for the office. Qualified renters go straight to booking; the office is notified either way.</div>
+        </div>
+      </div>
+    </div>
+    <div class="fstep" data-step="book">
+      <div class="section">
+        <div class="container" style="max-width:720px">
+          <p class="breadcrumb">Prequalify / <b>Book a showing</b></p>
+          <h1 class="wf">Pick a time to tour</h1>
+          <div class="muted">Showing for <b class="r-prop">Oak Street 2B</b>.</div>
+          <div class="ph-img h-180" style="margin-top:14px"><svg class="ic"><use href="#ic-map"/></svg><span class="cap">Calendly booking embed</span></div>
+          <div class="chip-row" style="margin-top:14px"><span class="chip">Tue 10:00</span><span class="chip">Tue 2:00</span><span class="chip">Wed 11:30</span><span class="chip">Thu 4:00</span></div>
+          <div class="btn-row"><a class="btn" id="toDone">Confirm showing</a></div>
+          <div class="note"><span class="lbl">Build note</span>Booking uses Calendly, already in your toolkit. Only prequalified renters reach this step.</div>
+        </div>
+      </div>
+    </div>
+    <div class="fstep" data-step="done">
+      <div class="section">
+        <div class="container" style="max-width:720px;text-align:center">
+          <div style="width:64px;height:64px;border-radius:50%;border:2px solid var(--ten-bd);background:var(--ten);display:grid;place-items:center;margin:0 auto 16px"><svg style="width:30px;height:30px;color:var(--ink-2)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+          <h1 class="wf">You're booked</h1>
+          <div class="muted">We'll text you a reminder before your showing. The office has your details.</div>
+          <div class="btn-row" style="justify-content:center"><a class="btn" data-goto="rentals">Back to rentals</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
   </main>
   <!-- ===== Footer ===== -->
   <footer class="site-foot">
@@ -594,11 +656,11 @@
 <div class="toast" id="toast"></div>
 <script>
   const labels = {
-    home:'Home', rentals:'Available Rentals', listing:'Listing detail (prequalify at bottom)',
-    apply:'How to Apply', owners:'Owners (management)', about:'About', contact:'Contact'
+    home:'Home', rentals:'Available Rentals', listing:'Listing detail',
+    prequal:'Prequalify', apply:'How to Apply', owners:'Owners (management)', about:'About', contact:'Contact'
   };
   const navFor = {
-    home:'home', rentals:'rentals', listing:'rentals', apply:'apply',
+    home:'home', rentals:'rentals', listing:'rentals', prequal:'rentals', apply:'apply',
     owners:'owners', about:'about', contact:'contact'
   };
   const pages = document.querySelectorAll('.page');
@@ -609,6 +671,7 @@
     navLinks.forEach(a => a.classList.toggle('current', a.dataset.goto === navFor[id]));
     document.getElementById('pageName').textContent = labels[id];
     if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    if(id==='prequal') resetPrequal();
     window.scrollTo({ top:0, behavior:'instant' });
   }
   document.querySelectorAll('[data-goto]').forEach(el=>{
@@ -629,13 +692,29 @@
   function tenantNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this opens the resident login on the HTTPS resident portal (parasoleproperties.propertymanage.biz).'); }
   function applyNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this starts the full application (proof of income + background/credit check), via the portal or an application form.'); }
   function msNote(e){ e.preventDefault(); ping('Wireframe link. On the live site this opens the Miles Summit website (milessummit.com) in a new tab.'); }
-  function prequalScroll(e){ e.preventDefault(); ping('Prequalify questionnaire is at the bottom of the listing. On the live site this scrolls you there.'); }
-  ['textHead','textHero','textBand','textListing'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', textNote);});
+  ['textHead','textHero','textBand','textListing','failText'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', textNote);});
   ['ownerLogin','ownerLogin2','ownerLoginFoot'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', ownerNote);});
   ['tenantLogin','tenantLoginFoot'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', tenantNote);});
   ['applyPortal'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', applyNote);});
   ['msFoot'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', msNote);});
-  ['listingPrequal'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('click', prequalScroll);});
+  const propSel = document.getElementById('propSelect');
+  function currentReq(){ const rent = propSel ? parseFloat(propSel.value)||0 : 0; return Math.round(rent*40/12); }
+  function fmtMoney(n){ return '$'+Number(n).toLocaleString(); }
+  function fstep(step){ document.querySelectorAll('#pg-prequal .fstep').forEach(s=>s.classList.toggle('on', s.dataset.step===step)); window.scrollTo({top:0,behavior:'instant'}); }
+  function resetPrequal(){ const inc=document.getElementById('incomeInput'); if(inc) inc.value=''; fstep('quiz'); }
+  const seeResult = document.getElementById('seeResult');
+  if(seeResult) seeResult.addEventListener('click', e=>{ e.preventDefault();
+    const req=currentReq(); const incEl=document.getElementById('incomeInput'); const inc=parseFloat(incEl&&incEl.value)||0;
+    const name=propSel?propSel.options[propSel.selectedIndex].getAttribute('data-name'):'this home';
+    document.querySelectorAll('.r-prop').forEach(el=>el.textContent=name);
+    document.querySelectorAll('.r-req').forEach(el=>el.textContent=fmtMoney(req));
+    document.querySelectorAll('.r-inc').forEach(el=>el.textContent=fmtMoney(inc));
+    const pass=inc>=req;
+    document.getElementById('resPass').style.display=pass?'block':'none';
+    document.getElementById('resFail').style.display=pass?'none':'block';
+    fstep('result'); });
+  const toBook=document.getElementById('toBook'); if(toBook) toBook.addEventListener('click', e=>{ e.preventDefault(); fstep('book'); });
+  const toDone=document.getElementById('toDone'); if(toDone) toDone.addEventListener('click', e=>{ e.preventDefault(); fstep('done'); });
   window.addEventListener('hashchange', ()=> show(location.hash.replace('#','')));
   show(location.hash ? location.hash.replace('#','') : 'home');
 </script>
