@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole Properties — Mobile Wireframes (v1, rentals-first)</title>
+<style>
+  :root{
+    --ink:#2b2b2b; --ink-2:#555; --ink-3:#8a8a8a;
+    --line:#cfcfcf; --line-2:#e0e0e0;
+    --bg:#ffffff; --bg-2:#f5f5f5; --bg-3:#ececec;
+    --ph:#e6e6e6; --ph-line:#d2d2d2;
+    --btn:#3a3a3a; --btn-ink:#fff;
+    --note-bg:#eaf0f8; --note-bd:#b7cae3; --note-ink:#284c7a;
+    --ten:#eef1ec; --tenb:#c9d2c1;
+    --own:#e9eef4; --ownb:#c2cfdd;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg-3);line-height:1.5}
+  button{font-family:inherit}
+  /* control bar */
+  .wf-bar{position:sticky;top:0;z-index:80;background:#1f1f1f;color:#eee;padding:10px 16px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid #000}
+  .wf-bar .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;background:#000;color:#bdbdbd;padding:3px 7px;border-radius:3px;text-transform:uppercase}
+  .wf-bar .title{font-weight:600;font-size:14px}
+  .wf-bar .sub{font-size:12px;color:#9a9a9a}
+  .wf-bar .spacer{flex:1}
+  .wf-bar .pageind{font-size:12px;color:#cfcfcf}
+  .wf-bar .pageind b{color:#fff}
+  .wf-toggle{background:#333;color:#eee;border:1px solid #555;border-radius:5px;padding:6px 11px;font-size:12px;cursor:pointer}
+  .wf-toggle[aria-pressed="true"]{background:var(--note-ink);border-color:var(--note-ink);color:#fff}
+  .wf-legend{background:#fafafa;border-bottom:1px solid var(--line-2);padding:8px 16px;font-size:11.5px;color:var(--ink-2)}
+  /* stage + device */
+  .stage{display:flex;justify-content:center;padding:22px 14px 40px}
+  .device{width:392px;max-width:100%;background:#0e0e0e;border-radius:44px;padding:12px;
+    box-shadow:0 12px 40px rgba(0,0,0,.28)}
+  .screen{position:relative;width:100%;height:788px;background:var(--bg);border-radius:32px;overflow:hidden}
+  .scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  /* status notch */
+  .notch{height:26px;display:flex;align-items:center;justify-content:center;background:var(--bg);position:sticky;top:0;z-index:25}
+  .notch .bar{width:110px;height:6px;border-radius:6px;background:#111;opacity:.85}
+  /* mobile header */
+  .m-head{position:sticky;top:26px;z-index:24;background:var(--bg);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:10px;padding:10px 14px;height:56px}
+  .logo{display:flex;align-items:center;gap:8px}
+  .logo .mark{width:34px;height:34px;border:1px dashed var(--line);border-radius:6px;display:grid;place-items:center;
+    color:var(--ink-3);font-size:7px;font-family:var(--mono);text-align:center;line-height:1.05}
+  .logo .name{font-weight:700;letter-spacing:.02em;color:var(--ink-2);font-size:13px}
+  .m-head .sp{flex:1}
+  .icon-btn{width:44px;height:44px;border:1px solid var(--line);border-radius:9px;background:var(--bg);
+    display:grid;place-items:center;cursor:pointer;color:var(--ink-2)}
+  .icon-btn svg{width:22px;height:22px}
+  /* hamburger menu overlay */
+  .m-menu{position:absolute;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column}
+  .m-menu.open{display:flex}
+  .m-menu .top{display:flex;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
+  .m-menu .top .name{font-weight:700;color:var(--ink-2);font-size:13px;flex:1}
+  .m-menu nav{padding:8px 8px 4px}
+  .m-menu a{display:flex;align-items:center;justify-content:space-between;padding:15px 12px;font-size:16px;
+    color:var(--ink);border-bottom:1px solid var(--bg-2);cursor:pointer;font-weight:600}
+  .m-menu a .chev{color:var(--ink-3)}
+  .m-menu .logins{padding:14px;display:flex;flex-direction:column;gap:10px;margin-top:auto;border-top:1px solid var(--line);background:var(--bg-2)}
+  /* pages */
+  .page{display:none}
+  .page.active{display:block}
+  .sec{padding:22px 16px;border-bottom:1px solid var(--bg-2)}
+  .sec.alt{background:var(--bg-2)}
+  .sec.band{background:var(--bg-3)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+  h1.wf{font-size:24px;margin:0 0 12px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+  h2.wf{font-size:19px;margin:0 0 6px;color:var(--ink);font-weight:700}
+  h3.wf{font-size:15px;margin:0 0 6px;color:var(--ink-2);font-weight:700}
+  .muted{color:var(--ink-3);font-size:13px}
+  .lines{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+  .line{height:11px;border-radius:3px;background:var(--ph-line);opacity:.65}
+  .line.w90{width:90%}.line.w80{width:80%}.line.w70{width:70%}.line.w60{width:60%}.line.w50{width:50%}.line.w40{width:40%}
+  .ph-img{background:var(--ph);border:1px solid var(--ph-line);border-radius:8px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:6px;color:var(--ink-3);text-align:center;padding:12px}
+  .ph-img svg{width:26px;height:26px;opacity:.5}
+  .ph-img .cap{font-family:var(--mono);font-size:11px}
+  .h-200{height:200px}.h-170{height:170px}.h-150{height:150px}.h-120{height:120px}.h-84{height:84px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--btn);color:var(--btn-ink);
+    border:1px solid var(--btn);border-radius:9px;padding:14px 16px;font-size:15px;font-weight:600;cursor:pointer;width:100%;text-decoration:none;min-height:48px}
+  .btn.ghost{background:var(--bg);color:var(--ink-2);border-color:var(--line)}
+  .btn.sm{padding:11px 14px;font-size:14px;min-height:44px}
+  .btn svg{width:18px;height:18px}
+  .btn-col{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .card{border:1px solid var(--line-2);border-radius:10px;padding:16px;background:var(--bg);margin-bottom:12px}
+  .card.ten{background:var(--ten);border-color:var(--tenb)}
+  .card.own{background:var(--own);border-color:var(--ownb)}
+  .card .arr{display:block;margin-top:10px;color:var(--ink-3);font-weight:700;font-size:14px}
+  .card i.ic{display:block;width:24px;height:24px;color:var(--ink-3);margin-bottom:8px}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin:6px 0 2px}
+  .chip{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-size:13px;color:var(--ink-2);background:var(--bg);display:flex;align-items:center;gap:6px}
+  .chip svg{width:12px;height:12px;opacity:.6}
+  /* listing card */
+  .listing{border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:var(--bg);margin-bottom:14px}
+  .listing .meta{padding:13px}
+  .listing .price{font-weight:700;color:var(--ink);font-size:16px}
+  .listing .specs{display:flex;gap:14px;color:var(--ink-3);font-size:13px;margin:7px 0 11px}
+  /* form */
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;color:var(--ink-2);margin-bottom:6px;font-weight:600}
+  .field .input{min-height:46px;border:1px solid var(--line);border-radius:8px;background:var(--bg-2)}
+  .field .input.area{min-height:96px}
+  .captcha{min-height:58px;border:1px dashed var(--line);border-radius:8px;background:var(--bg-2);display:flex;align-items:center;padding:0 12px;color:var(--ink-3);font-size:12px;font-family:var(--mono)}
+  /* prequal block */
+  .prequal{border:2px solid var(--tenb);background:var(--ten);border-radius:14px;padding:18px}
+  .prequal .flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:4px;padding:3px 8px;margin-bottom:10px}
+  /* steps */
+  .step{border:1px solid var(--line-2);border-radius:12px;padding:16px;margin-bottom:12px;background:var(--bg)}
+  .step.s1{background:var(--ten);border-color:var(--tenb)}
+  .step .num{font-family:var(--mono);font-size:12px;color:var(--ink-3);border:1px solid var(--line);border-radius:6px;width:26px;height:26px;display:grid;place-items:center;margin-bottom:10px}
+  .req{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .req li{display:flex;gap:9px;align-items:flex-start;font-size:14px}
+  .req li .bx{width:16px;height:16px;border:1px solid var(--ink-3);border-radius:4px;flex:0 0 auto;margin-top:2px}
+  .breadcrumb{font-size:12px;color:var(--ink-3);font-family:var(--mono);margin-bottom:12px}
+  .breadcrumb b{color:var(--ink-2)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .faq{border:1px solid var(--line-2);border-radius:9px;padding:15px;background:var(--bg);display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .logos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .logobox{height:54px;border:1px dashed var(--line);border-radius:7px;display:grid;place-items:center;color:var(--ink-3);font-family:var(--mono);font-size:11px}
+  /* text band */
+  .textband{text-align:center}
+  /* footer */
+  .m-foot{background:#2a2a2a;color:#cfcfcf;padding:22px 16px 26px}
+  .m-foot .name{color:#fff;font-weight:700;margin-bottom:6px;font-size:14px}
+  .m-foot .textbig{margin:10px 0;font-size:14px}
+  .m-foot .textbig b{color:#fff}
+  .m-foot .social{display:flex;gap:8px;margin:10px 0}
+  .m-foot .social span{height:34px;padding:0 12px;border:1px solid #4a4a4a;border-radius:8px;display:grid;place-items:center;font-size:12px;color:#cfcfcf;font-family:var(--mono)}
+  .m-foot .fl{display:block;color:#cfcfcf;text-decoration:none;padding:9px 0;font-size:14px;border-top:1px solid #3d3d3d;cursor:pointer}
+  .m-foot .copy{border-top:1px solid #3d3d3d;margin-top:14px;padding-top:14px;font-size:12px;color:#8a8a8a}
+  /* sticky bottom action bar */
+  .m-bottom{position:sticky;bottom:0;z-index:24;background:var(--bg);border-top:1px solid var(--line);
+    display:flex;gap:10px;padding:10px 14px}
+  .m-bottom .btn{margin:0}
+  /* build notes */
+  .note{display:none;margin:14px 0 0;border:1px solid var(--note-bd);background:var(--note-bg);border-radius:9px;padding:12px;font-size:13px;color:var(--note-ink)}
+  body.notes-on .note{display:block}
+  .note .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;display:inline-block;background:var(--note-ink);color:#fff;padding:2px 6px;border-radius:3px;margin-right:8px;vertical-align:1px}
+  .note .ref{font-family:var(--mono);font-size:11.5px;opacity:.85;display:block;margin-top:6px}
+  /* toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1f1f1f;color:#fff;
+    padding:12px 16px;border-radius:9px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:90;max-width:92vw;text-align:center}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></symbol>
+  <symbol id="ic-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="ic-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="ic-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="ic-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M15 8l2 2"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></symbol>
+  <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="ic-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+</svg>
+<!-- control bar -->
+<div class="wf-bar">
+  <span class="tag">Wireframe · Mobile</span>
+  <span class="title">Parasole Properties</span>
+  <span class="sub">Rentals-first · 390px</span>
+  <span class="spacer"></span>
+  <span class="pageind">Viewing: <b id="pageName">Home</b></span>
+  <button class="wf-toggle" id="notesToggle" aria-pressed="false">Show build notes</button>
+</div>
+<div class="wf-legend">Mobile is designed as its own experience, not a shrunk desktop: tap menu, a Text us bar pinned to the bottom, stacked single-column layout, and 13px minimum text for readability. Scroll inside the phone.</div>
+
+<div class="stage">
+  <div class="device">
+    <div class="screen">
+      <div class="scroll" id="scroll">
+        <!-- status bar -->
+        <div class="notch"><span class="bar"></span></div>
+        <!-- header -->
+        <header class="m-head">
+          <span class="logo"><span class="mark">CURR<br>LOGO</span><span class="name">PARASOLE</span></span>
+          <span class="sp"></span>
+          <button class="icon-btn" id="menuOpen" aria-label="Open menu"><svg><use href="#ic-menu"/></svg></button>
+        </header>
+
+        <!-- ===================== HOME ===================== -->
+        <section class="page active" id="pg-home">
+          <div class="sec">
+            <p class="eyebrow">Rentals in Scranton / Wilkes-Barre</p>
+            <h1 class="wf">[ Find your next place to rent ]</h1>
+            <div class="lines"><div class="line w80"></div></div>
+            <div class="ph-img h-200" style="margin-top:14px"><svg><use href="#ic-img"/></svg><span class="cap">Hero image</span></div>
+            <div class="btn-col"><a class="btn ghost" id="textHero"><svg><use href="#ic-txt"/></svg> Text us a question</a></div>
+            <div class="note"><span class="lbl">Build note</span>Rentals-first hero, one action. The primary action (texting) also lives in the pinned bottom bar, so it is always reachable without scrolling.
+              <span class="ref">Fixes the audit finding that the old site had no mobile menu and a layout pinned near 1059px wide.</span></div>
+          </div>
+          <div class="sec alt">
+            <p class="eyebrow">What we offer</p>
+            <h2 class="wf">How can we help?</h2>
+            <div style="margin-top:12px">
+              <div class="card ten" data-goto="rentals"><i class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><use href="#ic-home"/></svg></i><h3 class="wf">Rentals</h3><div class="muted">Browse available homes and apartments for rent.</div><span class="arr">See available rentals →</span></div>
+              <div class="card own" data-goto="owners"><i class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><use href="#ic-key"/></svg></i><h3 class="wf">Property Management</h3><div class="muted">Own a property? We will take care of it for you.</div><span class="arr">See management services →</span></div>
+            </div>
+            <div class="note"><span class="lbl">Build note</span>The same two clear offerings as the desktop simplification, stacked full-width. One obvious tap per path, no duplicate rentals links.</div>
+          </div>
+          <div class="sec band textband">
+            <h2 class="wf">Questions about a rental?</h2>
+            <div class="muted">Text is the fastest way to reach us.</div>
+            <div class="btn-col"><a class="btn" id="textBand"><svg><use href="#ic-txt"/></svg> Text us</a></div>
+          </div>
+          <footer class="m-foot">
+            <div class="name">PARASOLE PROPERTIES</div>
+            <div class="muted" style="color:#9d9d9d">[ One-line descriptor ]</div>
+            <div class="textbig"><span style="font-family:var(--mono);font-size:11px">TEXT US</span> <b>000-000-0000</b></div>
+            <div class="social"><span>Facebook</span><span>Miles Summit ↗</span></div>
+            <a class="fl" data-goto="rentals">Available Rentals</a>
+            <a class="fl" data-goto="apply">How to Apply</a>
+            <a class="fl" data-goto="owners">Owners</a>
+            <a class="fl" data-goto="contact">Contact</a>
+            <div class="copy">© Parasole Properties · parasoleproperties.com</div>
+          </footer>
+        </section>
+
+        <!-- ===================== RENTALS ===================== -->
+        <section class="page" id="pg-rentals">
+          <div class="sec">
+            <p class="eyebrow">Listings</p>
+            <h1 class="wf">Available Rentals</h1>
+            <div class="muted">Found one you like? Prequalify for a showing at the bottom of the listing.</div>
+            <div class="chips">
+              <span class="chip">Location <svg><use href="#ic-down"/></svg></span>
+              <span class="chip">Beds <svg><use href="#ic-down"/></svg></span>
+              <span class="chip">Price <svg><use href="#ic-down"/></svg></span>
+              <span class="chip">Sort <svg><use href="#ic-down"/></svg></span>
+            </div>
+            <div style="margin-top:14px">
+              <div class="listing"><div class="ph-img h-150" style="border-radius:0"><svg><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+              <div class="listing"><div class="ph-img h-150" style="border-radius:0"><svg><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+              <div class="listing"><div class="ph-img h-150" style="border-radius:0"><svg><use href="#ic-img"/></svg><span class="cap">Photo</span></div><div class="meta"><span class="price">$0,000 / mo</span><div class="specs"><span>0 bd</span><span>0 ba</span><span>City, PA</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+            </div>
+            <div class="note"><span class="lbl">Build note</span>Filters collapse into a horizontal, thumb-swipeable chip row. Cards stack full-width with a large tap target for details. Pulls from the self-managed listings module.</div>
+          </div>
+        </section>
+
+        <!-- ===================== LISTING DETAIL ===================== -->
+        <section class="page" id="pg-listing">
+          <div class="sec">
+            <p class="breadcrumb">Rentals / <b>Listing name</b></p>
+            <div class="ph-img h-200"><svg><use href="#ic-img"/></svg><span class="cap">Primary photo</span></div>
+            <h1 class="wf" style="margin-top:14px;font-size:21px">Listing name</h1>
+            <div class="price" style="font-weight:700;font-size:19px">$0,000 / mo</div>
+            <div class="chips" style="margin-top:8px"><span class="chip">0 bd</span><span class="chip">0 ba</span><span class="chip">0 sqft</span><span class="chip">City, PA</span></div>
+            <div class="btn-col">
+              <a class="btn" id="listingPrequal">Prequalify for a showing</a>
+              <a class="btn ghost" id="textListing"><svg><use href="#ic-txt"/></svg> Text about this rental</a>
+            </div>
+            <div class="grid2" style="margin-top:16px">
+              <div class="ph-img h-84"><svg><use href="#ic-img"/></svg></div>
+              <div class="ph-img h-84"><svg><use href="#ic-img"/></svg></div>
+              <div class="ph-img h-84"><svg><use href="#ic-img"/></svg></div>
+              <div class="ph-img h-84"><svg><use href="#ic-img"/></svg></div>
+            </div>
+          </div>
+          <div class="sec alt">
+            <p class="eyebrow">Description</p>
+            <div class="lines"><div class="line w90"></div><div class="line w90"></div><div class="line w70"></div><div class="line w40"></div></div>
+            <p class="eyebrow" style="margin-top:18px">Features</p>
+            <div class="chips"><span class="chip">Feature</span><span class="chip">Feature</span><span class="chip">Feature</span></div>
+            <p class="eyebrow" style="margin-top:18px">Location</p>
+            <div class="ph-img h-150"><svg><use href="#ic-map"/></svg><span class="cap">Map</span></div>
+            <div class="note"><span class="lbl">Build note</span>The long application wording stays off the listing. It lives once on How to Apply and is summarized in the prequalify block below.</div>
+          </div>
+          <div class="sec">
+            <div class="prequal">
+              <span class="flag">Required to book a showing</span>
+              <h2 class="wf" style="font-size:18px">Prequalify for a showing</h2>
+              <div class="muted">A few quick questions. This qualifies you to schedule a showing. It is not the full application.</div>
+              <div style="margin-top:14px">
+                <div class="field"><label>First name</label><div class="input"></div></div>
+                <div class="field"><label>Last name</label><div class="input"></div></div>
+                <div class="field"><label>Mobile (for texting)</label><div class="input"></div></div>
+                <div class="field"><label>Email</label><div class="input"></div></div>
+                <div class="field"><label>Desired move-in date</label><div class="input"></div></div>
+                <div class="field"><label>Monthly household income</label><div class="input"></div></div>
+                <a class="btn">Submit &amp; request a showing</a>
+              </div>
+              <div class="muted" style="margin-top:12px">Ready to lease? See <a data-goto="apply" style="color:var(--ink);font-weight:600;cursor:pointer">How to Apply</a>.</div>
+            </div>
+            <div class="note"><span class="lbl">Build note</span>Placed at the very bottom of the listing, exactly as Jessica described the process. Mobile number is captured first, since follow-up happens by text. Part of the reusable listing template.</div>
+          </div>
+        </section>
+
+        <!-- ===================== HOW TO APPLY ===================== -->
+        <section class="page" id="pg-apply">
+          <div class="sec">
+            <p class="eyebrow">For renters</p>
+            <h1 class="wf">How to Apply</h1>
+            <div class="muted">Two steps: prequalify to see the unit, then apply to lease it.</div>
+            <div style="margin-top:16px">
+              <div class="step s1"><div class="num">1</div><h3 class="wf" style="font-size:16px">Prequalify for a showing</h3><div class="muted">Answer a short questionnaire at the bottom of the listing you like. Once you prequalify, we set up a showing.</div><div class="btn-col"><a class="btn sm" data-goto="rentals">Find a rental to prequalify</a></div></div>
+              <div class="step"><div class="num">2</div><h3 class="wf" style="font-size:16px">Submit your full application</h3><div class="muted">Required to lease the unit. The full application includes:</div><ul class="req"><li><span class="bx"></span> Proof of income</li><li><span class="bx"></span> Background and credit check</li></ul><div class="btn-col"><a class="btn ghost sm" id="applyPortal">Start full application ↗</a></div></div>
+            </div>
+            <div class="note"><span class="lbl">Build note</span>The single home for the application requirements, stated once instead of repeated in every listing description.</div>
+          </div>
+          <div class="sec alt">
+            <p class="eyebrow">Good to know</p>
+            <div class="card"><h3 class="wf">Rental criteria</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+            <div class="card"><h3 class="wf">Pets &amp; policies</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+            <div class="card"><h3 class="wf">Fees &amp; deposits</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+          </div>
+        </section>
+
+        <!-- ===================== OWNERS ===================== -->
+        <section class="page" id="pg-owners">
+          <div class="sec">
+            <p class="eyebrow">For property owners</p>
+            <h1 class="wf">Own a property? Let us manage it.</h1>
+            <div class="lines"><div class="line w90"></div><div class="line w60"></div></div>
+            <div class="btn-col">
+              <a class="btn" data-goto="contact">Request a management quote</a>
+              <a class="btn ghost" id="ownerLogin2">Owner login ↗</a>
+            </div>
+            <div class="note"><span class="lbl">Build note</span>One slim page for owners. The site's focus stays on rentals; this also absorbs the removed Investment Opportunities page (301-redirect its old URL here).</div>
+          </div>
+          <div class="sec alt">
+            <p class="eyebrow">What we handle</p>
+            <div class="card"><h3 class="wf">Leasing &amp; marketing</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+            <div class="card"><h3 class="wf">Maintenance</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+            <div class="card"><h3 class="wf">Rent &amp; reporting</h3><div class="lines"><div class="line w90"></div><div class="line w60"></div></div></div>
+            <div class="btn-col"><a class="btn" data-goto="contact">Request a management quote</a></div>
+          </div>
+        </section>
+
+        <!-- ===================== ABOUT ===================== -->
+        <section class="page" id="pg-about">
+          <div class="sec">
+            <p class="eyebrow">Page heading</p>
+            <h1 class="wf">About</h1>
+            <div class="lines"><div class="line w90"></div><div class="line w90"></div><div class="line w70"></div><div class="line w40"></div></div>
+            <div class="ph-img h-170" style="margin-top:14px"><svg><use href="#ic-img"/></svg><span class="cap">Office / team image</span></div>
+            <div class="note"><span class="lbl">Build note</span>Proper H1 and meta description (the old Press Releases page had neither). Kept short to match the simple direction.</div>
+          </div>
+          <div class="sec alt">
+            <p class="eyebrow">In the news <span style="text-transform:none;letter-spacing:0;color:var(--ink-3)">(optional)</span></p>
+            <div class="logos"><div class="logobox">HEADLINE</div><div class="logobox">HEADLINE</div></div>
+          </div>
+        </section>
+
+        <!-- ===================== CONTACT ===================== -->
+        <section class="page" id="pg-contact">
+          <div class="sec">
+            <p class="eyebrow">Page heading</p>
+            <h1 class="wf">Contact</h1>
+            <div class="card" style="margin-top:6px"><h3 class="wf"><svg style="width:15px;height:15px;vertical-align:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><use href="#ic-txt"/></svg> Text us (fastest)</h3><div class="line w50"></div><h3 class="wf" style="margin-top:12px">Call</h3><div class="line w50"></div><h3 class="wf" style="margin-top:12px">Email</h3><div class="line w70"></div><h3 class="wf" style="margin-top:12px">Office</h3><div class="line w80"></div></div>
+            <div class="field"><label>I am a</label><div class="input"></div></div>
+            <div class="field"><label>First name</label><div class="input"></div></div>
+            <div class="field"><label>Last name</label><div class="input"></div></div>
+            <div class="field"><label>Mobile (for texting)</label><div class="input"></div></div>
+            <div class="field"><label>Email</label><div class="input"></div></div>
+            <div class="field"><label>Message</label><div class="input area"></div></div>
+            <div class="captcha">reCAPTCHA — this page only</div>
+            <div class="btn-col"><a class="btn">Send message</a></div>
+            <div class="ph-img h-150" style="margin-top:16px"><svg><use href="#ic-map"/></svg><span class="cap">Map</span></div>
+            <div class="note"><span class="lbl">Build note</span>Text is listed first and labeled fastest, with call as backup. All fields carry visible labels; reCAPTCHA loads on this page only; the map embed gets a title attribute.</div>
+          </div>
+        </section>
+
+        <!-- sticky bottom action bar -->
+        <div class="m-bottom">
+          <a class="btn" id="textBottom" style="flex:1"><svg><use href="#ic-txt"/></svg> Text us</a>
+          <a class="btn ghost" data-goto="rentals" style="flex:1">Rentals</a>
+        </div>
+
+        <!-- hamburger menu -->
+        <div class="m-menu" id="menu">
+          <div class="top"><span class="name">PARASOLE PROPERTIES</span><button class="icon-btn" id="menuClose" aria-label="Close menu"><svg><use href="#ic-x"/></svg></button></div>
+          <nav>
+            <a data-goto="home">Home <span class="chev"><svg style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chev"/></svg></span></a>
+            <a data-goto="rentals">Available Rentals <span class="chev"><svg style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chev"/></svg></span></a>
+            <a data-goto="apply">How to Apply <span class="chev"><svg style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chev"/></svg></span></a>
+            <a data-goto="owners">Owners <span class="chev"><svg style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chev"/></svg></span></a>
+            <a data-goto="about">About <span class="chev"><svg style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chev"/></svg></span></a>
+            <a data-goto="contact">Contact <span class="chev"><svg style="width:18px;height:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chev"/></svg></span></a>
+          </nav>
+          <div class="logins">
+            <a class="btn ghost sm" id="tenantLogin">Resident Login ↗</a>
+            <a class="btn ghost sm" id="ownerLogin">Owner Login ↗</a>
+          </div>
+        </div>
+
+      </div><!-- /scroll -->
+    </div><!-- /screen -->
+  </div><!-- /device -->
+</div><!-- /stage -->
+<div class="toast" id="toast"></div>
+<script>
+  var labels={home:'Home',rentals:'Available Rentals',listing:'Listing detail',apply:'How to Apply',owners:'Owners',about:'About',contact:'Contact'};
+  var navFor={home:'home',rentals:'rentals',listing:'rentals',apply:'apply',owners:'owners',about:'about',contact:'contact'};
+  var pages=document.querySelectorAll('.page');
+  var scroll=document.getElementById('scroll');
+  var menu=document.getElementById('menu');
+  function closeMenu(){menu.classList.remove('open');}
+  function show(id){
+    if(!labels[id]) id='home';
+    pages.forEach(function(p){p.classList.toggle('active',p.id==='pg-'+id);});
+    document.getElementById('pageName').textContent=labels[id];
+    if(location.hash!=='#'+id) history.replaceState(null,'','#'+id);
+    closeMenu();
+    if(scroll) scroll.scrollTop=0;
+  }
+  document.querySelectorAll('[data-goto]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();show(el.dataset.goto);});});
+  document.getElementById('menuOpen').addEventListener('click',function(){menu.classList.add('open');});
+  document.getElementById('menuClose').addEventListener('click',closeMenu);
+  var nt=document.getElementById('notesToggle');
+  nt.addEventListener('click',function(){var on=document.body.classList.toggle('notes-on');nt.setAttribute('aria-pressed',on);nt.textContent=on?'Hide build notes':'Show build notes';});
+  var toast=document.getElementById('toast'),tt;
+  function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3600);}
+  function textNote(e){e.preventDefault();ping('Wireframe link. On the live site this opens the phone SMS app to text Parasole (sms: link), the preferred contact method.');}
+  function ownerNote(e){e.preventDefault();closeMenu();ping('Wireframe link. On the live site this opens the owner login on the HTTPS resident portal.');}
+  function tenantNote(e){e.preventDefault();closeMenu();ping('Wireframe link. On the live site this opens the resident login on the HTTPS resident portal.');}
+  function applyNote(e){e.preventDefault();ping('Wireframe link. On the live site this starts the full application (proof of income + background/credit check).');}
+  function prequalScroll(e){e.preventDefault();ping('The prequalify questionnaire is at the bottom of this listing. On the live site this scrolls you there.');}
+  ['textHero','textBand','textBottom','textListing'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',textNote);});
+  ['ownerLogin','ownerLogin2'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',ownerNote);});
+  ['tenantLogin'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',tenantNote);});
+  ['applyPortal'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',applyNote);});
+  ['listingPrequal'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',prequalScroll);});
+  window.addEventListener('hashchange',function(){show(location.hash.replace('#',''));});
+  show(location.hash?location.hash.replace('#',''):'home');
+</script>
+</body>
+</html>
