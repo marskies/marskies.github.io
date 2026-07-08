@@ -163,6 +163,30 @@
   .note-strip{background:var(--band);color:var(--ink2);font-size:13px;padding:9px 18px;text-align:center;border-bottom:1px solid var(--line)}
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1c1b1a;color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:90;max-width:92vw;text-align:center}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .gphoto{cursor:pointer;position:relative}
+  .gphoto:after{content:"\2922";position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:8px;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:15px;opacity:0;transition:.15s}
+  .gphoto:hover:after{opacity:1}.gphoto:hover{border-color:var(--brand)}
+  .video-embed{position:relative;aspect-ratio:16/9;background:color-mix(in srgb,var(--brand) 8%,var(--bg2));border:2px dashed color-mix(in srgb,var(--brand) 34%,transparent);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;cursor:pointer}
+  .video-embed .play{width:72px;height:72px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .video-embed .play svg{width:30px;height:30px;margin-left:4px}
+  .video-embed .vt{font-weight:800;font-size:18px;color:var(--brand)}
+  .video-embed .vs{font-size:13px;color:var(--ink3);letter-spacing:.03em}
+  .video-embed:hover{border-color:var(--brand)}
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(20,18,16,.88);display:none;flex-direction:column;padding:26px}
+  .lb.on{display:flex}
+  .lb-top{display:flex;align-items:center;justify-content:space-between;color:#fff;margin-bottom:14px}
+  .lb-count{font-weight:700;font-size:15px}
+  .lb-close{width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer;font-size:20px;font-family:inherit}
+  .lb-stage{flex:1;display:flex;align-items:center;gap:16px;min-height:0}
+  .lb-nav{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;flex:0 0 auto;display:grid;place-items:center}
+  .lb-nav svg{width:24px;height:24px}
+  .lb-main{flex:1;height:100%;border:2px dashed rgba(255,255,255,.4);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;text-align:center;padding:20px}
+  .lb-main svg.pic{width:44px;height:44px;opacity:.7}
+  .lb-cap{font-weight:800;font-size:24px}
+  .lb-sub{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .lb-thumbs{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+  .lb-thumbs button{width:96px;height:58px;border-radius:8px;border:2px solid transparent;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);font-size:11px;cursor:pointer;padding:5px;overflow:hidden;font-family:inherit;line-height:1.2}
+  .lb-thumbs button.on{border-color:#fff;color:#fff}
   @media (max-width:900px){.split,.split.rev,.g3,.g4,.steps,.foot .top{grid-template-columns:1fr}.g2{grid-template-columns:1fr}h1{font-size:36px}}
 </style>
 </head>
@@ -295,7 +319,7 @@
       <div class="container">
         <p class="breadcrumb">Available Rentals / <b>Oak Street 2B</b></p>
         <div class="split">
-          <div class="photo h-320"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Primary photo — Oak Street 2B exterior</span><span class="ps">Photo placeholder</span></div>
+          <div class="photo h-320 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Primary photo — Oak Street 2B exterior</span><span class="ps">Click any photo to open the gallery</span></div>
           <div>
             <h1 style="font-size:34px">Oak Street 2B</h1>
             <div class="price" style="font-size:26px;font-weight:800;color:var(--brand)">$1,000 / mo</div>
@@ -305,11 +329,13 @@
           </div>
         </div>
         <div class="grid g4" style="margin-top:26px">
-          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Living room</span></div>
-          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Kitchen</span></div>
-          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bedroom</span></div>
-          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bathroom</span></div>
+          <div class="photo h-110 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Living room</span></div>
+          <div class="photo h-110 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Kitchen</span></div>
+          <div class="photo h-110 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bedroom</span></div>
+          <div class="photo h-110 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bathroom</span></div>
         </div>
+        <p class="eyebrow" style="margin-top:36px">Property walkthrough</p>
+        <div class="video-embed" id="vidEmbed"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="vt">Property walkthrough video</span><span class="vs">Their existing YouTube walkthrough embeds right here</span></div>
       </div>
     </div>
     <div class="sec warm tight">
@@ -484,6 +510,15 @@
     </div>
   </footer>
 </div>
+<div class="lb" id="lb" aria-hidden="true">
+  <div class="lb-top"><span class="lb-count" id="lbCount">1 / 5</span><button class="lb-close" id="lbClose" aria-label="Close">&#10005;</button></div>
+  <div class="lb-stage">
+    <button class="lb-nav" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="lb-main"><svg class="pic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></svg><span class="lb-cap" id="lbCap">Photo</span><span class="lb-sub">Photo placeholder — the real photo shows here</span></div>
+    <button class="lb-nav" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="lb-thumbs" id="lbThumbs"></div>
+</div>
 <div class="toast" id="toast"></div>
 <script>
   var labels={home:'Home',rentals:'Available Rentals',listing:'Listing detail',prequal:'Prequalify',apply:'How to Apply',owners:'Owners',about:'About',contact:'Contact'};
@@ -543,6 +578,25 @@
     fstep('result');});
   var tb=document.getElementById('toBook');if(tb)tb.addEventListener('click',function(e){e.preventDefault();fstep('book');});
   var td=document.getElementById('toDone');if(td)td.addEventListener('click',function(e){e.preventDefault();fstep('done');});
+  // listing photo lightbox carousel + walkthrough video
+  (function(){
+    var gphotos=[].slice.call(document.querySelectorAll('#pg-listing .gphoto'));
+    if(!gphotos.length)return;
+    var caps=gphotos.map(function(el){var t=el.querySelector('.pt');return t?t.textContent:'Photo';});
+    var lb=document.getElementById('lb'),cap=document.getElementById('lbCap'),cnt=document.getElementById('lbCount'),th=document.getElementById('lbThumbs'),idx=0;
+    function render(){cap.textContent=caps[idx];cnt.textContent=(idx+1)+' / '+caps.length;[].forEach.call(th.children,function(b,i){b.classList.toggle('on',i===idx);});}
+    function open(i){idx=i;render();lb.classList.add('on');lb.setAttribute('aria-hidden','false');}
+    function close(){lb.classList.remove('on');lb.setAttribute('aria-hidden','true');}
+    function go(d){idx=(idx+d+caps.length)%caps.length;render();}
+    caps.forEach(function(c,i){var b=document.createElement('button');b.textContent=c;b.addEventListener('click',function(){idx=i;render();});th.appendChild(b);});
+    gphotos.forEach(function(el,i){el.addEventListener('click',function(){open(i);});});
+    document.getElementById('lbClose').addEventListener('click',close);
+    document.getElementById('lbPrev').addEventListener('click',function(){go(-1);});
+    document.getElementById('lbNext').addEventListener('click',function(){go(1);});
+    lb.addEventListener('click',function(e){if(e.target===lb)close();});
+    document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();else if(e.key==='ArrowLeft')go(-1);else if(e.key==='ArrowRight')go(1);});
+    var ve=document.getElementById('vidEmbed');if(ve)ve.addEventListener('click',function(){ping('On the live site this plays the property’s YouTube walkthrough video, embedded right here.');});
+  })();
   window.addEventListener('hashchange',function(){show(location.hash.replace('#',''));});
   show(location.hash?location.hash.replace('#',''):'home');
 </script>
