@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole Properties — Design Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* CURRENT Parasole palette (color-picked from parasoleproperties.com) */
+    --brand:#991822; --brand-dk:#6e0f17; --accent:#c9a227; --accent-lt:#e6cf7a;
+    --bg:#ffffff; --bg2:#f7f4ef; --band:#efeae1; --ink:#242220; --ink2:#5f5b54; --ink3:#8b877e;
+    --line:#e7e1d6; --btn-ink:#ffffff; --onaccent:#3a2e00;
+    --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    --maxw:1160px;
+  }
+  body.rebrand{
+    /* PROPOSED rebrand: forest green + terracotta + cream (distinct from Miles Summit navy/gold) */
+    --brand:#2e4b3f; --brand-dk:#223a30; --accent:#c56b4b; --accent-lt:#e7b49b;
+    --bg:#ffffff; --bg2:#f6f1e9; --band:#ede6d9; --ink:#242220; --ink2:#5f5b54; --ink3:#8b877e;
+    --line:#e6decf; --btn-ink:#ffffff; --onaccent:#3a1c10;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg2);line-height:1.55;-webkit-font-smoothing:antialiased}
+  /* ---- mockup control bar ---- */
+  .mk-bar{position:sticky;top:0;z-index:80;background:#1c1b1a;color:#eee;display:flex;align-items:center;gap:16px;padding:9px 18px;flex-wrap:wrap}
+  .mk-bar .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:#000;color:#c9c6c0;padding:3px 8px;border-radius:4px;font-weight:700}
+  .mk-bar .t{font-weight:700;font-size:14px}
+  .mk-bar .sub{font-size:12px;color:#9a968f}
+  .mk-bar .sp{flex:1}
+  .mk-bar .pg{font-size:12px;color:#c9c6c0}
+  .mk-bar .pg b{color:#fff}
+  .seg{display:inline-flex;border:1px solid #4a4844;border-radius:8px;overflow:hidden}
+  .seg button{appearance:none;border:0;background:transparent;color:#cfccc6;font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;cursor:pointer}
+  .seg button.on{background:#fff;color:#1c1b1a}
+  /* ---- frame ---- */
+  .frame{max-width:1320px;margin:16px auto;background:var(--bg);box-shadow:0 1px 0 var(--line),0 14px 40px rgba(0,0,0,.10);border-radius:6px;overflow:hidden}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 34px}
+  /* ---- top utility ---- */
+  .util{background:var(--brand);color:#fff}
+  .util .row{display:flex;align-items:center;gap:14px;height:40px;font-size:12.5px}
+  .util .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:5px;padding:3px 9px;font-weight:700;letter-spacing:.03em}
+  .util b{font-weight:700}
+  .util .sp{flex:1}
+  .util a{color:#fff;text-decoration:none;opacity:.92}
+  /* ---- header ---- */
+  .head{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:41px;z-index:20}
+  .head .row{display:flex;align-items:center;gap:26px;height:88px}
+  .brandmark{display:flex;align-items:center}
+  .logo-cur{height:66px;width:auto;display:block}
+  .logo-new{display:none;align-items:center;gap:11px}
+  body.rebrand .logo-cur{display:none}
+  body.rebrand .logo-new{display:flex}
+  .lm-badge{width:46px;height:46px;border-radius:12px;background:var(--brand);display:grid;place-items:center;position:relative;overflow:hidden}
+  .lm-badge:before{content:"";position:absolute;left:-6px;right:-6px;top:9px;height:11px;background:var(--accent);border-radius:50%;transform:rotate(-8deg)}
+  .lm-badge span{position:relative;color:#fff;font-weight:800;font-size:20px;line-height:1}
+  .lm-txt{display:flex;flex-direction:column;line-height:1}
+  .lm-txt b{font-weight:800;font-size:20px;letter-spacing:.01em;color:var(--brand)}
+  .lm-txt i{font-style:normal;font-size:10.5px;letter-spacing:.24em;color:var(--ink2);font-weight:600;margin-top:3px}
+  .nav{display:flex;gap:3px;margin-left:6px;flex-wrap:wrap}
+  .nav button{background:none;border:0;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink2);padding:9px 12px;border-radius:8px;cursor:pointer}
+  .nav button:hover{background:var(--bg2);color:var(--ink)}
+  .nav button.cur{color:var(--brand)}
+  .head .sp{flex:1}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:var(--btn-ink);border:1px solid var(--brand);border-radius:9px;padding:12px 20px;font-size:14.5px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit}
+  .btn:hover{background:var(--brand-dk);border-color:var(--brand-dk)}
+  .btn.gold{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+  .btn.gold:hover{filter:brightness(.96)}
+  .btn.ghost{background:transparent;color:var(--brand);border-color:var(--line)}
+  .btn.ghost:hover{background:var(--bg2)}
+  .btn.sm{padding:9px 15px;font-size:13.5px}
+  .btn.lg{padding:15px 26px;font-size:16px}
+  .btn.block{width:100%}
+  .btn.white{background:#fff;color:var(--brand);border-color:#fff}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .head-cta{display:flex;gap:10px;align-items:center}
+  /* ---- pages ---- */
+  .page{display:none}.page.active{display:block}
+  .sec{padding:66px 0}
+  .sec.warm{background:var(--bg2)}
+  .sec.band{background:var(--band)}
+  .sec.brand{background:var(--brand);color:#fff}
+  .sec.tight{padding:44px 0}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+  body.rebrand .eyebrow{color:var(--accent)}
+  h1{font-size:46px;line-height:1.05;letter-spacing:-.02em;font-weight:800;margin:0 0 18px;color:var(--ink)}
+  h2{font-size:32px;line-height:1.1;letter-spacing:-.01em;font-weight:800;margin:0 0 14px;color:var(--ink)}
+  h3{font-size:19px;font-weight:700;margin:0 0 8px;color:var(--ink)}
+  p.lead{font-size:18px;color:var(--ink2);margin:0 0 8px;max-width:60ch}
+  p{color:var(--ink2);font-size:15.5px}
+  .sec.brand h1,.sec.brand h2,.sec.brand h3,.sec.brand p{color:#fff}
+  .sec.brand .eyebrow{color:var(--accent-lt)}
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .split.rev{grid-template-columns:.95fr 1.05fr}
+  .grid{display:grid;gap:22px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  /* ---- photo placeholders (labeled) ---- */
+  .photo{position:relative;background:var(--bg2);border:2px dashed color-mix(in srgb,var(--brand) 34%,transparent);border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px;color:var(--brand)}
+  .photo .pic{width:34px;height:34px;opacity:.55}
+  .photo .pt{font-weight:700;font-size:15px;color:var(--brand);max-width:90%}
+  .photo .ps{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+  .h-hero{min-height:420px}.h-320{height:320px}.h-260{height:260px}.h-200{height:200px}.h-150{height:150px}.h-110{height:110px}
+  /* ---- cards ---- */
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .card.warm{background:var(--bg2)}
+  .offer{position:relative;overflow:hidden}
+  .offer .ico{width:48px;height:48px;border-radius:12px;background:color-mix(in srgb,var(--brand) 10%,var(--bg));color:var(--brand);display:grid;place-items:center;margin-bottom:16px}
+  .offer .ico svg{width:24px;height:24px}
+  .offer .go{display:inline-flex;align-items:center;gap:7px;margin-top:14px;color:var(--brand);font-weight:700;font-size:14.5px}
+  .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13.5px;color:var(--ink2);background:var(--bg);font-weight:600}
+  .chips{display:flex;gap:9px;flex-wrap:wrap}
+  .stat{display:flex;flex-direction:column;gap:2px}
+  .stat b{font-size:38px;font-weight:800;color:var(--brand);letter-spacing:-.02em;line-height:1}
+  .stat span{font-size:13.5px;color:var(--ink2);font-weight:600}
+  /* listing */
+  .listing{background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .listing .meta{padding:16px 18px}
+  .listing .price{font-weight:800;font-size:19px;color:var(--ink)}
+  .listing .specs{display:flex;gap:14px;color:var(--ink3);font-size:13.5px;margin:8px 0 14px;font-weight:600}
+  .filter{display:flex;gap:12px;flex-wrap:wrap;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:26px}
+  .sel{min-width:150px;height:44px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);display:flex;align-items:center;padding:0 14px;color:var(--ink2);font-size:14px;gap:8px;font-weight:600}
+  .sel .cv{margin-left:auto;opacity:.5}
+  /* forms */
+  .form{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:7px}
+  .field .in{height:46px;border:1px solid var(--line);border-radius:9px;background:var(--bg2)}
+  .field .in.area{height:110px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .rin{width:100%;height:46px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);padding:0 14px;font-family:inherit;font-size:15px;color:var(--ink)}
+  select.rin{cursor:pointer}
+  .req{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .req li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--ink);font-weight:600}
+  .req li .bx{width:22px;height:22px;border-radius:6px;background:color-mix(in srgb,var(--brand) 12%,var(--bg));color:var(--brand);display:grid;place-items:center;flex:0 0 auto}
+  .req li .bx svg{width:13px;height:13px}
+  .breadcrumb{font-size:13px;color:var(--ink3);margin-bottom:16px;font-weight:600}
+  .breadcrumb b{color:var(--brand)}
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .step{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .step .num{width:34px;height:34px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;margin-bottom:12px}
+  .prequal-cta{background:color-mix(in srgb,var(--brand) 7%,var(--bg));border:1px solid color-mix(in srgb,var(--brand) 22%,transparent);border-radius:18px;padding:30px}
+  .flag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:var(--onaccent);border-radius:6px;padding:4px 10px;margin-bottom:12px}
+  .fstep{display:none}.fstep.on{display:block}
+  .result-pass{background:color-mix(in srgb,var(--brand) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--brand) 26%,transparent);border-radius:18px;padding:30px}
+  .check{width:66px;height:66px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;margin:0 auto 18px}
+  .check svg{width:32px;height:32px}
+  /* footer */
+  .foot{background:#211f1d;color:#cbc7c0;padding:52px 0 30px}
+  body.rebrand .foot{background:#1e2a23}
+  .foot .top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
+  .foot h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8f8b84;margin:0 0 14px}
+  .foot .fl{display:block;color:#cbc7c0;text-decoration:none;padding:6px 0;font-size:14px;cursor:pointer}
+  .foot .fl:hover{color:#fff}
+  .foot .desc{color:#9c988f;font-size:14px;max-width:250px;margin-top:10px}
+  .foot .fbrand{color:#fff;font-weight:800;font-size:17px}
+  .foot .txt{margin-top:14px;font-size:15px}.foot .txt b{color:#fff}
+  .foot .social{display:flex;gap:8px;margin-top:14px}
+  .foot .social span{padding:7px 12px;border:1px solid #45423d;border-radius:8px;font-size:12px;color:#cbc7c0}
+  .foot .copy{border-top:1px solid #3a3733;margin-top:30px;padding-top:18px;font-size:12.5px;color:#8a867f;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .note-strip{background:var(--band);color:var(--ink2);font-size:13px;padding:9px 18px;text-align:center;border-bottom:1px solid var(--line)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1c1b1a;color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:90;max-width:92vw;text-align:center}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:900px){.split,.split.rev,.g3,.g4,.steps,.foot .top{grid-template-columns:1fr}.g2{grid-template-columns:1fr}h1{font-size:36px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M15 8l2 2"/></symbol>
+  <symbol id="i-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></symbol>
+</svg>
+
+<div class="mk-bar">
+  <span class="tag">Mockup</span>
+  <span class="t">Parasole Properties</span>
+  <span class="sub">Desktop</span>
+  <span class="sp"></span>
+  <span class="pg">Viewing: <b id="pageName">Home</b></span>
+  <div class="seg" role="group" aria-label="Color scheme">
+    <button id="btnCurrent" class="on">Current colors</button>
+    <button id="btnRebrand">Proposed rebrand</button>
+  </div>
+</div>
+<div class="note-strip">Colors and logo are fully editable. This shows two options: your current brand, and a proposed refresh. Toggle above.</div>
+
+<div class="frame">
+  <div class="util">
+    <div class="container"><div class="row">
+      <span class="pill">Text us</span><b>(570) 343-2597</b><span style="opacity:.8">or call anytime</span>
+      <span class="sp"></span>
+      <a>Resident Login ↗</a><a>Owner Login ↗</a>
+    </div></div>
+  </div>
+  <header class="head">
+    <div class="container"><div class="row">
+      <span class="brandmark">
+        <img class="logo-cur" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties">
+        <span class="logo-new"><span class="lm-badge"><span>P</span></span><span class="lm-txt"><b>Parasole</b><i>PROPERTIES</i></span></span>
+      </span>
+      <nav class="nav" aria-label="Primary">
+        <button class="cur" data-goto="home">Home</button>
+        <button data-goto="rentals">Available Rentals</button>
+        <button data-goto="apply">How to Apply</button>
+        <button data-goto="owners">Owners</button>
+        <button data-goto="about">About</button>
+        <button data-goto="contact">Contact</button>
+      </nav>
+      <span class="sp"></span>
+      <span class="head-cta"><a class="btn ghost sm" id="tx1"><svg width="16" height="16"><use href="#i-txt"/></svg> Text us</a><a class="btn sm" data-goto="rentals">View rentals</a></span>
+    </div></div>
+  </header>
+  <main>
+  <!-- HOME -->
+  <section class="page active" id="pg-home">
+    <div class="sec">
+      <div class="container"><div class="split">
+        <div>
+          <p class="eyebrow">Rentals in Scranton &amp; Wilkes-Barre</p>
+          <h1>Find a place you'll be glad to call home.</h1>
+          <p class="lead">Family-run property management in Northeastern Pennsylvania for over 20 years. Browse available rentals, see if you prequalify, and book a showing in minutes.</p>
+          <div class="btn-row"><a class="btn lg" data-goto="rentals">View available rentals</a><a class="btn ghost lg" id="tx2"><svg width="18" height="18"><use href="#i-txt"/></svg> Text us a question</a></div>
+        </div>
+        <div class="photo h-hero"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Hero — downtown Scranton at golden hour, or a welcoming rental exterior</span><span class="ps">Photo placeholder</span></div>
+      </div></div>
+    </div>
+    <div class="sec warm">
+      <div class="container">
+        <p class="eyebrow" style="text-align:center">What we offer</p>
+        <h2 style="text-align:center">How can we help?</h2>
+        <div class="grid g2" style="margin-top:34px">
+          <div class="card offer"><div class="ico"><svg><use href="#i-home"/></svg></div><h3>Rentals</h3><p>Browse available homes and apartments for rent across the area, with photos and quick prequalification.</p><a class="go" data-goto="rentals">See available rentals <svg width="16" height="16"><use href="#i-arrow"/></svg></a></div>
+          <div class="card offer"><div class="ico"><svg><use href="#i-key"/></svg></div><h3>Property Management</h3><p>Own a property? We handle leasing, maintenance, rent, and reporting, so you don't have to.</p><a class="go" data-goto="owners">See management services <svg width="16" height="16"><use href="#i-arrow"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="container"><div class="split rev">
+        <div class="photo h-320"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Local scene — a Scranton / Wilkes-Barre neighborhood or street</span><span class="ps">Photo placeholder</span></div>
+        <div>
+          <p class="eyebrow">Local, and here for the long run</p>
+          <h2>A family business that treats your home like our own.</h2>
+          <p class="lead">We know these neighborhoods because we live here. When something comes up, you reach a real person, and we make renting simple and clear from the first text to move-in day.</p>
+          <div class="grid g3" style="margin-top:28px;gap:18px">
+            <div class="stat"><b>20+</b><span>Years serving NEPA</span></div>
+            <div class="stat"><b>Local</b><span>Scranton &amp; Wilkes-Barre</span></div>
+            <div class="stat"><b>Text</b><span>The fastest way to reach us</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="sec brand">
+      <div class="container" style="text-align:center">
+        <h2>Questions about a rental?</h2>
+        <p class="lead" style="margin:0 auto;color:rgba(255,255,255,.85)">Text is the fastest way to reach us.</p>
+        <div class="btn-row" style="justify-content:center"><a class="btn white lg" id="tx3"><svg width="18" height="18"><use href="#i-txt"/></svg> Text us</a><a class="btn lg" style="background:transparent;border-color:rgba(255,255,255,.5);color:#fff" data-goto="contact">Other ways to reach us</a></div>
+      </div>
+    </div>
+  </section>
+  <!-- RENTALS -->
+  <section class="page" id="pg-rentals">
+    <div class="sec">
+      <div class="container">
+        <p class="eyebrow">Listings</p>
+        <h1>Available Rentals</h1>
+        <p class="lead">Found one you like? See if you prequalify and book a showing right from the listing.</p>
+        <div class="filter" style="margin-top:26px">
+          <span class="sel">Location <svg class="cv" width="14" height="14"><use href="#i-chev"/></svg></span>
+          <span class="sel">Bedrooms <svg class="cv" width="14" height="14"><use href="#i-chev"/></svg></span>
+          <span class="sel">Price range <svg class="cv" width="14" height="14"><use href="#i-chev"/></svg></span>
+          <span class="sel">Sort by <svg class="cv" width="14" height="14"><use href="#i-chev"/></svg></span>
+        </div>
+        <div class="grid g3">
+          <div class="listing"><div class="photo h-200" style="border-radius:0;border-left:0;border-right:0;border-top:0"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Oak Street 2B — exterior</span><span class="ps">Photo</span></div><div class="meta"><span class="price">$1,000 / mo</span><div class="specs"><span>2 bd</span><span>1 ba</span><span>Scranton, PA</span></div><a class="btn ghost block sm" data-goto="listing">View details</a></div></div>
+          <div class="listing"><div class="photo h-200" style="border-radius:0;border-left:0;border-right:0;border-top:0"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Linden Ave 1B — living room</span><span class="ps">Photo</span></div><div class="meta"><span class="price">$850 / mo</span><div class="specs"><span>1 bd</span><span>1 ba</span><span>Scranton, PA</span></div><a class="btn ghost block sm" data-goto="listing">View details</a></div></div>
+          <div class="listing"><div class="photo h-200" style="border-radius:0;border-left:0;border-right:0;border-top:0"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Center St 3B — kitchen</span><span class="ps">Photo</span></div><div class="meta"><span class="price">$1,450 / mo</span><div class="specs"><span>3 bd</span><span>2 ba</span><span>Wilkes-Barre, PA</span></div><a class="btn ghost block sm" data-goto="listing">View details</a></div></div>
+          <div class="listing"><div class="photo h-200" style="border-radius:0;border-left:0;border-right:0;border-top:0"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Wyoming Ave — studio</span><span class="ps">Photo</span></div><div class="meta"><span class="price">$725 / mo</span><div class="specs"><span>Studio</span><span>1 ba</span><span>Scranton, PA</span></div><a class="btn ghost block sm" data-goto="listing">View details</a></div></div>
+          <div class="listing"><div class="photo h-200" style="border-radius:0;border-left:0;border-right:0;border-top:0"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Rental photo — exterior</span><span class="ps">Photo</span></div><div class="meta"><span class="price">$1,200 / mo</span><div class="specs"><span>2 bd</span><span>1.5 ba</span><span>Dunmore, PA</span></div><a class="btn ghost block sm" data-goto="listing">View details</a></div></div>
+          <div class="listing"><div class="photo h-200" style="border-radius:0;border-left:0;border-right:0;border-top:0"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Rental photo — exterior</span><span class="ps">Photo</span></div><div class="meta"><span class="price">$975 / mo</span><div class="specs"><span>2 bd</span><span>1 ba</span><span>Clarks Summit, PA</span></div><a class="btn ghost block sm" data-goto="listing">View details</a></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- LISTING -->
+  <section class="page" id="pg-listing">
+    <div class="sec">
+      <div class="container">
+        <p class="breadcrumb">Available Rentals / <b>Oak Street 2B</b></p>
+        <div class="split">
+          <div class="photo h-320"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Primary photo — Oak Street 2B exterior</span><span class="ps">Photo placeholder</span></div>
+          <div>
+            <h1 style="font-size:34px">Oak Street 2B</h1>
+            <div class="price" style="font-size:26px;font-weight:800;color:var(--brand)">$1,000 / mo</div>
+            <div class="chips" style="margin-top:14px"><span class="chip">2 bd</span><span class="chip">1 ba</span><span class="chip">900 sqft</span><span class="chip">Scranton, PA</span></div>
+            <div class="btn-row"><a class="btn lg" data-goto="prequal">See if you prequalify</a><a class="btn ghost lg" id="tx4"><svg width="18" height="18"><use href="#i-txt"/></svg> Text about this rental</a></div>
+            <p style="margin-top:14px">Answer a few quick questions to book a showing.</p>
+          </div>
+        </div>
+        <div class="grid g4" style="margin-top:26px">
+          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Living room</span></div>
+          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Kitchen</span></div>
+          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bedroom</span></div>
+          <div class="photo h-110"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bathroom</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sec warm tight">
+      <div class="container"><div class="split">
+        <div>
+          <p class="eyebrow">Description</p>
+          <p class="lead">A bright, well-kept two-bedroom close to downtown Scranton, with off-street parking and updated appliances. Placeholder copy for the real listing description.</p>
+          <p class="eyebrow" style="margin-top:24px">Features</p>
+          <div class="chips"><span class="chip">Off-street parking</span><span class="chip">Updated kitchen</span><span class="chip">Laundry hookup</span><span class="chip">Pet friendly</span></div>
+        </div>
+        <div><p class="eyebrow">Location</p><div class="photo h-260"><svg class="pic"><use href="#i-map"/></svg><span class="pt">Map — property location</span></div></div>
+      </div></div>
+    </div>
+    <div class="sec tight">
+      <div class="container"><div class="prequal-cta">
+        <span class="flag">Book a showing</span>
+        <h2>See if you prequalify</h2>
+        <p class="lead">Answer a few quick questions. If you prequalify, you can book a tour right away. It is not the full application.</p>
+        <div class="btn-row"><a class="btn lg" data-goto="prequal">See if you prequalify</a></div>
+      </div></div>
+    </div>
+  </section>
+  <!-- PREQUALIFY (central flow) -->
+  <section class="page" id="pg-prequal">
+    <div class="fstep on" data-step="quiz"><div class="sec"><div class="container" style="max-width:760px">
+      <p class="breadcrumb">Available Rentals / <b>Prequalify</b></p>
+      <h1>Prequalify for a showing</h1>
+      <p class="lead">Pick the home you're interested in and answer a few quick questions. We check instantly. It is not the full application.</p>
+      <div class="form" style="margin-top:24px">
+        <div class="field"><label>Which home?</label><select class="rin" id="propSelect">
+          <option value="1000" data-name="Oak Street 2B">Oak Street 2B — $1,000 / mo</option>
+          <option value="850" data-name="Linden Ave 1B">Linden Ave 1B — $850 / mo</option>
+          <option value="1450" data-name="Center St 3B">Center St 3B — $1,450 / mo</option>
+          <option value="725" data-name="Wyoming Ave Studio">Wyoming Ave Studio — $725 / mo</option>
+        </select></div>
+        <div class="field"><label>Your gross monthly income</label><input class="rin" id="incomeInput" type="number" inputmode="numeric" placeholder="e.g. 3500"></div>
+        <div class="frow"><div class="field"><label>Desired move-in date</label><div class="in"></div></div><div class="field"><label>Number of occupants</label><div class="in"></div></div></div>
+        <div class="frow"><div class="field"><label>Pets?</label><div class="in"></div></div><div class="field"><label>First name</label><div class="in"></div></div></div>
+        <div class="frow"><div class="field"><label>Mobile (for texting)</label><div class="in"></div></div><div class="field"><label>Email</label><div class="in"></div></div></div>
+        <div class="btn-row"><a class="btn lg" id="seeResult">See my result</a></div>
+      </div>
+    </div></div></div>
+    <div class="fstep" data-step="result"><div class="sec"><div class="container" style="max-width:760px">
+      <div id="resPass"><div class="result-pass">
+        <span class="flag">Prequalified</span>
+        <h1>Good news, you prequalify.</h1>
+        <p class="lead"><b class="r-prop">Oak Street 2B</b> needs <b class="r-req">$3,333</b>/mo, and you entered <b class="r-inc">$0</b>/mo. Let's get you a tour.</p>
+        <div class="btn-row"><a class="btn lg" id="toBook">Pick a showing time</a></div>
+      </div></div>
+      <div id="resFail" style="display:none"><div class="card">
+        <h1>Not a match just yet.</h1>
+        <p class="lead"><b class="r-prop">Oak Street 2B</b> needs about <b class="r-req">$3,333</b>/mo in gross income. Based on the <b class="r-inc">$0</b>/mo entered, it is not a fit right now.</p>
+        <div class="btn-row"><a class="btn lg" data-goto="rentals">Browse other homes</a><a class="btn ghost lg" id="tx5"><svg width="18" height="18"><use href="#i-txt"/></svg> Text us a question</a></div>
+      </div></div>
+    </div></div></div>
+    <div class="fstep" data-step="book"><div class="sec"><div class="container" style="max-width:760px">
+      <p class="breadcrumb">Prequalify / <b>Book a showing</b></p>
+      <h1>Pick a time to tour</h1>
+      <p class="lead">Showing for <b class="r-prop">Oak Street 2B</b>.</p>
+      <div class="photo h-260" style="margin-top:14px"><svg class="pic"><use href="#i-map"/></svg><span class="pt">Calendly booking embed</span></div>
+      <div class="chips" style="margin-top:16px"><span class="chip">Tue 10:00</span><span class="chip">Tue 2:00</span><span class="chip">Wed 11:30</span><span class="chip">Thu 4:00</span></div>
+      <div class="btn-row"><a class="btn lg" id="toDone">Confirm showing</a></div>
+    </div></div></div>
+    <div class="fstep" data-step="done"><div class="sec"><div class="container" style="max-width:640px;text-align:center">
+      <div class="check"><svg><use href="#i-check"/></svg></div>
+      <h1>You're booked.</h1>
+      <p class="lead" style="margin:0 auto">We'll text you a reminder before your showing. The office has your details.</p>
+      <div class="btn-row" style="justify-content:center"><a class="btn lg" data-goto="rentals">Back to rentals</a></div>
+    </div></div></div>
+  </section>
+  <!-- HOW TO APPLY -->
+  <section class="page" id="pg-apply">
+    <div class="sec"><div class="container">
+      <p class="eyebrow">For renters</p>
+      <h1>How to Apply</h1>
+      <p class="lead">Two steps: prequalify to see the unit, then submit a full application to lease it.</p>
+      <div class="steps" style="margin-top:28px">
+        <div class="step" style="background:color-mix(in srgb,var(--brand) 6%,var(--bg))"><div class="num">1</div><h3>Prequalify for a showing</h3><p>Pick the home you want, answer a few quick questions, and get an instant result. Prequalifying lets you book a showing.</p><div class="btn-row"><a class="btn sm" data-goto="prequal">Start prequalification</a></div></div>
+        <div class="step"><div class="num">2</div><h3>Submit your full application</h3><p>Required to lease the unit. The full application includes:</p><ul class="req"><li><span class="bx"><svg><use href="#i-check"/></svg></span> Proof of income</li><li><span class="bx"><svg><use href="#i-check"/></svg></span> Background and credit check</li></ul><div class="btn-row"><a class="btn ghost sm" id="applyPortal">Start full application ↗</a></div></div>
+      </div>
+    </div></div>
+    <div class="sec warm tight"><div class="container">
+      <p class="eyebrow">Good to know</p>
+      <div class="grid g3">
+        <div class="card"><h3>Rental criteria</h3><p>What we look for in an application, in plain terms.</p></div>
+        <div class="card"><h3>Pets &amp; policies</h3><p>Pet-friendly options and the basics on deposits.</p></div>
+        <div class="card"><h3>Fees &amp; deposits</h3><p>Clear, up-front numbers so there are no surprises.</p></div>
+      </div>
+    </div></div>
+  </section>
+  <!-- OWNERS -->
+  <section class="page" id="pg-owners">
+    <div class="sec"><div class="container"><div class="split">
+      <div>
+        <p class="eyebrow">For property owners</p>
+        <h1>Own a property? Let us manage it.</h1>
+        <p class="lead">Full-service management from a local team that treats your investment like our own. Leasing, maintenance, rent collection, and clear reporting.</p>
+        <div class="btn-row"><a class="btn lg" data-goto="contact">Request a management quote</a><a class="btn ghost lg" id="ownerLogin">Owner login ↗</a></div>
+      </div>
+      <div class="photo h-320"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">A managed property, or a happy owner handing over keys</span><span class="ps">Photo placeholder</span></div>
+    </div></div></div>
+    <div class="sec warm tight"><div class="container">
+      <p class="eyebrow">What we handle</p>
+      <div class="grid g3">
+        <div class="card"><h3>Leasing &amp; marketing</h3><p>We market your unit, screen tenants, and get it leased.</p></div>
+        <div class="card"><h3>Maintenance</h3><p>Repairs handled promptly by people you can trust.</p></div>
+        <div class="card"><h3>Rent &amp; reporting</h3><p>On-time rent and clear statements, every month.</p></div>
+      </div>
+      <div class="btn-row"><a class="btn lg" data-goto="contact">Request a management quote</a></div>
+    </div></div>
+  </section>
+  <!-- ABOUT -->
+  <section class="page" id="pg-about">
+    <div class="sec"><div class="container"><div class="split">
+      <div>
+        <p class="eyebrow">About Parasole</p>
+        <h1>A family-run business, rooted in NEPA.</h1>
+        <p class="lead">For over 20 years, Parasole Properties has helped families find homes and helped owners grow with peace of mind. We treat every property with the same care and commitment as our own.</p>
+      </div>
+      <div class="photo h-320"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">The Parasole team, or the office</span><span class="ps">Photo placeholder</span></div>
+    </div></div></div>
+    <div class="sec warm tight"><div class="container">
+      <p class="eyebrow">In the news</p>
+      <div class="grid g4">
+        <div class="photo h-110"><span class="pt" style="font-size:13px">Press logo / headline</span></div>
+        <div class="photo h-110"><span class="pt" style="font-size:13px">Press logo / headline</span></div>
+        <div class="photo h-110"><span class="pt" style="font-size:13px">Press logo / headline</span></div>
+        <div class="photo h-110"><span class="pt" style="font-size:13px">Press logo / headline</span></div>
+      </div>
+    </div></div>
+  </section>
+  <!-- CONTACT -->
+  <section class="page" id="pg-contact">
+    <div class="sec"><div class="container">
+      <p class="eyebrow">Get in touch</p>
+      <h1>Contact</h1>
+      <div class="split" style="margin-top:10px;align-items:start">
+        <div class="form">
+          <div class="field"><label>I am a</label><div class="in"></div></div>
+          <div class="frow"><div class="field"><label>First name</label><div class="in"></div></div><div class="field"><label>Last name</label><div class="in"></div></div></div>
+          <div class="frow"><div class="field"><label>Mobile (for texting)</label><div class="in"></div></div><div class="field"><label>Email</label><div class="in"></div></div></div>
+          <div class="field"><label>Message</label><div class="in area"></div></div>
+          <div class="btn-row"><a class="btn lg">Send message</a></div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:18px">
+            <h3><svg width="16" height="16" style="vertical-align:-2px;color:var(--brand)"><use href="#i-txt"/></svg> Text us (fastest)</h3><p style="margin:2px 0 0"><b style="color:var(--ink)">(570) 343-2597</b></p>
+            <h3 style="margin-top:16px">Call</h3><p style="margin:2px 0 0">(570) 343-2597</p>
+            <h3 style="margin-top:16px">Email</h3><p style="margin:2px 0 0">office@parasoleproperties.com</p>
+            <h3 style="margin-top:16px">Office</h3><p style="margin:2px 0 0">Northeastern Pennsylvania</p>
+          </div>
+          <div class="photo h-200"><svg class="pic"><use href="#i-map"/></svg><span class="pt">Map — office location</span></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+  </main>
+  <footer class="foot">
+    <div class="container">
+      <div class="top">
+        <div>
+          <div class="fbrand">PARASOLE PROPERTIES</div>
+          <div class="desc">Family-run property management in Northeastern Pennsylvania.</div>
+          <div class="txt"><span style="font-size:11px;letter-spacing:.08em">TEXT US</span> <b>(570) 343-2597</b></div>
+          <div class="social"><span>Facebook</span><span>Miles Summit ↗</span></div>
+        </div>
+        <div><h4>Rent</h4><a class="fl" data-goto="rentals">Available Rentals</a><a class="fl" data-goto="apply">How to Apply</a><a class="fl" data-goto="prequal">Prequalify</a><a class="fl">Resident Login ↗</a></div>
+        <div><h4>Owners</h4><a class="fl" data-goto="owners">Management</a><a class="fl" data-goto="contact">Request a Quote</a><a class="fl">Owner Login ↗</a></div>
+        <div><h4>Company</h4><a class="fl" data-goto="about">About</a><a class="fl" data-goto="contact">Contact</a><a class="fl">Miles Summit ↗</a></div>
+      </div>
+      <div class="copy"><span>© Parasole Properties. All rights reserved.</span><span>parasoleproperties.com</span></div>
+    </div>
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+  var labels={home:'Home',rentals:'Available Rentals',listing:'Listing detail',prequal:'Prequalify',apply:'How to Apply',owners:'Owners',about:'About',contact:'Contact'};
+  var navFor={home:'home',rentals:'rentals',listing:'rentals',prequal:'rentals',apply:'apply',owners:'owners',about:'about',contact:'contact'};
+  var pages=document.querySelectorAll('.page'), navBtns=document.querySelectorAll('.nav button');
+  function show(id){
+    if(!labels[id]) id='home';
+    pages.forEach(function(p){p.classList.toggle('active',p.id==='pg-'+id);});
+    navBtns.forEach(function(b){b.classList.toggle('cur',b.dataset.goto===navFor[id]);});
+    document.getElementById('pageName').textContent=labels[id];
+    if(location.hash!=='#'+id) history.replaceState(null,'','#'+id);
+    if(id==='prequal') resetPrequal();
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  document.querySelectorAll('[data-goto]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();show(el.dataset.goto);});});
+  // palette toggle
+  var bc=document.getElementById('btnCurrent'), br=document.getElementById('btnRebrand');
+  bc.addEventListener('click',function(){document.body.classList.remove('rebrand');bc.classList.add('on');br.classList.remove('on');});
+  br.addEventListener('click',function(){document.body.classList.add('rebrand');br.classList.add('on');bc.classList.remove('on');});
+  // toast for text/login links
+  var toast=document.getElementById('toast'),tt;
+  function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3400);}
+  ['tx1','tx2','tx3','tx4','tx5'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();ping('On the live site this opens your phone to text Parasole at (570) 343-2597.');});});
+  var ap=document.getElementById('applyPortal');if(ap)ap.addEventListener('click',function(e){e.preventDefault();ping('On the live site this starts the full application (proof of income + background/credit check).');});
+  var ol=document.getElementById('ownerLogin');if(ol)ol.addEventListener('click',function(e){e.preventDefault();ping('On the live site this opens the owner login on the resident portal.');});
+  // prequal flow
+  var propSel=document.getElementById('propSelect');
+  function currentReq(){var rent=propSel?parseFloat(propSel.value)||0:0;return Math.round(rent*40/12);}
+  function fmt(n){return '$'+Number(n).toLocaleString();}
+  function fstep(step){document.querySelectorAll('#pg-prequal .fstep').forEach(function(s){s.classList.toggle('on',s.dataset.step===step);});window.scrollTo({top:0,behavior:'instant'});}
+  function resetPrequal(){var i=document.getElementById('incomeInput');if(i)i.value='';fstep('quiz');}
+  var sr=document.getElementById('seeResult');
+  if(sr)sr.addEventListener('click',function(e){e.preventDefault();
+    var req=currentReq();var ie=document.getElementById('incomeInput');var inc=parseFloat(ie&&ie.value)||0;
+    var name=propSel?propSel.options[propSel.selectedIndex].getAttribute('data-name'):'this home';
+    document.querySelectorAll('.r-prop').forEach(function(el){el.textContent=name;});
+    document.querySelectorAll('.r-req').forEach(function(el){el.textContent=fmt(req);});
+    document.querySelectorAll('.r-inc').forEach(function(el){el.textContent=fmt(inc);});
+    var pass=inc>=req;
+    document.getElementById('resPass').style.display=pass?'block':'none';
+    document.getElementById('resFail').style.display=pass?'none':'block';
+    fstep('result');});
+  var tb=document.getElementById('toBook');if(tb)tb.addEventListener('click',function(e){e.preventDefault();fstep('book');});
+  var td=document.getElementById('toDone');if(td)td.addEventListener('click',function(e){e.preventDefault();fstep('done');});
+  window.addEventListener('hashchange',function(){show(location.hash.replace('#',''));});
+  show(location.hash?location.hash.replace('#',''):'home');
+</script>
+</body>
+</html>
