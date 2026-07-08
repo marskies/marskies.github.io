@@ -51,9 +51,9 @@
   .head .row{display:flex;align-items:center;gap:26px;height:88px}
   .brandmark{display:flex;align-items:center}
   .logo-cur{height:66px;width:auto;display:block}
-  .logo-new{display:none;align-items:center;gap:11px}
+  .logo-new{display:none;height:66px;width:auto}
   body.rebrand .logo-cur{display:none}
-  body.rebrand .logo-new{display:flex}
+  body.rebrand .logo-new{display:block}
   .lm-badge{width:46px;height:46px;border-radius:12px;background:var(--brand);display:grid;place-items:center;position:relative;overflow:hidden}
   .lm-badge:before{content:"";position:absolute;left:-6px;right:-6px;top:9px;height:11px;background:var(--accent);border-radius:50%;transform:rotate(-8deg)}
   .lm-badge span{position:relative;color:#fff;font-weight:800;font-size:20px;line-height:1}
@@ -204,7 +204,7 @@
     <div class="container"><div class="row">
       <span class="brandmark">
         <img class="logo-cur" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties">
-        <span class="logo-new"><span class="lm-badge"><span>P</span></span><span class="lm-txt"><b>Parasole</b><i>PROPERTIES</i></span></span>
+        <img class="logo-new" id="logoNew" alt="Parasole Properties (recolored for rebrand)">
       </span>
       <nav class="nav" aria-label="Primary">
         <button class="cur" data-goto="home">Home</button>
@@ -503,6 +503,21 @@
   var bc=document.getElementById('btnCurrent'), br=document.getElementById('btnRebrand');
   bc.addEventListener('click',function(){document.body.classList.remove('rebrand');bc.classList.add('on');br.classList.remove('on');});
   br.addEventListener('click',function(){document.body.classList.add('rebrand');br.classList.add('on');bc.classList.remove('on');});
+  // recolor the real logo to match the rebrand palette (burgundy->green, gold->terracotta), live in-browser
+  (function(){
+    function r2h(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),h,s,l=(mx+mn)/2;if(mx==mn){h=s=0;}else{var d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;}h/=6;}return[h*360,s,l];}
+    function h2c(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}
+    function h2r(h,s,l){h/=360;var r,g,b;if(s==0){r=g=b=l;}else{var q=l<0.5?l*(1+s):l+s-l*s;var p=2*l-q;r=h2c(p,q,h+1/3);g=h2c(p,q,h);b=h2c(p,q,h-1/3);}return[Math.round(r*255),Math.round(g*255),Math.round(b*255)];}
+    var img=new Image();img.crossOrigin='anonymous';
+    img.onload=function(){
+      var c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;var ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+      var id;try{id=ctx.getImageData(0,0,c.width,c.height);}catch(e){return;}
+      var d=id.data,GH=150,GS=.30,TH=16,TS=.52;
+      for(var i=0;i<d.length;i+=4){var a=d[i+3];if(a<8)continue;var hs=r2h(d[i],d[i+1],d[i+2]),H=hs[0],S=hs[1],L=hs[2];if(S<.12)continue;var nr;if(H>=325||H<=20)nr=h2r(GH,GS,L);else if(H>=35&&H<=72)nr=h2r(TH,TS,L);else continue;d[i]=nr[0];d[i+1]=nr[1];d[i+2]=nr[2];}
+      ctx.putImageData(id,0,0);var el=document.getElementById('logoNew');if(el)el.src=c.toDataURL('image/png');
+    };
+    img.src='https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png';
+  })();
   // toast for text/login links
   var toast=document.getElementById('toast'),tt;
   function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3400);}
