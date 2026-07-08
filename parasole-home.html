@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole Properties — Homepage Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* neutral base (shared) */
+    --bg:#ffffff; --bg2:#f7f2e9; --ink:#201e1b; --ink2:#5c574f; --ink3:#8a857c; --line:#e7e0d4;
+    --burgundy:#991822; --gold:#c9a227;
+    /* Direction A — warm neutral + burgundy accents (default) */
+    --btn:#991822; --btn-hover:#7a1119; --btn-ink:#ffffff;
+    --eyebrow:#a67c10; --hair:#c9a227; --link:#991822;
+    --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    --maxw:1160px;
+  }
+  body.min{
+    /* Direction B — minimal charcoal (burgundy only as a small highlight) */
+    --bg2:#f5f5f4; --btn:#201e1b; --btn-hover:#000; --eyebrow:#991822; --hair:#e2ddd4; --link:#201e1b;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg2);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .mk-bar{position:sticky;top:0;z-index:80;background:#1c1b1a;color:#eee;display:flex;align-items:center;gap:16px;padding:9px 18px;flex-wrap:wrap}
+  .mk-bar .tag{font-size:11px;letter-spacing:.13em;text-transform:uppercase;background:#000;color:#c9c6c0;padding:3px 8px;border-radius:4px;font-weight:700}
+  .mk-bar .t{font-weight:700;font-size:14px}.mk-bar .sub{font-size:12px;color:#9a968f}.mk-bar .sp{flex:1}
+  .seg{display:inline-flex;border:1px solid #4a4844;border-radius:8px;overflow:hidden}
+  .seg button{border:0;background:transparent;color:#cfccc6;font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 15px;cursor:pointer}
+  .seg button.on{background:#fff;color:#1c1b1a}
+  .note-strip{background:var(--bg2);color:var(--ink2);font-size:12.5px;padding:10px 18px;text-align:center;border-bottom:1px solid var(--line)}
+  .frame{max-width:1320px;margin:16px auto;background:var(--bg);box-shadow:0 1px 0 var(--line),0 14px 40px rgba(0,0,0,.10);border-radius:8px;overflow:hidden}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 34px}
+  /* hero with photo background */
+  .hero{position:relative;min-height:600px;display:flex;flex-direction:column;color:#fff;overflow:hidden}
+  .hero-photo{position:absolute;inset:0;background:linear-gradient(135deg,#8f867c 0%,#635c53 44%,#3c3732 100%)}
+  .hero-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.10) 0%,rgba(0,0,0,.12) 42%,rgba(0,0,0,.62) 100%)}
+  .photo-chip{position:absolute;right:16px;bottom:14px;z-index:3;font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.82);background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:5px 12px}
+  .topbar{position:relative;z-index:4;background:rgba(255,255,255,.93);backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid rgba(255,255,255,.4)}
+  .topbar .row{display:flex;align-items:center;gap:24px;height:80px}
+  .logo{height:56px;width:auto;display:block}
+  .nav{display:flex;gap:2px;margin-left:6px;flex-wrap:wrap}
+  .nav a{color:var(--ink2);font-size:14px;font-weight:600;padding:9px 12px;border-radius:8px;text-decoration:none;cursor:pointer}
+  .nav a:hover{background:var(--bg2);color:var(--ink)}
+  .nav a.cur{color:var(--burgundy)}
+  body.min .nav a.cur{color:var(--ink)}
+  .topbar .sp{flex:1}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--btn);color:var(--btn-ink);border:1px solid var(--btn);border-radius:10px;padding:13px 22px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit}
+  .btn:hover{background:var(--btn-hover);border-color:var(--btn-hover)}
+  .btn.sm{padding:10px 16px;font-size:14px}
+  .btn.lg{padding:16px 28px;font-size:16.5px}
+  .btn.on-photo{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.6);color:#fff;backdrop-filter:blur(3px)}
+  .btn.on-photo:hover{background:rgba(255,255,255,.24)}
+  .hero-body{position:relative;z-index:3;margin-top:auto;padding:44px 0 64px}
+  .eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--eyebrow);margin:0 0 14px}
+  .hero .eyebrow{color:rgba(255,255,255,.9)}
+  .hero h1{font-size:56px;line-height:1.03;letter-spacing:-.02em;font-weight:800;margin:0 0 16px;max-width:15ch}
+  .hero p.sub{font-size:19px;color:rgba(255,255,255,.92);margin:0 0 26px;max-width:52ch}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero .textlink{color:#fff;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-left:4px;cursor:pointer;opacity:.95}
+  .hero .textlink svg{width:18px;height:18px}
+  /* sections */
+  .sec{padding:70px 0}
+  .sec.warm{background:var(--bg2)}
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+  h2{font-size:34px;line-height:1.1;letter-spacing:-.01em;font-weight:800;margin:0 0 14px;color:var(--ink)}
+  p.lead{font-size:17.5px;color:var(--ink2);margin:0 0 8px;max-width:56ch}
+  .stats{display:flex;gap:34px;margin-top:30px}
+  .stat b{display:block;font-size:40px;font-weight:800;color:var(--burgundy);letter-spacing:-.02em;line-height:1}
+  body.min .stat b{color:var(--ink)}
+  .stat span{font-size:14px;color:var(--ink2);font-weight:600}
+  .stat .hair{width:34px;height:3px;background:var(--hair);border-radius:2px;margin:10px 0 8px}
+  .ph{background:var(--bg2);border:2px dashed color-mix(in srgb,var(--burgundy) 22%,var(--line));border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:var(--ink3);padding:20px}
+  .ph svg{width:30px;height:30px;opacity:.5}
+  .ph .pt{font-weight:700;font-size:14.5px;color:var(--ink2)}
+  .ph .ps{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink3)}
+  .h-360{height:360px}
+  .owners{background:var(--ink);color:#fff;border-radius:20px;padding:44px 46px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  .owners h2{color:#fff;margin:0 0 6px}
+  .owners p{color:rgba(255,255,255,.82);margin:0;font-size:16px}
+  .owners .btn{background:#fff;color:var(--ink);border-color:#fff}
+  .owners .btn:hover{background:#f0ece4}
+  .foot{background:#211f1d;color:#c9c5be;padding:44px 0 28px}
+  .foot .top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:30px}
+  .foot .fbrand{color:#fff;font-weight:800;font-size:17px}
+  .foot .desc{color:#9c988f;font-size:14px;margin-top:8px;max-width:260px}
+  .foot h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8f8b84;margin:0 0 12px}
+  .foot a{display:block;color:#c9c5be;text-decoration:none;padding:6px 0;font-size:14px;cursor:pointer}
+  .foot a:hover{color:#fff}
+  .foot .txt{margin-top:12px;font-size:15px}.foot .txt b{color:#fff}
+  .foot .copy{border-top:1px solid #3a3733;margin-top:28px;padding-top:16px;font-size:12.5px;color:#8a867f;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1c1b1a;color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:90}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:880px){.split,.foot .top{grid-template-columns:1fr}.hero h1{font-size:38px}.stats{gap:24px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M15 8l2 2"/></symbol>
+  <symbol id="i-pic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<div class="mk-bar">
+  <span class="tag">Homepage direction</span>
+  <span class="t">Parasole Properties</span>
+  <span class="sub">Desktop · neutral</span>
+  <span class="sp"></span>
+  <span style="font-size:12px;color:#c9c6c0">Accent:</span>
+  <div class="seg"><button id="btnA" class="on">Warm neutral</button><button id="btnB">Minimal</button></div>
+</div>
+<div class="note-strip">Two neutral directions to compare, with your brand colors kept to the logo and key buttons. A real photo fills the hero. Colors and logo are easily changed.</div>
+
+<div class="frame">
+  <section class="hero">
+    <div class="hero-photo"></div>
+    <header class="topbar"><div class="container"><div class="row">
+      <img class="logo" id="logo" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties">
+      <nav class="nav"><a class="cur">Home</a><a>Available Rentals</a><a>How to Apply</a><a>Owners</a><a>About</a><a>Contact</a></nav>
+      <span class="sp"></span>
+      <a class="btn sm" id="tx1"><svg width="15" height="15"><use href="#i-txt"/></svg> Text us</a>
+    </div></div></header>
+    <div class="hero-body"><div class="container">
+      <p class="eyebrow">Rentals in Scranton &amp; Wilkes-Barre</p>
+      <h1>Find your next place to rent.</h1>
+      <p class="sub">Family-run property management in Northeastern Pennsylvania for over 20 years. Browse what's available and book a showing in minutes.</p>
+      <div class="cta">
+        <a class="btn lg">View available rentals</a>
+        <a class="btn lg on-photo">How to apply</a>
+        <a class="textlink" id="tx2"><svg><use href="#i-txt"/></svg> or text us a question</a>
+      </div>
+    </div></div>
+    <span class="photo-chip">Background photo — a Parasole rental or downtown Scranton</span>
+  </section>
+
+  <section class="sec">
+    <div class="container"><div class="split">
+      <div>
+        <p class="eyebrow">Local, and here for the long run</p>
+        <h2>A family business that treats your home like our own.</h2>
+        <p class="lead">We know these neighborhoods because we live here. When something comes up, you reach a real person, and we keep renting simple and clear from the first text to move-in day.</p>
+        <div class="stats">
+          <div class="stat"><b>20+</b><div class="hair"></div><span>Years serving NEPA</span></div>
+          <div class="stat"><b>Local</b><div class="hair"></div><span>Scranton &amp; Wilkes-Barre</span></div>
+          <div class="stat"><b>Family</b><div class="hair"></div><span>run, start to finish</span></div>
+        </div>
+      </div>
+      <div class="ph h-360"><svg><use href="#i-pic"/></svg><span class="pt">Photo — the Parasole family, or a happy resident</span><span class="ps">Photo placeholder</span></div>
+    </div></div>
+  </section>
+
+  <section class="sec warm">
+    <div class="container"><div class="owners">
+      <div><h2>Own a property? Let us manage it.</h2><p>Full-service management from a local team, so you don't have to think about it.</p></div>
+      <a class="btn lg">Request a management quote</a>
+    </div></div>
+  </section>
+
+  <footer class="foot"><div class="container">
+    <div class="top">
+      <div>
+        <div class="fbrand">PARASOLE PROPERTIES</div>
+        <div class="desc">Family-run property management in Northeastern Pennsylvania.</div>
+        <div class="txt"><span style="font-size:11px;letter-spacing:.06em">TEXT US</span> <b>(570) 343-2597</b></div>
+      </div>
+      <div><h4>Rent</h4><a>Available Rentals</a><a>How to Apply</a><a>Resident Login ↗</a></div>
+      <div><h4>Company</h4><a>Owners</a><a>About</a><a>Contact</a></div>
+    </div>
+    <div class="copy"><span>© Parasole Properties. All rights reserved.</span><span>parasoleproperties.com</span></div>
+  </div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+  var A=document.getElementById('btnA'), B=document.getElementById('btnB');
+  A.addEventListener('click',function(){document.body.classList.remove('min');A.classList.add('on');B.classList.remove('on');});
+  B.addEventListener('click',function(){document.body.classList.add('min');B.classList.add('on');A.classList.remove('on');});
+  var toast=document.getElementById('toast'),tt;
+  function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3200);}
+  ['tx1','tx2'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();ping('On the live site this opens your phone to text Parasole at (570) 343-2597.');});});
+  // make the logo background transparent (flood-fill white from the edges), so it sits cleanly on the photo/header
+  (function(){
+    var img=new Image();img.crossOrigin='anonymous';
+    img.onload=function(){
+      var w=img.naturalWidth,h=img.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;
+      var ctx=c.getContext('2d');ctx.drawImage(img,0,0);var id;try{id=ctx.getImageData(0,0,w,h);}catch(e){return;}var d=id.data;
+      function white(i){return d[i]>233&&d[i+1]>228&&d[i+2]>222;}
+      var st=[];function push(x,y){if(x<0||y<0||x>=w||y>=h)return;var i=(y*w+x)*4;if(d[i+3]===0)return;if(!white(i))return;st.push(y*w+x);}
+      for(var x=0;x<w;x++){push(x,0);push(x,h-1);}for(var y=0;y<h;y++){push(0,y);push(w-1,y);}
+      while(st.length){var p=st.pop(),i=p*4;if(d[i+3]===0||!white(i))continue;d[i+3]=0;var px=p%w,py=(p-px)/w;push(px+1,py);push(px-1,py);push(px,py+1);push(px,py-1);}
+      ctx.putImageData(id,0,0);var el=document.getElementById('logo');if(el)el.src=c.toDataURL('image/png');
+    };
+    img.src='https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png';
+  })();
+</script>
+</body>
+</html>
