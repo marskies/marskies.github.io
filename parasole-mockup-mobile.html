@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole Properties — Mobile Design Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#991822; --brand-dk:#6e0f17; --accent:#c9a227; --accent-lt:#e6cf7a;
+    --bg:#ffffff; --bg2:#f7f4ef; --band:#efeae1; --ink:#242220; --ink2:#5f5b54; --ink3:#8b877e;
+    --line:#e7e1d6; --btn-ink:#ffffff; --onaccent:#3a2e00;
+    --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  }
+  body.rebrand{
+    --brand:#2e4b3f; --brand-dk:#223a30; --accent:#c56b4b; --accent-lt:#e7b49b;
+    --bg2:#f6f1e9; --band:#ede6d9; --line:#e6decf; --onaccent:#3a1c10;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg2);line-height:1.5;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit}
+  .mk-bar{position:sticky;top:0;z-index:80;background:#1c1b1a;color:#eee;display:flex;align-items:center;gap:14px;padding:9px 18px;flex-wrap:wrap}
+  .mk-bar .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:#000;color:#c9c6c0;padding:3px 8px;border-radius:4px;font-weight:700}
+  .mk-bar .t{font-weight:700;font-size:14px}.mk-bar .sub{font-size:12px;color:#9a968f}.mk-bar .sp{flex:1}
+  .mk-bar .pg{font-size:12px;color:#c9c6c0}.mk-bar .pg b{color:#fff}
+  .seg{display:inline-flex;border:1px solid #4a4844;border-radius:8px;overflow:hidden}
+  .seg button{border:0;background:transparent;color:#cfccc6;font-size:12.5px;font-weight:600;padding:7px 14px;cursor:pointer}
+  .seg button.on{background:#fff;color:#1c1b1a}
+  .note-strip{background:var(--band);color:var(--ink2);font-size:12.5px;padding:9px 18px;text-align:center}
+  .stage{display:flex;justify-content:center;padding:22px 14px 44px}
+  .device{width:392px;max-width:100%;background:#0e0e0e;border-radius:46px;padding:12px;box-shadow:0 14px 44px rgba(0,0,0,.28)}
+  .screen{position:relative;width:100%;height:806px;background:var(--bg);border-radius:34px;overflow:hidden}
+  .scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .notch{height:26px;display:flex;align-items:center;justify-content:center;background:var(--bg);position:sticky;top:0;z-index:25}
+  .notch .bar{width:120px;height:6px;border-radius:6px;background:#111;opacity:.85}
+  .m-util{background:var(--brand);color:#fff;font-size:11.5px;display:flex;align-items:center;gap:8px;padding:6px 14px}
+  .m-util .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:5px;padding:2px 7px;font-weight:700}
+  .m-util b{font-weight:700}
+  .m-head{position:sticky;top:26px;z-index:24;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:9px 14px;height:60px}
+  .logo-cur{height:38px;width:auto;display:block}
+  .logo-new{height:38px;width:auto;display:none}
+  body.rebrand .logo-cur{display:none}body.rebrand .logo-new{display:block}
+  .m-head .sp{flex:1}
+  .icon-btn{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);display:grid;place-items:center;cursor:pointer;color:var(--brand)}
+  .icon-btn svg{width:22px;height:22px}
+  .m-menu{position:absolute;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column}
+  .m-menu.open{display:flex}
+  .m-menu .top{display:flex;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
+  .m-menu .top b{flex:1;color:var(--brand);font-weight:800;font-size:15px}
+  .m-menu nav{padding:6px 8px}
+  .m-menu a{display:flex;align-items:center;justify-content:space-between;padding:15px 12px;font-size:17px;color:var(--ink);border-bottom:1px solid var(--bg2);cursor:pointer;font-weight:700}
+  .m-menu a .chev{color:var(--ink3)}
+  .m-menu .logins{margin-top:auto;padding:14px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);background:var(--bg2)}
+  .page{display:none}.page.active{display:block}
+  .sec{padding:26px 16px}
+  .sec.warm{background:var(--bg2)}.sec.band{background:var(--band)}.sec.brand{background:var(--brand);color:#fff}
+  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+  h1{font-size:27px;line-height:1.08;letter-spacing:-.01em;font-weight:800;margin:0 0 12px;color:var(--ink)}
+  h2{font-size:21px;line-height:1.14;font-weight:800;margin:0 0 8px;color:var(--ink)}
+  h3{font-size:16px;font-weight:700;margin:0 0 6px;color:var(--ink)}
+  p{color:var(--ink2);font-size:14.5px;margin:0 0 6px}
+  p.lead{font-size:15.5px;color:var(--ink2)}
+  .sec.brand h1,.sec.brand h2,.sec.brand p{color:#fff}.sec.brand .eyebrow{color:var(--accent-lt)}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:var(--btn-ink);border:1px solid var(--brand);border-radius:11px;padding:14px 16px;font-size:15.5px;font-weight:700;cursor:pointer;width:100%;text-decoration:none;min-height:50px}
+  .btn.ghost{background:var(--bg);color:var(--brand);border-color:var(--line)}
+  .btn.gold{background:var(--accent);border-color:var(--accent);color:var(--onaccent)}
+  .btn.white{background:#fff;color:var(--brand);border-color:#fff}
+  .btn.sm{min-height:44px;padding:11px 14px;font-size:14px}
+  .btn svg{width:18px;height:18px}
+  .btn-col{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .photo{position:relative;background:var(--bg2);border:2px dashed color-mix(in srgb,var(--brand) 34%,transparent);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;padding:16px;color:var(--brand)}
+  .photo .pic{width:30px;height:30px;opacity:.55}
+  .photo .pt{font-weight:700;font-size:14px;color:var(--brand);max-width:92%}
+  .photo .ps{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+  .gphoto{cursor:pointer}
+  .h-240{height:240px}.h-200{height:200px}.h-170{height:170px}.h-150{height:150px}.h-92{height:92px}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px}
+  .card.warm{background:var(--bg2)}
+  .card.ten .ico,.offer .ico{width:46px;height:46px;border-radius:12px;background:color-mix(in srgb,var(--brand) 10%,var(--bg));color:var(--brand);display:grid;place-items:center;margin-bottom:12px}
+  .offer .ico svg{width:24px;height:24px}
+  .offer .go{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:var(--brand);font-weight:700;font-size:14.5px}
+  .stat b{font-size:30px;font-weight:800;color:var(--brand);letter-spacing:-.02em;line-height:1;display:block}
+  .stat span{font-size:13px;color:var(--ink2);font-weight:600}
+  .listing{background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px}
+  .listing .meta{padding:14px}
+  .listing .price{font-weight:800;font-size:18px;color:var(--ink)}
+  .listing .specs{display:flex;gap:12px;color:var(--ink3);font-size:13px;margin:7px 0 11px;font-weight:600;flex-wrap:wrap}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin:6px 0}
+  .chip{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-size:13px;color:var(--ink2);background:var(--bg);font-weight:600;display:flex;align-items:center;gap:6px}
+  .chip svg{width:12px;height:12px;opacity:.6}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .field .in{min-height:46px;border:1px solid var(--line);border-radius:9px;background:var(--bg2)}
+  .field .in.area{min-height:96px}
+  .rin{width:100%;min-height:46px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);padding:0 13px;font-family:inherit;font-size:15px;color:var(--ink)}
+  select.rin{cursor:pointer}
+  .req{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .req li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink);font-weight:600}
+  .req li .bx{width:22px;height:22px;border-radius:6px;background:color-mix(in srgb,var(--brand) 12%,var(--bg));color:var(--brand);display:grid;place-items:center;flex:0 0 auto}
+  .req li .bx svg{width:13px;height:13px}
+  .breadcrumb{font-size:12.5px;color:var(--ink3);font-weight:600;margin-bottom:12px}
+  .breadcrumb b{color:var(--brand)}
+  .step{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+  .step.s1{background:color-mix(in srgb,var(--brand) 6%,var(--bg))}
+  .step .num{width:32px;height:32px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;margin-bottom:10px}
+  .prequal-cta{background:color-mix(in srgb,var(--brand) 7%,var(--bg));border:1px solid color-mix(in srgb,var(--brand) 22%,transparent);border-radius:16px;padding:20px}
+  .flag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--onaccent);border-radius:6px;padding:4px 9px;margin-bottom:10px}
+  .result-pass{background:color-mix(in srgb,var(--brand) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--brand) 26%,transparent);border-radius:16px;padding:20px}
+  .check{width:60px;height:60px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;margin:0 auto 14px}
+  .check svg{width:28px;height:28px}
+  .fstep{display:none}.fstep.on{display:block}
+  .video-embed{position:relative;aspect-ratio:16/9;background:color-mix(in srgb,var(--brand) 8%,var(--bg2));border:2px dashed color-mix(in srgb,var(--brand) 34%,transparent);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+  .video-embed .play{width:58px;height:58px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .video-embed .play svg{width:26px;height:26px;margin-left:3px}
+  .video-embed .vt{font-weight:800;font-size:15px;color:var(--brand)}
+  .video-embed .vs{font-size:11.5px;color:var(--ink3);padding:0 12px}
+  .m-foot{background:#211f1d;color:#cbc7c0;padding:24px 16px 28px}
+  body.rebrand .m-foot{background:#1e2a23}
+  .m-foot .fbrand{color:#fff;font-weight:800;font-size:15px}
+  .m-foot .desc{color:#9c988f;font-size:13.5px;margin-top:6px}
+  .m-foot .txt{margin:12px 0;font-size:14px}.m-foot .txt b{color:#fff}
+  .m-foot .social{display:flex;gap:8px;margin:10px 0}
+  .m-foot .social span{padding:7px 11px;border:1px solid #45423d;border-radius:8px;font-size:12px;color:#cbc7c0}
+  .m-foot .fl{display:block;color:#cbc7c0;text-decoration:none;padding:9px 0;font-size:14px;border-top:1px solid #3a3733;cursor:pointer}
+  .m-foot .copy{border-top:1px solid #3a3733;margin-top:14px;padding-top:14px;font-size:12px;color:#8a867f}
+  .m-bottom{position:sticky;bottom:0;z-index:24;background:var(--bg);border-top:1px solid var(--line);display:flex;gap:10px;padding:10px 14px}
+  .m-bottom .btn{margin:0}
+  .lb{position:absolute;inset:0;z-index:70;background:rgba(20,18,16,.9);display:none;flex-direction:column;padding:16px}
+  .lb.on{display:flex}
+  .lb-top{display:flex;align-items:center;justify-content:space-between;color:#fff;margin-bottom:10px}
+  .lb-count{font-weight:700;font-size:14px}
+  .lb-close{width:40px;height:40px;border-radius:9px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer;font-size:18px}
+  .lb-main{flex:1;border:2px dashed rgba(255,255,255,.4);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;text-align:center;padding:16px}
+  .lb-main svg.pic{width:38px;height:38px;opacity:.7}
+  .lb-cap{font-weight:800;font-size:18px}
+  .lb-sub{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .lb-ctrl{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+  .lb-nav{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;display:grid;place-items:center}
+  .lb-nav svg{width:22px;height:22px}
+  .toast{position:absolute;bottom:84px;left:16px;right:16px;background:#1c1b1a;color:#fff;padding:11px 14px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:.22s;z-index:90;text-align:center}
+  .toast.on{opacity:1}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M15 8l2 2"/></symbol>
+  <symbol id="i-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<div class="mk-bar">
+  <span class="tag">Mockup · Mobile</span>
+  <span class="t">Parasole Properties</span>
+  <span class="sp"></span>
+  <span class="pg">Viewing: <b id="pageName">Home</b></span>
+  <div class="seg"><button id="btnCurrent" class="on">Current colors</button><button id="btnRebrand">Proposed rebrand</button></div>
+</div>
+<div class="note-strip">Colors and logo are fully editable. Toggle between your current brand and a proposed refresh above.</div>
+
+<div class="stage">
+  <div class="device"><div class="screen">
+    <div class="scroll" id="scroll">
+      <div class="notch"><span class="bar"></span></div>
+      <div class="m-util"><span class="pill">Text us</span><b>(570) 343-2597</b><span style="opacity:.8">or call</span></div>
+      <header class="m-head">
+        <img class="logo-cur" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties">
+        <img class="logo-new" id="logoNew" alt="Parasole Properties">
+        <span class="sp"></span>
+        <button class="icon-btn" id="menuOpen" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+      </header>
+
+      <!-- HOME -->
+      <section class="page active" id="pg-home">
+        <div class="sec">
+          <p class="eyebrow">Rentals in Scranton &amp; Wilkes-Barre</p>
+          <h1>Find a place you'll be glad to call home.</h1>
+          <p class="lead">Family-run property management in NEPA for over 20 years.</p>
+          <div class="photo h-200" style="margin-top:14px"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Hero — downtown Scranton or a rental exterior</span><span class="ps">Photo placeholder</span></div>
+          <div class="btn-col"><a class="btn" data-goto="rentals">View available rentals</a><a class="btn ghost" id="tx1"><svg><use href="#i-txt"/></svg> Text us a question</a></div>
+        </div>
+        <div class="sec warm">
+          <p class="eyebrow">What we offer</p><h2>How can we help?</h2>
+          <div style="margin-top:14px">
+            <div class="card offer" data-goto="rentals"><div class="ico"><svg><use href="#i-home"/></svg></div><h3>Rentals</h3><p>Browse available homes and apartments for rent.</p><span class="go">See available rentals <svg width="15" height="15"><use href="#i-arrow"/></svg></span></div>
+            <div class="card offer" data-goto="owners"><div class="ico"><svg><use href="#i-key"/></svg></div><h3>Property Management</h3><p>Own a property? We'll take care of it for you.</p><span class="go">See management services <svg width="15" height="15"><use href="#i-arrow"/></svg></span></div>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="photo h-170"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Local scene — a Scranton / Wilkes-Barre neighborhood</span><span class="ps">Photo placeholder</span></div>
+          <p class="eyebrow" style="margin-top:18px">Local, here for the long run</p>
+          <h2>We treat your home like our own.</h2>
+          <p class="lead">We know these neighborhoods because we live here. When something comes up, you reach a real person.</p>
+          <div style="display:flex;gap:16px;margin-top:16px"><div class="stat"><b>20+</b><span>Years in NEPA</span></div><div class="stat"><b>Local</b><span>Scranton area</span></div></div>
+        </div>
+        <div class="sec brand" style="text-align:center">
+          <h2>Questions about a rental?</h2><p style="color:rgba(255,255,255,.85)">Text is the fastest way to reach us.</p>
+          <div class="btn-col"><a class="btn white" id="tx2"><svg><use href="#i-txt"/></svg> Text us</a></div>
+        </div>
+        <footer class="m-foot">
+          <div class="fbrand">PARASOLE PROPERTIES</div><div class="desc">Family-run property management in NEPA.</div>
+          <div class="txt"><span style="font-size:11px">TEXT US</span> <b>(570) 343-2597</b></div>
+          <div class="social"><span>Facebook</span><span>Miles Summit ↗</span></div>
+          <a class="fl" data-goto="rentals">Available Rentals</a><a class="fl" data-goto="apply">How to Apply</a><a class="fl" data-goto="owners">Owners</a><a class="fl" data-goto="contact">Contact</a>
+          <div class="copy">© Parasole Properties · parasoleproperties.com</div>
+        </footer>
+      </section>
+
+      <!-- RENTALS -->
+      <section class="page" id="pg-rentals">
+        <div class="sec">
+          <p class="eyebrow">Listings</p><h1>Available Rentals</h1>
+          <p class="lead">Found one you like? See if you prequalify right on the listing.</p>
+          <div class="chips"><span class="chip">Location <svg><use href="#i-down"/></svg></span><span class="chip">Beds <svg><use href="#i-down"/></svg></span><span class="chip">Price <svg><use href="#i-down"/></svg></span></div>
+          <div style="margin-top:12px">
+            <div class="listing"><div class="photo h-150" style="border-radius:0;border:0;border-bottom:1px solid var(--line)"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">510 Pittston Ave Apt 1 — exterior</span></div><div class="meta"><span class="price">$900 / mo</span><div class="specs"><span>1 bd</span><span>1 ba</span><span>Scranton 18505</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+            <div class="listing"><div class="photo h-150" style="border-radius:0;border:0;border-bottom:1px solid var(--line)"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">910 W. Linden St Apt 1 — exterior</span></div><div class="meta"><span class="price">$925 / mo</span><div class="specs"><span>1 bd</span><span>1 ba</span><span>Scranton 18504</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+            <div class="listing"><div class="photo h-150" style="border-radius:0;border:0;border-bottom:1px solid var(--line)"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">320 Taylor Ave Apt 3 — exterior</span></div><div class="meta"><span class="price">$1,395 / mo</span><div class="specs"><span>3 bd</span><span>1 ba</span><span>Scranton 18510</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+            <div class="listing"><div class="photo h-150" style="border-radius:0;border:0;border-bottom:1px solid var(--line)"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">316-322 Taylor Ave — exterior</span></div><div class="meta"><span class="price">$1,395–$1,495 / mo</span><div class="specs"><span>3 bd</span><span>1 ba</span><span>Scranton 18510</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+            <div class="listing"><div class="photo h-150" style="border-radius:0;border:0;border-bottom:1px solid var(--line)"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">608 12th Avenue — townhome</span></div><div class="meta"><span class="price">$985 / mo</span><div class="specs"><span>2 bd</span><span>1 ba</span><span>Scranton 18504</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+            <div class="listing"><div class="photo h-150" style="border-radius:0;border:0;border-bottom:1px solid var(--line)"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">919 Clay Ave 1st Floor — exterior</span></div><div class="meta"><span class="price">$1,275 / mo</span><div class="specs"><span>1 bd</span><span>1.5 ba</span><span>1,300 sqft · 18510</span></div><a class="btn ghost sm" data-goto="listing">View details</a></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LISTING -->
+      <section class="page" id="pg-listing">
+        <div class="sec">
+          <p class="breadcrumb">Available Rentals / <b>320 Taylor Ave Apt 3</b></p>
+          <div class="photo h-200 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Primary photo — 320 Taylor Ave Apt 3 exterior</span><span class="ps">Tap any photo to open the gallery</span></div>
+          <h1 style="margin-top:14px;font-size:24px">320 Taylor Ave Apt 3</h1>
+          <div class="price" style="font-weight:800;font-size:22px;color:var(--brand)">$1,395 / mo</div>
+          <div class="chips" style="margin-top:8px"><span class="chip">3 bd</span><span class="chip">1 ba</span><span class="chip">3rd floor</span><span class="chip">Scranton 18510</span></div>
+          <div class="btn-col"><a class="btn" data-goto="prequal">See if you prequalify</a><a class="btn ghost" id="tx3"><svg><use href="#i-txt"/></svg> Text about this rental</a></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+            <div class="photo h-92 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Living room</span></div>
+            <div class="photo h-92 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Kitchen</span></div>
+            <div class="photo h-92 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bedroom</span></div>
+            <div class="photo h-92 gphoto"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">Bathroom</span></div>
+          </div>
+          <p class="eyebrow" style="margin-top:22px">Property walkthrough</p>
+          <div class="video-embed"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="vt">Property walkthrough video</span><span class="vs">Their existing YouTube walkthrough embeds here</span></div>
+        </div>
+        <div class="sec warm">
+          <p class="eyebrow">Description</p>
+          <p class="lead">A bright three-bedroom close to downtown Scranton. Placeholder copy for the real listing description.</p>
+          <p class="eyebrow" style="margin-top:18px">Features</p>
+          <div class="chips"><span class="chip">Off-street parking</span><span class="chip">Updated kitchen</span><span class="chip">Pet friendly</span></div>
+          <p class="eyebrow" style="margin-top:18px">Location</p>
+          <div class="photo h-150"><svg class="pic"><use href="#i-map"/></svg><span class="pt">Map — property location</span></div>
+        </div>
+        <div class="sec">
+          <div class="prequal-cta"><span class="flag">Book a showing</span><h2>See if you prequalify</h2><p class="lead">A few quick questions. If you prequalify, book a tour right away.</p><div class="btn-col"><a class="btn" data-goto="prequal">See if you prequalify</a></div></div>
+        </div>
+      </section>
+
+      <!-- PREQUALIFY -->
+      <section class="page" id="pg-prequal">
+        <div class="fstep on" data-step="quiz"><div class="sec">
+          <p class="breadcrumb">Available Rentals / <b>Prequalify</b></p>
+          <h1>Prequalify for a showing</h1>
+          <p class="lead">Pick the home you're interested in and answer a few quick questions. We check instantly.</p>
+          <div style="margin-top:16px">
+            <div class="field"><label>Which home?</label><select class="rin" id="propSelect">
+              <option value="1395" data-name="320 Taylor Ave Apt 3">320 Taylor Ave Apt 3 — $1,395 / mo</option>
+              <option value="900" data-name="510 Pittston Ave Apt 1">510 Pittston Ave Apt 1 — $900 / mo</option>
+              <option value="925" data-name="910 W. Linden St Apt 1">910 W. Linden St Apt 1 — $925 / mo</option>
+              <option value="985" data-name="608 12th Avenue">608 12th Avenue — $985 / mo</option>
+              <option value="1275" data-name="919 Clay Ave 1st Floor">919 Clay Ave 1st Floor — $1,275 / mo</option>
+              <option value="1495" data-name="316-322 Taylor Ave">316-322 Taylor Ave — $1,495 / mo</option>
+            </select></div>
+            <div class="field"><label>Your gross monthly income</label><input class="rin" id="incomeInput" type="number" inputmode="numeric" placeholder="e.g. 4800"></div>
+            <div class="field"><label>Desired move-in date</label><div class="in"></div></div>
+            <div class="field"><label>Number of occupants</label><div class="in"></div></div>
+            <div class="field"><label>Pets?</label><div class="in"></div></div>
+            <div class="field"><label>First name</label><div class="in"></div></div>
+            <div class="field"><label>Mobile (for texting)</label><div class="in"></div></div>
+            <div class="btn-col"><a class="btn" id="seeResult">See my result</a></div>
+          </div>
+        </div></div>
+        <div class="fstep" data-step="result"><div class="sec">
+          <div id="resPass"><div class="result-pass"><span class="flag">Prequalified</span><h1>Good news, you prequalify.</h1><p class="lead"><b class="r-prop">320 Taylor Ave Apt 3</b> needs <b class="r-req">$4,650</b>/mo, and you entered <b class="r-inc">$0</b>/mo.</p><div class="btn-col"><a class="btn" id="toBook">Pick a showing time</a></div></div></div>
+          <div id="resFail" style="display:none"><div class="card"><h1>Not a match just yet.</h1><p class="lead"><b class="r-prop">320 Taylor Ave Apt 3</b> needs about <b class="r-req">$4,650</b>/mo in gross income. Based on the <b class="r-inc">$0</b>/mo entered, it is not a fit right now.</p><div class="btn-col"><a class="btn" data-goto="rentals">Browse other homes</a><a class="btn ghost" id="tx4"><svg><use href="#i-txt"/></svg> Text us a question</a></div></div></div>
+        </div></div>
+        <div class="fstep" data-step="book"><div class="sec">
+          <p class="breadcrumb">Prequalify / <b>Book a showing</b></p><h1>Pick a time to tour</h1><p class="lead">Showing for <b class="r-prop">320 Taylor Ave Apt 3</b>.</p>
+          <div class="photo h-150" style="margin-top:12px"><svg class="pic"><use href="#i-map"/></svg><span class="pt">Calendly booking embed</span></div>
+          <div class="chips" style="margin-top:12px"><span class="chip">Tue 10:00</span><span class="chip">Tue 2:00</span><span class="chip">Wed 11:30</span></div>
+          <div class="btn-col"><a class="btn" id="toDone">Confirm showing</a></div>
+        </div></div>
+        <div class="fstep" data-step="done"><div class="sec" style="text-align:center;padding-top:40px">
+          <div class="check"><svg><use href="#i-check"/></svg></div><h1>You're booked.</h1><p class="lead">We'll text you a reminder before your showing.</p>
+          <div class="btn-col"><a class="btn" data-goto="rentals">Back to rentals</a></div>
+        </div></div>
+      </section>
+
+      <!-- HOW TO APPLY -->
+      <section class="page" id="pg-apply">
+        <div class="sec">
+          <p class="eyebrow">For renters</p><h1>How to Apply</h1><p class="lead">Two steps: prequalify to see the unit, then apply to lease it.</p>
+          <div style="margin-top:16px">
+            <div class="step s1"><div class="num">1</div><h3>Prequalify for a showing</h3><p>Pick the home you want, answer a few quick questions, and get an instant result.</p><div class="btn-col"><a class="btn sm" data-goto="prequal">Start prequalification</a></div></div>
+            <div class="step"><div class="num">2</div><h3>Submit your full application</h3><p>Required to lease. It includes:</p><ul class="req"><li><span class="bx"><svg><use href="#i-check"/></svg></span> Proof of income</li><li><span class="bx"><svg><use href="#i-check"/></svg></span> Background and credit check</li></ul><div class="btn-col"><a class="btn ghost sm" id="tx5">Start full application ↗</a></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- OWNERS -->
+      <section class="page" id="pg-owners">
+        <div class="sec">
+          <p class="eyebrow">For property owners</p><h1>Own a property? Let us manage it.</h1>
+          <p class="lead">Full-service management from a local team. Leasing, maintenance, rent, and clear reporting.</p>
+          <div class="btn-col"><a class="btn" data-goto="contact">Request a management quote</a><a class="btn ghost" id="tx6">Owner login ↗</a></div>
+          <div class="photo h-170" style="margin-top:16px"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">A managed property, or a happy owner</span><span class="ps">Photo placeholder</span></div>
+        </div>
+        <div class="sec warm">
+          <p class="eyebrow">What we handle</p>
+          <div class="card"><h3>Leasing &amp; marketing</h3><p>We market your unit, screen tenants, and get it leased.</p></div>
+          <div class="card"><h3>Maintenance</h3><p>Repairs handled promptly by people you can trust.</p></div>
+          <div class="card"><h3>Rent &amp; reporting</h3><p>On-time rent and clear statements, every month.</p></div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="page" id="pg-about">
+        <div class="sec">
+          <p class="eyebrow">About Parasole</p><h1>A family-run business, rooted in NEPA.</h1>
+          <p class="lead">For over 20 years, Parasole Properties has helped families find homes and helped owners grow with peace of mind.</p>
+          <div class="photo h-200" style="margin-top:14px"><svg class="pic"><use href="#i-pic"/></svg><span class="pt">The Parasole team, or the office</span><span class="ps">Photo placeholder</span></div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="page" id="pg-contact">
+        <div class="sec">
+          <p class="eyebrow">Get in touch</p><h1>Contact</h1>
+          <div class="card"><h3><svg width="15" height="15" style="vertical-align:-2px;color:var(--brand)"><use href="#i-txt"/></svg> Text us (fastest)</h3><p><b style="color:var(--ink)">(570) 343-2597</b></p><h3 style="margin-top:12px">Email</h3><p>office@parasoleproperties.com</p><h3 style="margin-top:12px">Office</h3><p>Northeastern Pennsylvania</p></div>
+          <div class="field"><label>I am a</label><div class="in"></div></div>
+          <div class="field"><label>Name</label><div class="in"></div></div>
+          <div class="field"><label>Mobile (for texting)</label><div class="in"></div></div>
+          <div class="field"><label>Message</label><div class="in area"></div></div>
+          <div class="btn-col"><a class="btn">Send message</a></div>
+        </div>
+      </section>
+
+      <div class="m-bottom"><a class="btn" id="tx7" style="flex:1"><svg><use href="#i-txt"/></svg> Text us</a><a class="btn ghost" data-goto="rentals" style="flex:1">Rentals</a></div>
+    </div><!-- /scroll -->
+
+    <div class="m-menu" id="menu">
+      <div class="top"><b>PARASOLE PROPERTIES</b><button class="icon-btn" id="menuClose" aria-label="Close"><svg><use href="#i-x"/></svg></button></div>
+      <nav>
+        <a data-goto="home">Home <span class="chev"><svg width="18" height="18"><use href="#i-chev"/></svg></span></a>
+        <a data-goto="rentals">Available Rentals <span class="chev"><svg width="18" height="18"><use href="#i-chev"/></svg></span></a>
+        <a data-goto="apply">How to Apply <span class="chev"><svg width="18" height="18"><use href="#i-chev"/></svg></span></a>
+        <a data-goto="owners">Owners <span class="chev"><svg width="18" height="18"><use href="#i-chev"/></svg></span></a>
+        <a data-goto="about">About <span class="chev"><svg width="18" height="18"><use href="#i-chev"/></svg></span></a>
+        <a data-goto="contact">Contact <span class="chev"><svg width="18" height="18"><use href="#i-chev"/></svg></span></a>
+      </nav>
+      <div class="logins"><a class="btn ghost sm" id="tx8">Resident Login ↗</a><a class="btn ghost sm" id="tx9">Owner Login ↗</a></div>
+    </div>
+
+    <div class="lb" id="lb">
+      <div class="lb-top"><span class="lb-count" id="lbCount">1 / 5</span><button class="lb-close" id="lbClose" aria-label="Close">&#10005;</button></div>
+      <div class="lb-main"><svg class="pic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L5 20"/></svg><span class="lb-cap" id="lbCap">Photo</span><span class="lb-sub">Photo placeholder</span></div>
+      <div class="lb-ctrl"><button class="lb-nav" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button class="lb-nav" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="toast" id="toast"></div>
+  </div></div><!-- /screen /device -->
+</div>
+<script>
+  var labels={home:'Home',rentals:'Available Rentals',listing:'Listing detail',prequal:'Prequalify',apply:'How to Apply',owners:'Owners',about:'About',contact:'Contact'};
+  var pages=document.querySelectorAll('.page'), scroll=document.getElementById('scroll'), menu=document.getElementById('menu');
+  function closeMenu(){menu.classList.remove('open');}
+  function show(id){if(!labels[id])id='home';pages.forEach(function(p){p.classList.toggle('active',p.id==='pg-'+id);});document.getElementById('pageName').textContent=labels[id];if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);closeMenu();if(id==='prequal')resetPrequal();if(scroll)scroll.scrollTop=0;}
+  document.querySelectorAll('[data-goto]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();show(el.dataset.goto);});});
+  document.getElementById('menuOpen').addEventListener('click',function(){menu.classList.add('open');});
+  document.getElementById('menuClose').addEventListener('click',closeMenu);
+  var bc=document.getElementById('btnCurrent'),br=document.getElementById('btnRebrand');
+  bc.addEventListener('click',function(){document.body.classList.remove('rebrand');bc.classList.add('on');br.classList.remove('on');});
+  br.addEventListener('click',function(){document.body.classList.add('rebrand');br.classList.add('on');bc.classList.remove('on');});
+  var toast=document.getElementById('toast'),tt;
+  function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3200);}
+  ['tx1','tx2','tx3','tx4','tx7'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();ping('On the live site this opens your phone to text Parasole at (570) 343-2597.');});});
+  ['tx5'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();ping('On the live site this starts the full application (proof of income + background/credit check).');});});
+  ['tx6','tx8','tx9'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();closeMenu();ping('On the live site this opens the login on the resident portal.');});});
+  // recolor logo for rebrand
+  (function(){
+    function r2h(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),h,s,l=(mx+mn)/2;if(mx==mn){h=s=0;}else{var d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;}h/=6;}return[h*360,s,l];}
+    function h2c(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}
+    function h2r(h,s,l){h/=360;var r,g,b;if(s==0){r=g=b=l;}else{var q=l<0.5?l*(1+s):l+s-l*s;var p=2*l-q;r=h2c(p,q,h+1/3);g=h2c(p,q,h);b=h2c(p,q,h-1/3);}return[Math.round(r*255),Math.round(g*255),Math.round(b*255)];}
+    var img=new Image();img.crossOrigin='anonymous';
+    img.onload=function(){var c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;var ctx=c.getContext('2d');ctx.drawImage(img,0,0);var id;try{id=ctx.getImageData(0,0,c.width,c.height);}catch(e){return;}var d=id.data,GH=150,GS=.30,TH=16,TS=.52;for(var i=0;i<d.length;i+=4){var a=d[i+3];if(a<8)continue;var hs=r2h(d[i],d[i+1],d[i+2]),H=hs[0],S=hs[1],L=hs[2];if(S<.12)continue;var nr;if(H>=325||H<=20)nr=h2r(GH,GS,L);else if(H>=35&&H<=72)nr=h2r(TH,TS,L);else continue;d[i]=nr[0];d[i+1]=nr[1];d[i+2]=nr[2];}ctx.putImageData(id,0,0);var el=document.getElementById('logoNew');if(el)el.src=c.toDataURL('image/png');};
+    img.src='https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png';
+  })();
+  // prequal flow
+  var propSel=document.getElementById('propSelect');
+  function currentReq(){var rent=propSel?parseFloat(propSel.value)||0:0;return Math.round(rent*40/12);}
+  function fmt(n){return '$'+Number(n).toLocaleString();}
+  function fstep(step){document.querySelectorAll('#pg-prequal .fstep').forEach(function(s){s.classList.toggle('on',s.dataset.step===step);});if(scroll)scroll.scrollTop=0;}
+  function resetPrequal(){var i=document.getElementById('incomeInput');if(i)i.value='';fstep('quiz');}
+  var sr=document.getElementById('seeResult');
+  if(sr)sr.addEventListener('click',function(e){e.preventDefault();var req=currentReq();var ie=document.getElementById('incomeInput');var inc=parseFloat(ie&&ie.value)||0;var name=propSel?propSel.options[propSel.selectedIndex].getAttribute('data-name'):'this home';document.querySelectorAll('.r-prop').forEach(function(el){el.textContent=name;});document.querySelectorAll('.r-req').forEach(function(el){el.textContent=fmt(req);});document.querySelectorAll('.r-inc').forEach(function(el){el.textContent=fmt(inc);});var pass=inc>=req;document.getElementById('resPass').style.display=pass?'block':'none';document.getElementById('resFail').style.display=pass?'none':'block';fstep('result');});
+  var tb=document.getElementById('toBook');if(tb)tb.addEventListener('click',function(e){e.preventDefault();fstep('book');});
+  var td=document.getElementById('toDone');if(td)td.addEventListener('click',function(e){e.preventDefault();fstep('done');});
+  // photo carousel
+  (function(){
+    var gp=[].slice.call(document.querySelectorAll('#pg-listing .gphoto'));if(!gp.length)return;
+    var caps=gp.map(function(el){var t=el.querySelector('.pt');return t?t.textContent:'Photo';});
+    var lb=document.getElementById('lb'),cap=document.getElementById('lbCap'),cnt=document.getElementById('lbCount'),idx=0;
+    function render(){cap.textContent=caps[idx];cnt.textContent=(idx+1)+' / '+caps.length;}
+    function open(i){idx=i;render();lb.classList.add('on');}
+    function go(d){idx=(idx+d+caps.length)%caps.length;render();}
+    gp.forEach(function(el,i){el.addEventListener('click',function(){open(i);});});
+    document.getElementById('lbClose').addEventListener('click',function(){lb.classList.remove('on');});
+    document.getElementById('lbPrev').addEventListener('click',function(){go(-1);});
+    document.getElementById('lbNext').addEventListener('click',function(){go(1);});
+  })();
+  window.addEventListener('hashchange',function(){show(location.hash.replace('#',''));});
+  show(location.hash?location.hash.replace('#',''):'home');
+</script>
+</body>
+</html>
