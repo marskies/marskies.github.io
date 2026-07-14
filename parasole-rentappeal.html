@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole Properties — RentAppeal-style hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --burgundy:#991822; --burgundy-dk:#7a1119; --gold:#c9a227; --gold-dk:#9c7c12;
+    --ink:#242220; --ink2:#5c574f; --ink3:#8a857c; --line:#e7e0d4; --bg:#ffffff; --bg2:#f6f2ea;
+    --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .note-strip{background:var(--bg2);color:var(--ink2);font-size:12.5px;padding:9px 18px;text-align:center;border-bottom:1px solid var(--line)}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+  /* header */
+  .head{background:var(--bg);border-bottom:1px solid var(--line)}
+  .head .row{display:flex;align-items:center;gap:24px;height:96px}
+  .logo{height:64px;width:auto;display:block}
+  .nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+  .nav a{color:var(--ink2);font-size:14.5px;font-weight:700;padding:9px 12px;border-radius:8px;text-decoration:none;cursor:pointer}
+  .nav a:hover{color:var(--burgundy)}
+  .quote{background:var(--burgundy);color:#fff;border:0;border-radius:8px;padding:14px 22px;font-size:13.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-left:8px;white-space:nowrap}
+  .quote:hover{background:var(--burgundy-dk)}
+  /* color bar */
+  .colorbar{background:var(--burgundy);color:#fff}
+  .colorbar .row{display:flex;align-items:center;justify-content:center;gap:40px;height:48px;font-size:14px;font-weight:600;flex-wrap:wrap}
+  .colorbar a{color:#fff;text-decoration:none;cursor:pointer}
+  .colorbar b{font-weight:800}
+  /* hero */
+  .hero{position:relative;min-height:560px;display:flex;flex-direction:column;justify-content:center;text-align:center;color:#fff;padding:70px 0 150px}
+  .hero-bg{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#0d1830 0%,#0a1120 55%,#070b14 100%)}
+  .hero-bg:before{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;background:radial-gradient(120% 90% at 50% 120%,rgba(201,162,39,.28),rgba(153,24,34,.14) 42%,transparent 70%)}
+  .hero-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 42%,transparent,rgba(0,0,0,.45))}
+  .hero-inner{position:relative;z-index:2}
+  .hero h1{font-size:56px;line-height:1.05;letter-spacing:-.02em;font-weight:800;margin:0 auto 18px;max-width:16ch}
+  .hero p{font-size:19px;color:rgba(255,255,255,.9);margin:0 auto 30px;max-width:60ch}
+  .btn-gold{display:inline-block;background:var(--gold);color:#2a2100;border:0;border-radius:8px;padding:16px 30px;font-size:15px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+  .btn-gold:hover{background:var(--gold-dk);color:#fff}
+  .photo-chip{position:absolute;right:16px;bottom:14px;z-index:3;font-size:11px;letter-spacing:.03em;color:rgba(255,255,255,.8);background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:5px 12px}
+  /* three cards overlapping the hero */
+  .cards-wrap{position:relative;z-index:5}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:-92px}
+  .card{background:#fff;border-radius:8px;box-shadow:0 18px 44px rgba(0,0,0,.16);padding:30px 30px 30px}
+  .card h3{font-size:28px;font-weight:800;color:var(--burgundy);margin:0 0 14px;letter-spacing:-.01em}
+  .card .body{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+  .card p{font-size:15.5px;color:var(--ink2);margin:0;max-width:22ch}
+  .card .arrow{flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:var(--burgundy);color:#fff;display:grid;place-items:center;cursor:pointer}
+  .card .arrow:hover{background:var(--burgundy-dk)}
+  .card .arrow svg{width:22px;height:22px}
+  .spacer{height:70px}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1c1b1a;color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:90}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:900px){.cards{grid-template-columns:1fr;margin-top:-60px}.hero h1{font-size:38px}.nav{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+</svg>
+<div class="note-strip">A recreation of the RentAppeal layout with your logo, colors, and Scranton. The dark hero is a placeholder for the nighttime downtown Scranton photo. Everything here is editable.</div>
+
+<header class="head"><div class="container"><div class="row">
+  <img class="logo" id="logo" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties">
+  <nav class="nav"><a>Home</a><a>Available Rentals</a><a>How to Apply</a><a>Owners</a><a>About</a><a>Contact</a></nav>
+  <button class="quote" id="q1">Management Quote</button>
+</div></div></header>
+
+<div class="colorbar"><div class="container"><div class="row">
+  <a id="c1">Email Us</a>
+  <span>Office: <b>(570) 343-2597</b></span>
+  <span>24/7 Maintenance: <b>(570) 343-2597</b></span>
+</div></div></div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner"><div class="container">
+    <h1>Looking for quality property management in Northeastern PA?</h1>
+    <p>Parasole Properties is a family-run company serving Scranton, Wilkes-Barre, and beyond for over 20 years, guided by care, simplicity, and deep local knowledge.</p>
+    <a class="btn-gold" id="cta">View available rentals</a>
+  </div></div>
+  <span class="photo-chip">Nighttime downtown Scranton photo goes here</span>
+</section>
+
+<div class="cards-wrap"><div class="container"><div class="cards">
+  <div class="card"><h3>Our Rentals</h3><div class="body"><p>Looking for a home to rent? View our listings to get started.</p><span class="arrow" id="a1"><svg><use href="#i-ar"/></svg></span></div></div>
+  <div class="card"><h3>Our Services</h3><div class="body"><p>Full-service property management, tailored to you.</p><span class="arrow" id="a2"><svg><use href="#i-ar"/></svg></span></div></div>
+  <div class="card"><h3>List Your Property</h3><div class="body"><p>Get started now and reclaim your peace of mind.</p><span class="arrow" id="a3"><svg><use href="#i-ar"/></svg></span></div></div>
+</div></div></div>
+<div class="spacer"></div>
+<div class="toast" id="toast"></div>
+<script>
+  var toast=document.getElementById('toast'),tt;
+  function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3000);}
+  ['q1','c1','cta','a1','a2','a3'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();ping('This is a static preview. On the live site each of these links through to its page.');});});
+  // transparent-background logo (flood-fill white from the edges)
+  (function(){
+    var img=new Image();img.crossOrigin='anonymous';
+    img.onload=function(){
+      var w=img.naturalWidth,h=img.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;
+      var ctx=c.getContext('2d');ctx.drawImage(img,0,0);var id;try{id=ctx.getImageData(0,0,w,h);}catch(e){return;}var d=id.data;
+      function white(i){return d[i]>233&&d[i+1]>228&&d[i+2]>222;}
+      var st=[];function push(x,y){if(x<0||y<0||x>=w||y>=h)return;var i=(y*w+x)*4;if(d[i+3]===0)return;if(!white(i))return;st.push(y*w+x);}
+      for(var x=0;x<w;x++){push(x,0);push(x,h-1);}for(var y=0;y<h;y++){push(0,y);push(w-1,y);}
+      while(st.length){var p=st.pop(),i=p*4;if(d[i+3]===0||!white(i))continue;d[i+3]=0;var px=p%w,py=(p-px)/w;push(px+1,py);push(px-1,py);push(px,py+1);push(px,py-1);}
+      ctx.putImageData(id,0,0);var el=document.getElementById('logo');if(el)el.src=c.toDataURL('image/png');
+    };
+    img.src='https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png';
+  })();
+</script>
+</body>
+</html>
