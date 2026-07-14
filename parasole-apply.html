@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Apply & Prequalify — Parasole Properties</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="parasole-site.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></symbol>
+</defs></svg>
+
+<div class="note-strip">Design preview — the prequalify check uses Parasole's real income guideline: monthly rent × 40 ÷ 12. Pick a home and the numbers update.</div>
+
+<header class="head"><div class="container"><div class="row">
+  <a href="parasole-rentappeal.html"><img class="logo" id="logo" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties"></a>
+  <nav class="nav">
+    <a href="parasole-rentappeal.html">Home</a>
+    <a href="parasole-rentals.html">Available Rentals</a>
+    <a class="active" href="parasole-apply.html">How to Apply</a>
+    <a href="parasole-owners.html">Owners</a>
+    <a href="parasole-about.html">About</a>
+    <a href="parasole-contact.html">Contact</a>
+  </nav>
+  <a class="btn tx" href="#"><svg><use href="#i-txt"/></svg> Text us</a>
+</div></div></header>
+
+<div class="colorbar"><div class="container"><div class="row">
+  <a class="lead tx" href="#"><svg><use href="#i-txt"/></svg> Text us: <b>(570) 343-2597</b> · fastest</a>
+  <span>Or call <b>(570) 343-2597</b></span>
+  <a href="parasole-contact.html">Email Us</a>
+</div></div></div>
+
+<section class="banner"><div class="container">
+  <p class="eyebrow">How to apply</p>
+  <h1>Prequalify in 30 seconds, then book a showing.</h1>
+  <p>Renting with us is simple. Pick a home, do a quick income check, and if it's a fit, schedule a tour, all online. Questions any step of the way? Just text us.</p>
+</div></section>
+
+<section class="sec"><div class="container">
+  <div class="flow">
+
+    <div class="step reveal">
+      <div class="n"><span class="dot">1</span> Pick a home</div>
+      <h3>Which rental are you interested in?</h3>
+      <p>Income requirements change with the rent, so start by choosing a home.</p>
+      <label class="fld" for="prop">Choose a rental</label>
+      <select id="prop"><option value="">Select a home…</option></select>
+    </div>
+
+    <div class="step reveal">
+      <div class="n"><span class="dot">2</span> Quick income check</div>
+      <h3>See if you prequalify.</h3>
+      <p>We use a standard guideline: monthly rent × 40 ÷ 12. Enter your household's gross monthly income (before taxes).</p>
+      <div class="calc">
+        <div class="row2"><span>Selected home</span><b id="cHome">—</b></div>
+        <div class="row2"><span>Monthly rent</span><b id="cRent">—</b></div>
+        <div class="row2"><span>Income guideline (rent × 40 ÷ 12)</span><span class="big" id="cNeed">—</span></div>
+      </div>
+      <div style="margin-top:16px">
+        <label class="fld" for="inc">Your household gross monthly income</label>
+        <input class="txt" id="inc" type="text" inputmode="numeric" placeholder="e.g. 4000">
+      </div>
+      <div class="result" id="res"></div>
+    </div>
+
+    <div class="step reveal">
+      <div class="n"><span class="dot">3</span> Book a showing</div>
+      <h3>Pick a time to tour.</h3>
+      <p>If you prequalify, grab a showing time that works for you. Prefer to ask first? Text us and we'll help.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn gold up" id="book" href="#" data-demo="On the live site this opens the showing calendar to book a tour." style="opacity:.5;pointer-events:none">Book a showing</a>
+        <a class="btn ghost tx" href="#"><svg><use href="#i-txt"/></svg> Text us instead</a>
+      </div>
+      <p id="bookHint" style="color:var(--ink3);font-size:13px;margin:14px 0 0">Finish the income check above to unlock booking.</p>
+    </div>
+
+  </div>
+</div></section>
+
+<section class="sec warm"><div class="container reveal">
+  <div style="max-width:820px;margin:0 auto">
+    <p class="eyebrow" style="text-align:center">The full application</p>
+    <h2 class="center">What you'll need to be approved.</h2>
+    <p class="sub-c">Prequalifying is just a guideline. To be approved and sign a lease, every applicant completes a full application. Here's what that includes:</p>
+    <div class="grid3" style="margin-top:34px">
+      <div class="svc"><div class="ico"><svg><use href="#i-doc"/></svg></div><h3>Proof of income</h3><p>Recent pay stubs or an offer letter, so we can confirm the income guideline.</p></div>
+      <div class="svc"><div class="ico"><svg><use href="#i-shield"/></svg></div><h3>Background &amp; credit check</h3><p>A standard screening that's part of every application.</p></div>
+      <div class="svc"><div class="ico"><svg><use href="#i-cal"/></svg></div><h3>Application before showing</h3><p>Applications come first so we can pre-approve you and move quickly.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:30px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn lg up" href="https://parasoleproperties.com/property-application/" target="_blank" rel="noopener">Submit a full application</a>
+      <a class="btn ghost lg tx" href="#"><svg><use href="#i-txt"/></svg> Text us with questions</a>
+    </div>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="container">
+  <div class="top">
+    <div>
+      <div class="fbrand">PARASOLE PROPERTIES</div>
+      <div class="desc">Family-run property management in Northeastern Pennsylvania.</div>
+      <div class="txt"><span style="font-size:11px;letter-spacing:.06em">TEXT US (FASTEST)</span> <b>(570) 343-2597</b></div>
+      <div class="social"><a href="https://www.facebook.com/ParasoleProperties" target="_blank" rel="noopener">Facebook</a><a href="https://milessummit.com" target="_blank" rel="noopener">Miles Summit ↗</a></div>
+    </div>
+    <div><h4>Rent</h4><a class="fl" href="parasole-rentals.html">Available Rentals</a><a class="fl" href="parasole-apply.html">How to Apply</a><a class="fl" href="parasole-apply.html">Prequalify</a><a class="fl" href="http://Parasoleproperties.propertymanage.biz" target="_blank" rel="noopener">Resident Login ↗</a></div>
+    <div><h4>Owners</h4><a class="fl" href="parasole-owners.html">Management</a><a class="fl" href="parasole-owners.html">Request a Quote</a><a class="fl" href="http://Parasoleproperties.propertymanage.biz" target="_blank" rel="noopener">Owner Login ↗</a></div>
+    <div><h4>Company</h4><a class="fl" href="parasole-about.html">About</a><a class="fl" href="parasole-contact.html">Contact</a><a class="fl" href="https://milessummit.com" target="_blank" rel="noopener">Miles Summit ↗</a></div>
+  </div>
+  <div class="copy"><span>© Parasole Properties. All rights reserved.</span><span>parasoleproperties.com</span></div>
+</div></footer>
+
+<script src="parasole-data.js"></script>
+<script src="parasole-site.js"></script>
+<script>
+(function(){
+  var list=window.PARASOLE_RENTALS||[];
+  var sel=document.getElementById('prop');
+  list.forEach(function(r){var o=document.createElement('option');o.value=r.id;o.textContent=r.addr+' — '+r.price;sel.appendChild(o);});
+  var pre=new URLSearchParams(location.search).get('property'); if(pre)sel.value=pre;
+
+  var inc=document.getElementById('inc'), res=document.getElementById('res'),
+      cHome=document.getElementById('cHome'), cRent=document.getElementById('cRent'), cNeed=document.getElementById('cNeed'),
+      book=document.getElementById('book'), hint=document.getElementById('bookHint');
+  function money(n){return '$'+n.toLocaleString('en-US');}
+  function current(){return list.filter(function(x){return x.id===sel.value;})[0];}
+
+  function refresh(){
+    var r=current();
+    if(!r){cHome.textContent='—';cRent.textContent='—';cNeed.textContent='—';}
+    else{cHome.textContent=r.addr;cRent.textContent=money(r.rent)+' / mo';cNeed.textContent=money(Math.round(r.rent*40/12))+' / mo';}
+    evaluate();
+  }
+  function evaluate(){
+    var r=current(), v=parseInt((inc.value||'').replace(/[^0-9]/g,''),10);
+    res.className='result'; book.style.opacity=.5; book.style.pointerEvents='none';
+    hint.textContent='Finish the income check above to unlock booking.';
+    if(!r){res.classList.add('no');res.textContent='Pick a home first, then enter your income.';return;}
+    if(!v){return;}
+    var need=Math.round(r.rent*40/12);
+    if(v>=need){
+      res.classList.add('ok');res.textContent='You prequalify for '+r.addr+'. '+money(v)+'/mo meets the '+money(need)+'/mo guideline. Book a showing below.';
+      book.style.opacity=1;book.style.pointerEvents='auto';hint.textContent='You\'re prequalified — pick a time that works for you.';
+    }else{
+      res.classList.add('no');res.textContent=money(v)+'/mo is under the '+money(need)+'/mo guideline for this home. Text us — we may have a better-fitting rental, or a co-applicant can help.';
+    }
+  }
+  sel.addEventListener('change',refresh);
+  inc.addEventListener('input',evaluate);
+  refresh();
+})();
+</script>
+</body>
+</html>

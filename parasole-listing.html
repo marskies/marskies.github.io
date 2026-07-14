@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rental — Parasole Properties</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="parasole-site.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 18v-6h18v6M3 12V7a2 2 0 0 1 2-2h5v7M14 12V5h5a2 2 0 0 1 2 2v5M3 18v2M21 18v2"/></symbol>
+  <symbol id="i-bath" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M6 12V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2M8 19l-1 2M17 19l1 2"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+</defs></svg>
+
+<div class="note-strip">Design preview — real listing detail from Parasole's current rentals. Photos open full-screen; the video box is where a YouTube walkthrough plays.</div>
+
+<header class="head"><div class="container"><div class="row">
+  <a href="parasole-rentappeal.html"><img class="logo" id="logo" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties"></a>
+  <nav class="nav">
+    <a href="parasole-rentappeal.html">Home</a>
+    <a class="active" href="parasole-rentals.html">Available Rentals</a>
+    <a href="parasole-apply.html">How to Apply</a>
+    <a href="parasole-owners.html">Owners</a>
+    <a href="parasole-about.html">About</a>
+    <a href="parasole-contact.html">Contact</a>
+  </nav>
+  <a class="btn tx" href="#"><svg><use href="#i-txt"/></svg> Text us</a>
+</div></div></header>
+
+<div class="colorbar"><div class="container"><div class="row">
+  <a class="lead tx" href="#"><svg><use href="#i-txt"/></svg> Text us: <b>(570) 343-2597</b> · fastest</a>
+  <span>Or call <b>(570) 343-2597</b></span>
+  <a href="parasole-contact.html">Email Us</a>
+</div></div></div>
+
+<div class="container"><p class="crumb"><a href="parasole-rentals.html">← All rentals</a></p></div>
+
+<main class="container" id="listing" style="padding-bottom:70px"></main>
+
+<section class="sec warm" id="prequalWrap">
+  <div class="container reveal">
+    <p class="eyebrow" style="text-align:center">Before you tour</p>
+    <h2 class="center">See if you prequalify for this home.</h2>
+    <p class="sub-c">We use a simple income guideline: monthly rent × 40 ÷ 12. Enter your household's gross monthly income and we'll show you right away.</p>
+    <div class="flow" style="margin-top:26px">
+      <div class="step">
+        <div class="n"><span class="dot">1</span> This home</div>
+        <div class="calc">
+          <div class="row2"><span>Monthly rent</span><b id="pqRent">—</b></div>
+          <div class="row2"><span>Income guideline (rent × 40 ÷ 12)</span><span class="big" id="pqNeed">—</span></div>
+        </div>
+        <div style="margin-top:16px">
+          <label class="fld" for="inc">Your household gross monthly income</label>
+          <input class="txt" id="inc" type="text" inputmode="numeric" placeholder="e.g. 4000">
+        </div>
+        <div class="result" id="pqResult"></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn gold up" id="bookBtn" href="#" data-demo="On the live site this opens the showing calendar to book a tour.">Book a showing</a>
+          <a class="btn ghost tx" href="#"><svg><use href="#i-txt"/></svg> Text a question</a>
+        </div>
+        <p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">This is a quick guideline only, not a decision. A full application with proof of income and a background/credit check confirms approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><div class="container">
+  <div class="top">
+    <div>
+      <div class="fbrand">PARASOLE PROPERTIES</div>
+      <div class="desc">Family-run property management in Northeastern Pennsylvania.</div>
+      <div class="txt"><span style="font-size:11px;letter-spacing:.06em">TEXT US (FASTEST)</span> <b>(570) 343-2597</b></div>
+      <div class="social"><a href="https://www.facebook.com/ParasoleProperties" target="_blank" rel="noopener">Facebook</a><a href="https://milessummit.com" target="_blank" rel="noopener">Miles Summit ↗</a></div>
+    </div>
+    <div><h4>Rent</h4><a class="fl" href="parasole-rentals.html">Available Rentals</a><a class="fl" href="parasole-apply.html">How to Apply</a><a class="fl" href="parasole-apply.html">Prequalify</a><a class="fl" href="http://Parasoleproperties.propertymanage.biz" target="_blank" rel="noopener">Resident Login ↗</a></div>
+    <div><h4>Owners</h4><a class="fl" href="parasole-owners.html">Management</a><a class="fl" href="parasole-owners.html">Request a Quote</a><a class="fl" href="http://Parasoleproperties.propertymanage.biz" target="_blank" rel="noopener">Owner Login ↗</a></div>
+    <div><h4>Company</h4><a class="fl" href="parasole-about.html">About</a><a class="fl" href="parasole-contact.html">Contact</a><a class="fl" href="https://milessummit.com" target="_blank" rel="noopener">Miles Summit ↗</a></div>
+  </div>
+  <div class="copy"><span>© Parasole Properties. All rights reserved.</span><span>parasoleproperties.com</span></div>
+</div></footer>
+
+<div class="lb" id="lb"><span class="x">&times;</span><span class="nav-a prev"><svg><use href="#i-l"/></svg></span><img alt=""><span class="nav-a next"><svg><use href="#i-r"/></svg></span></div>
+
+<script src="parasole-data.js"></script>
+<script src="parasole-site.js"></script>
+<script>
+(function(){
+  var list=window.PARASOLE_RENTALS||[];
+  var id=new URLSearchParams(location.search).get('id');
+  var r=list.filter(function(x){return x.id===id;})[0]||list[0];
+  document.title=r.addr+" — Parasole Properties";
+  var photos=[r.img]; // one real photo; live site has the full set
+
+  var mainPhoto='<div class="gallery">'
+    +'<div class="main" data-lb="0"><img src="'+r.img+'" alt="'+r.addr+'"></div>'
+    +'<div class="side">'
+      +'<div class="thumb" data-lb="0"><img src="'+r.img+'" alt=""></div>'
+      +'<div class="thumb" data-lb="0"><img src="'+r.img+'" alt=""><div class="more">+ more photos<br><span style="font-weight:600;font-size:13px">on the live site</span></div></div>'
+    +'</div></div>';
+
+  var html='<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-top:22px">'
+      +'<div><p class="eyebrow" style="margin-bottom:8px"><svg width="14" height="14" style="vertical-align:-2px"><use href="#i-pin"/></svg> For rent · '+r.tag+'</p>'
+      +'<h1 style="font-size:34px;margin:0 0 4px;letter-spacing:-.02em">'+r.addr+'</h1>'
+      +'<p style="color:var(--ink3);margin:0">'+r.city+'</p></div>'
+      +'<div style="text-align:right"><div style="font-size:30px;font-weight:800;color:var(--burgundy)">'+r.price+'</div></div>'
+    +'</div>'
+    +mainPhoto
+    +'<div class="detail-cols">'
+      +'<div>'
+        +'<div class="factbar">'
+          +'<div class="f"><span class="k">Bedrooms</span><span class="v">'+r.beds+'</span></div>'
+          +'<div class="f"><span class="k">Bathrooms</span><span class="v">'+r.baths+'</span></div>'
+          +'<div class="f"><span class="k">Square feet</span><span class="v">'+r.sqft+'</span></div>'
+          +'<div class="f"><span class="k">Type</span><span class="v" style="font-size:16px">'+r.tag+'</span></div>'
+        +'</div>'
+        +'<h2 style="font-size:22px">About this home</h2>'
+        +'<p class="lead">A '+r.beds+'-bedroom '+r.tag.toLowerCase()+' in '+r.city.split(",")[0]+', part of Parasole\'s current rentals. Full description, amenities, and the complete photo set live on the listing. Want specifics? Text us and a real person will answer.</p>'
+        +'<h2 style="font-size:22px;margin-top:30px">Walkthrough video</h2>'
+        +'<div class="vid"><div class="play"><svg><use href="#i-play"/></svg></div><div>YouTube walkthrough embeds here</div><div style="font-size:12.5px;color:rgba(255,255,255,.6)">Renters can tour the whole place before booking</div></div>'
+      +'</div>'
+      +'<aside><div class="aside-card">'
+        +'<p class="p">'+r.price+'</p><p class="sm">'+r.beds+' bd · '+r.baths+' ba · '+r.tag+'</p>'
+        +'<a class="btn gold up" href="#prequalWrap">See if you prequalify</a>'
+        +'<a class="btn tx" href="#"><svg><use href="#i-txt"/></svg> Text us about this home</a>'
+        +'<a class="btn ghost" href="'+r.live+'" target="_blank" rel="noopener">View on current site ↗</a>'
+        +'<p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">Application required before showing, so we can pre-approve you.</p>'
+      +'</div></aside>'
+    +'</div>';
+  document.getElementById('listing').innerHTML=html;
+
+  // lightbox
+  var lb=window.parasoleLightbox(photos);
+  document.querySelectorAll('[data-lb]').forEach(function(el){el.addEventListener('click',function(){lb.open(+el.getAttribute('data-lb'));});});
+
+  // prequal calc for this home
+  var need=Math.round(r.rent*40/12);
+  function money(n){return '$'+n.toLocaleString('en-US');}
+  document.getElementById('pqRent').textContent=money(r.rent);
+  document.getElementById('pqNeed').textContent=money(need)+' / mo';
+  var inc=document.getElementById('inc'), res=document.getElementById('pqResult'), book=document.getElementById('bookBtn');
+  function evaluate(){
+    var v=parseInt((inc.value||'').replace(/[^0-9]/g,''),10);
+    res.className='result';book.style.display='none';
+    if(!v){return;}
+    if(v>=need){res.classList.add('ok');res.textContent='Looks good — $'+v.toLocaleString('en-US')+'/mo meets the guideline for this home. Book a showing below.';book.style.display='inline-flex';}
+    else{res.classList.add('no');res.textContent='This home looks a bit high for $'+v.toLocaleString('en-US')+'/mo. Text us — we may have a better-fitting rental, or a co-applicant can help.';}
+  }
+  inc.addEventListener('input',evaluate);
+})();
+</script>
+</body>
+</html>

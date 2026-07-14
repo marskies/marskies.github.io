@@ -3,121 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parasole Properties — Homepage</title>
+<title>Parasole Properties — Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --burgundy:#991822; --burgundy-dk:#7a1119; --gold:#c9a227; --gold-dk:#9c7c12;
-    --ink:#242220; --ink2:#5c574f; --ink3:#8a857c; --line:#e7e0d4; --bg:#ffffff; --bg2:#f6f2ea;
-    --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-    --maxw:1200px;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .note-strip{background:var(--bg2);color:var(--ink2);font-size:12.5px;padding:9px 18px;text-align:center;border-bottom:1px solid var(--line)}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 30px}
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-  /* header */
-  .head{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
-  .head .row{display:flex;align-items:center;gap:22px;height:92px}
-  .logo{height:60px;width:auto;display:block}
-  .nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
-  .nav a{color:var(--ink2);font-size:14.5px;font-weight:700;padding:9px 12px;border-radius:8px;text-decoration:none;cursor:pointer}
-  .nav a:hover{color:var(--burgundy)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--burgundy);color:#fff;border:1px solid var(--burgundy);border-radius:8px;padding:13px 20px;font-size:14.5px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit}
-  .btn:hover{background:var(--burgundy-dk);border-color:var(--burgundy-dk)}
-  .btn svg{width:16px;height:16px}
-  .btn.gold{background:var(--gold);border-color:var(--gold);color:#2a2100}
-  .btn.gold:hover{background:var(--gold-dk);border-color:var(--gold-dk);color:#fff}
-  .btn.ghost{background:transparent;color:var(--burgundy);border-color:var(--line)}
-  .btn.on-photo{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.6);color:#fff}
-  .btn.on-photo:hover{background:rgba(255,255,255,.24)}
-  .btn.lg{padding:16px 28px;font-size:16px}
-  .btn.up{letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;font-weight:800}
-  /* color bar — text first */
-  .colorbar{background:var(--burgundy);color:#fff}
-  .colorbar .row{display:flex;align-items:center;justify-content:center;gap:34px;min-height:48px;font-size:14px;font-weight:600;flex-wrap:wrap;padding:6px 0}
-  .colorbar a{color:#fff;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
-  .colorbar a svg{width:15px;height:15px}
-  .colorbar b{font-weight:800}
-  .colorbar .lead{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:4px 13px}
-  /* hero */
-  .hero{position:relative;min-height:560px;display:flex;flex-direction:column;justify-content:center;text-align:center;color:#fff;padding:70px 0 148px}
-  .hero-bg{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#0d1830 0%,#0a1120 55%,#070b14 100%)}
-  .hero-bg:before{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;background:radial-gradient(120% 90% at 50% 120%,rgba(201,162,39,.26),rgba(153,24,34,.13) 42%,transparent 70%)}
-  .hero-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 42%,transparent,rgba(0,0,0,.45))}
-  .hero-inner{position:relative;z-index:2}
-  .eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
-  .hero .eyebrow{color:var(--gold)}
-  .hero h1{font-size:54px;line-height:1.05;letter-spacing:-.02em;font-weight:800;margin:0 auto 16px;max-width:15ch}
-  .hero p{font-size:19px;color:rgba(255,255,255,.9);margin:0 auto 28px;max-width:58ch}
-  .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .photo-chip{position:absolute;right:16px;bottom:14px;z-index:3;font-size:11px;color:rgba(255,255,255,.8);background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:5px 12px}
-  /* three cards */
-  .cards-wrap{position:relative;z-index:5}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:-88px}
-  .qcard{background:#fff;border-radius:8px;box-shadow:0 18px 44px rgba(0,0,0,.16);padding:28px}
-  .qcard h3{font-size:25px;font-weight:800;color:var(--burgundy);margin:0 0 12px;letter-spacing:-.01em}
-  .qcard .b{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
-  .qcard p{font-size:15px;color:var(--ink2);margin:0;max-width:24ch}
-  .qcard .arrow{flex:0 0 auto;width:50px;height:50px;border-radius:50%;background:var(--burgundy);color:#fff;display:grid;place-items:center;cursor:pointer}
-  .qcard .arrow:hover{background:var(--burgundy-dk)}
-  .qcard .arrow svg{width:21px;height:21px}
-  /* sections */
-  .sec{padding:76px 0}
-  .sec.warm{background:var(--bg2)}
-  h2{font-size:34px;line-height:1.12;letter-spacing:-.01em;font-weight:800;margin:0 0 14px;color:var(--ink)}
-  h2.center{text-align:center}
-  p.lead{font-size:17.5px;color:var(--ink2);margin:0 0 8px}
-  .sub-c{text-align:center;max-width:60ch;margin:0 auto 8px;color:var(--ink2);font-size:17px}
-  /* apart carousel */
-  .apart{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
-  .apart .circle{width:340px;height:340px;max-width:100%;border-radius:50%;background:var(--bg2);border:2px dashed color-mix(in srgb,var(--burgundy) 24%,var(--line));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink3);text-align:center;padding:26px;margin:0 auto}
-  .apart .circle svg{width:32px;height:32px;opacity:.5}
-  .apart .circle .pt{font-weight:700;font-size:14px;color:var(--ink2)}
-  .aslide{display:none}.aslide.on{display:block}
-  .anav{display:flex;gap:12px;margin-top:22px}
-  .anav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--burgundy);cursor:pointer;display:grid;place-items:center}
-  .anav button:hover{background:var(--bg2)}
-  .anav button svg{width:22px;height:22px}
-  /* services grid */
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
-  .svc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
-  .svc .ico{width:46px;height:46px;border-radius:12px;background:color-mix(in srgb,var(--burgundy) 9%,var(--bg));color:var(--burgundy);display:grid;place-items:center;margin-bottom:14px}
-  .svc .ico svg{width:24px;height:24px}
-  .svc h3{font-size:17px;font-weight:800;margin:0 0 6px}
-  .svc p{font-size:14.5px;color:var(--ink2);margin:0}
-  /* prequal band */
-  .band{background:var(--ink);color:#fff;border-radius:20px;padding:46px;text-align:center}
-  .band h2{color:#fff}.band p{color:rgba(255,255,255,.85);max-width:56ch;margin:0 auto 8px;font-size:17px}
-  /* owners */
-  .owners{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
-  /* areas */
-  .areas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-  .areas span{border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:14px;color:var(--ink2);font-weight:600;background:var(--bg)}
-  /* footer */
-  .foot{background:#211f1d;color:#c9c5be;padding:48px 0 28px}
-  .foot .top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
-  .foot .fbrand{color:#fff;font-weight:800;font-size:17px}
-  .foot .desc{color:#9c988f;font-size:14px;margin-top:8px;max-width:250px}
-  .foot .txt{margin-top:14px;font-size:15px}.foot .txt b{color:#fff}
-  .foot .social{display:flex;gap:8px;margin-top:12px}
-  .foot .social span{padding:7px 12px;border:1px solid #45423d;border-radius:8px;font-size:12px;color:#c9c5be;cursor:pointer}
-  .foot h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8f8b84;margin:0 0 12px}
-  .foot a{display:block;color:#c9c5be;text-decoration:none;padding:6px 0;font-size:14px;cursor:pointer}
-  .foot a:hover{color:#fff}
-  .foot .copy{border-top:1px solid #3a3733;margin-top:28px;padding-top:16px;font-size:12.5px;color:#8a867f;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#1c1b1a;color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.22s;z-index:90}
-  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-  @media (max-width:900px){.cards,.grid3,.apart,.foot .top{grid-template-columns:1fr}.cards{margin-top:-56px}.hero h1{font-size:38px}.nav{display:none}}
-</style>
+<link rel="stylesheet" href="parasole-site.css">
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-txt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v11H9l-5 4z"/></symbol>
   <symbol id="i-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></symbol>
   <symbol id="i-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></symbol>
@@ -129,19 +22,27 @@
   <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 7a4 4 0 0 1-5 5l-6 6 3 3 6-6a4 4 0 0 0 5-5l-2 2-3-1-1-3z"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
-</svg>
-<div class="note-strip">The RentAppeal look and scroll feel, rebuilt as Parasole: your logo and colors, texting first, and your rentals + prequalify flow. The dark hero is a placeholder for the nighttime Scranton photo.</div>
+</defs></svg>
+
+<div class="note-strip">Design preview — the Rent Appeal look rebuilt as Parasole: your logo, colors, texting first, rentals + prequalify. The dark hero is a placeholder for the nighttime downtown Scranton photo. The menu links to the other pages.</div>
 
 <header class="head"><div class="container"><div class="row">
-  <img class="logo" id="logo" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties">
-  <nav class="nav"><a>Home</a><a>Available Rentals</a><a>How to Apply</a><a>Owners</a><a>About</a><a>Contact</a></nav>
-  <a class="btn tx"><svg><use href="#i-txt"/></svg> Text us</a>
+  <a href="parasole-rentappeal.html"><img class="logo" id="logo" src="https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png" alt="Parasole Properties"></a>
+  <nav class="nav">
+    <a class="active" href="parasole-rentappeal.html">Home</a>
+    <a href="parasole-rentals.html">Available Rentals</a>
+    <a href="parasole-apply.html">How to Apply</a>
+    <a href="parasole-owners.html">Owners</a>
+    <a href="parasole-about.html">About</a>
+    <a href="parasole-contact.html">Contact</a>
+  </nav>
+  <a class="btn tx" href="#"><svg><use href="#i-txt"/></svg> Text us</a>
 </div></div></header>
 
 <div class="colorbar"><div class="container"><div class="row">
-  <a class="lead tx"><svg><use href="#i-txt"/></svg> Text us: <b>(570) 343-2597</b> · fastest</a>
+  <a class="lead tx" href="#"><svg><use href="#i-txt"/></svg> Text us: <b>(570) 343-2597</b> · fastest</a>
   <span>Or call <b>(570) 343-2597</b></span>
-  <a class="mail">Email Us</a>
+  <a href="parasole-contact.html">Email Us</a>
 </div></div></div>
 
 <section class="hero">
@@ -150,30 +51,30 @@
     <p class="eyebrow">Rentals in Scranton &amp; Wilkes-Barre</p>
     <h1>Find your next place to rent in NEPA.</h1>
     <p>Family-run property management for over 20 years. Browse what's available, see if you prequalify, and book a showing, with a real person a text away.</p>
-    <div class="cta"><a class="btn gold lg up">View available rentals</a><a class="btn on-photo lg tx"><svg><use href="#i-txt"/></svg> Text us a question</a></div>
+    <div class="cta"><a class="btn gold lg up" href="parasole-rentals.html">View available rentals</a><a class="btn on-photo lg tx" href="#"><svg><use href="#i-txt"/></svg> Text us a question</a></div>
   </div></div>
   <span class="photo-chip">Nighttime downtown Scranton photo goes here</span>
 </section>
 
 <div class="cards-wrap"><div class="container"><div class="cards">
-  <div class="qcard reveal"><h3>Browse Rentals</h3><div class="b"><p>See our current homes and apartments for rent.</p><span class="arrow lk"><svg><use href="#i-ar"/></svg></span></div></div>
-  <div class="qcard reveal"><h3>See if You Prequalify</h3><div class="b"><p>Answer a few quick questions and book a showing.</p><span class="arrow lk"><svg><use href="#i-ar"/></svg></span></div></div>
-  <div class="qcard reveal"><h3>Own a Property?</h3><div class="b"><p>List it with us and let our local team manage it.</p><span class="arrow lk"><svg><use href="#i-ar"/></svg></span></div></div>
+  <a class="qcard reveal" href="parasole-rentals.html"><h3>Browse Rentals</h3><div class="b"><p>See our current homes and apartments for rent.</p><span class="arrow"><svg><use href="#i-ar"/></svg></span></div></a>
+  <a class="qcard reveal" href="parasole-apply.html"><h3>See if You Prequalify</h3><div class="b"><p>Answer a few quick questions and book a showing.</p><span class="arrow"><svg><use href="#i-ar"/></svg></span></div></a>
+  <a class="qcard reveal" href="parasole-owners.html"><h3>Own a Property?</h3><div class="b"><p>List it with us and let our local team manage it.</p><span class="arrow"><svg><use href="#i-ar"/></svg></span></div></a>
 </div></div></div>
 
 <section class="sec">
   <div class="container reveal">
     <div class="apart">
       <div>
-        <div class="aslide on"><div class="circle"><svg><use href="#i-pic"/></svg><span class="pt">Photo — a real person helping a renter</span></div></div>
-        <div class="aslide"><div class="circle"><svg><use href="#i-pic"/></svg><span class="pt">Photo — a Scranton neighborhood</span></div></div>
-        <div class="aslide"><div class="circle"><svg><use href="#i-pic"/></svg><span class="pt">Photo — the Parasole family</span></div></div>
+        <div class="aslide on" data-idx="0"><div class="circle"><svg><use href="#i-pic"/></svg><span class="pt">Photo — a real person helping a renter</span></div></div>
+        <div class="aslide" data-idx="1"><div class="circle"><svg><use href="#i-pic"/></svg><span class="pt">Photo — a Scranton neighborhood</span></div></div>
+        <div class="aslide" data-idx="2"><div class="circle"><svg><use href="#i-pic"/></svg><span class="pt">Photo — the Parasole family</span></div></div>
       </div>
       <div>
         <p class="eyebrow">What sets us apart</p>
-        <div class="aslide on"><h2>A real person, one text away.</h2><p class="lead">No phone tree, no waiting. Text us and reach someone who actually knows your rental. Texting is the fastest way to get an answer, and it is how most of our residents like to reach us.</p></div>
-        <div class="aslide"><h2>Local, and here for the long run.</h2><p class="lead">We know these neighborhoods because we live here. For over 20 years we have helped families across Scranton, Wilkes-Barre, and the surrounding towns find a place to call home.</p></div>
-        <div class="aslide"><h2>Simple, clear renting.</h2><p class="lead">From your first text to move-in day, we keep it straightforward. See a home, check if you prequalify, book a showing, and apply, without the runaround.</p></div>
+        <div class="aslide on" data-idx="0"><h2>A real person, one text away.</h2><p class="lead">No phone tree, no waiting. Text us and reach someone who actually knows your rental. Texting is the fastest way to get an answer, and it's how most of our residents like to reach us.</p></div>
+        <div class="aslide" data-idx="1"><h2>Local, and here for the long run.</h2><p class="lead">We know these neighborhoods because we live here. For over 20 years we've helped families across Scranton, Wilkes-Barre, and the surrounding area find a place to call home.</p></div>
+        <div class="aslide" data-idx="2"><h2>Simple, clear renting.</h2><p class="lead">From your first text to move-in day, we keep it straightforward. See a home, check if you prequalify, book a showing, and apply, without the runaround.</p></div>
         <div class="anav"><button id="aprev" aria-label="Previous"><svg><use href="#i-l"/></svg></button><button id="anext" aria-label="Next"><svg><use href="#i-r"/></svg></button></div>
       </div>
     </div>
@@ -185,12 +86,12 @@
     <p class="eyebrow" style="text-align:center">What we do</p>
     <h2 class="center">Everything renting and management, in one place.</h2>
     <div class="grid3">
-      <div class="svc"><div class="ico"><svg><use href="#i-home"/></svg></div><h3>Available rentals</h3><p>Browse current homes and apartments across NEPA.</p></div>
-      <div class="svc"><div class="ico"><svg><use href="#i-doc"/></svg></div><h3>Prequalify &amp; book</h3><p>Answer a few questions and schedule a showing online.</p></div>
-      <div class="svc"><div class="ico"><svg><use href="#i-txt"/></svg></div><h3>Text-first support</h3><p>Questions, maintenance, or rent, we are a text away.</p></div>
-      <div class="svc"><div class="ico"><svg><use href="#i-key"/></svg></div><h3>Full-service management</h3><p>Leasing, screening, and day-to-day care for owners.</p></div>
-      <div class="svc"><div class="ico"><svg><use href="#i-wrench"/></svg></div><h3>Maintenance</h3><p>Repairs handled promptly by people you can trust.</p></div>
-      <div class="svc"><div class="ico"><svg><use href="#i-chart"/></svg></div><h3>Rent &amp; reporting</h3><p>On-time rent and clear statements, every month.</p></div>
+      <a class="svc" href="parasole-rentals.html" style="text-decoration:none;color:inherit"><div class="ico"><svg><use href="#i-home"/></svg></div><h3>Available rentals</h3><p>Browse current homes and apartments across NEPA.</p></a>
+      <a class="svc" href="parasole-apply.html" style="text-decoration:none;color:inherit"><div class="ico"><svg><use href="#i-doc"/></svg></div><h3>Prequalify &amp; book</h3><p>Answer a few questions and schedule a showing online.</p></a>
+      <a class="svc tx" href="#" style="text-decoration:none;color:inherit"><div class="ico"><svg><use href="#i-txt"/></svg></div><h3>Text-first support</h3><p>Questions, maintenance, or rent, we're a text away.</p></a>
+      <a class="svc" href="parasole-owners.html" style="text-decoration:none;color:inherit"><div class="ico"><svg><use href="#i-key"/></svg></div><h3>Full-service management</h3><p>Leasing, screening, and day-to-day care for owners.</p></a>
+      <a class="svc" href="parasole-owners.html" style="text-decoration:none;color:inherit"><div class="ico"><svg><use href="#i-wrench"/></svg></div><h3>Maintenance</h3><p>Repairs handled promptly by people you can trust.</p></a>
+      <a class="svc" href="parasole-owners.html" style="text-decoration:none;color:inherit"><div class="ico"><svg><use href="#i-chart"/></svg></div><h3>Rent &amp; reporting</h3><p>On-time rent and clear statements, every month.</p></a>
     </div>
   </div>
 </section>
@@ -200,14 +101,14 @@
     <p class="eyebrow" style="color:var(--gold)">Found a home you love?</p>
     <h2>See if you prequalify, then book a showing.</h2>
     <p>Answer a few quick questions right on the listing. If you prequalify, pick a time to tour, all online. Prefer to ask first? Just text us.</p>
-    <div class="cta" style="display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap"><a class="btn gold lg up">See if you prequalify</a><a class="btn on-photo lg tx" style="border-color:rgba(255,255,255,.5)"><svg><use href="#i-txt"/></svg> Text us</a></div>
+    <div class="cta" style="display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap"><a class="btn gold lg up" href="parasole-apply.html">See if you prequalify</a><a class="btn on-photo lg tx" href="#" style="border-color:rgba(255,255,255,.5)"><svg><use href="#i-txt"/></svg> Text us</a></div>
   </div></div>
 </section>
 
 <section class="sec warm">
   <div class="container reveal"><div class="owners">
     <div style="max-width:36ch"><p class="eyebrow">For property owners</p><h2>Own a property? Let us manage it.</h2><p class="lead">Full-service management from a local team, so you don't have to think about it.</p></div>
-    <a class="btn lg up">Request a management quote</a>
+    <a class="btn lg up" href="parasole-owners.html">Request a management quote</a>
   </div></div>
 </section>
 
@@ -225,44 +126,14 @@
       <div class="fbrand">PARASOLE PROPERTIES</div>
       <div class="desc">Family-run property management in Northeastern Pennsylvania.</div>
       <div class="txt"><span style="font-size:11px;letter-spacing:.06em">TEXT US (FASTEST)</span> <b>(570) 343-2597</b></div>
-      <div class="social"><span>Facebook</span><span>Miles Summit ↗</span></div>
+      <div class="social"><a href="https://www.facebook.com/ParasoleProperties" target="_blank" rel="noopener">Facebook</a><a href="https://milessummit.com" target="_blank" rel="noopener">Miles Summit ↗</a></div>
     </div>
-    <div><h4>Rent</h4><a>Available Rentals</a><a>How to Apply</a><a>Prequalify</a><a>Resident Login ↗</a></div>
-    <div><h4>Owners</h4><a>Management</a><a>Request a Quote</a><a>Owner Login ↗</a></div>
-    <div><h4>Company</h4><a>About</a><a>Contact</a><a>Miles Summit ↗</a></div>
+    <div><h4>Rent</h4><a class="fl" href="parasole-rentals.html">Available Rentals</a><a class="fl" href="parasole-apply.html">How to Apply</a><a class="fl" href="parasole-apply.html">Prequalify</a><a class="fl" href="http://Parasoleproperties.propertymanage.biz" target="_blank" rel="noopener">Resident Login ↗</a></div>
+    <div><h4>Owners</h4><a class="fl" href="parasole-owners.html">Management</a><a class="fl" href="parasole-owners.html">Request a Quote</a><a class="fl" href="http://Parasoleproperties.propertymanage.biz" target="_blank" rel="noopener">Owner Login ↗</a></div>
+    <div><h4>Company</h4><a class="fl" href="parasole-about.html">About</a><a class="fl" href="parasole-contact.html">Contact</a><a class="fl" href="https://milessummit.com" target="_blank" rel="noopener">Miles Summit ↗</a></div>
   </div>
   <div class="copy"><span>© Parasole Properties. All rights reserved.</span><span>parasoleproperties.com</span></div>
 </div></footer>
-<div class="toast" id="toast"></div>
-<script>
-  var toast=document.getElementById('toast'),tt;
-  function ping(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3000);}
-  document.querySelectorAll('.tx').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();ping('On the live site this opens your phone to text Parasole at (570) 343-2597 — the fastest way to reach them.');});});
-  document.querySelectorAll('.lk,.mail,.social span,.nav a,.btn:not(.tx),.foot a').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();ping('Static preview. On the live site this links through to its page.');});});
-  // scroll-reveal (smooth fade-up as sections enter view)
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  // "what sets us apart" carousel
-  (function(){
-    var slides=document.querySelectorAll('.aslide'),per=3,i=0;
-    function show(n){i=(n+per)%per;document.querySelectorAll('.aslide').forEach(function(s,k){s.classList.toggle('on',k%per===i);});}
-    document.getElementById('aprev').addEventListener('click',function(){show(i-1);});
-    document.getElementById('anext').addEventListener('click',function(){show(i+1);});
-  })();
-  // transparent-background logo (flood-fill white from edges)
-  (function(){
-    var img=new Image();img.crossOrigin='anonymous';
-    img.onload=function(){
-      var w=img.naturalWidth,h=img.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;
-      var ctx=c.getContext('2d');ctx.drawImage(img,0,0);var id;try{id=ctx.getImageData(0,0,w,h);}catch(e){return;}var d=id.data;
-      function white(k){return d[k]>233&&d[k+1]>228&&d[k+2]>222;}
-      var st=[];function push(x,y){if(x<0||y<0||x>=w||y>=h)return;var k=(y*w+x)*4;if(d[k+3]===0)return;if(!white(k))return;st.push(y*w+x);}
-      for(var x=0;x<w;x++){push(x,0);push(x,h-1);}for(var y=0;y<h;y++){push(0,y);push(w-1,y);}
-      while(st.length){var p=st.pop(),k=p*4;if(d[k+3]===0||!white(k))continue;d[k+3]=0;var px=p%w,py=(p-px)/w;push(px+1,py);push(px-1,py);push(px,py+1);push(px,py-1);}
-      ctx.putImageData(id,0,0);var el=document.getElementById('logo');if(el)el.src=c.toDataURL('image/png');
-    };
-    img.src='https://parasoleproperties.com/wp-content/uploads/2015/01/logo1.png';
-  })();
-</script>
+<script src="parasole-site.js"></script>
 </body>
 </html>
