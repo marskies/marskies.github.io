@@ -51,15 +51,11 @@
   <div class="container reveal">
     <p class="eyebrow" style="text-align:center">Before you tour</p>
     <h2 class="center">See if you prequalify for this home.</h2>
-    <p class="sub-c">We use a simple income guideline: monthly rent × 40 ÷ 12. Enter your household's gross monthly income and we'll show you right away.</p>
+    <p class="sub-c">Enter your household's gross monthly income and we'll let you know right away if this home is a fit.</p>
     <div class="flow" style="margin-top:26px">
       <div class="step">
         <div class="n"><span class="dot">1</span> This home</div>
-        <div class="calc">
-          <div class="row2"><span>Monthly rent</span><b id="pqRent">—</b></div>
-          <div class="row2"><span>Income guideline (rent × 40 ÷ 12)</span><span class="big" id="pqNeed">—</span></div>
-        </div>
-        <div style="margin-top:16px">
+        <div style="margin-top:4px">
           <label class="fld" for="inc">Your household gross monthly income</label>
           <input class="txt" id="inc" type="text" inputmode="numeric" placeholder="e.g. 4000">
         </div>
@@ -68,7 +64,7 @@
           <a class="btn gold up" id="bookBtn" href="#" data-demo="On the live site this opens the showing calendar to book a tour.">Book a showing</a>
           <a class="btn ghost tx" href="#"><svg><use href="#i-txt"/></svg> Text a question</a>
         </div>
-        <p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">This is a quick guideline only, not a decision. A full application with proof of income and a background/credit check confirms approval.</p>
+        <p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">This is a quick check only, not a decision. A full application with proof of income and a background/credit check confirms approval.</p>
       </div>
     </div>
   </div>
@@ -144,16 +140,13 @@
 
   // prequal calc for this home
   var need=Math.round(r.rent*40/12);
-  function money(n){return '$'+n.toLocaleString('en-US');}
-  document.getElementById('pqRent').textContent=money(r.rent);
-  document.getElementById('pqNeed').textContent=money(need)+' / mo';
   var inc=document.getElementById('inc'), res=document.getElementById('pqResult'), book=document.getElementById('bookBtn');
   function evaluate(){
     var v=parseInt((inc.value||'').replace(/[^0-9]/g,''),10);
     res.className='result';book.style.display='none';
     if(!v){return;}
-    if(v>=need){res.classList.add('ok');res.textContent='Looks good — $'+v.toLocaleString('en-US')+'/mo meets the guideline for this home. Book a showing below.';book.style.display='inline-flex';}
-    else{res.classList.add('no');res.textContent='This home looks a bit high for $'+v.toLocaleString('en-US')+'/mo. Text us — we may have a better-fitting rental, or a co-applicant can help.';}
+    if(v>=need){res.classList.add('ok');res.textContent='Looks good — this home fits your income. Book a showing below.';book.style.display='inline-flex';}
+    else{res.classList.add('no');res.textContent='This home may be above your range. Text us — we may have a better-fitting rental, or a co-applicant can help.';}
   }
   inc.addEventListener('input',evaluate);
 })();
