@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<title>Yuumi-Chan: Rent is Due! · Marina DiPonio</title>
+<title>Foreshore · Marina DiPonio</title>
 <style>
 :root{
   --bg-deep:#0a1f24;
@@ -230,10 +230,6 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 .title-links a:hover{background:color-mix(in srgb,var(--copper) 18%,transparent);border-color:var(--copper)}
 .title-links a .arr{font-size:11px;opacity:.8}
 
-.title-row--stack{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:18px}
-.title-row--stack .title-links{margin-top:0}
-.title-row--stack .case-title{line-height:1.12;margin-bottom:0}
-
 /* ===== LOCK-PAGE PATCH: no page scroll / no overscroll bounce ===== */
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 </style>
@@ -285,10 +281,10 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
       <div class="t">Cosmic Catch</div>
       <div class="tags"><span>UI/UX</span></div>
     </a>
-    <div class="rail-item active" aria-current="page">
+    <a class="rail-item" href="yuumi-chan.html">
       <div class="t">Yuumi-Chan: Rent is Due!</div>
       <div class="tags"><span>Research</span></div>
-    </div>
+    </a>
     <a class="rail-item" href="startea.html">
       <div class="t">StarTea</div>
       <div class="tags"><span>UI/UX</span><span>Research</span></div>
@@ -302,10 +298,10 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
       <div class="tags"></div>
     </a>
     <div class="rail-cat">UI / UX</div>
-    <a class="rail-item" href="foreshore.html">
+    <div class="rail-item active" aria-current="page">
       <div class="t">Foreshore</div>
       <div class="tags"><span>UI/UX</span></div>
-    </a>
+    </div>
     <a class="rail-item" href="nutrition-app.html">
       <div class="t">Nutrition Tracking App</div>
       <div class="tags"><span>PM</span></div>
@@ -317,71 +313,100 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
   </aside>
   <div class="pane case">
     <div class="case-hero">
-      <img src="images/yuumi-gameplay.png" alt="Yuumi-Chan gameplay" />
-      <span class="badge">★ 25-Person Team · Shipped & Covered</span>
+      <img src="images/foreshore-onboarding-welcome.jpeg" alt="Foreshore onboarding welcome screen reading &quot;Know where your money went.&quot;" />
+      <span class="badge">≈ Self-Hosted · Solo Build</span>
     </div>
     <div class="case-body">
-      <div class="title-row title-row--stack"><h2 class="case-title">Yuumi-Chan: <em>Rent is Due!</em></h2><div class="title-links"><a href="https://krillshot-games.itch.io/yuumi-chan-rent-is-due" target="_blank" rel="noopener">Play Prototype <span class="arr">↗</span></a><a href="https://www.behance.net/gallery/247783791/Yuumi-Chan-Rent-is-Due" target="_blank" rel="noopener">Behance <span class="arr">↗</span></a></div></div>
-      <p class="case-sub">Magical girl life simulation · 25-Person Team · Producer</p>
-      <div class="chapters" data-chapters="yc">
-        <button class="chapter-tab on" data-target="yc-overview">Overview</button>
-        <button class="chapter-tab" data-target="yc-challenge">The Challenge</button>
-        <button class="chapter-tab" data-target="yc-process">Process</button>
-        <button class="chapter-tab" data-target="yc-outcome">Outcome</button>
+      <div class="title-row"><h2 class="case-title">Fore<em>shore</em></h2></div>
+      <p class="case-sub">A self-hosted personal budgeting app · Designed &amp; built end-to-end · Solo</p>
+      <div class="chapters" data-chapters="fs">
+        <button class="chapter-tab on" data-target="fs-overview">Overview</button>
+        <button class="chapter-tab" data-target="fs-design">Design</button>
+        <button class="chapter-tab" data-target="fs-engineering">Engineering</button>
+        <button class="chapter-tab" data-target="fs-hosting">Self-Hosting</button>
+        <button class="chapter-tab" data-target="fs-outcome">Outcome</button>
       </div>
-      <div class="chapter-body on" id="yc-overview">
-        <div class="ab-section"><span class="ab-lbl">The Game</span><p>Yuumi-Chan: Rent is Due! is a magical girl life simulation game where players balance the demands of saving the world with the very real pressure of making rent. As Producer, I led a 25-person team through four months of development, managing three departments and wearing whatever hat the team needed on any given day.</p></div>
-        <div class="ab-section"><span class="ab-lbl">The Role</span><p>The game launched on Itch.io in December 2025 and is now available on Steam. Within the first 10 days of the Itch.io release—with zero advertising—we achieved organic traction that validated our concept and execution.</p></div>
-        <div class="ab-section"><span class="ab-lbl">The Scale</span><p>The game caught the attention of content creators organically, including a YouTuber who played and uploaded the full game in Japanese—reaching an audience we never expected to connect with.</p></div>
-      </div>
-      <div class="chapter-body" id="yc-challenge">
-        <div class="ab-section"><span class="ab-lbl">Inexperienced Leadership</span><p>This was the largest team most of us had ever worked on, and that inexperience created real friction. Department leads were learning how to lead at the same time they were learning the project itself. Getting alignment across 25 people—many of whom had different visions for what the game should be—tested every communication skill I had.</p></div>
+      <div class="chapter-body on" id="fs-overview">
+        <div class="ab-section"><span class="ab-lbl">The Idea</span><p>Foreshore replaces the budgeting spreadsheet with something calmer and more honest. Charges arrive from your bank, you sort each one into a category with a tap, and animated water-fill tiles show how full each budget is. It has a coastal aesthetic, a dark-mode-first interface, and a design language built around one rule: the app never pretends to know more than it does.</p></div>
         <figure>
-          <img src="images/yuumi-team.png" alt="Team collaboration" />
-          <figcaption>Team collaboration</figcaption>
+          <img src="images/foreshore-sort.jpeg" alt="The Sort screen — animated water-fill tiles showing how full each spending category is for the month." />
+          <figcaption>Sort · water-fill budget tiles</figcaption>
         </figure>
-
-        <div class="ab-section"><span class="ab-lbl">Communication Gaps</span><p>The core challenge wasn't technical; it was human. How do you get a team of new leaders to execute on decisions they didn't all agree with? How do you maintain momentum when the scope keeps shifting? I worked closely with our executive producer, Nick Heitzman, to navigate these dynamics, but much of it came down to showing up consistently, running structured standups, and being present in every department meeting.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Why I Built It</span><p>I wanted a budgeting tool I fully owned — my data on my hardware, nothing sold to a third party, no subscription, no ads. So I built the whole stack: the design, the app, and the server it lives on.</p></div>
       </div>
-      <div class="chapter-body" id="yc-process">
-        <div class="ab-section"><span class="ab-lbl">Weekly Cadence</span><p>My workflow centered on weekly standups with all 8 leads, where we reviewed progress, flagged blockers, and aligned on priorities for the coming week. I participated in every department meeting—art, design, programming—not to micromanage, but to understand where I could help and to catch disconnects before they became crises.</p></div>
+      <div class="chapter-body" id="fs-design">
+        <div class="ab-section"><span class="ab-lbl">Interaction Model</span><p>The whole app turns on a single gesture: tap a charge, drop it in a category. Around that sit water-fill budget tiles, a Goals screen with savings targets, an Overview with spending breakdowns, and a Journal.</p></div>
         <figure>
-          <img src="images/yuumi-playtest.png" alt="Playtest feedback" />
-          <figcaption>Playtest feedback</figcaption>
+          <img src="images/foreshore-budget.jpeg" alt="Budget screen — each category set to a Hard limit, a Soft target, or tracking-only None." />
+          <figcaption>Budget · hard, soft, and tracked-only limits</figcaption>
         </figure>
-
-        <div class="ab-section"><span class="ab-lbl">Servant Leadership</span><p>Playtesting drove our final polish decisions. We collected feedback from 11 testers and prioritized fixes based on player impact. One example: testers reported confusion about the $7,000 rent due at the end of the week. The information existed in the pause menu, but players weren't seeing it in time. We added explicit dialogue early in the game to set expectations—a small change that significantly improved the experience.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Budgets That Don't Nag</span><p>Every category can be a <strong>Hard</strong> limit that flags you when you cross it, a <strong>Soft</strong> target that stays quiet, or <strong>None</strong> that just tracks spending and stays out of the math. The point is to plan without being scolded.</p></div>
         <figure>
-          <img src="images/yuumi-presentation.png" alt="Team presentation" />
-          <figcaption>Team presentation</figcaption>
+          <img src="images/foreshore-goals.jpeg" alt="Goals screen — a savings goal showing progress toward its target." />
+          <figcaption>Goals · saving toward a target</figcaption>
         </figure>
-
+        <div class="ab-section"><span class="ab-lbl">Onboarding in Six Screens</span><p>A new person goes from zero to a working budget in six screens — pick a few categories, say what you expect to earn, and choose how charges should arrive.</p></div>
+        <div class="compare">
+          <figure><img src="images/foreshore-onboarding-categories.jpeg" alt="Onboarding — choosing spending categories from a set of suggestions." /><figcaption>Pick categories</figcaption></figure>
+          <figure><img src="images/foreshore-onboarding-income.jpeg" alt="Onboarding — entering expected income, which the app plans against." /><figcaption>Expected income</figcaption></figure>
+        </div>
+        <div class="ab-section"><span class="ab-lbl">A Coastal Design System</span><p>Everything is built on a custom design system in a coastal palette — teal, foam, and sand — dark-mode-first, with colour-coded categories that flow straight into the Sort grid.</p></div>
+        <figure>
+          <img src="images/foreshore-settings-1.jpeg" alt="Settings — the category list, whose colours drive the Sort grid ordering." />
+          <figcaption>Category system · colour drives the grid</figcaption>
+        </figure>
       </div>
-      <div class="chapter-body" id="yc-outcome">
-        <div class="ab-section"><span class="ab-lbl">We Shipped</span><p>I tried to be everything this team needed—flexible, supportive, decisive when required. And we shipped. The game exists, people are playing it, YouTubers are covering it, and it's now on Steam. That's a win.</p></div>
-        <div class="ab-section"><span class="ab-lbl">Producer As Glue</span><p>I also learned a lesson that no amount of planning prepares you for: not every problem is a process problem. Some friction comes down to personalities, and you can do everything right—raise concerns early, communicate clearly, stay open—and still not be able to bring everyone into alignment. What I took away was knowing the difference: when to invest more effort in working something out, and when to accept that a dynamic is outside my control and focus my energy on protecting the rest of the team's momentum and morale.</p></div>
-        <div class="ab-section"><span class="ab-lbl">Lessons</span><p>The flip side: I now know what it takes to ship a game with a large team. I know how to run standups that actually move projects forward, how to translate playtest data into action items, and how to keep 25 people pointed in roughly the same direction. Next time, I'll be faster to protect the team from dysfunction—because protecting the team is part of the job.</p></div>
+      <div class="chapter-body" id="fs-engineering">
+        <div class="ab-section"><span class="ab-lbl">A Strict Commit Model</span><p>The backend is Node and Express with one firm rule: a write only counts once it's confirmed synced. No phantom saves. It's built on top of <strong>Actual Budget's</strong> sync engine, so the underlying data is stored encrypted.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Read-Only by Design</span><p>Bank sync is optional and one-directional. Through <strong>SimpleFin</strong>, Foreshore can observe charges but can <strong>never move money</strong> — and it never sees your bank password.</p></div>
+        <figure>
+          <img src="images/foreshore-onboarding-bank.jpeg" alt="Onboarding — optional read-only bank connection via SimpleFin; the app never sees your password and can never move money." />
+          <figcaption>Optional read-only bank sync</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Honest About What It Knows</span><p>When money is still syncing, the app says so rather than showing a fake number. A small deposit you didn't plan for is surfaced as a windfall — something to save on purpose — instead of being quietly absorbed.</p></div>
+        <figure>
+          <img src="images/foreshore-income.jpeg" alt="Budget screen — a small unplanned deposit surfaced as a windfall to save before you notice it." />
+          <figcaption>Windfalls, surfaced not hidden</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Zero Third-Party Calls</span><p>Fonts are self-hosted and the app makes exactly one outbound connection — and only when the user opts into bank sync. The whole thing is containerized with Docker so it can run isolated instances.</p></div>
+      </div>
+      <div class="chapter-body" id="fs-hosting">
+        <div class="ab-section"><span class="ab-lbl">From Dead PC to Home Server</span><p>The part I'm proudest of: I took a dead desktop, installed Linux on it, and turned it into a private home server — reachable only over a secure mesh network, with no exposure to the public internet.</p></div>
+        <figure>
+          <img src="images/foreshore-settings-2.jpeg" alt="Settings — read-only bank connection and a self-hosted server shown as reachable." />
+          <figcaption>Your data, on your own server</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Built to Survive</span><p>I made it survive power cuts unattended, run isolated instances for different people, and connect to real banks read-only. It's a server I don't have to babysit.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Honest States Everywhere</span><p>The same honesty runs through the failure states: a read-only mode, a calm "can't reach your ledger" screen, and loading states designed so the app never lies about what it knows.</p></div>
+        <figure>
+          <img src="images/foreshore-history.jpeg" alt="Overview — an honest history that shows the month is still open rather than inventing a total." />
+          <figcaption>Overview · it won't invent a total</figcaption>
+        </figure>
+      </div>
+      <div class="chapter-body" id="fs-outcome">
+        <div class="ab-section"><span class="ab-lbl">What It Became</span><p>It went from a sketch of a water-fill grid to a working app pulling real transactions on my phone — my data, my hardware, no subscription, no ads. I shipped it for friends and family to use.</p></div>
+        <div class="ab-section"><span class="ab-lbl">What It Taught Me</span><p>Foreshore pulled together product and UX design, a design system, front-end engineering, a Node backend, Docker, Linux server administration, networking, working with financial APIs, and a lot of careful debugging on real hardware — end to end, by one person.</p></div>
       </div>
     </div>
   </div>
   <aside class="side-stack">
     <div class="pane stack-card">
       <h4>Quick Stats</h4>
-      <div class="stat-row"><span class="k">Role</span><span class="v">Producer</span></div>
-      <div class="stat-row"><span class="k">Timeline</span><span class="v">4 Months</span></div>
-      <div class="stat-row"><span class="k">Team</span><span class="v">25 Members · 8 Leads</span></div>
-      <div class="stat-row"><span class="k">Reception</span><span class="v">YouTube Coverage</span></div>
+      <div class="stat-row"><span class="k">Role</span><span class="v">Designer &amp; Engineer</span></div>
+      <div class="stat-row"><span class="k">Scope</span><span class="v">Design → Backend → Server</span></div>
+      <div class="stat-row"><span class="k">Team</span><span class="v">Solo</span></div>
+      <div class="stat-row"><span class="k">Type</span><span class="v">Self-Hosted Web App</span></div>
     </div>
     <div class="pane stack-card">
       <h4>Methods</h4>
       <div class="tool-chips">
-        <span>Producer Standups</span><span>Cross-Department Sync</span><span>Leadership Coaching</span><span>Scope Triage</span><span>Playtesting</span>
+        <span>Interaction Design</span><span>Design System</span><span>Honest-State Design</span><span>Onboarding Flow</span><span>Self-Hosting</span>
       </div>
     </div>
     <div class="pane stack-card">
       <h4>Tools</h4>
       <div class="tool-chips">
-        <span>Unity</span><span>Miro</span><span>Canva</span><span>Discord</span>
+        <span>JavaScript</span><span>Node</span><span>Express</span><span>Actual Budget</span><span>SQLite</span><span>Docker</span><span>Ubuntu Server</span><span>Tailscale</span><span>SimpleFin</span>
       </div>
     </div>
   </aside>

@@ -2,6 +2,21 @@
 // Update this file to update project info across all category pages
 
 const PROJECTS = {
+    "foreshore": {
+        id: "foreshore",
+        title: "Foreshore",
+        subtitle: "Self-Hosted Budgeting App",
+        roles: ["uiux"],
+        timeline: "Solo Project",
+        teamSize: "Solo",
+        tools: ["Node", "Express", "Docker", "Tailscale", "SimpleFin"],
+        links: {},
+        thumbnail: "images/foreshore-sort.jpeg",
+        roleDescriptions: {
+            uiux: "Designed and built a self-hosted personal budgeting app end-to-end \u2014 interaction model, a coastal design system, honest failure states, a Node/Express backend on Actual Budget's sync engine, read-only bank sync via SimpleFin, and a Dockerized home server reachable only over a private mesh network."
+        }
+    },
+
     "tick-tock-trivia": {
         id: "tick-tock-trivia",
         title: "Tick Tock Trivia",
