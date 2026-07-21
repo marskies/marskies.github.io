@@ -17,8 +17,8 @@ img{max-width:100%}
 
 /* header */
 .head{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
-.head .row{display:flex;align-items:center;gap:22px;height:92px}
-.logo{height:60px;width:auto;display:block}
+.head .row{display:flex;align-items:center;gap:22px;height:112px}
+.logo{height:90px;width:auto;display:block}
 .nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
 .nav a{color:var(--ink2);font-size:14.5px;font-weight:700;padding:9px 12px;border-radius:8px;text-decoration:none;cursor:pointer}
 .nav a:hover{color:var(--burgundy)}
@@ -47,7 +47,7 @@ img{max-width:100%}
 .colorbar .lead{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:4px 13px}
 
 /* hero (home) */
-.hero{position:relative;min-height:560px;display:flex;flex-direction:column;justify-content:center;text-align:center;color:#fff;padding:70px 0 148px}
+.hero{position:relative;min-height:560px;display:flex;flex-direction:column;justify-content:center;text-align:center;color:#fff;padding:80px 0 250px}
 .hero-bg{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#0d1830 0%,#0a1120 55%,#070b14 100%)}
 .hero-bg:before{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;background:radial-gradient(120% 90% at 50% 120%,rgba(201,162,39,.26),rgba(153,24,34,.13) 42%,transparent 70%)}
 .hero-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 42%,transparent,rgba(0,0,0,.45))}
@@ -70,7 +70,7 @@ img{max-width:100%}
 
 /* three cards (home) */
 .cards-wrap{position:relative;z-index:5}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:-88px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:-210px}
 .qcard{background:#fff;border-radius:8px;box-shadow:0 18px 44px rgba(0,0,0,.16);padding:28px;text-decoration:none;color:inherit;display:block}
 .qcard h3{font-size:25px;font-weight:800;color:var(--burgundy);margin:0 0 12px;letter-spacing:-.01em}
 .qcard .b{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
@@ -227,7 +227,7 @@ select:focus,input.txt:focus{outline:2px solid color-mix(in srgb,var(--burgundy)
 
 @media (max-width:900px){
   .cards,.grid3,.apart,.foot .top,.rgrid,.tgrid,.split,.contact-grid,.detail-cols,.formgrid{grid-template-columns:1fr}
-  .cards{margin-top:-56px}
+  .cards{margin-top:-150px}
   .hero h1{font-size:38px}.banner h1{font-size:32px}
   .nav{display:none}
   .gallery{grid-template-columns:1fr}.gallery .side{grid-template-rows:none;grid-template-columns:1fr 1fr}
