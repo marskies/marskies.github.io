@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parasole — Mobile Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--burgundy:#991822;--gold:#c9a227;--ink:#242220;--ink2:#5c574f;--ink3:#8a857c;--line:#e7e0d4;--bg2:#f6f2ea}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg2);color:var(--ink);min-height:100vh;padding:28px 16px 48px;text-align:center}
+  h1{font-size:24px;font-weight:800;letter-spacing:-.01em;margin:0 0 4px}
+  .sub{color:var(--ink2);font-size:14.5px;margin:0 0 20px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:640px;margin:0 auto 24px}
+  .tabs button{font-family:inherit;font-size:13.5px;font-weight:700;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer}
+  .tabs button:hover{border-color:var(--burgundy);color:var(--burgundy)}
+  .tabs button.on{background:var(--burgundy);border-color:var(--burgundy);color:#fff}
+  .phone{width:392px;max-width:100%;margin:0 auto;background:#111;border-radius:46px;padding:13px;box-shadow:0 30px 70px rgba(0,0,0,.28);position:relative}
+  .phone:before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#111;border-radius:0 0 16px 16px;z-index:3}
+  .screen{width:100%;height:812px;background:#fff;border-radius:34px;overflow:hidden;position:relative}
+  iframe{width:100%;height:100%;border:0;display:block}
+  .hint{color:var(--ink3);font-size:12.5px;margin-top:18px}
+  .open-real{display:inline-block;margin-top:12px;font-size:13.5px;font-weight:700;color:var(--burgundy);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:9px 16px;background:#fff}
+</style>
+</head>
+<body>
+  <h1>Parasole — Mobile Preview</h1>
+  <p class="sub">This is the real site at phone width. Tap a page, and tap the ☰ menu inside the phone to move around.</p>
+  <div class="tabs" id="tabs">
+    <button data-src="parasole-rentappeal.html" class="on">Home</button>
+    <button data-src="parasole-rentals.html">Available Rentals</button>
+    <button data-src="parasole-listing.html?id=320-taylor-ave-apt-3">A Rental</button>
+    <button data-src="parasole-apply.html">How to Apply</button>
+    <button data-src="parasole-owners.html">Owners</button>
+    <button data-src="parasole-about.html">About</button>
+    <button data-src="parasole-contact.html">Contact</button>
+  </div>
+  <div class="phone"><div class="screen"><iframe id="frame" src="parasole-rentappeal.html" title="Parasole mobile preview"></iframe></div></div>
+  <p class="hint">Prefer to see it on your own phone? Open the site there:</p>
+  <a class="open-real" id="openReal" href="parasole-rentappeal.html" target="_blank" rel="noopener">Open this page in a new tab ↗</a>
+<script>
+  var frame=document.getElementById('frame'), openReal=document.getElementById('openReal');
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    var src=b.getAttribute('data-src');
+    frame.src=src; openReal.href=src;
+  });
+</script>
+</body>
+</html>

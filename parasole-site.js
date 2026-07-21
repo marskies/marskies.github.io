@@ -14,6 +14,23 @@
   function onReady(fn){if(document.readyState!=='loading')fn();else document.addEventListener('DOMContentLoaded',fn);}
 
   onReady(function(){
+    // mobile hamburger menu, built from the existing nav so every page gets it
+    (function(){
+      var row=document.querySelector('.head .row'), head=document.querySelector('.head');
+      if(!row||!head||document.querySelector('.menu-btn'))return;
+      var nav=row.querySelector('.nav'), apply=null;
+      row.querySelectorAll(':scope > a.btn').forEach(function(a){apply=a;});
+      var btn=document.createElement('button');
+      btn.className='menu-btn';btn.setAttribute('aria-label','Menu');btn.setAttribute('aria-expanded','false');
+      btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+      row.appendChild(btn);
+      var panel=document.createElement('div');panel.className='mobile-menu';var h='';
+      if(nav)nav.querySelectorAll('a').forEach(function(a){h+='<a href="'+a.getAttribute('href')+'">'+a.textContent.trim()+'</a>';});
+      if(apply)h+='<a class="apply" href="'+apply.getAttribute('href')+'">'+apply.textContent.trim()+'</a>';
+      panel.innerHTML=h;head.appendChild(panel);
+      btn.addEventListener('click',function(){var open=panel.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
+    })();
+
     // text buttons -> explain texting
     document.querySelectorAll('.tx').forEach(function(el){
       el.addEventListener('click',function(e){e.preventDefault();ping('On the live site this opens your phone to text Parasole at (570) 343-2597 — the fastest way to reach them.');});
