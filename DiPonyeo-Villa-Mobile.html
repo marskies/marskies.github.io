@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The DiPonyeo Villa — Design Preview (Mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F6F0E6; --paper:#FBF7EF; --sand:#E4D5BE; --ink:#2A2622; --mute:#8a827a;
+    --line:rgba(42,38,34,.18); --teal:#22504C; --sage:#6E7F63; --clay:#C0714E; --brass:#B08D57;
+    --ph:#e7ddcd; --serif:'Fraunces',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#cdd3ce;font-family:var(--sans);font-weight:300;color:var(--ink);-webkit-font-smoothing:antialiased;padding:26px 0 40px;}
+  /* soft tropical backdrop behind the "phone" */
+  body:before{content:"";position:fixed;inset:0;background:linear-gradient(160deg,#b9c7c2,#cdd3ce 40%,#d7ccbb);z-index:-1;}
+
+  .device{max-width:412px;margin:0 auto;background:var(--ivory);border-radius:38px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.28);position:relative;}
+  .previewtag{max-width:412px;margin:0 auto 12px;text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#3d4a45;font-weight:600;}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;}
+  em{font-style:italic;}
+  .num{font-family:var(--serif);font-style:italic;color:var(--clay);font-size:14px;}
+  .eyebrow{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);}
+  .lab{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);}
+  .pad{padding:0 24px;}
+
+  /* sticky header */
+  header.bar{position:relative;z-index:20;background:var(--ivory);border-bottom:1px solid var(--line);display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:12px 14px;}
+  .burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;}
+  .burger span{height:1.5px;background:var(--ink);display:block;}
+  .burger span:nth-child(2){width:70%;}
+  .wm{font-family:var(--serif);font-size:18px;text-align:center;letter-spacing:.02em;}
+  .wm .the{display:block;font-size:7.5px;letter-spacing:.36em;text-transform:uppercase;font-family:var(--sans);font-weight:600;color:var(--clay);}
+  .headbook{width:44px;height:44px;border-radius:50%;background:var(--clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;justify-self:end;}
+
+  /* slide-down menu */
+  .menu{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--teal);}
+  .menu.open{max-height:340px;}
+  .menu a{display:block;color:var(--ivory);text-decoration:none;font-size:15px;letter-spacing:.16em;text-transform:uppercase;padding:15px 26px;border-bottom:1px solid rgba(246,240,230,.14);font-weight:400;}
+
+  /* hero */
+  .hero{position:relative;min-height:540px;background:linear-gradient(165deg,#efe6d5 0%,#e5d9c2 55%,#d8cdbb 100%);display:flex;align-items:center;justify-content:center;text-align:center;}
+  .hero:before{content:"";position:absolute;top:0;left:0;right:0;height:100px;background:linear-gradient(180deg,rgba(34,80,76,.16),transparent);}
+  .hero .in{position:relative;padding:36px 26px;display:flex;flex-direction:column;align-items:center;gap:15px;}
+  .hero h1{font-size:46px;letter-spacing:-.01em;}
+  .hero h1 em{color:var(--clay);}
+  .hero .tag{font-family:var(--serif);font-style:italic;font-size:19px;color:#5a5148;line-height:1.4;}
+  .hero .facts{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;line-height:2;}
+  .hero .facts span{color:var(--clay);}
+  .hero .rate{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);}
+  .cta{font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;background:var(--clay);color:#fff;padding:15px 30px;border-radius:100px;text-decoration:none;border:none;min-height:48px;display:inline-flex;align-items:center;}
+  .phnote{position:absolute;right:12px;bottom:12px;font-family:var(--sans);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#857b6b;background:rgba(246,240,230,.7);border:1px solid rgba(42,38,34,.14);padding:5px 9px;border-radius:3px;max-width:180px;text-align:right;line-height:1.5;}
+
+  section{padding:74px 0;}
+  .band{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .center{text-align:center;}
+  h2{font-size:32px;margin:8px 0 14px;line-height:1.12;}
+  .lead{font-family:var(--sans);font-weight:300;font-size:15.5px;color:#5f574e;line-height:1.65;}
+
+  .mph{background:var(--ph);border:1px solid var(--line);border-radius:2px;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;color:var(--mute);padding:16px;}
+  .mph .ptag{font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);}
+  .mph .pdesc{font-family:var(--serif);font-style:italic;font-size:15px;color:#6f665c;}
+
+  /* amenities */
+  .tier{margin-top:28px;}
+  .tier .lab{display:block;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px;}
+  .arow{display:flex;gap:11px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(42,38,34,.08);}
+  .arow .dot{font-family:var(--serif);font-style:italic;color:var(--clay);font-size:14px;flex:none;width:22px;}
+  .arow b{font-family:var(--serif);font-weight:400;font-size:18px;display:block;}
+  .arow small{color:var(--mute);font-size:13px;}
+
+  /* feature teal */
+  .feature{background:var(--teal);color:var(--ivory);}
+  .feature .num{color:var(--sand);}
+  .feature .fph{min-height:300px;background:linear-gradient(150deg,#245450,#17423e 70%,#123331);border:1px solid rgba(246,240,230,.14);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;color:rgba(246,240,230,.72);padding:16px;}
+  .feature .fph .ptag{color:var(--sand);font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;}
+  .feature .fph .pdesc{font-family:var(--serif);font-style:italic;font-size:15px;color:rgba(246,240,230,.72);}
+  .feature h2{margin-top:26px;}
+  .feature h2 em{color:var(--sand);}
+  .feature .lead{color:rgba(246,240,230,.82);}
+
+  /* swipe carousel */
+  .swipehint{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
+  .swipehint span{font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);}
+  .carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 24px 6px;scrollbar-width:none;}
+  .carousel::-webkit-scrollbar{display:none;}
+  .slide{flex:0 0 82%;scroll-snap-align:center;min-height:300px;background:var(--ph);border:1px solid var(--line);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;color:var(--mute);padding:16px;}
+  .slide .ptag{font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);}
+  .slide .pdesc{font-family:var(--serif);font-style:italic;font-size:15px;color:#6f665c;}
+  .dots{display:flex;gap:7px;justify-content:center;margin-top:16px;}
+  .dots i{width:7px;height:7px;border-radius:50%;background:rgba(42,38,34,.22);}
+  .dots i.on{background:var(--clay);}
+
+  /* reviews */
+  .reviews{background:var(--sand);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .quote{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.45;color:var(--ink);}
+  .quote .attr{display:block;font-family:var(--sans);font-style:normal;font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-top:16px;}
+
+  /* booking */
+  .rateline{font-family:var(--sans);font-size:14px;color:var(--ink);margin:4px 0 18px;}
+  .rateline b{font-family:var(--serif);font-size:28px;font-weight:400;vertical-align:-3px;margin-right:2px;}
+  .field{border:1px solid var(--line);background:var(--paper);padding:15px 15px;font-size:14px;color:var(--mute);margin-bottom:12px;}
+  .submit{width:100%;background:var(--clay);color:#fff;text-align:center;padding:17px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;border:none;min-height:50px;}
+  .devnote{margin-top:22px;background:#fbf5ee;border:1.5px dashed var(--clay);border-radius:4px;padding:18px 18px;}
+  .devnote .devlabel{display:block;font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin-bottom:12px;padding-bottom:9px;border-bottom:1px dashed rgba(192,113,78,.5);}
+  .devnote p{font-size:12.5px;line-height:1.6;color:#5f574e;margin-bottom:10px;}
+  .devnote p:last-child{margin-bottom:0;}
+  .devnote b{color:var(--ink);font-weight:600;}
+
+  .anno{font-family:var(--sans);font-size:10.5px;letter-spacing:.03em;color:var(--sage);background:rgba(110,127,99,.1);border:1px dashed var(--sage);border-radius:3px;padding:4px 9px;display:inline-block;margin-top:12px;}
+
+  /* footer */
+  footer{background:var(--teal);color:rgba(246,240,230,.82);padding:44px 24px 40px;}
+  footer .wm{text-align:left;color:var(--ivory);font-size:22px;}
+  footer .wm .the{text-align:left;color:var(--sand);}
+  footer .fdesc{margin:12px 0 24px;font-size:15px;line-height:1.7;color:rgba(246,240,230,.72);}
+  footer .col{margin-top:20px;}
+  footer .col b{display:block;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ivory);margin-bottom:9px;}
+  footer .col{font-size:15px;line-height:2;}
+
+  /* pinned bottom book bar */
+  .pinbar{position:fixed;bottom:0;left:0;right:0;max-width:412px;margin:0 auto;background:var(--ink);color:var(--ivory);display:flex;align-items:center;justify-content:space-between;padding:13px 20px;z-index:30;box-shadow:0 -8px 24px rgba(0,0,0,.2);}
+  .pinbar .p1{font-family:var(--serif);font-size:16px;}
+  .pinbar .p1 small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,240,230,.62);font-weight:400;}
+  .pinbar a{background:var(--clay);color:#fff;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:13px 20px;border-radius:100px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;}
+  .spacer{height:74px;}
+</style>
+</head>
+<body>
+
+<div class="previewtag">Design preview · Mobile</div>
+
+<div class="device">
+
+  <!-- sticky header -->
+  <header class="bar">
+    <div class="burger" onclick="document.getElementById('m').classList.toggle('open')"><span></span><span></span><span></span></div>
+    <div class="wm"><span class="the">The</span>DiPonyeo Villa</div>
+    <a class="headbook" href="#book">✦</a>
+  </header>
+  <nav class="menu" id="m">
+    <a href="#villa">The Villa</a>
+    <a href="#amen">Amenities</a>
+    <a href="#area">The Area</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#book">Request a Stay</a>
+  </nav>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="in">
+      <div class="eyebrow">Dorado del Mar · Puerto Rico</div>
+      <h1>The DiPonyeo <em>Villa</em></h1>
+      <p class="tag">Where the days stretch long and the stars come close.</p>
+      <div class="facts">4 Bed <span>·</span> 4.5 Bath <span>·</span> Sleeps 10<br>Ocean &amp; Golf Views</div>
+      <div class="rate">From $650 / night — best rate direct</div>
+      <a class="cta" href="#book">Request Your Stay</a>
+    </div>
+    <div class="phnote">Hero photo<br>pool at golden hour</div>
+  </div>
+
+  <!-- 01 welcome -->
+  <section class="band center pad">
+    <span class="num">01</span>
+    <h2>Slow mornings,<br><em>long starlit evenings</em></h2>
+    <p class="lead">Inside the Dorado del Mar Beach &amp; Golf Resort on Puerto Rico's calm north coast — a four-bedroom retreat built for gathering and for stillness. End each night in the rooftop hot tub beneath an open Caribbean sky.</p>
+  </section>
+
+  <!-- 02 the villa -->
+  <section id="villa" class="pad">
+    <span class="num">02 — The Villa</span>
+    <h2>Room for ten,<br>built for gathering</h2>
+    <p class="lead" style="margin-bottom:20px;">Four bedrooms, four and a half baths, sleeps ten. A shaded terrace for grilling and long lunches, and a rooftop that becomes the best seat in the house after dark.</p>
+    <div class="mph"><span class="ptag">Photo</span><span class="pdesc">Open-plan living / interior</span></div>
+    <div class="anno">Real interior + terrace photos go here</div>
+  </section>
+
+  <!-- 03 amenities -->
+  <section id="amen" class="band pad">
+    <div class="center"><span class="num">03</span><h2>Within reach</h2></div>
+
+    <div class="tier">
+      <span class="lab">At the Villa</span>
+      <div class="arow"><span class="dot">i.</span><div><b>Rooftop Hot Tub</b><small>Under the stars, on the roof</small></div></div>
+      <div class="arow"><span class="dot">ii.</span><div><b>Shaded Grill Terrace</b><small>Grilling &amp; picnics</small></div></div>
+      <div class="arow"><span class="dot">iii.</span><div><b>4 BR · 4.5 BA · Sleeps 10</b><small>Room for the family</small></div></div>
+    </div>
+
+    <div class="tier">
+      <span class="lab">A Few Steps Away</span>
+      <div class="arow"><span class="dot">iv.</span><div><b>Gated Pool</b><small>5-min walk · gated for safety</small></div></div>
+      <div class="arow"><span class="dot">v.</span><div><b>Beach Access</b><small>Calm, walkable, set back from the current</small></div></div>
+      <div class="arow"><span class="dot">vi.</span><div><b>Ocean &amp; Fairway Views</b><small>Wrapped by golf, ocean to the north — from the hot tub &amp; terrace</small></div></div>
+    </div>
+
+    <div class="tier">
+      <span class="lab">Around the Resort</span>
+      <div class="arow"><span class="dot">vii.</span><div><b>Championship Golf</b><small>Chi Chi Rodríguez 18-hole course</small></div></div>
+      <div class="arow"><span class="dot">viii.</span><div><b>Courts</b><small>Tennis · pickleball · basketball</small></div></div>
+      <div class="arow"><span class="dot">ix.</span><div><b>Casino &amp; Dining</b><small>Casino + several restaurants on-property</small></div></div>
+      <div class="arow"><span class="dot">x.</span><div><b>Family Fun</b><small>Go-karts · bowling · arcade</small></div></div>
+      <div class="arow"><span class="dot">xi.</span><div><b>Room for More</b><small>Embassy Suites by Hilton next door</small></div></div>
+    </div>
+  </section>
+
+  <!-- 04 feature under the stars -->
+  <section class="feature pad">
+    <span class="num">04 — The Signature</span>
+    <h2 style="margin-top:8px;margin-bottom:20px;">Under the <em>Stars</em></h2>
+    <div class="fph"><span class="ptag">Feature photo</span><span class="pdesc">Rooftop hot tub at blue hour</span></div>
+    <p class="lead" style="margin-top:22px;">A rooftop hot tub with nothing above you but the Caribbean night — ocean on one side, the fairway on the other. The quiet centerpiece of every stay.</p>
+  </section>
+
+  <!-- 05 the area -->
+  <section id="area" class="band pad">
+    <span class="num">05 — The Area</span>
+    <h2>Dorado,<br>Puerto Rico</h2>
+    <p class="lead" style="margin-bottom:20px;">A polished stretch of the north coast — calm beaches, championship golf, easy Caribbean living, a short drive west of San Juan.</p>
+    <div class="mph" style="min-height:220px;"><span class="ptag">Map + Area Photos</span><span class="pdesc">Neighborhood map + Dorado shots</span></div>
+    <div class="anno">Your Puerto Rico + neighborhood photos go here</div>
+  </section>
+
+  <!-- 06 gallery carousel -->
+  <section id="gallery">
+    <div class="pad center" style="margin-bottom:22px;">
+      <span class="num">06</span>
+      <h2>The Gallery</h2>
+    </div>
+    <div class="pad swipehint"><span>Swipe to browse</span><span>→</span></div>
+    <div class="carousel" id="car" onscroll="syncDots()">
+      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">Hero-worthy villa shot</span></div>
+      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">The pool</span></div>
+      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">Rooftop hot tub</span></div>
+      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">A bedroom</span></div>
+      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">The beach</span></div>
+    </div>
+    <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    <div class="pad center anno" style="margin-top:16px;">Property photos come later — placeholders hold the layout</div>
+  </section>
+
+  <!-- 07 reviews -->
+  <section class="reviews center pad">
+    <span class="num">07</span>
+    <p class="quote">"The rooftop under the stars, the walk to the beach, room for our whole family — we've already booked again."
+      <span class="attr">Guest review — placeholder</span>
+    </p>
+  </section>
+
+  <!-- 08 booking -->
+  <section id="book" class="pad">
+    <span class="num">08 — Reserve</span>
+    <h2>Request your stay</h2>
+    <p class="lead" style="margin-bottom:6px;">Tell us your dates and we'll confirm personally. Direct is always the best rate.</p>
+    <div class="rateline">From <b>$650</b> / night · best rate direct</div>
+    <form onsubmit="return false;">
+      <div class="field">First &amp; last name</div>
+      <div class="field">Email</div>
+      <div class="field">Check-in</div>
+      <div class="field">Check-out</div>
+      <div class="field">Guests (sleeps up to 10)</div>
+      <div class="field" style="min-height:90px;">Message — tell us about your trip</div>
+      <button class="submit">Send Request</button>
+    </form>
+    <aside class="devnote">
+      <span class="devlabel">Developer's note — not on the live site</span>
+      <p><b>Holiday pricing:</b> Dec 20 – Jan 7 auto-updates to $1,000/night in your booking system. Not shown publicly.</p>
+      <p>Rates per night. Direct booking skips the ~15% platform guest fee.</p>
+      <p><b>Manual booking:</b> the form emails you the request (e.g., Formspree) — no instant checkout. You confirm dates and send a secure payment link, which prevents double-bookings.</p>
+      <p><b>Also on</b> Airbnb · VRBO · Booking.com — direct is best price. Sync all three via one iCal calendar so dates never clash.</p>
+    </aside>
+  </section>
+
+  <footer>
+    <div class="wm"><span class="the">The</span>DiPonyeo Villa</div>
+    <div class="fdesc">Dorado del Mar, Puerto Rico<br>An elevated tropical retreat</div>
+    <div class="col"><b>Book</b>Request a Stay · Best-Rate Direct<br>Airbnb · VRBO · Booking</div>
+    <div class="col"><b>Contact</b>hello@diponyeovilla.com<br>Instagram · Managed by [LLC name]</div>
+  </footer>
+
+  <div class="spacer"></div>
+</div>
+
+<!-- pinned book bar -->
+<div class="pinbar">
+  <div class="p1">$650<small>per night</small></div>
+  <a href="#book">Request Your Stay</a>
+</div>
+
+<script>
+  function syncDots(){
+    var c=document.getElementById('car'), dots=document.getElementById('dots').children;
+    var i=Math.round(c.scrollLeft/(c.scrollWidth/dots.length));
+    for(var k=0;k<dots.length;k++){dots[k].className = (k===i?'on':'');}
+  }
+</script>
+</body>
+</html>
