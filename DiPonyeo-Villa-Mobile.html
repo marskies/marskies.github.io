@@ -64,6 +64,8 @@
   .mph{background:var(--ph);border:1px solid var(--line);border-radius:2px;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;color:var(--mute);padding:16px;}
   .mph .ptag{font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);}
   .mph .pdesc{font-family:var(--serif);font-style:italic;font-size:15px;color:#6f665c;}
+  .shot{background-size:cover!important;background-position:center!important;border-color:rgba(42,38,34,.1)!important;}
+  .shot .ptag,.shot .pdesc{display:none;}
 
   /* amenities */
   .tier{margin-top:28px;}
@@ -132,7 +134,7 @@
 </head>
 <body>
 
-<div class="previewtag">Design preview · Mobile</div>
+<div class="previewtag">Design preview · Mobile · reference photos, same layout</div>
 
 <div class="device">
 
@@ -151,7 +153,7 @@
   </nav>
 
   <!-- hero -->
-  <div class="hero">
+  <div class="hero" style="background-image:linear-gradient(180deg,rgba(246,240,230,.56),rgba(246,240,230,.48) 50%,rgba(246,240,230,.64)),url('diponyeo-pool.jpg');background-size:cover;background-position:center">
     <div class="in">
       <div class="eyebrow">Dorado del Mar · Puerto Rico</div>
       <h1>The DiPonyeo <em>Villa</em></h1>
@@ -160,7 +162,6 @@
       <div class="rate">From $650 / night — best rate direct</div>
       <a class="cta" href="#book">Request Your Stay</a>
     </div>
-    <div class="phnote">Hero photo<br>pool at golden hour</div>
   </div>
 
   <!-- 01 welcome -->
@@ -175,8 +176,7 @@
     <span class="num">02 — The Villa</span>
     <h2>Room for ten,<br>built for gathering</h2>
     <p class="lead" style="margin-bottom:20px;">Four bedrooms, four and a half baths, sleeps ten. A shaded terrace for grilling and long lunches, and a rooftop that becomes the best seat in the house after dark.</p>
-    <div class="mph"><span class="ptag">Photo</span><span class="pdesc">Open-plan living / interior</span></div>
-    <div class="anno">Real interior + terrace photos go here</div>
+    <div class="mph shot" style="background-image:url('diponyeo-living1.jpg')"></div>
   </section>
 
   <!-- 03 amenities -->
@@ -211,7 +211,7 @@
   <section class="feature pad">
     <span class="num">04 — The Signature</span>
     <h2 style="margin-top:8px;margin-bottom:20px;">Under the <em>Stars</em></h2>
-    <div class="fph"><span class="ptag">Feature photo</span><span class="pdesc">Rooftop hot tub at blue hour</span></div>
+    <div class="fph"><span class="ptag">Photo still to capture</span><span class="pdesc">Your rooftop hot tub at dusk — the one shot still to add</span></div>
     <p class="lead" style="margin-top:22px;">A rooftop hot tub with nothing above you but the Caribbean night — ocean on one side, the fairway on the other. The quiet centerpiece of every stay.</p>
   </section>
 
@@ -220,8 +220,7 @@
     <span class="num">05 — The Area</span>
     <h2>Dorado,<br>Puerto Rico</h2>
     <p class="lead" style="margin-bottom:20px;">A polished stretch of the north coast — calm beaches, championship golf, easy Caribbean living, a short drive west of San Juan.</p>
-    <div class="mph" style="min-height:220px;"><span class="ptag">Map + Area Photos</span><span class="pdesc">Neighborhood map + Dorado shots</span></div>
-    <div class="anno">Your Puerto Rico + neighborhood photos go here</div>
+    <div class="mph shot" style="min-height:220px;background-image:url('diponyeo-playground.jpg')"></div>
   </section>
 
   <!-- 06 gallery carousel -->
@@ -232,14 +231,16 @@
     </div>
     <div class="pad swipehint"><span>Swipe to browse</span><span>→</span></div>
     <div class="carousel" id="car" onscroll="syncDots()">
-      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">Hero-worthy villa shot</span></div>
-      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">The pool</span></div>
-      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">Rooftop hot tub</span></div>
-      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">A bedroom</span></div>
-      <div class="slide"><span class="ptag">Photo</span><span class="pdesc">The beach</span></div>
+      <div class="slide shot" style="background-image:url('diponyeo-exterior.jpg')"></div>
+      <div class="slide shot" style="background-image:url('diponyeo-living2.jpg')"></div>
+      <div class="slide shot" style="background-image:url('diponyeo-bedroom.jpg')"></div>
+      <div class="slide shot" style="background-image:url('diponyeo-kitchen.jpg')"></div>
+      <div class="slide shot" style="background-image:url('diponyeo-dining.jpg')"></div>
+      <div class="slide shot" style="background-image:url('diponyeo-terrace.jpg')"></div>
+      <div class="slide shot" style="background-image:url('diponyeo-bath.jpg')"></div>
     </div>
-    <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-    <div class="pad center anno" style="margin-top:16px;">Property photos come later — placeholders hold the layout</div>
+    <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="pad center anno" style="margin-top:16px;">Reference photos of the same-layout unit — your villa's own photos to come</div>
   </section>
 
   <!-- 07 reviews -->
