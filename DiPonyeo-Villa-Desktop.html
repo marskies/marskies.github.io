@@ -13,7 +13,7 @@
     --paper:#FBF7EF;
     --sand:#E4D5BE;
     --ink:#2A2622;
-    --mute:#8a827a;
+    --mute:#6f665c;
     --line:rgba(42,38,34,.18);
     --teal:#22504C;
     --teal-d:#1a3f3b;
@@ -61,12 +61,13 @@
   .heroph{position:relative;min-height:580px;background:linear-gradient(163deg,#efe6d5 0%,#e5d9c2 55%,#d8cdbb 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;}
   .heroph:before{content:"";position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,rgba(34,80,76,.14),transparent);}
   .overlay{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;padding:40px;}
-  .hero h1{font-size:clamp(46px,7vw,88px);color:var(--ink);letter-spacing:-.01em;}
-  .hero h1 em{color:var(--clay);}
-  .hero .tagline{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.4vw,25px);color:#5a5148;max-width:640px;}
-  .hero .facts{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);}
-  .hero .facts span{margin:0 9px;color:var(--clay);}
-  .hero .heronote{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);}
+  .hero .overlay .eyebrow{color:var(--sand);}
+  .hero h1{font-size:clamp(46px,7vw,88px);color:var(--ivory);letter-spacing:-.01em;text-shadow:0 2px 30px rgba(10,22,20,.45);}
+  .hero h1 em{color:#F0B085;}
+  .hero .tagline{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.4vw,25px);color:rgba(246,240,230,.95);max-width:640px;text-shadow:0 1px 20px rgba(10,22,20,.5);}
+  .hero .facts{font-family:var(--sans);font-weight:600;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ivory);text-shadow:0 1px 16px rgba(10,22,20,.55);}
+  .hero .facts span{margin:0 9px;color:var(--sand);}
+  .hero .heronote{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);text-shadow:0 1px 16px rgba(10,22,20,.55);}
   .phnote{position:absolute;right:16px;bottom:14px;font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8c8272;background:rgba(246,240,230,.66);border:1px solid rgba(42,38,34,.14);padding:5px 10px;border-radius:3px;max-width:260px;text-align:right;line-height:1.5;}
 
   section{padding:92px 0;}
@@ -170,7 +171,7 @@
 
 <!-- hero -->
 <header class="hero">
-  <div class="heroph shot" style="background-image:linear-gradient(180deg,rgba(246,240,230,.58),rgba(246,240,230,.5) 50%,rgba(246,240,230,.62)),url('diponyeo-pool.jpg')">
+  <div class="heroph shot" style="background-image:linear-gradient(180deg,rgba(16,36,33,.62),rgba(16,36,33,.5) 42%,rgba(16,36,33,.72)),url('diponyeo-pool.jpg')">
     <div class="overlay">
       <div class="eyebrow">Dorado del Mar · Puerto Rico</div>
       <h1>The DiPonyeo <em>Villa</em></h1>

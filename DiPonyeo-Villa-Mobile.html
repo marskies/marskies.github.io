@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ivory:#F6F0E6; --paper:#FBF7EF; --sand:#E4D5BE; --ink:#2A2622; --mute:#8a827a;
+    --ivory:#F6F0E6; --paper:#FBF7EF; --sand:#E4D5BE; --ink:#2A2622; --mute:#6f665c;
     --line:rgba(42,38,34,.18); --teal:#22504C; --sage:#6E7F63; --clay:#C0714E; --brass:#B08D57;
     --ph:#e7ddcd; --serif:'Fraunces',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
   }
@@ -46,12 +46,13 @@
   .hero{position:relative;min-height:540px;background:linear-gradient(165deg,#efe6d5 0%,#e5d9c2 55%,#d8cdbb 100%);display:flex;align-items:center;justify-content:center;text-align:center;}
   .hero:before{content:"";position:absolute;top:0;left:0;right:0;height:100px;background:linear-gradient(180deg,rgba(34,80,76,.16),transparent);}
   .hero .in{position:relative;padding:36px 26px;display:flex;flex-direction:column;align-items:center;gap:15px;}
-  .hero h1{font-size:46px;letter-spacing:-.01em;}
-  .hero h1 em{color:var(--clay);}
-  .hero .tag{font-family:var(--serif);font-style:italic;font-size:19px;color:#5a5148;line-height:1.4;}
-  .hero .facts{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;line-height:2;}
-  .hero .facts span{color:var(--clay);}
-  .hero .rate{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);}
+  .hero .in .eyebrow{color:var(--sand);}
+  .hero h1{font-size:46px;letter-spacing:-.01em;color:var(--ivory);text-shadow:0 2px 24px rgba(10,22,20,.5);}
+  .hero h1 em{color:#F0B085;}
+  .hero .tag{font-family:var(--serif);font-style:italic;font-size:19px;color:rgba(246,240,230,.95);line-height:1.4;text-shadow:0 1px 18px rgba(10,22,20,.5);}
+  .hero .facts{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;line-height:2;color:var(--ivory);text-shadow:0 1px 14px rgba(10,22,20,.55);}
+  .hero .facts span{color:var(--sand);}
+  .hero .rate{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);text-shadow:0 1px 14px rgba(10,22,20,.55);}
   .cta{font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;background:var(--clay);color:#fff;padding:15px 30px;border-radius:100px;text-decoration:none;border:none;min-height:48px;display:inline-flex;align-items:center;}
   .phnote{position:absolute;right:12px;bottom:12px;font-family:var(--sans);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#857b6b;background:rgba(246,240,230,.7);border:1px solid rgba(42,38,34,.14);padding:5px 9px;border-radius:3px;max-width:180px;text-align:right;line-height:1.5;}
 
@@ -153,7 +154,7 @@
   </nav>
 
   <!-- hero -->
-  <div class="hero" style="background-image:linear-gradient(180deg,rgba(246,240,230,.56),rgba(246,240,230,.48) 50%,rgba(246,240,230,.64)),url('diponyeo-pool.jpg');background-size:cover;background-position:center">
+  <div class="hero" style="background-image:linear-gradient(180deg,rgba(16,36,33,.62),rgba(16,36,33,.5) 42%,rgba(16,36,33,.72)),url('diponyeo-pool.jpg');background-size:cover;background-position:center">
     <div class="in">
       <div class="eyebrow">Dorado del Mar · Puerto Rico</div>
       <h1>The DiPonyeo <em>Villa</em></h1>
