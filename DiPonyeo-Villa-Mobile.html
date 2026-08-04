@@ -304,7 +304,7 @@
   <section class="feature pad">
     <span class="num" data-es="05 — Lo Distintivo">05 — The Signature</span>
     <h2 style="margin-top:8px;margin-bottom:20px;" data-es="Bajo las <em>Estrellas</em>">Under the <em>Stars</em></h2>
-    <div class="fph shot" style="background-image:linear-gradient(180deg,rgba(26,63,59,.44),rgba(26,63,59,.14) 55%,rgba(26,63,59,.42)),url('diponyeo-hottub.jpg')"></div>
+    <div class="fph shot" style="background-image:linear-gradient(180deg,rgba(10,20,30,.16),rgba(10,20,30,.04) 50%,rgba(10,20,30,.30)),url('diponyeo-hottub-stars.jpg')"></div>
     <p class="lead" style="margin-top:22px;" data-es="Un jacuzzi en la azotea con nada más que la noche caribeña encima — el mar de un lado, el campo de golf del otro. El corazón tranquilo de cada estadía.">A rooftop hot tub with nothing above you but the Caribbean night — ocean on one side, the fairway on the other. The quiet centerpiece of every stay.</p>
   </section>
 
@@ -418,8 +418,7 @@
     }
     var saved = null;
     try{ saved = localStorage.getItem('villa-lang'); }catch(e){}
-    var auto = (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
-    setLang(saved || auto);
+    setLang(saved || 'en');
     document.querySelectorAll('.langtog a').forEach(function(a){
       a.addEventListener('click', function(){ setLang(a.getAttribute('data-lang')); });
     });
