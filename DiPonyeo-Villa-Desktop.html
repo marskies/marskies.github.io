@@ -42,11 +42,18 @@
   .ph .pdesc{font-family:var(--serif);font-style:italic;font-size:16px;color:#6f665c;max-width:82%;}
   .shot{background-size:cover !important;background-position:center !important;border-color:rgba(42,38,34,.1)!important;}
   .shot .ptag,.shot .pdesc{display:none;}
+  .shot .cap-chip{display:block;}
+  .cap-chip{position:absolute;left:12px;bottom:12px;font-family:var(--sans);font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory);background:rgba(26,63,59,.72);padding:6px 11px;border-radius:3px;line-height:1.4;max-width:88%;text-align:left;}
 
   /* utility + nav */
   .util{background:var(--teal);color:var(--ivory);font-size:12px;letter-spacing:.06em;}
   .util .wrap{display:flex;justify-content:space-between;align-items:center;padding:11px 44px;}
   .util .badge{font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:11px;}
+  .util .uright{display:flex;gap:18px;align-items:center;}
+  .langtog{display:inline-flex;gap:7px;align-items:center;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.12em;}
+  .langtog a{color:rgba(246,240,230,.55);cursor:pointer;text-decoration:none;}
+  .langtog a.on{color:var(--ivory);text-decoration:underline;text-underline-offset:3px;}
+  .langtog .sep{color:rgba(246,240,230,.35);}
   nav{border-bottom:1px solid var(--line);background:var(--ivory);position:relative;z-index:3;}
   nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px 44px;}
   nav .btn{justify-self:end;}
@@ -68,7 +75,6 @@
   .hero .facts{font-family:var(--sans);font-weight:600;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ivory);text-shadow:0 1px 16px rgba(10,22,20,.55);}
   .hero .facts span{margin:0 9px;color:var(--sand);}
   .hero .heronote{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);text-shadow:0 1px 16px rgba(10,22,20,.55);}
-  .phnote{position:absolute;right:16px;bottom:14px;font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8c8272;background:rgba(246,240,230,.66);border:1px solid rgba(42,38,34,.14);padding:5px 10px;border-radius:3px;max-width:260px;text-align:right;line-height:1.5;}
 
   section{padding:92px 0;}
   .band{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -82,14 +88,18 @@
   .collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:210px 150px;gap:14px;}
   .collage .ph:first-child{grid-column:1 / span 2;}
 
-  /* amenities */
-  .tier{margin-top:42px;}
-  .tier .lab{display:block;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:9px;}
-  .amen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 36px;}
-  .amen .item{display:flex;gap:13px;align-items:baseline;padding:6px 0;}
-  .amen .dot{font-family:var(--serif);font-style:italic;color:var(--clay);font-size:15px;flex:none;width:26px;}
-  .amen .item b{font-family:var(--serif);font-weight:400;font-size:20px;display:block;}
-  .amen .item small{color:var(--mute);font-size:13.5px;}
+  /* inside — interior look */
+  .inside4{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px;margin-top:36px;}
+  .inside4 .ph:nth-child(3){grid-column:span 2;grid-row:span 1;}
+
+  /* amenities — icon grid, all visible */
+  .tier{margin-top:40px;}
+  .tier .lab{display:block;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:9px;}
+  .amen{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 38px;}
+  .amen .item{display:flex;gap:14px;align-items:flex-start;padding:2px 0;}
+  .ic{width:27px;height:27px;flex:none;stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-top:3px;color:var(--ink);}
+  .amen .item b{font-family:var(--serif);font-weight:400;font-size:19px;display:block;line-height:1.16;}
+  .amen .item small{color:var(--mute);font-size:13px;display:block;margin-top:2px;line-height:1.45;}
 
   /* feature — Under the Stars (teal night band) */
   .feature{background:var(--teal);color:var(--ivory);}
@@ -142,6 +152,8 @@
     .split,.split.rev,.book{grid-template-columns:1fr;gap:30px;}
     .amen{grid-template-columns:1fr 1fr;}
     .grid5{grid-template-columns:repeat(2,1fr);}
+    .inside4{grid-template-columns:repeat(2,1fr);}
+    .inside4 .ph:nth-child(3){grid-column:span 2;}
     .navlinks,.util .wrap span.hidem{display:none;}
     .wrap{padding:0 24px;}
     .feature .cap{margin-left:24px;margin-right:24px;}
@@ -150,22 +162,56 @@
 </head>
 <body>
 
-<div class="ribbon">Design preview · real villa bedrooms + Dorado del Mar club &amp; resort photos · interior common-area photos to come</div>
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="ic-kitchen" viewBox="0 0 24 24"><path d="M6 2v7a2 2 0 0 0 2 2v11M6 2v6M9 2v6M18 2c-1.6 0-3 1.8-3 5s1.4 4 3 4v11"/></symbol>
+  <symbol id="ic-water" viewBox="0 0 24 24"><path d="M12 3s5.5 5.5 5.5 9.5a5.5 5.5 0 0 1-11 0C6.5 8.5 12 3 12 3z"/></symbol>
+  <symbol id="ic-snow" viewBox="0 0 24 24"><path d="M12 2v20M3.5 7l17 10M20.5 7l-17 10M12 6l-2.5-2M12 6l2.5-2M12 18l-2.5 2M12 18l2.5 2M4.7 8.8 8 9M4.7 15.2 8 15M19.3 8.8 16 9M19.3 15.2 16 15"/></symbol>
+  <symbol id="ic-washer" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1.5"/><circle cx="12" cy="13" r="4.6"/><circle cx="7.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="10.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-bed" viewBox="0 0 24 24"><path d="M2 17v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4M2 17v3M22 17v3M2 13h20M6 11V9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/></symbol>
+  <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+  <symbol id="ic-tank" viewBox="0 0 24 24"><rect x="5" y="6" width="14" height="15" rx="2"/><path d="M5 11h14M9 6V4.5a3 3 0 0 1 6 0V6"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z"/></symbol>
+  <symbol id="ic-garage" viewBox="0 0 24 24"><path d="M3 21V9l9-5 9 5v12M3 21h18M7 21v-6h10v6M7 15h10"/></symbol>
+  <symbol id="ic-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M6 8h12v3a6 6 0 0 1-12 0V8zM12 17v5"/></symbol>
+  <symbol id="ic-parking" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 17V7h3.6a3 3 0 0 1 0 6H9"/></symbol>
+  <symbol id="ic-hottub" viewBox="0 0 24 24"><path d="M3.5 12h17v4a4 4 0 0 1-4 4H7.5a4 4 0 0 1-4-4v-4zM8 12V8a2 2 0 0 1 4 0M8.5 4.5V6M12.5 3.5V5M16.5 4.5V6"/></symbol>
+  <symbol id="ic-flame" viewBox="0 0 24 24"><path d="M12 22c3.9 0 6-2.5 6-6 0-4-4-6-2.8-11-3 2-6.2 5-6.2 9 0-1-1-2.6-1-4-2 2-2 4-2 6 0 3.5 2.1 6 6 6z"/></symbol>
+  <symbol id="ic-railing" viewBox="0 0 24 24"><path d="M4 21v-9M20 21v-9M4 12h16M7.5 12v9M11 12v9M14.5 12v9M18 12v9M3 12l9-6 9 6"/></symbol>
+  <symbol id="ic-view" viewBox="0 0 24 24"><path d="M3 20h18M3 20l5.5-7 3.5 4.2 3-4L21 20M16.5 7.5a2 2 0 1 0 0-.01"/></symbol>
+  <symbol id="ic-wave" viewBox="0 0 24 24"><path d="M2 8.5c2 0 2 1.8 4 1.8s2-1.8 4-1.8 2 1.8 4 1.8 2-1.8 4-1.8 2 1.8 4 1.8M2 14.5c2 0 2 1.8 4 1.8s2-1.8 4-1.8 2 1.8 4 1.8 2-1.8 4-1.8 2 1.8 4 1.8"/></symbol>
+  <symbol id="ic-surf" viewBox="0 0 24 24"><path d="M12 2c5.5 4.5 5.5 15.5 0 20C6.5 17.5 6.5 6.5 12 2zM12 6.5v11"/></symbol>
+  <symbol id="ic-bike" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3.4"/><circle cx="18" cy="17" r="3.4"/><path d="M6 17l4.2-7.4H15M9.4 9.6H15l2.6 7.4M13.5 6.6H16.6"/></symbol>
+  <symbol id="ic-paddle" viewBox="0 0 24 24"><path d="M14.5 2.5a6 6 0 0 1 0 12 6 6 0 0 1 0-12zM10.2 13.3 4 19.5M6.5 17l1.8 1.8"/></symbol>
+  <symbol id="ic-pool" viewBox="0 0 24 24"><path d="M4 20v-9a3 3 0 0 1 6 0v9M4 13.5h6M14 6v8.5M18 6v8.5M14 10h4M3 20.5c1.8 0 1.8-1.4 3.5-1.4S8.3 20.5 10 20.5s1.8-1.4 3.5-1.4S15.3 20.5 17 20.5s1.8-1.4 3.5-1.4"/></symbol>
+  <symbol id="ic-umbrella" viewBox="0 0 24 24"><path d="M12 3.2c5 0 9 3.8 9 8.3H3c0-4.5 4-8.3 9-8.3zM12 3.2v17.6M12 20.8a2 2 0 0 0 3 0"/></symbol>
+  <symbol id="ic-golf" viewBox="0 0 24 24"><path d="M8 20V3l9 3.6L8 10.4M8 20h5M8 20a2.5 2 0 0 1 5 0"/></symbol>
+  <symbol id="ic-tennis" viewBox="0 0 24 24"><circle cx="9.5" cy="9.5" r="6.2"/><path d="M13.9 13.9 21 21M5.4 9.5h8.2M9.5 5.4v8.2"/></symbol>
+  <symbol id="ic-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.2"/><circle cx="9" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-game" viewBox="0 0 24 24"><path d="M7.5 8h9a5 5 0 0 1 5 5c0 2.1-1.1 4-3 4-1.5 0-2-1-3.6-1h-3.8C8.6 16 8 17 6.5 17c-1.9 0-3-1.9-3-4a5 5 0 0 1 4-5zM8 11v3M6.5 12.5h3M15.5 11.5h.01M18 13h.01"/></symbol>
+  <symbol id="ic-building" viewBox="0 0 24 24"><path d="M5 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17M15 21V9h3a1 1 0 0 1 1 1v11M3 21h18M8 7h2M8 11h2M8 15h2M12 7h.5M12 11h.5M12 15h.5"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.2 6.6.7-5 4.6 1.4 6.5L12 17.7 6.1 21l1.4-6.5-5-4.6 6.6-.7L12 2.5z"/></symbol>
+</defs></svg>
+
+<div class="ribbon" data-es="Vista previa · fotos reales de las habitaciones + club y resort Dorado del Mar · fotos de áreas comunes próximamente">Design preview · real villa bedrooms + Dorado del Mar club &amp; resort photos · interior common-area photos to come</div>
 
 <!-- utility bar -->
 <div class="util">
   <div class="wrap">
-    <span class="badge">◆ Book Direct — Best Rate, No Platform Fees</span>
-    <span class="hidem">Dorado del Mar, Puerto Rico &nbsp;·&nbsp; hello@diponyeovilla.com</span>
+    <span class="badge" data-es="◆ Reserva directa — el mejor precio, sin cargos de plataforma">◆ Book Direct — Best Rate, No Platform Fees</span>
+    <span class="uright">
+      <span class="hidem">Dorado del Mar, Puerto Rico &nbsp;·&nbsp; hello@diponyeovilla.com</span>
+      <span class="langtog"><a data-lang="en">EN</a><span class="sep">/</span><a data-lang="es">ES</a></span>
+    </span>
   </div>
 </div>
 
 <!-- nav -->
 <nav>
   <div class="wrap">
-    <div class="navlinks"><a>The Villa</a><a>Amenities</a><a>The Area</a><a>Gallery</a></div>
+    <div class="navlinks"><a data-es="La Villa">The Villa</a><a data-es="Comodidades">Amenities</a><a data-es="La Zona">The Area</a><a data-es="Galería">Gallery</a></div>
     <div class="wordmark"><span class="the">The</span>DiPonyeo Villa</div>
-    <a class="btn solid" href="#book">Request Stay</a>
+    <a class="btn solid" href="#book" data-es="Reserva">Request Stay</a>
   </div>
 </nav>
 
@@ -175,10 +221,10 @@
     <div class="overlay">
       <div class="eyebrow">Dorado del Mar · Puerto Rico</div>
       <h1>The DiPonyeo <em>Villa</em></h1>
-      <p class="tagline">An elevated tropical retreat where the days stretch long and the stars come close.</p>
-      <div class="facts">4 Bedrooms <span>·</span> 4.5 Baths <span>·</span> Sleeps 10 <span>·</span> Ocean &amp; Golf Views</div>
-      <div class="heronote">From $650 / night — best rate when you book direct</div>
-      <a class="btn solid" href="#book">Request Your Stay</a>
+      <p class="tagline" data-es="Un refugio tropical elevado, donde los días se hacen largos y las estrellas se sienten cerca.">An elevated tropical retreat where the days stretch long and the stars come close.</p>
+      <div class="facts" data-es="4 Habitaciones <span>·</span> 4.5 Baños <span>·</span> Para 10 <span>·</span> Vistas al Mar y al Golf">4 Bedrooms <span>·</span> 4.5 Baths <span>·</span> Sleeps 10 <span>·</span> Ocean &amp; Golf Views</div>
+      <div class="heronote" data-es="Desde $650 / noche — el mejor precio al reservar directo">From $650 / night — best rate when you book direct</div>
+      <a class="btn solid" href="#book" data-es="Solicita tu estadía">Request Your Stay</a>
     </div>
   </div>
 </header>
@@ -187,8 +233,8 @@
 <section class="band center">
   <div class="wrap">
     <span class="num">01</span>
-    <h2>Slow mornings by the sea,<br><em>long evenings under the stars</em></h2>
-    <p class="lead">Set inside the Dorado del Mar Beach &amp; Golf Resort on Puerto Rico's calm north coast, The DiPonyeo Villa is a four-bedroom retreat built for gathering — and for stillness. Wake to the sea, spend the afternoon between the pool and the shore, and end the night in the rooftop hot tub beneath an open Caribbean sky.</p>
+    <h2 data-es="Mañanas tranquilas junto al mar,<br><em>noches largas bajo las estrellas</em>">Slow mornings by the sea,<br><em>long evenings under the stars</em></h2>
+    <p class="lead" data-es="Dentro del Dorado del Mar Beach &amp; Golf Resort, en la tranquila costa norte de Puerto Rico, The DiPonyeo Villa es un refugio de cuatro habitaciones hecho para reunirse — y para descansar. Despierta frente al mar, pasa la tarde entre la piscina y la playa, y termina la noche en el jacuzzi de la azotea bajo el cielo caribeño.">Set inside the Dorado del Mar Beach &amp; Golf Resort on Puerto Rico's calm north coast, The DiPonyeo Villa is a four-bedroom retreat built for gathering — and for stillness. Wake to the sea, spend the afternoon between the pool and the shore, and end the night in the rooftop hot tub beneath an open Caribbean sky.</p>
   </div>
 </section>
 
@@ -201,117 +247,134 @@
       <div class="ph shot" style="background-image:url('diponyeo-bedroom-kids.jpg')"></div>
     </div>
     <div>
-      <span class="num">02 — The Villa</span>
-      <h2>Room for ten,<br>built for gathering</h2>
-      <p class="lead">Four light-filled bedrooms and four and a half baths across an easy home that sleeps ten — each room its own quiet corner, with a shaded terrace for grilling and a rooftop that becomes the best seat in the house after dark.</p>
+      <span class="num" data-es="02 — La Villa">02 — The Villa</span>
+      <h2 data-es="Espacio para diez,<br>hecho para reunirse">Room for ten,<br>built for gathering</h2>
+      <p class="lead" data-es="Cuatro habitaciones llenas de luz y cuatro baños y medio en una casa cómoda para diez — cada cuarto su propio rincón tranquilo, con una terraza sombreada para la parrilla y una azotea que se vuelve el mejor lugar de la casa al anochecer.">Four light-filled bedrooms and four and a half baths across an easy home that sleeps ten — each room its own quiet corner, with a shaded terrace for grilling and a rooftop that becomes the best seat in the house after dark.</p>
     </div>
   </div>
 </section>
 
-<!-- 03 amenities -->
+<!-- 03 a look inside -->
 <section class="band">
+  <div class="wrap center">
+    <span class="num" data-es="03 — Por Dentro">03 — A Look Inside</span>
+    <h2 data-es="Los espacios que vas a vivir">The spaces you'll live in</h2>
+    <p class="lead" data-es="La fotografía de interiores viene en camino. Aquí un primer vistazo — empezando por el garaje con aire acondicionado y su cargador de pared Tesla — con la sala, la cocina y el comedor próximamente.">Interior photography is on the way. Here's a first look — starting with the air-conditioned garage and its Tesla wall charger — with the living room, kitchen, and dining room to follow.</p>
+  </div>
+  <div class="wrap">
+    <div class="inside4">
+      <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Sala">Living room</span></div>
+      <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Cocina">Kitchen</span></div>
+      <div class="ph shot" style="background-image:url('diponyeo-garage-ev.jpg')"><span class="cap-chip" data-es="El garaje — cargador Tesla, listo para autos eléctricos">The garage — Tesla wall charger, EV-ready</span></div>
+      <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Comedor">Dining room</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 amenities -->
+<section>
   <div class="wrap">
     <div class="center">
-      <span class="num">03</span>
-      <h2>Everything within reach</h2>
-      <p class="lead">Everything you need to move in and enjoy — freshly remodeled, fully furnished, and stocked right down to the beach gear.</p>
+      <span class="num">04</span>
+      <h2 data-es="Todo a tu alcance">Everything within reach</h2>
+      <p class="lead" data-es="Todo lo que necesitas para llegar y disfrutar — recién remodelada, totalmente amueblada y equipada hasta con el equipo de playa.">Everything you need to move in and enjoy — freshly remodeled, fully furnished, and stocked right down to the beach gear.</p>
     </div>
 
     <div class="tier">
-      <span class="lab">Inside the Villa</span>
+      <span class="lab" data-es="Dentro de la Villa">Inside the Villa</span>
       <div class="amen">
-        <div class="item"><span class="dot">i.</span><div><b>Remodeled Chef's Kitchen</b><small>Induction cooktop · high-end stainless · open to the living &amp; dining room</small></div></div>
-        <div class="item"><span class="dot">ii.</span><div><b>Reverse-Osmosis Water</b><small>Filtered drinking water on tap in the kitchen</small></div></div>
-        <div class="item"><span class="dot">iii.</span><div><b>A/C in Every Room</b><small>Individually cooled bedrooms &amp; living spaces</small></div></div>
-        <div class="item"><span class="dot">iv.</span><div><b>Washer, Dryer &amp; Vacuum</b><small>Full-size in-unit laundry, move-in ready</small></div></div>
-        <div class="item"><span class="dot">v.</span><div><b>4 BR · 4.5 BA · Sleeps 10</b><small>Fully furnished across four light-filled stories</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-kitchen"/></svg><div><b data-es="Cocina de Chef Remodelada">Remodeled Chef's Kitchen</b><small data-es="Tope de inducción · acero inoxidable · abierta a la sala y el comedor">Induction cooktop · high-end stainless · open to the living &amp; dining room</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-water"/></svg><div><b data-es="Agua por Ósmosis Inversa">Reverse-Osmosis Water</b><small data-es="Agua filtrada para beber en la cocina">Filtered drinking water on tap in the kitchen</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-snow"/></svg><div><b data-es="Aire Acondicionado en Cada Cuarto">A/C in Every Room</b><small data-es="Habitaciones y áreas con control independiente">Individually cooled bedrooms &amp; living spaces</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-washer"/></svg><div><b data-es="Lavadora, Secadora y Aspiradora">Washer, Dryer &amp; Vacuum</b><small data-es="Lavandería completa en la casa, lista para usar">Full-size in-unit laundry, move-in ready</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-bed"/></svg><div><b data-es="4 Hab · 4.5 Baños · Para 10">4 BR · 4.5 BA · Sleeps 10</b><small data-es="Totalmente amueblada en cuatro niveles llenos de luz">Fully furnished across four light-filled stories</small></div></div>
       </div>
     </div>
 
     <div class="tier">
-      <span class="lab">Power, Water &amp; Security</span>
+      <span class="lab" data-es="Energía, Agua y Seguridad">Power, Water &amp; Security</span>
       <div class="amen">
-        <div class="item"><span class="dot">i.</span><div><b>Whole-Home Generator</b><small>Never lose power — total peace of mind</small></div></div>
-        <div class="item"><span class="dot">ii.</span><div><b>Cistern Water Reserve</b><small>Never lose water</small></div></div>
-        <div class="item"><span class="dot">iii.</span><div><b>24-Hour Gated Security</b><small>Controlled access &amp; round-the-clock guards</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-bolt"/></svg><div><b data-es="Generador para Toda la Casa">Whole-Home Generator</b><small data-es="Nunca te quedas sin luz — total tranquilidad">Never lose power — total peace of mind</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-tank"/></svg><div><b data-es="Cisterna de Reserva de Agua">Cistern Water Reserve</b><small data-es="Nunca te quedas sin agua">Never lose water</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-shield"/></svg><div><b data-es="Seguridad 24 Horas con Control de Acceso">24-Hour Gated Security</b><small data-es="Acceso controlado y guardias las 24 horas">Controlled access &amp; round-the-clock guards</small></div></div>
       </div>
     </div>
 
     <div class="tier">
-      <span class="lab">Garage &amp; EV</span>
+      <span class="lab" data-es="Garaje y Auto Eléctrico">Garage &amp; EV</span>
       <div class="amen">
-        <div class="item"><span class="dot">i.</span><div><b>Air-Conditioned Garage</b><small>Climate-controlled storage or vehicle</small></div></div>
-        <div class="item"><span class="dot">ii.</span><div><b>Tesla Wall Charger</b><small>EV charging inside the garage</small></div></div>
-        <div class="item"><span class="dot">iii.</span><div><b>Room for a Car + Remote</b><small>Plus a driveway for two &amp; two reserved spaces — parking for four</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-garage"/></svg><div><b data-es="Garaje con Aire Acondicionado">Air-Conditioned Garage</b><small data-es="Espacio con clima controlado para auto o almacenaje">Climate-controlled storage or vehicle</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-plug"/></svg><div><b data-es="Cargador de Pared Tesla">Tesla Wall Charger</b><small data-es="Carga tu auto eléctrico dentro del garaje">EV charging inside the garage</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-parking"/></svg><div><b data-es="Espacio para un Auto + Control">Room for a Car + Remote</b><small data-es="Más entrada para dos y dos espacios reservados — estacionamiento para cuatro">Plus a driveway for two &amp; two reserved spaces — parking for four</small></div></div>
       </div>
     </div>
 
     <div class="tier">
-      <span class="lab">Outdoor Living</span>
+      <span class="lab" data-es="Vida al Aire Libre">Outdoor Living</span>
       <div class="amen">
-        <div class="item"><span class="dot">i.</span><div><b>Rooftop Hot Tub</b><small>Under the stars, on the roof</small></div></div>
-        <div class="item"><span class="dot">ii.</span><div><b>Covered Patio</b><small>Outdoor TV, fire pit &amp; ceiling fans</small></div></div>
-        <div class="item"><span class="dot">iii.</span><div><b>Balconies &amp; Terraces</b><small>Two balconies, three terraces &amp; shaded grilling</small></div></div>
-        <div class="item"><span class="dot">iv.</span><div><b>Ocean &amp; Fairway Views</b><small>Wrapped by the golf course, ocean to the north</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-hottub"/></svg><div><b data-es="Jacuzzi en la Azotea">Rooftop Hot Tub</b><small data-es="Bajo las estrellas, en la azotea">Under the stars, on the roof</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-flame"/></svg><div><b data-es="Terraza Techada">Covered Patio</b><small data-es="TV exterior, fogata y abanicos de techo">Outdoor TV, fire pit &amp; ceiling fans</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-railing"/></svg><div><b data-es="Balcones y Terrazas">Balconies &amp; Terraces</b><small data-es="Dos balcones, tres terrazas y parrilla bajo sombra">Two balconies, three terraces &amp; shaded grilling</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-view"/></svg><div><b data-es="Vistas al Mar y al Golf">Ocean &amp; Fairway Views</b><small data-es="Rodeada por el campo de golf, con el mar al norte">Wrapped by the golf course, ocean to the north</small></div></div>
       </div>
     </div>
 
     <div class="tier">
-      <span class="lab">Beach &amp; Bike Gear — Included</span>
+      <span class="lab" data-es="Equipo de Playa y Bicicletas — Incluido">Beach &amp; Bike Gear — Included</span>
       <div class="amen">
-        <div class="item"><span class="dot">i.</span><div><b>3 Boogie Boards</b><small>Grab &amp; go to the beach</small></div></div>
-        <div class="item"><span class="dot">ii.</span><div><b>Surf &amp; Skim Boards</b><small>One of each, ready to ride</small></div></div>
-        <div class="item"><span class="dot">iii.</span><div><b>2 Mountain Bikes</b><small>Explore the resort on two wheels</small></div></div>
-        <div class="item"><span class="dot">iv.</span><div><b>Pickleball Paddles &amp; Balls</b><small>For the resort courts</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-wave"/></svg><div><b data-es="3 Tablas Boogie">3 Boogie Boards</b><small data-es="Listas para la playa">Grab &amp; go to the beach</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-surf"/></svg><div><b data-es="Tabla de Surf y Skim">Surf &amp; Skim Boards</b><small data-es="Una de cada una, listas para usar">One of each, ready to ride</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-bike"/></svg><div><b data-es="2 Bicicletas de Montaña">2 Mountain Bikes</b><small data-es="Recorre el resort sobre dos ruedas">Explore the resort on two wheels</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-paddle"/></svg><div><b data-es="Raquetas y Bolas de Pickleball">Pickleball Paddles &amp; Balls</b><small data-es="Para las canchas del resort">For the resort courts</small></div></div>
       </div>
     </div>
 
     <div class="tier">
-      <span class="lab">Steps Away &amp; The Resort</span>
+      <span class="lab" data-es="A Pasos y El Resort">Steps Away &amp; The Resort</span>
       <div class="amen">
-        <div class="item"><span class="dot">i.</span><div><b>Gated Pool</b><small>5-minute walk · gated for safety</small></div></div>
-        <div class="item"><span class="dot">ii.</span><div><b>Beach Access</b><small>Calm &amp; walkable, set back from the current</small></div></div>
-        <div class="item"><span class="dot">iii.</span><div><b>Championship Golf</b><small>Chi Chi Rodríguez-designed 18-hole course</small></div></div>
-        <div class="item"><span class="dot">iv.</span><div><b>Courts</b><small>Tennis · pickleball · basketball</small></div></div>
-        <div class="item"><span class="dot">v.</span><div><b>Casino &amp; Dining</b><small>Casino + several restaurants on-property</small></div></div>
-        <div class="item"><span class="dot">vi.</span><div><b>Family Fun</b><small>Go-karts · bowling · arcade</small></div></div>
-        <div class="item"><span class="dot">vii.</span><div><b>Embassy Suites Next Door</b><small>Room for overflow guests</small></div></div>
-        <div class="item"><span class="dot">viii.</span><div><b>Dorado Beach Resort</b><small>Experience available by request</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-pool"/></svg><div><b data-es="Piscina con Portón">Gated Pool</b><small data-es="A 5 minutos a pie · cerrada por seguridad">5-minute walk · gated for safety</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-umbrella"/></svg><div><b data-es="Acceso a la Playa">Beach Access</b><small data-es="Tranquila y caminable, protegida de la corriente">Calm &amp; walkable, set back from the current</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-golf"/></svg><div><b data-es="Golf de Campeonato">Championship Golf</b><small data-es="Campo de 18 hoyos diseñado por Chi Chi Rodríguez">Chi Chi Rodríguez-designed 18-hole course</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-tennis"/></svg><div><b data-es="Canchas">Courts</b><small data-es="Tenis · pickleball · baloncesto">Tennis · pickleball · basketball</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-dice"/></svg><div><b data-es="Casino y Restaurantes">Casino &amp; Dining</b><small data-es="Casino y varios restaurantes en el resort">Casino + several restaurants on-property</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-game"/></svg><div><b data-es="Diversión Familiar">Family Fun</b><small data-es="Go-karts · bolos · arcade">Go-karts · bowling · arcade</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-building"/></svg><div><b data-es="Embassy Suites al Lado">Embassy Suites Next Door</b><small data-es="Espacio para invitados adicionales">Room for overflow guests</small></div></div>
+        <div class="item"><svg class="ic"><use href="#ic-star"/></svg><div><b data-es="Dorado Beach Resort">Dorado Beach Resort</b><small data-es="Experiencia disponible a solicitud">Experience available by request</small></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 04 feature: under the stars -->
+<!-- 05 feature: under the stars -->
 <section class="feature">
-  <div class="wrap"><span class="num">04 — The Signature</span></div>
+  <div class="wrap"><span class="num" data-es="05 — Lo Distintivo">05 — The Signature</span></div>
   <div class="wrap" style="margin-top:16px;">
     <div class="fph shot" style="background-image:linear-gradient(180deg,rgba(26,63,59,.44),rgba(26,63,59,.12) 55%,rgba(26,63,59,.42)),url('diponyeo-hottub.jpg')"></div>
     <div class="cap">
-      <h2>Under the <em>Stars</em></h2>
-      <p class="lead">A rooftop hot tub with nothing above you but the Caribbean night — ocean on one side, the fairway on the other. The quiet centerpiece of every stay.</p>
+      <h2 data-es="Bajo las <em>Estrellas</em>">Under the <em>Stars</em></h2>
+      <p class="lead" data-es="Un jacuzzi en la azotea con nada más que la noche caribeña encima — el mar de un lado, el campo de golf del otro. El corazón tranquilo de cada estadía.">A rooftop hot tub with nothing above you but the Caribbean night — ocean on one side, the fairway on the other. The quiet centerpiece of every stay.</p>
     </div>
   </div>
 </section>
 
-<!-- 05 the area -->
+<!-- 06 the area -->
 <section class="band">
   <div class="wrap split rev">
     <div>
-      <span class="num">05 — The Area</span>
+      <span class="num" data-es="06 — La Zona">06 — The Area</span>
       <h2>Dorado,<br>Puerto Rico</h2>
-      <p class="lead">A polished stretch of Puerto Rico's north coast — calm beaches, championship golf, and easy Caribbean living, a short drive west of San Juan. Close enough for a night out, far enough to actually unwind.</p>
+      <p class="lead" data-es="Un rincón cuidado de la costa norte de Puerto Rico — playas tranquilas, golf de campeonato y buena vida caribeña, a poca distancia al oeste de San Juan. Cerca para salir de noche, lejos para de verdad descansar.">A polished stretch of Puerto Rico's north coast — calm beaches, championship golf, and easy Caribbean living, a short drive west of San Juan. Close enough for a night out, far enough to actually unwind.</p>
     </div>
-    <div class="ph shot" style="min-height:370px;background-image:url('https://doradodelmarclub.com/wp-content/uploads/2025/10/DJI_0804-1620x1080.jpg')"></div>
+    <div class="ph shot" style="min-height:370px;background-image:url('diponyeo-area-ddm.jpg')"></div>
   </div>
 </section>
 
-<!-- 06 gallery -->
+<!-- 07 gallery -->
 <section>
   <div class="wrap center" style="margin-bottom:32px;">
-    <span class="num">06 — At Your Door</span>
-    <h2>The Resort &amp; Club</h2>
-    <p class="lead">The Dorado del Mar Golf Club &amp; resort — championship golf, courts, clubhouse dining, and game rooms, all a short walk or cart ride from the villa.</p>
+    <span class="num" data-es="07 — A Tu Puerta">07 — At Your Door</span>
+    <h2 data-es="El Resort y Club">The Resort &amp; Club</h2>
+    <p class="lead" data-es="El Dorado del Mar Golf Club y resort — golf de campeonato, canchas, restaurantes del club y salas de juego, todo a poca distancia a pie o en carrito desde la villa.">The Dorado del Mar Golf Club &amp; resort — championship golf, courts, clubhouse dining, and game rooms, all a short walk or cart ride from the villa.</p>
   </div>
   <div class="wrap">
     <div class="grid5">
@@ -325,49 +388,49 @@
       <div class="ph shot" style="background-image:url('diponyeo-hotel-atrium.jpg')"></div>
       <div class="ph shot" style="background-image:url('diponyeo-hotel-lobby.jpg')"></div>
     </div>
-    <div class="center anno" style="margin-top:18px;">The resort pool, championship golf, ocean-view clubhouse dining, the game room, pickleball courts, playground, and the Embassy Suites resort atrium &amp; lobby — photographed at the Dorado del Mar Golf Club &amp; resort, shared with permission.</div>
+    <div class="center anno" style="margin-top:18px;" data-es="La piscina del resort, el golf de campeonato, el restaurante del club con vista al mar, la sala de juegos, las canchas de pickleball, el parque y el atrio y lobby del Embassy Suites — fotografiados en el Dorado del Mar Golf Club y resort, compartidos con permiso.">The resort pool, championship golf, ocean-view clubhouse dining, the game room, pickleball courts, playground, and the Embassy Suites resort atrium &amp; lobby — photographed at the Dorado del Mar Golf Club &amp; resort, shared with permission.</div>
   </div>
 </section>
 
-<!-- 07 reviews -->
+<!-- 08 reviews -->
 <section class="reviews center">
   <div class="wrap">
-    <span class="num">07</span>
-    <p class="quote">"The rooftop under the stars, the walk to the beach, room for our whole family — we've already booked again."
+    <span class="num">08</span>
+    <p class="quote" data-es="&quot;La azotea bajo las estrellas, la caminata a la playa, espacio para toda la familia — ya reservamos otra vez.&quot;<span class=&quot;attr&quot;>Reseña de huésped — ejemplo hasta tus primeras estadías</span>">"The rooftop under the stars, the walk to the beach, room for our whole family — we've already booked again."
       <span class="attr">Guest review — placeholder until your first stays</span>
     </p>
   </div>
 </section>
 
-<!-- 07b long-term rental -->
+<!-- 08b long-term rental -->
 <section style="background:var(--teal);border-top:1px solid rgba(255,255,255,.10);">
   <div class="wrap center" style="padding:66px 0;">
-    <span class="num" style="color:#E4D5BE;">Also Available</span>
-    <h2 style="color:#FBF7EF;">Long-Term Rental, <em>Available Now</em></h2>
-    <div style="font-family:var(--serif);font-size:42px;line-height:1;color:#F6F0E6;margin:12px 0 2px;">$8,000<span style="font-family:var(--sans);font-weight:300;font-size:15px;letter-spacing:.02em;color:rgba(246,240,230,.75);"> / month · fully furnished</span></div>
-    <p class="lead" style="color:rgba(246,240,230,.86);max-width:660px;margin:12px auto 0;">A perfect home for raising a young family — where kids can play safely, walk or ride to school and back, and grow up independent in the great outdoors.</p>
-    <a class="btn solid" href="#book" style="margin-top:26px;display:inline-block;">Inquire About a Long-Term Stay</a>
+    <span class="num" style="color:#E4D5BE;" data-es="También Disponible">Also Available</span>
+    <h2 style="color:#FBF7EF;" data-es="Alquiler a Largo Plazo, <em>Disponible Ahora</em>">Long-Term Rental, <em>Available Now</em></h2>
+    <div style="font-family:var(--serif);font-size:42px;line-height:1;color:#F6F0E6;margin:12px 0 2px;">$8,000<span style="font-family:var(--sans);font-weight:300;font-size:15px;letter-spacing:.02em;color:rgba(246,240,230,.75);" data-es=" / mes · totalmente amueblado"> / month · fully furnished</span></div>
+    <p class="lead" style="color:rgba(246,240,230,.86);max-width:660px;margin:12px auto 0;" data-es="Un hogar ideal para criar una familia joven — donde los niños juegan seguros, van y vuelven de la escuela a pie o en bici, y crecen independientes al aire libre.">A perfect home for raising a young family — where kids can play safely, walk or ride to school and back, and grow up independent in the great outdoors.</p>
+    <a class="btn solid" href="#book" style="margin-top:26px;display:inline-block;" data-es="Consulta por una Estadía Larga">Inquire About a Long-Term Stay</a>
   </div>
 </section>
 
-<!-- 08 booking -->
+<!-- 09 booking -->
 <section id="book">
   <div class="wrap">
-    <span class="num">08 — Reserve</span>
-    <h2>Request your stay</h2>
-    <p class="lead">Tell us your dates and we'll confirm availability personally. Booking direct is always the best rate.</p>
+    <span class="num" data-es="09 — Reserva">09 — Reserve</span>
+    <h2 data-es="Solicita tu estadía">Request your stay</h2>
+    <p class="lead" data-es="Cuéntanos tus fechas y confirmamos disponibilidad personalmente. Reservar directo siempre es el mejor precio.">Tell us your dates and we'll confirm availability personally. Booking direct is always the best rate.</p>
     <div class="book">
       <form class="form" onsubmit="return false;">
-        <div class="rateline full">From <b>$650</b> / night · best rate when you book direct</div>
-        <div class="field">First name</div>
-        <div class="field">Last name</div>
-        <div class="field">Email</div>
-        <div class="field">Phone</div>
-        <div class="field">Check-in</div>
-        <div class="field">Check-out</div>
-        <div class="field full">Guests (sleeps up to 10)</div>
-        <div class="field full" style="min-height:96px;">Message — tell us about your trip</div>
-        <button class="submit">Send Request</button>
+        <div class="rateline full" data-es="Desde <b>$650</b> / noche · el mejor precio al reservar directo">From <b>$650</b> / night · best rate when you book direct</div>
+        <div class="field" data-es="Nombre">First name</div>
+        <div class="field" data-es="Apellido">Last name</div>
+        <div class="field" data-es="Correo electrónico">Email</div>
+        <div class="field" data-es="Teléfono">Phone</div>
+        <div class="field" data-es="Llegada">Check-in</div>
+        <div class="field" data-es="Salida">Check-out</div>
+        <div class="field full" data-es="Huéspedes (hasta 10)">Guests (sleeps up to 10)</div>
+        <div class="field full" style="min-height:96px;" data-es="Mensaje — cuéntanos sobre tu viaje">Message — tell us about your trip</div>
+        <button class="submit" data-es="Enviar solicitud">Send Request</button>
       </form>
       <aside class="devnote">
         <span class="devlabel">Developer's note — not shown on the live site</span>
@@ -375,6 +438,7 @@
         <p>Rates are per night. Booking direct skips the ~15% platform guest fee.</p>
         <p><b>Manual booking (your chosen setup):</b> this form emails you the request (e.g., via Formspree) — there's no instant online checkout. You confirm the dates by hand and send a secure payment link, which keeps you in control and naturally prevents double-bookings.</p>
         <p><b>Also listed on</b> Airbnb · VRBO · Booking.com — but direct is the best price. Keep one master calendar and sync the three via iCal so dates never clash.</p>
+        <p><b>Bilingual:</b> the EN / ES toggle (top bar) auto-detects the visitor's browser language and remembers their choice. Spanish copy is localized, not machine-translated.</p>
       </aside>
     </div>
   </div>
@@ -384,13 +448,38 @@
   <div class="wrap">
     <div class="col">
       <div class="wordmark"><span class="the">The</span>DiPonyeo Villa</div>
-      <div class="fdesc">Dorado del Mar, Puerto Rico<br>An elevated tropical retreat</div>
+      <div class="fdesc" data-es="Dorado del Mar, Puerto Rico<br>Un refugio tropical elevado">Dorado del Mar, Puerto Rico<br>An elevated tropical retreat</div>
     </div>
-    <div class="col"><b>Explore</b>The Villa<br>Amenities<br>The Area<br>Gallery</div>
-    <div class="col"><b>Book</b>Request a Stay<br>Best-Rate Direct<br>Airbnb · VRBO · Booking</div>
-    <div class="col"><b>Contact</b>hello@diponyeovilla.com<br>Instagram<br>Managed by [LLC name]</div>
+    <div class="col"><b data-es="Explorar">Explore</b><span data-es="La Villa">The Villa</span><br><span data-es="Comodidades">Amenities</span><br><span data-es="La Zona">The Area</span><br><span data-es="Galería">Gallery</span></div>
+    <div class="col"><b data-es="Reservar">Book</b><span data-es="Solicita una Estadía">Request a Stay</span><br><span data-es="Mejor Precio Directo">Best-Rate Direct</span><br>Airbnb · VRBO · Booking</div>
+    <div class="col"><b data-es="Contacto">Contact</b>hello@diponyeovilla.com<br>Instagram<br><span data-es="Administrada por [nombre LLC]">Managed by [LLC name]</span></div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var nodes = document.querySelectorAll('[data-es]');
+  nodes.forEach(function(n){ if(!n.hasAttribute('data-en')) n.setAttribute('data-en', n.innerHTML); });
+  function setLang(l){
+    document.documentElement.lang = l;
+    nodes.forEach(function(n){
+      var v = (l === 'es') ? n.getAttribute('data-es') : n.getAttribute('data-en');
+      if(v !== null) n.innerHTML = v;
+    });
+    document.querySelectorAll('.langtog a').forEach(function(a){
+      a.classList.toggle('on', a.getAttribute('data-lang') === l);
+    });
+    try{ localStorage.setItem('villa-lang', l); }catch(e){}
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem('villa-lang'); }catch(e){}
+  var auto = (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+  setLang(saved || auto);
+  document.querySelectorAll('.langtog a').forEach(function(a){
+    a.addEventListener('click', function(){ setLang(a.getAttribute('data-lang')); });
+  });
+})();
+</script>
 
 </body>
 </html>
