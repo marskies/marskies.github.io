@@ -75,8 +75,9 @@
   /* inside — interior look */
   .insidewrap{margin-top:20px;}
   .insidebig{height:230px;border-radius:8px;margin-bottom:8px;}
-  .inside3{display:flex;gap:8px;}
-  .inside3 .mph{flex:1;min-height:120px;border-radius:8px;}
+  .inside3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+  .inside3 .mph{min-width:0;overflow:hidden;min-height:120px;border-radius:8px;padding:10px 5px;}
+  .inside3 .mph .ptag{font-size:8.5px;letter-spacing:.12em;}
   .inside3 .mph .pdesc{font-size:13px;}
 
   /* amenities — icon list */
