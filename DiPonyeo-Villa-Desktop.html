@@ -115,7 +115,8 @@
   .feature .fph{min-height:470px;background:linear-gradient(150deg,#245450,#17423e 70%,#123331);border:1px solid rgba(246,240,230,.14);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;position:relative;border-radius:2px;color:rgba(246,240,230,.7);}
   .feature .fph .ptag{color:var(--sand);font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
   .feature .fph .pdesc{font-family:var(--serif);font-style:italic;font-size:16px;color:rgba(246,240,230,.72);}
-  .feature .cap{position:relative;margin-top:-120px;margin-left:44px;background:var(--ivory);color:var(--ink);border:1px solid var(--line);max-width:460px;padding:36px 38px;border-radius:2px;box-shadow:0 20px 50px rgba(0,0,0,.18);}
+  .feature .capwrap{position:relative;}
+  .feature .cap{position:absolute;top:32px;left:44px;background:var(--ivory);color:var(--ink);border:1px solid var(--line);max-width:400px;padding:30px 34px;border-radius:2px;box-shadow:0 22px 55px rgba(0,0,0,.34);}
   .feature .cap h2{font-size:40px;}
   .feature .cap em{color:var(--clay);}
   .feature .cap .lead{font-size:16px;}
@@ -164,7 +165,7 @@
     .inside4 .ph:nth-child(3){grid-column:span 2;}
     .navlinks,.util .wrap span.hidem{display:none;}
     .wrap{padding:0 24px;}
-    .feature .cap{margin-left:24px;margin-right:24px;}
+    .feature .cap{position:static;margin:14px 24px 0;max-width:none;}
   }
   /* larger, more readable base sizes */
   .lead{font-size:19.5px;line-height:1.66;}
@@ -390,7 +391,7 @@
 <!-- 05 feature: under the stars -->
 <section class="feature">
   <div class="wrap"><span class="num" data-es="05 · Lo Distintivo">05 · The Signature</span></div>
-  <div class="wrap" style="margin-top:16px;">
+  <div class="wrap capwrap" style="margin-top:16px;">
     <div class="fph shot" style="background-image:linear-gradient(180deg,rgba(10,20,30,.16),rgba(10,20,30,.04) 50%,rgba(10,20,30,.30)),url('diponyeo-hottub-stars.jpg');background-position:center 85% !important;"></div>
     <div class="cap">
       <h2 data-es="Bajo las <em>Estrellas</em>">Under the <em>Stars</em></h2>
