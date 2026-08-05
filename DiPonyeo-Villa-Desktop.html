@@ -88,8 +88,16 @@
   .collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:210px 150px;gap:14px;}
   .collage .ph:first-child{grid-column:1 / span 2;}
 
+  html{scroll-behavior:smooth;}
+  /* suites — bedrooms + their baths */
+  .suites{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px;}
+  .suite{display:flex;flex-direction:column;gap:9px;}
+  .suite .rname{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);}
+  .suite .bed{height:230px;border-radius:3px;}
+  .suite .bath{height:116px;border-radius:3px;}
+
   /* inside — interior look */
-  .inside4{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px;margin-top:36px;}
+  .inside4{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px;margin-top:36px;}
   .inside4 .ph:nth-child(3){grid-column:span 2;grid-row:span 1;}
 
   /* amenities — icon grid, all visible */
@@ -152,7 +160,7 @@
     .split,.split.rev,.book{grid-template-columns:1fr;gap:30px;}
     .amen{grid-template-columns:1fr 1fr;}
     .grid5{grid-template-columns:repeat(2,1fr);}
-    .inside4{grid-template-columns:repeat(2,1fr);}
+    .inside4,.suites{grid-template-columns:repeat(2,1fr);}
     .inside4 .ph:nth-child(3){grid-column:span 2;}
     .navlinks,.util .wrap span.hidem{display:none;}
     .wrap{padding:0 24px;}
@@ -209,7 +217,7 @@
 <!-- nav -->
 <nav>
   <div class="wrap">
-    <div class="navlinks"><a data-es="La Villa">The Villa</a><a data-es="Comodidades">Amenities</a><a data-es="La Zona">The Area</a><a data-es="Galería">Gallery</a></div>
+    <div class="navlinks"><a href="#villa" data-es="La Villa">The Villa</a><a href="#amenities" data-es="Comodidades">Amenities</a><a href="#area" data-es="La Zona">The Area</a><a href="#gallery" data-es="Galería">Gallery</a></div>
     <div class="wordmark"><span class="the">The</span>DiPonyeo Villa</div>
     <a class="btn solid" href="#book" data-es="Reserva">Request Stay</a>
   </div>
@@ -238,18 +246,35 @@
   </div>
 </section>
 
-<!-- 02 the villa -->
-<section>
-  <div class="wrap split">
-    <div class="collage">
-      <div class="ph shot" style="background-image:url('diponyeo-bedroom-master.jpg')"></div>
-      <div class="ph shot" style="background-image:url('diponyeo-bedroom2.jpg')"></div>
-      <div class="ph shot" style="background-image:url('diponyeo-bedroom-kids.jpg')"></div>
-    </div>
-    <div>
-      <span class="num" data-es="02 — La Villa">02 — The Villa</span>
-      <h2 data-es="Espacio para diez,<br>hecho para reunirse">Room for ten,<br>built for gathering</h2>
-      <p class="lead" data-es="Cuatro habitaciones llenas de luz y cuatro baños y medio en una casa cómoda para diez — cada cuarto su propio rincón tranquilo, con una terraza sombreada para la parrilla y una azotea que se vuelve el mejor lugar de la casa al anochecer.">Four light-filled bedrooms and four and a half baths across an easy home that sleeps ten — each room its own quiet corner, with a shaded terrace for grilling and a rooftop that becomes the best seat in the house after dark.</p>
+<!-- 02 the villa (bedrooms + baths) -->
+<section id="villa">
+  <div class="wrap center">
+    <span class="num" data-es="02 — La Villa">02 — The Villa</span>
+    <h2 data-es="Espacio para diez,<br>hecho para reunirse">Room for ten,<br>built for gathering</h2>
+    <p class="lead" data-es="Cuatro habitaciones llenas de luz y cuatro baños y medio en una casa cómoda para diez — cada cuarto su propio rincón tranquilo, con una terraza sombreada para la parrilla y una azotea que se vuelve el mejor lugar de la casa al anochecer.">Four light-filled bedrooms and four and a half baths across an easy home that sleeps ten — each room its own quiet corner, with a shaded terrace for grilling and a rooftop that becomes the best seat in the house after dark.</p>
+  </div>
+  <div class="wrap">
+    <div class="suites">
+      <div class="suite">
+        <span class="rname" data-es="Habitación Principal">Primary Suite</span>
+        <div class="bed ph shot" style="background-image:url('diponyeo-bedroom-master.jpg')"></div>
+        <div class="bath ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
+      <div class="suite">
+        <span class="rname" data-es="Habitación 2">Bedroom 2</span>
+        <div class="bed ph shot" style="background-image:url('diponyeo-bedroom2.jpg')"></div>
+        <div class="bath ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
+      <div class="suite">
+        <span class="rname" data-es="Habitación de Niños">Kids' Room</span>
+        <div class="bed ph shot" style="background-image:url('diponyeo-bedroom-kids.jpg')"></div>
+        <div class="bath ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
+      <div class="suite">
+        <span class="rname" data-es="Habitación 4">Bedroom 4</span>
+        <div class="bed ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Habitación 4">Bedroom 4</span></div>
+        <div class="bath ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -259,7 +284,7 @@
   <div class="wrap center">
     <span class="num" data-es="03 — Por Dentro">03 — A Look Inside</span>
     <h2 data-es="Los espacios que vas a vivir">The spaces you'll live in</h2>
-    <p class="lead" data-es="La fotografía de interiores viene en camino. Aquí un primer vistazo — empezando por el garaje con aire acondicionado y su cargador de pared Tesla — con la sala, la cocina y el comedor próximamente.">Interior photography is on the way. Here's a first look — starting with the air-conditioned garage and its Tesla wall charger — with the living room, kitchen, and dining room to follow.</p>
+    <p class="lead" data-es="La fotografía de interiores viene en camino. Aquí un primer vistazo — empezando por el garaje con aire acondicionado y su cargador de pared Tesla — con las salas, la cocina, el comedor, la lavandería y el patio próximamente.">Interior photography is on the way. Here's a first look — starting with the air-conditioned garage and its Tesla wall charger — with the living rooms, kitchen, dining, laundry, and patio to follow.</p>
   </div>
   <div class="wrap">
     <div class="inside4">
@@ -267,12 +292,15 @@
       <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Cocina">Kitchen</span></div>
       <div class="ph shot" style="background-image:url('diponyeo-garage-ev.jpg')"><span class="cap-chip" data-es="El garaje — cargador Tesla, listo para autos eléctricos">The garage — Tesla wall charger, EV-ready</span></div>
       <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Comedor">Dining room</span></div>
+      <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Segunda Sala">Second living room</span></div>
+      <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Lavandería">Laundry room</span></div>
+      <div class="ph"><span class="ptag" data-es="Foto próximamente">Photo coming</span><span class="pdesc" data-es="Patio">Patio</span></div>
     </div>
   </div>
 </section>
 
 <!-- 04 amenities -->
-<section>
+<section id="amenities">
   <div class="wrap">
     <div class="center">
       <span class="num">04</span>
@@ -358,7 +386,7 @@
 </section>
 
 <!-- 06 the area -->
-<section class="band">
+<section class="band" id="area">
   <div class="wrap split rev">
     <div>
       <span class="num" data-es="06 — La Zona">06 — The Area</span>
@@ -370,7 +398,7 @@
 </section>
 
 <!-- 07 gallery -->
-<section>
+<section id="gallery">
   <div class="wrap center" style="margin-bottom:32px;">
     <span class="num" data-es="07 — A Tu Puerta">07 — At Your Door</span>
     <h2 data-es="El Resort y Club">The Resort &amp; Club</h2>
@@ -452,7 +480,7 @@
     </div>
     <div class="col"><b data-es="Explorar">Explore</b><span data-es="La Villa">The Villa</span><br><span data-es="Comodidades">Amenities</span><br><span data-es="La Zona">The Area</span><br><span data-es="Galería">Gallery</span></div>
     <div class="col"><b data-es="Reservar">Book</b><span data-es="Solicita una Estadía">Request a Stay</span><br><span data-es="Mejor Precio Directo">Best-Rate Direct</span><br>Airbnb · VRBO · Booking</div>
-    <div class="col"><b data-es="Contacto">Contact</b>hello@diponyeovilla.com<br>Instagram<br><span data-es="Administrada por [nombre LLC]">Managed by [LLC name]</span></div>
+    <div class="col"><b data-es="Contacto">Contact</b>hello@diponyeovilla.com<br>Instagram<br><span data-es="Administrada por Bracetti Holdings">Managed by Bracetti Holdings</span></div>
   </div>
 </footer>
 

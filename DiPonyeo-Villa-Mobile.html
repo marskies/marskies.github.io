@@ -14,6 +14,7 @@
     --ph:#e7ddcd; --serif:'Fraunces',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{background:#cdd3ce;font-family:var(--sans);font-weight:300;color:var(--ink);-webkit-font-smoothing:antialiased;padding:26px 0 40px;}
   body:before{content:"";position:fixed;inset:0;background:linear-gradient(160deg,#b9c7c2,#cdd3ce 40%,#d7ccbb);z-index:-1;}
 
@@ -79,6 +80,16 @@
   .inside3 .mph{min-width:0;overflow:hidden;min-height:120px;border-radius:8px;padding:10px 5px;}
   .inside3 .mph .ptag{font-size:8.5px;letter-spacing:.12em;}
   .inside3 .mph .pdesc{font-size:13px;}
+
+  /* suites — bedrooms + their baths */
+  .suites{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+  .suite{display:flex;flex-direction:column;gap:6px;}
+  .suite .rname{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);}
+  .suite .bed{height:128px;border-radius:8px;}
+  .suite .bath{height:72px;border-radius:8px;}
+  .suite .mph{min-height:0;padding:8px 6px;}
+  .suite .mph .ptag{font-size:8px;letter-spacing:.1em;}
+  .suite .mph .pdesc{font-size:12px;}
 
   /* amenities — icon list */
   .tier{margin-top:28px;}
@@ -214,15 +225,32 @@
     <p class="lead" data-es="Dentro del Dorado del Mar Beach &amp; Golf Resort, en la tranquila costa norte de Puerto Rico — un refugio de cuatro habitaciones hecho para reunirse y para descansar. Termina cada noche en el jacuzzi de la azotea bajo el cielo caribeño.">Inside the Dorado del Mar Beach &amp; Golf Resort on Puerto Rico's calm north coast — a four-bedroom retreat built for gathering and for stillness. End each night in the rooftop hot tub beneath an open Caribbean sky.</p>
   </section>
 
-  <!-- 02 the villa -->
+  <!-- 02 the villa (bedrooms + baths) -->
   <section id="villa" class="pad">
     <span class="num" data-es="02 — La Villa">02 — The Villa</span>
     <h2 data-es="Espacio para diez,<br>hecho para reunirse">Room for ten,<br>built for gathering</h2>
-    <p class="lead" style="margin-bottom:20px;" data-es="Cuatro habitaciones llenas de luz, cuatro baños y medio, para diez — cada una su rincón tranquilo, con una terraza sombreada para la parrilla y una azotea que se vuelve el mejor lugar al anochecer.">Four light-filled bedrooms, four and a half baths, sleeps ten — each its own quiet corner, with a shaded terrace for grilling and a rooftop that becomes the best seat in the house after dark.</p>
-    <div style="display:flex;gap:8px;">
-      <div class="shot" style="flex:1;height:150px;border-radius:10px;background-image:url('diponyeo-bedroom-master.jpg')"></div>
-      <div class="shot" style="flex:1;height:150px;border-radius:10px;background-image:url('diponyeo-bedroom2.jpg')"></div>
-      <div class="shot" style="flex:1;height:150px;border-radius:10px;background-image:url('diponyeo-bedroom-kids.jpg')"></div>
+    <p class="lead" data-es="Cuatro habitaciones llenas de luz, cuatro baños y medio, para diez — cada una su rincón tranquilo, con una terraza sombreada para la parrilla y una azotea que se vuelve el mejor lugar al anochecer.">Four light-filled bedrooms, four and a half baths, sleeps ten — each its own quiet corner, with a shaded terrace for grilling and a rooftop that becomes the best seat in the house after dark.</p>
+    <div class="suites">
+      <div class="suite">
+        <span class="rname" data-es="Habitación Principal">Primary Suite</span>
+        <div class="bed shot" style="background-image:url('diponyeo-bedroom-master.jpg')"></div>
+        <div class="bath mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
+      <div class="suite">
+        <span class="rname" data-es="Habitación 2">Bedroom 2</span>
+        <div class="bed shot" style="background-image:url('diponyeo-bedroom2.jpg')"></div>
+        <div class="bath mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
+      <div class="suite">
+        <span class="rname" data-es="Habitación de Niños">Kids' Room</span>
+        <div class="bed shot" style="background-image:url('diponyeo-bedroom-kids.jpg')"></div>
+        <div class="bath mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
+      <div class="suite">
+        <span class="rname" data-es="Habitación 4">Bedroom 4</span>
+        <div class="bed mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Habitación 4">Bedroom 4</span></div>
+        <div class="bath mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Baño">Bathroom</span></div>
+      </div>
     </div>
   </section>
 
@@ -231,7 +259,7 @@
     <div class="center">
       <span class="num" data-es="03 — Por Dentro">03 — A Look Inside</span>
       <h2 data-es="Los espacios que vas a vivir">The spaces you'll live in</h2>
-      <p class="lead" style="margin-top:8px;" data-es="La fotografía de interiores viene en camino — empezando por el garaje con su cargador Tesla, con la sala, la cocina y el comedor próximamente.">Interior photography is on the way — starting with the garage and its Tesla wall charger, with the living room, kitchen, and dining room to follow.</p>
+      <p class="lead" style="margin-top:8px;" data-es="La fotografía de interiores viene en camino — empezando por el garaje con su cargador Tesla, con las salas, la cocina, el comedor, la lavandería y el patio próximamente.">Interior photography is on the way — starting with the garage and its Tesla wall charger, with the living rooms, kitchen, dining, laundry, and patio to follow.</p>
     </div>
     <div class="insidewrap">
       <div class="shot insidebig" style="background-image:url('diponyeo-garage-ev.jpg')"><span class="cap-chip" data-es="El garaje — cargador Tesla, listo para autos eléctricos">The garage — Tesla wall charger, EV-ready</span></div>
@@ -239,6 +267,9 @@
         <div class="mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Sala">Living room</span></div>
         <div class="mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Cocina">Kitchen</span></div>
         <div class="mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Comedor">Dining</span></div>
+        <div class="mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Segunda Sala">2nd living</span></div>
+        <div class="mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Lavandería">Laundry</span></div>
+        <div class="mph"><span class="ptag" data-es="Próximamente">Coming</span><span class="pdesc" data-es="Patio">Patio</span></div>
       </div>
     </div>
   </section>
@@ -384,7 +415,7 @@
     <div class="wm"><span class="the">The</span>DiPonyeo Villa</div>
     <div class="fdesc" data-es="Dorado del Mar, Puerto Rico<br>Un refugio tropical elevado">Dorado del Mar, Puerto Rico<br>An elevated tropical retreat</div>
     <div class="col"><b data-es="Reservar">Book</b><span data-es="Solicita una Estadía · Mejor Precio Directo">Request a Stay · Best-Rate Direct</span><br>Airbnb · VRBO · Booking</div>
-    <div class="col"><b data-es="Contacto">Contact</b>hello@diponyeovilla.com<br><span data-es="Instagram · Administrada por [nombre LLC]">Instagram · Managed by [LLC name]</span></div>
+    <div class="col"><b data-es="Contacto">Contact</b>hello@diponyeovilla.com<br><span data-es="Instagram · Administrada por Bracetti Holdings">Instagram · Managed by Bracetti Holdings</span></div>
   </footer>
 
   <div class="spacer"></div>
