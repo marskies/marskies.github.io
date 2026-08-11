@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Doctors' Podcast — 20 concepts, colour systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Merriweather:ital,wght@0,400;0,900;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#FF9500;
+    --rose:#E9A3A9;
+    --rose-deep:#C75A6E;
+    --blush:#F2B5AC;
+    --dark:#16191D;
+    --black:#0A0C0E;
+    --off:#FAFAF8;
+    --blue:#9BB0C7;
+  }
+  /* colour systems: mark = structure, italic = voice, host = Lindsay, band = fields, light = accent on off-white */
+  body[data-pink="off"]{   --c-mark:#FF9500; --c-italic:#FF9500; --c-host:#9BB0C7; --c-band:#FF9500; --c-light:#FF9500; }
+  body[data-pink="host"]{  --c-mark:#FF9500; --c-italic:#FF9500; --c-host:#E9A3A9; --c-band:#FF9500; --c-light:#FF9500; }
+  body[data-pink="voice"]{ --c-mark:#FF9500; --c-italic:#E9A3A9; --c-host:#E9A3A9; --c-band:#E9A3A9; --c-light:#C75A6E; }
+  body[data-pink="rose"]{  --c-mark:#E9A3A9; --c-italic:#E9A3A9; --c-host:#E9A3A9; --c-band:#E9A3A9; --c-light:#C75A6E; }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--black);color:var(--off);
+    font-family:"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 28px 96px}
+
+  header h1{
+    font-family:Merriweather,Georgia,serif;font-weight:900;
+    letter-spacing:-.03em;line-height:1.02;font-size:clamp(34px,5vw,58px);margin:0 0 6px;
+  }
+  header h1 em{font-weight:300;font-style:italic;color:var(--c-italic)}
+  header .sub{color:var(--blue);font-size:15px;max-width:62ch;line-height:1.5;margin:0}
+
+  .switcher{
+    position:sticky;top:0;z-index:20;margin:34px -28px 0;padding:14px 28px;
+    background:rgba(10,12,14,.94);backdrop-filter:blur(8px);
+    border-top:1px solid #21262c;border-bottom:1px solid #21262c;
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px;
+  }
+  .switcher .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6d7a88;font-weight:700}
+  .switcher .btns{display:flex;flex-wrap:wrap;border:1px solid #2e343b}
+  .switcher button{
+    font-family:inherit;font-size:12px;letter-spacing:.06em;
+    background:transparent;color:#8f9daa;border:0;border-right:1px solid #2e343b;
+    padding:9px 15px;cursor:pointer;
+  }
+  .switcher button:last-child{border-right:0}
+  .switcher button:hover{color:var(--off)}
+  .switcher button[aria-pressed="true"]{background:var(--c-host);color:#0A0C0E;font-weight:700}
+  .switcher button:focus-visible{outline:2px solid var(--off);outline-offset:2px}
+  .switcher .now{font-size:12.5px;color:#8f9daa;max-width:46ch}
+
+  .notice{
+    border:1px solid #262b31;border-left:3px solid var(--c-host);
+    background:var(--dark);padding:20px 22px;margin:28px 0 8px;font-size:14px;line-height:1.6;
+  }
+  .notice h2{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-host);margin:0 0 12px;font-weight:700}
+  .notice p{margin:0 0 10px;color:#c9d2dc}
+  .notice p:last-child{margin:0}
+  .notice strong{color:var(--off)}
+  .notice code{color:#c9d2dc;font-size:12.5px}
+
+  .proof{display:flex;flex-wrap:wrap;gap:26px;margin:18px 0 4px;padding:16px 0 0;border-top:1px solid #262b31}
+  .proof figure{margin:0;display:flex;gap:11px;align-items:center}
+  .proof .sq{width:55px;height:55px;flex:0 0 auto;display:block}
+  .proof figcaption{font-size:11.5px;line-height:1.45;color:#8f9daa;max-width:19ch}
+  .proof code{color:#c9d2dc;font-size:11px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin:26px 0 0;font-size:12px;color:var(--blue)}
+
+  h2.territory{
+    font-family:Merriweather,Georgia,serif;font-weight:900;letter-spacing:-.03em;line-height:1.03;
+    font-size:30px;margin:64px 0 4px;padding-top:26px;border-top:1px solid #21262c;
+  }
+  h2.territory em{font-weight:300;font-style:italic;color:var(--c-italic)}
+  .terr-note{color:var(--blue);font-size:14px;line-height:1.55;margin:0 0 26px;max-width:72ch}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px}
+  .card{background:var(--dark);border:1px solid #22272d;padding:18px}
+  .renders{display:flex;gap:16px;align-items:flex-start}
+  .big{width:172px;height:172px;flex:0 0 auto;display:block}
+  .thumbs{display:flex;flex-direction:column;gap:12px;padding-top:2px}
+  .chip{display:flex;align-items:center;gap:9px}
+  .chip .pad{padding:9px;display:flex;line-height:0}
+  .chip .pad.light{background:var(--off)}
+  .chip .pad.dark{background:var(--black)}
+  .chip svg{width:55px;height:55px;display:block}
+  .chip small{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6d7a88}
+
+  .meta{margin-top:16px}
+  .idline{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+  .num{font-family:Merriweather,Georgia,serif;font-weight:900;font-size:20px;letter-spacing:-.03em}
+  .name{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:500}
+  .rationale{font-size:13.5px;line-height:1.55;color:#cfd7e0;margin:0 0 10px}
+  .pinknote{font-size:12.5px;line-height:1.5;color:#8f9daa;margin:0 0 14px;padding-left:10px;border-left:2px solid var(--c-host)}
+  .tags{display:flex;flex-wrap:wrap;gap:7px}
+  .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border:1px solid #2e343b;color:#8f9daa}
+  .tag.hold{border-color:#2f6b45;color:#5fd08c}
+  .tag.marg{border-color:#7a5a1c;color:#e0a944}
+  .tag.dies{border-color:#7a2f2f;color:#e06a6a}
+  .tag.safe{border-color:#2c4d6b;color:#78b3e0}
+  .tag.warn{border-color:#7a2f2f;color:#e06a6a}
+
+  footer{margin-top:72px;padding-top:26px;border-top:1px solid #21262c;color:var(--blue);font-size:13px;line-height:1.6;max-width:74ch}
+  footer strong{color:var(--off)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body data-pink="host">
+
+<!-- ===== concept definitions ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <pattern id="grille" width="15" height="15" patternUnits="userSpaceOnUse">
+    <circle cx="7.5" cy="7.5" r="5.4" fill="var(--c-mark)"/>
+  </pattern>
+</defs>
+
+<symbol id="c01" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <text x="34" y="94" font-family="DM Sans, sans-serif" font-weight="700" font-size="15" letter-spacing="4.5" fill="var(--c-host)">THE</text>
+  <text x="32" y="164" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="58" fill="#FAFAF8" textLength="238" lengthAdjust="spacingAndGlyphs">DOCTORS&#8217;</text>
+  <text x="32" y="224" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="56" fill="var(--c-italic)" textLength="216" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c02" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#0A0C0E"/>
+  <text x="150" y="196" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="160" fill="#FAFAF8" textLength="336" lengthAdjust="spacingAndGlyphs">DOC</text>
+  <rect x="0" y="224" width="300" height="11" fill="var(--c-mark)"/>
+  <text x="150" y="272" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="34" fill="var(--c-host)" textLength="146" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c03" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <rect x="34" y="70" width="4" height="164" fill="var(--c-mark)"/>
+  <text x="58" y="114" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="34" fill="#FAFAF8" textLength="72" lengthAdjust="spacingAndGlyphs">THE</text>
+  <text x="58" y="158" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="34" fill="#FAFAF8" textLength="196" lengthAdjust="spacingAndGlyphs">DOCTORS&#8217;</text>
+  <text x="58" y="206" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="38" fill="var(--c-italic)" textLength="152" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c04" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="var(--c-band)"/>
+  <text x="150" y="142" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="48" fill="#16191D" textLength="228" lengthAdjust="spacingAndGlyphs">DOCTORS&#8217;</text>
+  <text x="150" y="200" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="48" fill="#16191D" textLength="172" lengthAdjust="spacingAndGlyphs">Podcast</text>
+  <rect x="112" y="226" width="76" height="6" fill="#16191D"/>
+</symbol>
+
+<symbol id="c05" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <path d="M118 58 Q76 150 118 242" stroke="var(--c-mark)" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <path d="M182 58 Q224 150 182 242" stroke="var(--c-mark)" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <text x="150" y="196" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="132" fill="#FAFAF8" textLength="80" lengthAdjust="spacingAndGlyphs">D</text>
+</symbol>
+
+<symbol id="c06" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <path d="M112 48 Q60 150 112 252" stroke="#FAFAF8" stroke-width="15" fill="none" stroke-linecap="round"/>
+  <path d="M188 48 Q240 150 188 252" stroke="#FAFAF8" stroke-width="15" fill="none" stroke-linecap="round"/>
+  <circle cx="150" cy="150" r="31" fill="var(--c-mark)"/>
+</symbol>
+
+<symbol id="c07" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#0A0C0E"/>
+  <text x="80" y="188" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="110" fill="#FAFAF8" textLength="94" lengthAdjust="spacingAndGlyphs">W</text>
+  <path d="M152 106 Q130 150 152 194" stroke="var(--c-mark)" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M238 106 Q260 150 238 194" stroke="var(--c-mark)" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M174 120 L 220 150 L 174 180 Z" fill="var(--c-mark)"/>
+</symbol>
+
+<symbol id="c08" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <text x="38" y="192" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="122" fill="#FAFAF8" textLength="152" lengthAdjust="spacingAndGlyphs">TD</text>
+  <text x="200" y="192" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="122" fill="var(--c-italic)" textLength="66" lengthAdjust="spacingAndGlyphs">P</text>
+  <rect x="38" y="216" width="224" height="5" fill="var(--c-host)"/>
+</symbol>
+
+<symbol id="c09" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#0A0C0E"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M122.5 102.2 Q86.8 150 122.5 197.8" stroke="#FAFAF8" stroke-width="10" opacity=".95"/>
+    <path d="M177.5 102.2 Q213.2 150 177.5 197.8" stroke="#FAFAF8" stroke-width="10" opacity=".95"/>
+    <path d="M102.5 67.4 Q40.8 150 102.5 232.6" stroke="#FAFAF8" stroke-width="9" opacity=".5"/>
+    <path d="M197.5 67.4 Q259.2 150 197.5 232.6" stroke="#FAFAF8" stroke-width="9" opacity=".5"/>
+    <path d="M87.5 41.2 Q6.3 150 87.5 258.8" stroke="var(--c-host)" stroke-width="8" opacity=".45"/>
+    <path d="M212.5 41.2 Q293.7 150 212.5 258.8" stroke="var(--c-host)" stroke-width="8" opacity=".45"/>
+  </g>
+  <circle cx="150" cy="150" r="17" fill="var(--c-mark)"/>
+</symbol>
+
+<symbol id="c10" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <text x="150" y="236" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="238" fill="url(#grille)" textLength="164" lengthAdjust="spacingAndGlyphs">D</text>
+</symbol>
+
+<symbol id="c11" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#0A0C0E"/>
+  <rect x="62" y="50" width="56" height="180" fill="#FAFAF8"/>
+  <path d="M128 78 h 26 a 82 82 0 0 1 0 164 h -26 z" fill="var(--c-italic)"/>
+</symbol>
+
+<symbol id="c12" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <rect x="0" y="0" width="300" height="46" fill="var(--c-mark)"/>
+  <circle cx="34" cy="23" r="9" fill="#0A0C0E"/>
+  <text x="34" y="176" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="42" fill="#FAFAF8" textLength="232" lengthAdjust="spacingAndGlyphs">THE DOCTORS&#8217;</text>
+  <text x="34" y="226" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="44" fill="var(--c-italic)" textLength="168" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c13" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#FAFAF8"/>
+  <rect x="28" y="60" width="244" height="4" fill="#16191D"/>
+  <rect x="28" y="74" width="244" height="1.5" fill="#16191D"/>
+  <rect x="28" y="226" width="244" height="1.5" fill="#16191D"/>
+  <rect x="28" y="236" width="244" height="4" fill="#16191D"/>
+  <text x="150" y="142" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="40" fill="#16191D" textLength="228" lengthAdjust="spacingAndGlyphs">THE DOCTORS&#8217;</text>
+  <text x="150" y="196" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="46" fill="var(--c-light)" textLength="164" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c14" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#FAFAF8"/>
+  <rect x="26" y="26" width="248" height="248" fill="none" stroke="#16191D" stroke-width="4"/>
+  <rect x="38" y="38" width="224" height="224" fill="none" stroke="#16191D" stroke-width="1.5"/>
+  <text x="150" y="212" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="180" fill="#16191D" textLength="124" lengthAdjust="spacingAndGlyphs">D</text>
+  <rect x="26" y="26" width="34" height="10" fill="var(--c-light)"/>
+</symbol>
+
+<symbol id="c15" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <rect x="68" y="0" width="2.5" height="300" fill="var(--c-host)" opacity=".8"/>
+  <rect x="229.5" y="0" width="2.5" height="300" fill="var(--c-host)" opacity=".8"/>
+  <text x="150" y="196" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="156" fill="#FAFAF8" textLength="106" lengthAdjust="spacingAndGlyphs">D</text>
+  <rect x="98" y="222" width="104" height="7" fill="var(--c-italic)"/>
+</symbol>
+
+<symbol id="c16" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#0A0C0E"/>
+  <text x="150" y="118" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="38" fill="#FAFAF8" textLength="212" lengthAdjust="spacingAndGlyphs">THE DOCTORS&#8217;</text>
+  <rect x="0" y="182" width="300" height="118" fill="var(--c-band)"/>
+  <text x="150" y="256" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="58" fill="#0A0C0E" textLength="196" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c17" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#16191D"/>
+  <circle cx="150" cy="116" r="58" fill="var(--c-host)"/>
+  <path d="M50 300 C50 222 96 188 150 188 C204 188 250 222 250 300 Z" fill="var(--c-host)"/>
+  <rect x="0" y="230" width="300" height="70" fill="#0A0C0E" opacity=".88"/>
+  <rect x="28" y="248" width="58" height="5" fill="var(--c-mark)"/>
+  <text x="28" y="286" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="36" fill="var(--c-italic)" textLength="140" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c18" viewBox="0 0 300 300">
+  <rect x="0" y="0" width="150" height="300" fill="var(--c-band)"/>
+  <rect x="150" y="0" width="150" height="300" fill="#16191D"/>
+  <circle cx="76" cy="130" r="42" fill="#0A0C0E"/>
+  <path d="M12 300 C12 242 40 214 76 214 C112 214 140 242 140 300 Z" fill="#0A0C0E"/>
+  <text x="168" y="118" font-family="DM Sans, sans-serif" font-weight="700" font-size="12" letter-spacing="3.5" fill="var(--c-host)">THE</text>
+  <text x="168" y="154" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="27" fill="#FAFAF8" textLength="116" lengthAdjust="spacingAndGlyphs">DOCTORS&#8217;</text>
+  <text x="168" y="190" font-family="Merriweather, Georgia, serif" font-weight="300" font-style="italic" font-size="29" fill="var(--c-italic)" textLength="96" lengthAdjust="spacingAndGlyphs">Podcast</text>
+</symbol>
+
+<symbol id="c19" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#0A0C0E"/>
+  <circle cx="150" cy="138" r="44" fill="#FAFAF8"/>
+  <path d="M86 262 C86 208 114 186 150 186 C186 186 214 208 214 262 Z" fill="#FAFAF8"/>
+  <path d="M78 40 Q26 150 78 260" stroke="var(--c-host)" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <path d="M222 40 Q274 150 222 260" stroke="var(--c-host)" stroke-width="13" fill="none" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="c20" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="var(--c-band)"/>
+  <circle cx="150" cy="118" r="62" fill="#0A0C0E"/>
+  <path d="M42 300 C42 216 92 182 150 182 C208 182 258 216 258 300 Z" fill="#0A0C0E"/>
+</symbol>
+</svg>
+
+<div class="wrap">
+
+<header>
+  <h1>The Doctors' Podcast.<br><em>Twenty concepts, four colour systems.</em></h1>
+  <p class="sub">Sub-brand of Wellness Eternal. Working name is a placeholder. Every tile is 1:1 and rendered at full size and at true 55&nbsp;&times;&nbsp;55&nbsp;px. Colour is a system, not a tint. Switch it below.</p>
+</header>
+
+<div class="switcher">
+  <span class="lbl">Colour system</span>
+  <div class="btns" role="group" aria-label="Colour system">
+    <button data-v="off" aria-pressed="false">Off</button>
+    <button data-v="host" aria-pressed="true">Host-marked</button>
+    <button data-v="voice" aria-pressed="false">Voice-marked</button>
+    <button data-v="rose" aria-pressed="false">Pink only</button>
+  </div>
+  <span class="now" id="now"></span>
+</div>
+
+<div class="notice">
+  <h2>Pink only: what it costs</h2>
+  <p><strong>Orange is the only thing connecting this show to Wellness Eternal.</strong> The brief asks the sub-brand to read as related, not identical. Remove the parent colour and there is no relation left, so this stops being a sub-brand and becomes a second brand. That is a real decision, not a palette preference, and it should be made out loud.</p>
+  <p><strong>Rose is a weaker signal at thumbnail size.</strong> <code>#FF9500</code> sits near the top of the visible saturation range at 55&nbsp;px, which is why it holds in a crowded feed. <code>#E9A3A9</code> is a pale tint that drifts toward neutral once it is small. Compare the two systems on the light-background chips before deciding.</p>
+  <p><strong>Pink only runs two values, not one.</strong> A single light rose cannot do structural work: on the off-white editorial tiles it is nearly invisible. Deep rose <code>#C75A6E</code> takes anything sitting on a light field, light rose <code>#E9A3A9</code> takes everything on dark. That two-step is what replaces the range orange was providing.</p>
+  <p><strong>Positioning risk.</strong> Pink alone reads wellness-lifestyle, which is the register the brief steers away from given the physician guests and the no-BS line. Territory 4 is the only place pink only still reads as credentialed, because the editorial structure carries the seriousness instead of the colour.</p>
+</div>
+
+<div class="notice">
+  <h2>The pink itself</h2>
+  <p><strong>Rose is <code>#E9A3A9</code>, not the sampled <code>#F2B5AC</code>.</strong> The existing cover's blush sits about 25 to 30 degrees from <code>#FF9500</code> in hue and shares its warmth. Placed near the orange at thumbnail size the two stop reading as two colours. Rose is pulled cooler so the pair separates. In pink only this matters less, so the sampled blush is a live option there if Lindsay prefers it.</p>
+  <p><strong>Pink can only survive at 55&nbsp;px as an area.</strong> In the current cover it is a script line and a hand-drawn swash, both of which vanish first when the art shrinks. Where pink appears here it is a field, a band, a silhouette or a stroke with weight behind it.</p>
+  <div class="proof">
+    <figure>
+      <svg class="sq" viewBox="0 0 100 100"><rect width="50" height="100" fill="#FF9500"/><rect x="50" width="50" height="100" fill="#F2B5AC"/></svg>
+      <figcaption>Orange beside sampled blush <code>#F2B5AC</code>. Reads as one colour misprinted.</figcaption>
+    </figure>
+    <figure>
+      <svg class="sq" viewBox="0 0 100 100"><rect width="50" height="100" fill="#FF9500"/><rect x="50" width="50" height="100" fill="#E9A3A9"/></svg>
+      <figcaption>Orange beside rose <code>#E9A3A9</code>. Two colours, still warm family.</figcaption>
+    </figure>
+    <figure>
+      <svg class="sq" viewBox="0 0 100 100"><rect width="100" height="100" fill="#E9A3A9"/><rect x="20" y="20" width="60" height="60" fill="#C75A6E"/></svg>
+      <figcaption>The pink-only two-step: light rose and deep rose <code>#C75A6E</code>.</figcaption>
+    </figure>
+    <figure>
+      <svg class="sq" viewBox="0 0 100 100"><rect width="100" height="100" fill="#FAFAF8"/><rect x="14" y="30" width="34" height="40" fill="#E9A3A9"/><rect x="56" y="30" width="30" height="40" fill="#C75A6E"/></svg>
+      <figcaption>Why the deep value exists. Light rose disappears on off-white.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="notice">
+  <h2>Still true from the first pass</h2>
+  <p><strong>Territory 5 is not reviewable as drawn.</strong> The silhouettes are placeholders for Lindsay's press imagery. They show where a portrait sits, not whether one works. Her approval is required before any of it moves.</p>
+  <p><strong>Three concepts fail the size test and are marked as such.</strong> They are kept because the failure is the argument: a full three-word serif name cannot hold at 55&nbsp;px.</p>
+  <p><strong>Name behaviour is tagged three ways.</strong> "Flexes" absorbs any of the four doctor spellings. "Doctor-locked" survives those four but dies if the show reverts to Optimize W(e). "Name-safe" does not reference the name at all.</p>
+</div>
+
+<div class="legend">
+  <span class="tag hold">Holds at 55</span>
+  <span class="tag marg">Marginal at 55</span>
+  <span class="tag dies">Dies at 55</span>
+  <span class="tag safe">Name-safe</span>
+  <span class="tag">Flexes / Doctor-locked</span>
+</div>
+
+<!-- T1 -->
+<h2 class="territory">01&ndash;04. Wordmark. <em>Type only.</em></h2>
+<p class="terr-note">The brief asks for the whole logo to be the name. At 55&nbsp;px that is not available. Three of these buy legibility by letting the tile own a fragment or a colour instead of a sentence. The fourth shows what "set the full name well" actually looks like in a podcast app.</p>
+<div class="grid">
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c01"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c01"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c01"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">01</span><span class="name">Weight stack</span></div>
+      <p class="rationale">Puts the roman-to-italic switch at maximum scale so the device registers before the words do.</p>
+      <p class="pinknote">In pink only the eyebrow and the italic line share one colour, which flattens the hierarchy this concept depends on. Weakest of the four under that system.</p>
+      <div class="tags"><span class="tag marg">Marginal at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c02"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c02"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c02"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">02</span><span class="name">Fragment crop</span></div>
+      <p class="rationale">Trades completeness for a thumbnail that can be read cold: three letters own the tile and the rest is let go.</p>
+      <p class="pinknote">Gains under pink only. The white letters carry the whole tile and the rose rule stops competing with them, which is what the orange was doing.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c03"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c03"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c03"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">03</span><span class="name">Ruled slug</span></div>
+      <p class="rationale">Treats the name as content inside a fixed container so any spelling drops in without a redraw. Fails the size test and is shown as the control.</p>
+      <p class="pinknote">Colour changes nothing here. The concept is already illegible at thumbnail size and no palette rescues it.</p>
+      <div class="tags"><span class="tag dies">Dies at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c04"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c04"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c04"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">04</span><span class="name">Colour field</span></div>
+      <p class="rationale">Lets colour carry recognition at thumbnail size and type carry it at full size, so the tile is found by hue in a feed.</p>
+      <p class="pinknote">The clearest test of the whole question. This concept's entire argument is that the hue is findable, so compare it in host-marked and pink only at 55&nbsp;px and decide from that, not from the large view.</p>
+      <div class="tags"><span class="tag marg">Marginal at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- T2 -->
+<h2 class="territory">05&ndash;08. Monogram. <em>Reduce to a mark.</em></h2>
+<p class="terr-note">The strongest territory for the format, and the only one where the unsettled name is not a liability. These marks are never two colours in any system: a two-colour monogram at 55&nbsp;px is a mark that has to be explained.</p>
+<div class="grid">
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c05"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c05"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c05"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">05</span><span class="name">(D)</span></div>
+      <p class="rationale">Borrows the parent's parenthetical grammar and swaps the letter, so the mark inherits equity rather than starting over.</p>
+      <p class="pinknote">Under pink only the parens go rose wholesale. Note what that costs: the parenthetical is the parent brand's device, and in the parent's colour it read as inheritance. In rose it reads as a quotation of it.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Doctor-locked</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c06"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c06"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c06"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">06</span><span class="name">(&bull;)</span></div>
+      <p class="rationale">Reduces the parent device to punctuation holding a record dot. Survives any renaming decision, including reverting to Optimize W(e).</p>
+      <p class="pinknote">Holds up best of the monograms under pink only, because the dot is an area rather than a line and rose has enough weight at that size.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag safe">Name-safe</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c07"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c07"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c07"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">07</span><span class="name">W(&#9654;)</span></div>
+      <p class="rationale">Signals audio by putting a play glyph where the (e) sits, keeping the sub-brand inside the parent's syntax instead of beside it.</p>
+      <p class="pinknote">The one concept pink only actively breaks. It is built to sit inside the parent brand's mark, and recolouring the parent's own device is the clearest way to lose that.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag safe">Name-safe</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c08"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c08"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c08"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">08</span><span class="name">TDP</span></div>
+      <p class="rationale">Uses initials so the tile stays identical across all four spellings, at the cost of meaning nothing to a first-time listener.</p>
+      <p class="pinknote">Italic P and baseline rule unify under pink only, which reads cleaner than the two-colour version.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Doctor-locked</span></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- T3 -->
+<h2 class="territory">09&ndash;12. Audio form. <em>Transmission.</em></h2>
+<p class="terr-note">The weakest territory by construction: the brief bans the shortcuts and the category has used everything else. Nothing here is a drawn waveform. Two of the four route the audio idea through the brand's own punctuation.</p>
+<div class="grid">
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c09"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c09"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c09"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">09</span><span class="name">Nested parens</span></div>
+      <p class="rationale">Makes the brand's parenthesis the transmission itself, so the audio cue is proprietary rather than borrowed from the category.</p>
+      <p class="pinknote">Improves under pink only. The signal fades white to rose as it travels out, and with no orange in the centre the whole mark reads as one system instead of two.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag safe">Name-safe</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c10"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c10"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c10"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">10</span><span class="name">Grille</span></div>
+      <p class="rationale">Renders the letter through a speaker grille so the audio reference is a material rather than a diagram of sound.</p>
+      <p class="pinknote">Loses the most. Dotted forms already lose contrast at thumbnail size, and rose has less separation from the dark field than orange. Drop this one if pink only is chosen.</p>
+      <div class="tags"><span class="tag marg">Marginal at 55</span><span class="tag">Doctor-locked</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c11"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c11"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c11"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">11</span><span class="name">Displacement</span></div>
+      <p class="rationale">Breaks the letterform in two and offsets it. Sound as a shift in position rather than as a drawn wave.</p>
+      <p class="pinknote">Identical in voice-marked and pink only, since it already carries no orange in either. The most system-agnostic concept in the set.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Doctor-locked</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c12"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c12"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c12"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">12</span><span class="name">Tally</span></div>
+      <p class="rationale">Uses broadcast on-air language so the band does the recognition work and the name below is free to change length.</p>
+      <p class="pinknote">The tally band is borrowed from broadcast hardware, where the convention is red. Rose is closer to that reference than orange, so this concept arguably reads more correctly under pink only.</p>
+      <div class="tags"><span class="tag marg">Marginal at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- T4 -->
+<h2 class="territory">13&ndash;16. Editorial. <em>Masthead, not icon.</em></h2>
+<p class="terr-note">This territory buys the most positioning value and pays for it in legibility. It is also the only place pink only still reads as credentialed rather than lifestyle, because the ruled structure carries the seriousness instead of the colour.</p>
+<div class="grid">
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c13"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c13"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c13"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">13</span><span class="name">Masthead</span></div>
+      <p class="rationale">Sets the show as a journal masthead, so at thumbnail size it is identified as a pale ruled block rather than read as words.</p>
+      <p class="pinknote">The italic line switches to deep rose on the light field, which is the only value that holds against off-white. Light rose here would be decoration pretending to be type.</p>
+      <div class="tags"><span class="tag marg">Marginal at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c14"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c14"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c14"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">14</span><span class="name">Ruled frame</span></div>
+      <p class="rationale">Uses a double rule and a serif initial to claim credentialed authority, borrowing from journal covers rather than app icons.</p>
+      <p class="pinknote">Strongest pink-only candidate in the set. Deep rose on the corner tab is a single small mark, the structure does the rest, and nothing here needed the orange to work.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Doctor-locked</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c15"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c15"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c15"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">15</span><span class="name">Column rules</span></div>
+      <p class="rationale">Frames the initial between column rules so print structure, not decoration, is what makes the tile recognisable.</p>
+      <p class="pinknote">Rules and underline unify under pink only. The blue-grey leaves the palette entirely here, which is worth noticing: it was the only cool colour in the system.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Doctor-locked</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c16"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c16"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c16"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">16</span><span class="name">Band</span></div>
+      <p class="rationale">Splits the tile so the italic half of the phrase lives in colour. The structure is the logo and the name is a variable inside it.</p>
+      <p class="pinknote">A rose band across the bottom third is real pink presence that still holds at 55&nbsp;px, because it is area rather than line. The best argument for pink only after 14.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag">Flexes</span></div>
+    </div>
+  </article>
+
+</div>
+
+<!-- T5 -->
+<h2 class="territory">17&ndash;20. Host-led. <em>Approval required.</em></h2>
+<p class="terr-note">Treatment templates, not concepts. The silhouettes stand in for Lindsay's press imagery and prove nothing about likeness, crop or lighting. Under pink only these barely change, because host-marked already gave them the rose.</p>
+<div class="grid">
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c17"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c17"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c17"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">17</span><span class="name">Full bleed</span></div>
+      <p class="rationale">Anchors on the host and overlays the brand band, so the portrait carries recognition and the type stays out of its way.</p>
+      <p class="pinknote">Rose duotone plus rose rule under pink only. With a real photograph this is the closest thing in the set to the existing cover, which makes it the easiest sell and the least new.</p>
+      <div class="tags"><span class="tag marg">Marginal at 55</span><span class="tag warn">Approval required</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c18"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c18"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c18"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">18</span><span class="name">Split</span></div>
+      <p class="rationale">Divides the tile so portrait and name never compete for the same space. Included to show the split fails the size test.</p>
+      <p class="pinknote">Colour cannot save it. Half a tile of rose still leaves the name at four pixels of cap height.</p>
+      <div class="tags"><span class="tag dies">Dies at 55</span><span class="tag warn">Approval required</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c19"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c19"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c19"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">19</span><span class="name">Held</span></div>
+      <p class="rationale">Puts the host inside the brand's parentheses so the device becomes the crop, tying the person to the parent brand rather than to the show name.</p>
+      <p class="pinknote">Unchanged from host-marked. The parens were already rose because they frame Lindsay, so this concept is indifferent to the orange decision.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag safe">Name-safe</span><span class="tag warn">Approval required</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="renders">
+      <svg class="big" viewBox="0 0 300 300"><use href="#c20"/></svg>
+      <div class="thumbs">
+        <div class="chip"><span class="pad dark"><svg viewBox="0 0 300 300"><use href="#c20"/></svg></span><small>dark</small></div>
+        <div class="chip"><span class="pad light"><svg viewBox="0 0 300 300"><use href="#c20"/></svg></span><small>light</small></div>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="idline"><span class="num">20</span><span class="name">Cutout</span></div>
+      <p class="rationale">Reduces the host to a high-contrast silhouette on brand colour, the only host treatment that still reads as a shape at thumbnail size.</p>
+      <p class="pinknote">A full rose tile with a black silhouette. This is the far end of the range, and the fastest way to find out how much pink Lindsay actually wants.</p>
+      <div class="tags"><span class="tag hold">Holds at 55</span><span class="tag safe">Name-safe</span><span class="tag warn">Approval required</span></div>
+    </div>
+  </article>
+
+</div>
+
+<footer>
+  <p><strong>If pink only is chosen, drop 07 and 10.</strong> 07 is built to live inside the parent brand's mark and recolouring that device defeats it. 10 loses too much contrast without the orange. Everything else survives, and 02, 09, 12 and 14 arguably improve.</p>
+  <p><strong>One open question the colour does not settle.</strong> The pink in the current cover is carried by a script face that is not in the type system. If what Lindsay is attached to is the script rather than the hue, none of these will feel like continuity to her, and that is worth resolving before the shortlist.</p>
+  <p><strong>Notes.</strong> All type is set with locked glyph widths, so compositions hold if Merriweather fails to load and when the name changes length. No gradients, stethoscopes, caducei or heartbeat lines. Every tile is flat and exports cleanly to 3000&nbsp;&times;&nbsp;3000. The 55&nbsp;px renders are CSS pixels on this screen, which is a fair proxy but not a substitute for viewing the exported PNG on a phone.</p>
+</footer>
+
+</div>
+
+<script>
+  var copy = {
+    off:   "Original. Orange only, no pink anywhere.",
+    host:  "Rose marks Lindsay. Orange stays the show. Recommended.",
+    voice: "Rose takes the italic half and the colour fields. Orange retreats to marks and rules.",
+    rose:  "No orange. Light rose on dark, deep rose on light. Severs the link to Wellness Eternal."
+  };
+  var btns = document.querySelectorAll('.switcher button');
+  var now = document.getElementById('now');
+  function set(v){
+    document.body.dataset.pink = v;
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === v)); });
+    now.textContent = copy[v];
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.v); }); });
+  set('host');
+</script>
+</body>
+</html>
