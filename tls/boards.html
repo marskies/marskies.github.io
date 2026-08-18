@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translational Longevity Summit: LinkedIn boards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#23A455; --green-d:#1c8746; --sky:#6EC1E4; --royal:#4054B2; --dark:#3D4044;
+    --navy1:#16304f; --navy2:#0d2136;
+    --paper:#ffffff; --panel:#f1f5f8; --line:#e3e8ec;
+    --ink:#3D4044; --ink2:#6b7178; --muted:#9aa1a8;
+    --page:#f7f8f9;
+    --slab:"Roboto Slab",Georgia,"Times New Roman",serif;
+    --sans:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);font:400 15px/1.55 var(--sans);
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px 88px}
+
+  header.top{padding:48px 0 22px;border-bottom:3px solid var(--green);margin-bottom:30px}
+  .eyebrow{font:700 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+  h1{font:700 40px/1.08 var(--slab);margin:13px 0 10px;color:var(--dark);letter-spacing:-.01em}
+  h1 span{color:var(--green);font-weight:400}
+  .sub{font-size:15.5px;color:var(--ink2);max-width:70ch;margin:0}
+  .meta{margin-top:16px;font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 18px}
+
+  h2{font:700 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+     margin:56px 0 4px}
+  h2 b{color:var(--dark)}
+  .h2sub{font-size:13.5px;color:var(--ink2);margin:0 0 20px;max-width:76ch}
+  h3{font:700 21px/1.2 var(--slab);color:var(--dark);margin:44px 0 3px}
+  h3 i{font-style:normal;color:var(--muted);font-weight:400;margin-right:8px}
+  h3 em{font-style:normal;color:var(--green);font-weight:400}
+  .lead{font-size:13.5px;color:var(--ink2);margin:0 0 16px;max-width:82ch}
+
+  /* brand strip */
+  .brand{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0 8px}
+  .bk{background:#fff;border:1px solid var(--line);border-radius:6px;padding:0 0 12px;overflow:hidden}
+  .bk .chip{height:56px}
+  .bk .t{font:700 12px/1 var(--sans);margin:11px 12px 4px;color:var(--dark);letter-spacing:.04em}
+  .bk .h{font:400 11.5px/1 var(--sans);margin:0 12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0 0}
+  .rl{background:var(--panel);border-top:3px solid var(--green);padding:13px 15px 15px}
+  .rl b{display:block;font:700 11px/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;
+    color:var(--green);margin-bottom:7px}
+  .rl span{font-size:12.5px;color:var(--ink2);line-height:1.45}
+
+  /* board grid */
+  .bg{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:28px;margin:18px 0 6px;align-items:start}
+  .bg.two{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  .cap{font-size:11.5px;color:var(--muted);margin:9px 0 0;line-height:1.45}
+  .cap b{color:var(--ink);font-weight:700}
+
+  /* ---- BOARD BASE ---- */
+  .b{width:100%;aspect-ratio:1080/1350;position:relative;overflow:hidden;display:flex;flex-direction:column;
+     box-shadow:0 1px 4px rgba(0,0,0,.13);font-family:var(--sans)}
+  .b.li{aspect-ratio:1200/627}
+  .b.story{aspect-ratio:1080/1920}
+  .b.cov{aspect-ratio:4200/700}
+  .b.dk{background:radial-gradient(120% 90% at 78% 12%,#1d3f66 0%,#16304f 42%,#0d2136 100%);color:#fff}
+  .b.lt{background:#fff;color:var(--dark);border:1px solid var(--line)}
+  .b.lt::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--green)}
+  .b.lt.royal::before{background:var(--royal)}
+  .b.lt.norule::before{display:none}
+  .in{padding:7.5% 7.5%;display:flex;flex-direction:column;height:100%;position:relative;z-index:1}
+  .b.lt .in{padding-top:9%}
+
+  .logo{display:inline-flex;align-items:center;gap:4px;background:#fff;border-radius:4px;
+    padding:5px 8px;align-self:flex-start;box-shadow:0 1px 2px rgba(0,0,0,.10)}
+  .logo .lf{width:11px;height:13px;background:linear-gradient(150deg,#6EC1E4 0%,#23A455 70%);
+    border-radius:60% 8% 60% 8%;flex:0 0 auto}
+  .logo .w{line-height:1}
+  .logo .w b{display:block;font:700 4.2px/1 var(--sans);letter-spacing:.14em;color:#7d8a94}
+  .logo .w i{display:block;font:700 11px/1 var(--slab);font-style:italic;color:var(--green);letter-spacing:-.01em}
+
+  .ey{font:700 8.5px/1.3 var(--sans);letter-spacing:.17em;text-transform:uppercase;color:var(--sky);margin-top:14px}
+  .b.lt .ey{color:var(--green)}
+  .b.lt.royal .ey{color:var(--green)}
+  .ttl{font:700 25px/1.14 var(--slab);letter-spacing:-.01em;margin-top:9px}
+  .ttl.s{font-size:19px} .ttl.xs{font-size:16px} .ttl.l{font-size:31px}
+  .subl{font-size:10.5px;line-height:1.45;color:#b9c6d3;margin-top:9px}
+  .b.lt .subl{color:var(--ink2)}
+  .hr{height:1px;background:rgba(255,255,255,.20);margin:12px 0}
+  .b.lt .hr{background:var(--line)}
+
+  .daterow{display:flex;align-items:center;gap:7px;margin-top:11px}
+  .cal{width:11px;height:11px;border:1.4px solid var(--sky);border-radius:2px;position:relative;flex:0 0 auto}
+  .cal::before{content:"";position:absolute;top:-3px;left:1.5px;right:1.5px;height:2px;
+    border-left:1.4px solid var(--sky);border-right:1.4px solid var(--sky)}
+  .b.lt .cal,.b.lt .cal::before{border-color:var(--green)}
+  .dtx{font:700 12.5px/1 var(--sans);letter-spacing:.03em}
+
+  .nm{font:700 13px/1.2 var(--sans);margin-top:3px}
+  .cr{font:400 9px/1.35 var(--sans);color:var(--green);margin-top:3px}
+  .b.dk .cr{color:#7ddb9f}
+  .ph{flex:0 0 auto;min-height:0;background:rgba(255,255,255,.09);border-radius:3px;display:flex;align-items:flex-end;
+    justify-content:center;padding-bottom:7px;font:700 6.5px/1.3 var(--sans);letter-spacing:.12em;
+    text-transform:uppercase;color:#8fa4b8;text-align:center;position:relative}
+  .b.lt .ph{background:var(--panel);color:#a7b1bb}
+  .ph .av{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);width:44%;
+    aspect-ratio:1/1.14}
+  .ph .av::before{content:"";position:absolute;top:0;left:26%;width:48%;aspect-ratio:1;border-radius:50%;
+    background:rgba(255,255,255,.16)}
+  .ph .av::after{content:"";position:absolute;bottom:0;left:4%;width:92%;height:52%;
+    border-radius:50% 50% 12% 12%;background:rgba(255,255,255,.16)}
+  .b.lt .ph .av::before,.b.lt .ph .av::after{background:#d3dbe2}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#fff;
+    font:700 8.5px/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;padding:8px 13px;border-radius:3px}
+  .btn.o{background:transparent;border:1.3px solid var(--green);color:var(--green)}
+  .b.dk .btn.o{border-color:rgba(255,255,255,.5);color:#fff}
+  .badge{display:inline-flex;align-items:center;background:var(--sky);color:#12384a;
+    font:700 8px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:8px 11px;border-radius:3px}
+  .badge.off{background:transparent;border:1.3px dashed rgba(110,193,228,.55);color:#8fc9e2}
+  .b.lt .badge.off{border-color:#bcd7e4;color:#7ba9c2}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+  .url{font:400 8px/1 var(--sans);color:#8fa4b8;margin-top:11px;letter-spacing:.03em}
+  .b.lt .url{color:var(--muted)}
+  .band{background:var(--green);color:#fff;margin:0 -7.5%;padding:11px 7.5%;display:flex;
+    justify-content:space-between;align-items:center;gap:10px}
+  .band .bt{font:700 13px/1 var(--slab);letter-spacing:.02em}
+  .band .bs{font:400 8.5px/1 var(--sans);opacity:.92}
+  .push{margin-top:auto}
+  .foot{margin-top:auto;padding-top:10px}
+  .foot .row{margin-top:10px}
+  .foot .row:first-child{margin-top:0}
+  .b.dk .dots{position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);
+    background-size:74px 74px;background-position:18px 26px;opacity:.55}
+
+  .faces4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:9px 10px;
+    margin-top:12px;flex:1 1 0;min-height:0}
+  .faces4 .f{display:flex;flex-direction:column;min-height:0}
+  .faces4 .f .ph{flex:1 1 0;min-height:0}
+  .faces4 .f .n{font:700 9.5px/1.2 var(--sans);margin-top:6px}
+  .faces4 .f .c{font:400 7.5px/1.25 var(--sans);color:var(--green);margin-top:2px}
+  .b.dk .faces4 .f .c{color:#7ddb9f}
+
+  .prog{margin-top:12px}
+  .prog .r{display:grid;grid-template-columns:42px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+  .b.dk .prog .r{border-color:rgba(255,255,255,.14)}
+  .prog .r b{font:700 9px/1.3 var(--sans);color:var(--green)}
+  .b.dk .prog .r b{color:var(--sky)}
+  .prog .r span{font:400 10px/1.3 var(--sans)}
+  .tracks .r{display:grid;grid-template-columns:20px 1fr;gap:8px;padding:6.5px 0;border-bottom:1px solid var(--line)}
+  .b.dk .tracks .r{border-color:rgba(255,255,255,.14)}
+  .tracks .r b{font:700 9px/1.3 var(--sans);color:var(--green)}
+  .b.dk .tracks .r b{color:var(--sky)}
+  .tracks .r span{font:400 10.5px/1.3 var(--sans)}
+
+  .keypanel{background:var(--panel);border-left:3px solid var(--green);padding:11px 13px;margin-top:12px}
+  .keypanel b{display:block;font:700 8px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+    color:var(--green);margin-bottom:6px}
+  .keypanel span{font-size:10px;line-height:1.45;color:var(--ink)}
+  .quoteb{border-left:3px solid var(--green);padding-left:13px;margin-top:12px}
+
+  .covwrap .ttl{font:700 clamp(13px,2.35vw,26px)/1.1 var(--slab)}
+  .cov .in{padding:0 6%;justify-content:center}
+  .cov .ey{margin-top:0}
+  .cnt{position:absolute;top:7.5%;right:7.5%;font:700 8px/1 var(--sans);color:#8fa4b8;letter-spacing:.08em;z-index:2}
+
+  /* tables */
+  .tscroll{overflow-x:auto;margin:16px 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:100%}
+  th,td{text-align:left;padding:8px 13px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  td.n{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink2)}
+  tr.wk td{background:var(--panel);font:700 10.5px/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;
+    color:var(--green);padding:11px 13px 11px 10px;border-bottom:none}
+  .bd{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.05em;padding:4px 8px;border-radius:2px;
+    background:var(--panel);color:var(--ink2);white-space:nowrap}
+  .bd.c{background:#e7f4ec;color:var(--green-d)}
+  .bd.v{background:#eaeefb;color:var(--royal)}
+  .co{color:var(--green);font-weight:700}
+
+  .note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--green);padding:15px 17px;margin:16px 0}
+  .note.warn{border-left-color:#e0a54a}
+  .note b.l{display:block;font:700 10.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink2);margin-bottom:7px}
+  .note p{margin:0 0 9px;font-size:13.5px;color:var(--ink)} .note p:last-child{margin:0}
+  .note ul{margin:0;padding-left:19px;font-size:13.5px} .note li{margin-bottom:5px}
+
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+  footer a{color:var(--ink2)}
+  @media(max-width:600px){
+    .wrap{padding:0 15px 64px} h1{font-size:30px}
+    table{font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Translational Longevity Summit &middot; LinkedIn</div>
+  <h1>The boards. <span>Then the plan.</span></h1>
+  <p class="sub">Nine board types for the new Summit page, built inside the Boston BioLife template system. Master 1080 &times; 1350, resizing to 1200 &times; 627 and 1080 &times; 1920 by the existing rules.</p>
+  <div class="meta">
+    <span>Marina DiPonio</span><span>August 18, 2026</span>
+    <span>Oct 7 to 11, 2026 &middot; Enterprise Research Campus at Harvard, 1 Milestone St, Boston</span>
+  </div>
+</header>
+
+<h2><b>Identity.</b> Unchanged from the BBL system</h2>
+<div class="brand">
+  <div class="bk"><div class="chip" style="background:#23A455"></div><div class="t">Green</div><div class="h">#23A455</div></div>
+  <div class="bk"><div class="chip" style="background:#6EC1E4"></div><div class="t">Sky</div><div class="h">#6EC1E4</div></div>
+  <div class="bk"><div class="chip" style="background:#4054B2"></div><div class="t">Royal</div><div class="h">#4054B2</div></div>
+  <div class="bk"><div class="chip" style="background:#3D4044"></div><div class="t">Dark</div><div class="h">#3D4044</div></div>
+  <div class="bk"><div class="chip" style="background:linear-gradient(150deg,#1d3f66,#0d2136)"></div><div class="t">Deep navy</div><div class="h">confirm</div></div>
+  <div class="bk"><div class="chip" style="background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center"><span style="font:700 17px/1 var(--slab);color:#3D4044">Aa</span></div><div class="t">Roboto Slab</div><div class="h">+ Roboto</div></div>
+</div>
+
+<div class="rules">
+  <div class="rl"><b>01 &middot; Short titles</b><span>6 to 8 words on the board. Full title lives in the caption.</span></div>
+  <div class="rl"><b>02 &middot; One face</b><span>Single portrait leads. Lineup grids capped at four faces.</span></div>
+  <div class="rl"><b>03 &middot; CME forward</b><span>Badge is a toggle. Off on every Summit board until accreditation is confirmed.</span></div>
+  <div class="rl"><b>04 &middot; No scarcity</b><span>No countdowns, no "last chance." Dates are schedule facts. Lead with the clinical outcome.</span></div>
+</div>
+
+<h2><b>The boards</b></h2>
+<p class="h2sub">Nine types cover the whole run to October 11. Photo areas and the logo chip are placeholders; production needs the master logo file.</p>
+
+<h3><i>01</i>Announcement <em>&middot; the page opener</em></h3>
+<p class="lead">Reskin of the existing 9A board with the corrected date and venue. The venue carries the credibility so it keeps its own block. No price, no urgency.</p>
+<div class="bg two">
+  <div>
+    <div class="b dk"><div class="dots"></div><div class="in">
+      <div class="logo"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Boston Longevity Week &middot; October 2026</div>
+      <div class="ttl l">Translational<br>Longevity Summit</div>
+      <div class="daterow"><span class="cal"></span><span class="dtx">OCTOBER 7&ndash;11, 2026</span></div>
+      <div class="hr"></div>
+      <div class="ey" style="margin-top:0">Venue</div>
+      <div class="ttl" style="margin-top:5px;font-size:22px">Enterprise Research<br>Campus at Harvard</div>
+      <div class="subl" style="margin-top:6px">1 Milestone St, Boston, Massachusetts</div>
+      <div class="foot">
+        <div class="row"><span class="badge off">CME &middot; toggle off</span><span class="btn">View program</span></div>
+        <div class="url">translationallongevity.com</div>
+      </div>
+    </div></div>
+    <p class="cap"><b>1A &middot; Master 1080 &times; 1350.</b> Date corrected from "Saturday, October 11" to the confirmed five-day run. Venue named in full, because "Harvard" alone overstates the relationship.</p>
+  </div>
+  <div>
+    <div class="b dk li"><div class="in" style="padding:5% 5.5%">
+      <div style="display:flex;gap:5%;height:100%;align-items:center">
+        <div style="flex:1.25">
+          <div class="logo" style="transform:scale(.85);transform-origin:left"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+          <div class="ey" style="margin-top:9px">Boston Longevity Week</div>
+          <div class="ttl s" style="margin-top:6px">Translational Longevity Summit</div>
+          <div class="daterow" style="margin-top:8px"><span class="cal"></span><span class="dtx" style="font-size:10px">OCT 7&ndash;11 &middot; ERC AT HARVARD, BOSTON</span></div>
+          <div class="row" style="margin-top:9px"><span class="btn" style="padding:6px 11px;font-size:7.5px">View program</span></div>
+        </div>
+        <div style="flex:.75;height:74%"><div class="ph" style="height:100%">VENUE PHOTO</div></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>1A &middot; LinkedIn 1200 &times; 627.</b> Same board, landscape crop. My recommendation is to post the 1080 &times; 1350 master on LinkedIn instead: 4:5 is supported and takes noticeably more feed height on a phone.</p>
+  </div>
+</div>
+
+<h3><i>02</i>Speaker <em>&middot; the collab board</em></h3>
+<p class="lead">The one that carries the run. BBL's own Instagram numbers make the case: standard event promos sit at 2 to 24 likes, single-speaker features run 45 to 98, and the three posts that cleared 2,600 were collab posts co-authored with a speaker or partner. This board is drawn to work on the speaker's own grid, not just ours.</p>
+<div class="bg">
+  <div>
+    <div class="b dk"><div class="dots"></div><div class="in">
+      <div class="logo"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Speaking at the Summit</div>
+      <div class="ttl s">Camillo Ricordi, MD</div>
+      <div class="cr">Chief Scientific Officer, Healthspan Action Coalition &middot; Director, Cell Transplant Center, University of Miami</div>
+      <div class="subl">Cell transplantation, from the lab bench to the clinic.</div>
+      <div class="ph" style="flex:1 1 0;margin:12px 0 0"><span class="av"></span>SPEAKER PHOTO &middot; CHEST-UP</div>
+      <div class="foot">
+        <div class="hr" style="margin-top:0"></div>
+        <div class="daterow" style="margin-top:0"><span class="cal"></span><span class="dtx" style="font-size:11px">OCT 7&ndash;11 &middot; ERC AT HARVARD</span></div>
+        <div class="row"><span class="btn">Register</span><span class="badge off">CME &middot; off</span></div>
+        <div class="url">translationallongevity.com</div>
+      </div>
+    </div></div>
+    <p class="cap"><b>2A &middot; Collab cutdown.</b> Name in the display slot, credential underneath, one line of outcome. Tagged as co-author so it lands on their grid too.</p>
+  </div>
+  <div>
+    <div class="b dk"><div class="dots"></div><div class="in">
+      <div class="logo"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Speaking at the Summit</div>
+      <div class="ttl s">Aubrey de Grey</div>
+      <div class="cr">Chief Science Officer &middot; LEV Foundation</div>
+      <div class="subl">Damage repair as a clinical strategy, not a thought experiment.</div>
+      <div class="ph" style="flex:1 1 0;margin:12px 0 0"><span class="av"></span>SPEAKER PHOTO &middot; CHEST-UP</div>
+      <div class="foot">
+        <div class="hr" style="margin-top:0"></div>
+        <div class="daterow" style="margin-top:0"><span class="cal"></span><span class="dtx" style="font-size:11px">OCT 7&ndash;11 &middot; ERC AT HARVARD</span></div>
+        <div class="row"><span class="btn">Register</span><span class="badge off">CME &middot; off</span></div>
+        <div class="url">translationallongevity.com</div>
+      </div>
+    </div></div>
+    <p class="cap"><b>2A &middot; Same board.</b> Photo and three text fields change. Ten of these across the run, from one Canva board.</p>
+  </div>
+  <div>
+    <div class="b lt"><div class="in">
+      <div class="logo" style="box-shadow:none;padding:0"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Speaking at the Summit</div>
+      <div class="ttl s">Jeanne F. Loring, PhD</div>
+      <div class="cr">Professor Emeritus, Scripps Research &middot; Co-Founder, Aspen Neuroscience</div>
+      <div class="subl">Stem cell therapy and what the evidence currently supports.</div>
+      <div class="ph" style="flex:1 1 0;margin:12px 0 0"><span class="av"></span>SPEAKER PHOTO &middot; CHEST-UP</div>
+      <div class="foot" style="padding-top:12px">
+        <div class="band"><span class="bt">OCT 7&ndash;11 &middot; BOSTON</span><span class="bs">translationallongevity.com</span></div>
+        <div class="row"><span class="btn">Register</span></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>2B &middot; Light variant.</b> Alternating light and dark down the feed stops ten speaker posts reading as one repeated template.</p>
+  </div>
+</div>
+
+<h3><i>03</i>Lineup <em>&middot; four faces, never more</em></h3>
+<div class="bg two">
+  <div>
+    <div class="b lt"><div class="in">
+      <div class="logo" style="box-shadow:none;padding:0"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Summit speaker lineup</div>
+      <div class="ttl s">Translational Longevity Summit</div>
+      <div class="faces4">
+        <div class="f"><div class="ph"><span class="av"></span></div><div class="n">Camillo Ricordi, MD</div><div class="c">Cell Transplant Center, Miami</div></div>
+        <div class="f"><div class="ph"><span class="av"></span></div><div class="n">Aubrey de Grey</div><div class="c">LEV Foundation</div></div>
+        <div class="f"><div class="ph"><span class="av"></span></div><div class="n">Jeanne F. Loring, PhD</div><div class="c">Scripps Research</div></div>
+        <div class="f"><div class="ph"><span class="av"></span></div><div class="n">David Barzilai, MD, PhD</div><div class="c">Harvard Medical School</div></div>
+      </div>
+      <div class="foot">
+        <div class="subl" style="font-size:9px;margin:0 0 9px">30+ faculty. Full lineup on click-through.</div>
+        <div class="band"><span class="bt">OCT 7&ndash;11 &middot; ERC AT HARVARD</span></div>
+        <div class="row"><span class="btn">Full lineup</span></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>3A &middot; Master.</b> Four faces max, credentials legible at feed scale. A 30-face grid is wallpaper; four are readable.</p>
+  </div>
+  <div>
+    <div class="b lt"><div class="in">
+      <div class="logo" style="box-shadow:none;padding:0"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Six scientific tracks</div>
+      <div class="ttl s">Attend one day, or all five</div>
+      <div class="subl">Programming is built so a practising clinician can take a day, a day and a half, two days or the full run.</div>
+      <div class="tracks" style="margin-top:11px">
+        <div class="r"><b>01</b><span>Patient Advocacy</span></div>
+        <div class="r"><b>02</b><span>Clinical Implementation</span></div>
+        <div class="r"><b>03</b><span>Regenerative Medicine</span></div>
+        <div class="r"><b>04</b><span>Biomarkers &amp; Outcomes</span></div>
+        <div class="r"><b>05</b><span>Policy, Access &amp; Equity</span></div>
+        <div class="r"><b>06</b><span>Innovation &amp; Collaboration</span></div>
+      </div>
+      <div class="foot">
+        <div class="band"><span class="bt">OCT 7&ndash;11 &middot; BOSTON</span><span class="bs">translationallongevity.com</span></div>
+        <div class="row"><span class="btn">Full program</span></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>3B &middot; Tracks.</b> "Attend one day or all five" is the strongest line on either summit site and it is currently nowhere in the creative. It answers the objection a busy clinician actually has.</p>
+  </div>
+</div>
+
+<h3><i>04</i>Program <em>&middot; the densest board</em></h3>
+<div class="bg two">
+  <div>
+    <div class="b lt"><div class="in">
+      <div class="logo" style="box-shadow:none;padding:0"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey">Summit program &middot; Day 1</div>
+      <div class="ttl s">From Bench to Bedside</div>
+      <div class="prog">
+        <div class="r"><b>09:00</b><span>Cellular reprogramming: the clinical evidence</span></div>
+        <div class="r"><b>10:45</b><span>Biomarkers of aging: what to measure</span></div>
+        <div class="r"><b>13:30</b><span>Regenerative protocols at the N-of-1</span></div>
+        <div class="r"><b>15:15</b><span>Translating trials into practice</span></div>
+        <div class="r"><b>16:30</b><span>Panel: what would change your practice on Monday</span></div>
+        <div class="r"><b>18:00</b><span>Faculty reception, Atlas Hotel</span></div>
+      </div>
+      <div class="subl" style="font-size:8.5px;margin-top:9px">Session titles illustrative. Full program and faculty on click-through.</div>
+      <div class="foot">
+        <div class="band"><span class="bt">OCT 7&ndash;11 &middot; ERC AT HARVARD</span></div>
+        <div class="row"><span class="btn">Full program</span><span class="badge off">CME &middot; off</span></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>4A &middot; Master.</b> Nothing below 26px on the real board. Blocked until BBL releases the agenda.</p>
+  </div>
+  <div>
+    <div class="b lt royal"><div class="in">
+      <div class="logo" style="box-shadow:none;padding:0"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey" style="color:var(--royal)">Published research spotlight</div>
+      <div class="subl" style="margin-top:6px;font-size:9.5px">Journal of Translational Medicine &middot; 2026</div>
+      <div style="display:flex;gap:11px;align-items:flex-start;margin-top:5px">
+        <div style="flex:1"><div class="ttl s" style="margin-top:0">Exosome Signaling in Tissue Repair</div></div>
+        <div class="ph" style="width:30%;aspect-ratio:1/1.28;flex:0 0 auto;align-items:center;padding:0">JOURNAL<br>COVER</div>
+      </div>
+      <div class="keypanel"><b>Key takeaway</b><span>Exosome-mediated signaling altered repair markers across three tissue types, with directional implications for patient selection.</span></div>
+      <div style="font-size:9.5px;color:var(--ink2);margin-top:11px">Authors: [Name], [Name], et al.</div>
+      <div class="foot">
+      <div class="subl" style="font-size:9px;margin-top:0">Discussed at the Summit, Regenerative Medicine track.</div>
+      <div class="row"><span style="font:700 9.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--royal);border-bottom:2px solid var(--green);padding-bottom:3px">Read the summary</span></div>
+      <div class="url">Peer reviewed. Linked in caption.</div>
+      </div>
+    </div></div>
+    <p class="cap"><b>4B &middot; Research spotlight, reused.</b> BBL's existing royal-rule family, pointed at a Summit track. Evidence logic instead of promo logic, and the format BBL's LinkedIn already differentiates on.</p>
+  </div>
+</div>
+
+<h3><i>05</i>Carousel <em>&middot; the format BBL has never posted on LinkedIn</em></h3>
+<p class="lead">Document posts carry the highest engagement rate of any LinkedIn format on both large benchmark datasets. BBL's LinkedIn is currently 100% single landscape images.</p>
+<div class="bg">
+  <div>
+    <div class="b dk" style="aspect-ratio:1/1"><div class="dots"></div><div class="cnt">1 / 8</div><div class="in">
+      <div class="logo"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="push"></div>
+      <div class="ey">Boston Longevity Week</div>
+      <div class="ttl l">Six tracks.<br>Five days.<br>One question.</div>
+      <div class="subl">What in longevity science is ready to leave the lab? Swipe &rarr;</div>
+      <div class="hr"></div>
+      <div class="daterow" style="margin-top:0"><span class="cal"></span><span class="dtx" style="font-size:10.5px">OCT 7&ndash;11 &middot; ERC AT HARVARD</span></div>
+    </div></div>
+    <p class="cap"><b>5A &middot; Cover, 1080 &times; 1080.</b> Carries date and venue so a screenshot of slide one still works.</p>
+  </div>
+  <div>
+    <div class="b lt" style="aspect-ratio:1/1"><div class="cnt" style="color:var(--muted)">4 / 8</div><div class="in">
+      <div class="ey">Track 03</div>
+      <div class="ttl s">Regenerative Medicine</div>
+      <div class="subl">Stem cell and cellular therapies moving bench to bedside. Where the evidence supports clinical use, and where it does not yet.</div>
+      <div class="faces4" style="grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto;margin-top:auto;flex:0 0 auto">
+        <div class="f" style="min-height:0"><div class="ph" style="aspect-ratio:1/0.9;flex:0 0 auto"><span class="av"></span></div><div class="n" style="font-size:8px">Ricordi</div></div>
+        <div class="f" style="min-height:0"><div class="ph" style="aspect-ratio:1/0.9;flex:0 0 auto"><span class="av"></span></div><div class="n" style="font-size:8px">Loring</div></div>
+        <div class="f" style="min-height:0"><div class="ph" style="aspect-ratio:1/0.9;flex:0 0 auto"><span class="av"></span></div><div class="n" style="font-size:8px">Ross</div></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>5B &middot; Inner slide.</b> One per track, three faces each. Six tracks fill slides 2 through 7.</p>
+  </div>
+  <div>
+    <div class="b lt" style="aspect-ratio:1/1"><div class="cnt" style="color:var(--muted)">8 / 8</div><div class="in">
+      <div class="ey">One registration</div>
+      <div class="ttl">Five days.<br>Or just one.</div>
+      <div class="subl">All sessions, keynotes, workshops, networking, meals, summit materials and a certificate of participation.</div>
+      <div class="foot">
+        <div class="band"><span class="bt">OCT 7&ndash;11 &middot; BOSTON</span><span class="bs">translationallongevity.com</span></div>
+        <div class="row"><span class="btn">Register</span></div>
+      </div>
+    </div></div>
+    <p class="cap"><b>5C &middot; Closing slide.</b> Price stays off the board per house rule, and lives in the caption and on the checkout page.</p>
+  </div>
+</div>
+
+<h3><i>06</i>Reminder <em>&middot; story, schedule fact only</em></h3>
+<div class="bg">
+  <div style="max-width:230px">
+    <div class="b dk story"><div class="dots"></div><div class="in" style="padding:9% 9%">
+      <div class="logo" style="align-self:center;transform:scale(.9)"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+      <div class="ey" style="text-align:center;margin-top:16px">Opens tomorrow &middot; Boston</div>
+      <div class="push"></div>
+      <div class="ph" style="height:22%;margin:0 16%"><span class="av"></span></div>
+      <div class="ttl s" style="text-align:center;margin-top:14px">Translational<br>Longevity Summit</div>
+      <div class="subl" style="text-align:center">Enterprise Research Campus at Harvard</div>
+      <div class="row" style="justify-content:center"><span class="btn">Register</span></div>
+      <div class="push"></div>
+      <div class="url" style="text-align:center">&darr; Link in profile</div>
+    </div></div>
+    <p class="cap"><b>6A &middot; 1080 &times; 1920.</b> One line changes across the sequence: "Opens tomorrow," then "Day 1 today." Schedule fact, never scarcity. Top 250px and bottom 340px kept clear.</p>
+  </div>
+  <div style="grid-column:span 2">
+    <div class="b lt cov" style="aspect-ratio:4200/700"><div class="in" style="padding:0 5%;justify-content:center">
+      <div style="display:flex;align-items:center;gap:4%;width:100%">
+        <div class="logo" style="box-shadow:none;padding:0;transform:scale(1.5);transform-origin:left;flex:0 0 auto;margin-right:3%"><span class="lf"></span><span class="w"><b>BOSTON</b><i>biolife</i></span></div>
+        <div style="flex:1">
+          <div class="ttl" style="font-size:clamp(11px,1.85vw,22px);margin-top:0">Translational Longevity Summit</div>
+          <div style="font:700 clamp(5px,.80vw,10px)/1 var(--sans);letter-spacing:.12em;color:var(--green);margin-top:8px;white-space:nowrap">OCTOBER 7&ndash;11, 2026 &nbsp;&middot;&nbsp; ENTERPRISE RESEARCH CAMPUS AT HARVARD, BOSTON</div>
+        </div>
+      </div>
+    </div></div>
+    <p class="cap"><b>7A &middot; Page cover, 4200 &times; 700.</b> That is the company page spec, not the 1584 &times; 396 personal banner. Type sits inside the middle 72% because the page logo overlaps the lower left on desktop and the outer edges crop on mobile.</p>
+    <div class="note" style="margin-top:16px"><b class="l">Profile picture</b>
+      <p>400 &times; 400, rendering at about 60px in feed. At that size "TRANSLATIONAL" alone lands near 4.6px of cap height, under the roughly 7px a phone needs, so the name cannot be the mark. <b>Use the BBL logo chip.</b> It is the same identity, it is already drawn, and it makes the Summit page read as a BBL property from the first glance.</p>
+    </div>
+  </div>
+</div>
+
+<h2><b>The plan</b></h2>
+<p class="h2sub">43 posts across 41 slots, August 19 to October 16. Four a week, twice daily on the first two event days. <span class="co">&#10003;</span> marks the 27 built as collabs, tagged to a speaker or partner so they land on their grid too.</p>
+
+<div class="tscroll">
+<table>
+<thead><tr><th style="width:9%">When</th><th style="width:10%">Board</th><th>Post</th><th style="width:5%;text-align:center">Collab</th></tr></thead>
+<tbody>
+<tr class="wk"><td colspan="4">Week 0 &middot; Aug 19 to 23 &middot; Page live</td></tr>
+<tr><td class="n">Wed 19</td><td><span class="bd">01 Announce</span></td><td>Page opens. Name, date, venue. No price, no urgency.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 20</td><td><span class="bd c">05 Carousel</span></td><td>Six tracks, eight slides. The explainer everyone lands on.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Sat 22</td><td><span class="bd">03B Tracks</span></td><td>Attend one day or all five. The flexibility answer.</td><td></td></tr>
+
+<tr class="wk"><td colspan="4">Week 1 &middot; Aug 24 to 30 &middot; Faculty</td></tr>
+<tr><td class="n">Mon 24</td><td><span class="bd">02 Speaker</span></td><td>Camillo Ricordi, MD. Keynote, and CSO of Healthspan Action Coalition.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Wed 26</td><td><span class="bd">03A Lineup</span></td><td>First four faces.</td><td></td></tr>
+<tr><td class="n">Thu 27</td><td><span class="bd">02 Speaker</span></td><td>Aubrey de Grey, LEV Foundation.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Sat 29</td><td><span class="bd">04B Research</span></td><td>Published paper tied to the Regenerative Medicine track.</td><td></td></tr>
+
+<tr class="wk"><td colspan="4">Week 2 &middot; Aug 31 to Sep 6 &middot; Clinical relevance</td></tr>
+<tr><td class="n">Mon 31</td><td><span class="bd">02 Speaker</span></td><td>Jeanne F. Loring, PhD. Scripps and Aspen Neuroscience.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Wed 2</td><td><span class="bd c">05 Carousel</span></td><td>What is ready for the clinic, and what is not yet. Honest, which is why it travels.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 3</td><td><span class="bd">02 Speaker</span></td><td>David Barzilai, MD, PhD. Harvard Medical School.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Sat 5</td><td><span class="bd">03B Tracks</span></td><td>Track 04, Biomarkers and Outcomes. The "what do I measure" post.</td><td></td></tr>
+
+<tr class="wk"><td colspan="4">Week 3 &middot; Sep 7 to 13 &middot; Program</td></tr>
+<tr><td class="n">Mon 7</td><td><span class="bd">04A Program</span></td><td>Day 1 schedule. Needs the agenda.</td><td></td></tr>
+<tr><td class="n">Tue 8</td><td><span class="bd">02 Speaker</span></td><td>Bernard Siegel, JD. Tag Regenerative Medicine Foundation.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 10</td><td><span class="bd">03A Lineup</span></td><td>Second four faces.</td><td></td></tr>
+<tr><td class="n">Sat 12</td><td><span class="bd">02 Speaker</span></td><td>Paul Tortland, DO. New England Stem Cell Institute, local draw.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+
+<tr class="wk"><td colspan="4">Week 4 &middot; Sep 14 to 20 &middot; Depth</td></tr>
+<tr><td class="n">Mon 14</td><td><span class="bd">02 Speaker</span></td><td>Wei-Wu He, PhD. Human Longevity, Inc.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Tue 15</td><td><span class="bd c">05 Carousel</span></td><td>Full faculty by track. Four faces a slide.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 17</td><td><span class="bd">04A Program</span></td><td>Day 2 schedule.</td><td></td></tr>
+<tr><td class="n">Fri 18</td><td><span class="bd">01 Announce</span></td><td>Sponsor tiers. Different buyer, same board family.</td><td></td></tr>
+<tr><td class="n">Sat 19</td><td><span class="bd">02 Speaker</span></td><td>Antonio Regalado. MIT Technology Review, on the faculty.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+
+<tr class="wk"><td colspan="4">Week 5 &middot; Sep 21 to 27 &middot; Logistics</td></tr>
+<tr><td class="n">Mon 21</td><td><span class="bd">01 Announce</span></td><td>Travel and hotel. The Atlas is on the campus. Schedule fact, not a deadline.</td><td></td></tr>
+<tr><td class="n">Tue 22</td><td><span class="bd">02 Speaker</span></td><td>Melissa King. COO, Healthspan Action Coalition. Tag @HealthspanAct.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Wed 23</td><td><span class="bd v">Video</span></td><td>Sixty seconds, one speaker to camera: why this room. Norman can cut it.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 24</td><td><span class="bd">03B Tracks</span></td><td>Track 05, Policy, Access and Equity.</td><td></td></tr>
+<tr><td class="n">Sat 26</td><td><span class="bd">04B Research</span></td><td>Second research spotlight.</td><td></td></tr>
+
+<tr class="wk"><td colspan="4">Week 6 &middot; Sep 28 to Oct 4 &middot; Boston Longevity Week opens</td></tr>
+<tr><td class="n">Mon 28</td><td><span class="bd">01 Announce</span></td><td>What is included. Sessions, workshops, meals, materials, certificate.</td><td></td></tr>
+<tr><td class="n">Tue 29</td><td><span class="bd">02 Speaker</span></td><td>Duncan Ross, PhD. Kimera Labs.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Wed 30</td><td><span class="bd c">05 Carousel</span></td><td>Speaker highlights, one week out. The tactic the SCMR study credits with a 52% registration lift.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 1</td><td><span class="bd">01 Announce</span></td><td>Boston Longevity Week opens with ARDD. Position the Summit as its clinical finale. Tag ARDD.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Sat 3</td><td><span class="bd">03B Tracks</span></td><td>Track 06, Innovation and Collaboration.</td><td></td></tr>
+
+<tr class="wk"><td colspan="4">Week 7 &middot; Oct 5 to 11 &middot; Event week</td></tr>
+<tr><td class="n">Mon 5</td><td><span class="bd">04A Program</span></td><td>The full five-day program in one board.</td><td></td></tr>
+<tr><td class="n">Tue 6</td><td><span class="bd">06 Story</span></td><td>Opens tomorrow. Arrival, doors, start time.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Wed 7</td><td><span class="bd">Live &times;2</span></td><td>Day 1. Opening keynote, plus an afternoon post.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Thu 8</td><td><span class="bd">Live &times;2</span></td><td>Day 2, morning and afternoon.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Fri 9</td><td><span class="bd v">Video</span></td><td>Day 3. Sixty seconds from the floor. The single best asset for selling 2027.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Sat 10</td><td><span class="bd">Live</span></td><td>Day 4.</td><td></td></tr>
+<tr><td class="n">Sun 11</td><td><span class="bd">Live</span></td><td>Closing day. Room shot, faculty group.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Sun 11</td><td><span class="bd">Text</span></td><td>Same-day close from Joe Krieger, first person. Written now, posted then.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+
+<tr class="wk"><td colspan="4">After &middot; Oct 12 to 16 &middot; Convert the archive</td></tr>
+<tr><td class="n">Mon 12</td><td><span class="bd c">05 Carousel</span></td><td>Ten things said at the Summit. What people who did not attend actually read.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+<tr><td class="n">Wed 14</td><td><span class="bd">04B Research</span></td><td>The paper everyone asked about.</td><td></td></tr>
+<tr><td class="n">Fri 16</td><td><span class="bd">01 Announce</span></td><td>2027 interest list opens.</td><td class="co" style="text-align:center">&#10003;</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2><b>Before I build</b></h2>
+
+<div class="note warn"><b class="l">Two conflicts in our own sources</b>
+<ul>
+  <li><b>Date.</b> translationallongevity.com, bostonlongevityweek.com and healthspanaction.org all say <b>October 7 to 11</b>. bostonbiolife.com/upcoming-events says October 8 to 11, and the existing Summit board in the BBL template system says "Saturday, October 11." Two of our own assets need correcting either way.</li>
+  <li><b>Track 03 name.</b> healthspanaction.org calls it Regenerative Medicine. translationallongevity.com calls it Translational Science. I have used Regenerative Medicine on the boards because it is the clinical framing. Confirm which is canonical.</li>
+</ul>
+</div>
+
+<div class="note"><b class="l">What unblocks the rest</b>
+<ul>
+  <li><b>Agenda.</b> Three program boards depend on it. Without it I hold those slots and run faculty boards instead.</li>
+  <li><b>CME.</b> Not mentioned on either summit site. The badge stays off every Summit board until someone confirms. If it clears, it goes on all of them.</li>
+  <li><b>Speaker photo rights.</b> 30+ headshots are published on the summit site. Confirming we can use them in social graphics unblocks ten boards.</li>
+  <li><b>Master logo file.</b> The chip on every board here is redrawn at thumbnail scale. Production needs the real asset.</li>
+  <li><b>Who shoots the event.</b> Seven event-week posts are floor photography. Assign one person by early September or they will not happen.</li>
+  <li><b>Which doctor amplifies,</b> so the collab boards can be tagged correctly from post one.</li>
+</ul>
+</div>
+
+<footer>
+  <p><b>Sources.</b> Boston BioLife Social Template System (Canva, 27 boards) and the August 5 creative direction &middot; <a href="https://translationallongevity.com">translationallongevity.com</a> &middot; <a href="https://healthspanaction.org/translational-longevity-summit/">healthspanaction.org</a> &middot; <a href="https://www.bostonlongevityweek.com/">bostonlongevityweek.com</a> &middot; Boston BioLife Reconnaissance Report, July 31 2026 (Instagram engagement figures) &middot; <a href="https://www.socialinsider.io/social-media-benchmarks/linkedin">Socialinsider</a> and <a href="https://authoredup.com/blog/linkedin-algorithm">AuthoredUp</a> format benchmarks &middot; <a href="https://link.springer.com/article/10.1186/s12968-021-00837-x">SCMR social media task force, J Cardiovasc Magn Reson</a></p>
+  <p style="margin-top:10px">Colors and type per the BBL identity extracted from bostonbiolife.com computed CSS. Deep navy carried from BBL's own webinar creative, still pending confirmation as an approved brand color.</p>
+</footer>
+
+</div>
+</body>
+</html>
