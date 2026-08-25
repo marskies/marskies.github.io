@@ -11,6 +11,7 @@
   --page:#06070A;
   --label:#7F858E;
   --label-hi:#E8E9EB;
+  --round:#9BB0C7;
   --orange:#FF9500;
   --rule:#23272E;
   --panel:#0E1115;
@@ -26,8 +27,19 @@ body{
   padding:40px 20px 120px;
 }
 .wrap{max-width:1120px;margin:0 auto}
-section{margin:0 0 96px}
-section:last-child{margin-bottom:0}
+section{margin:0 0 84px}
+
+.round{
+  border-top:1px solid rgba(155,176,199,.32);
+  color:var(--round);
+  font-size:11px;
+  letter-spacing:.30em;
+  text-transform:uppercase;
+  padding-top:14px;
+  margin:0 0 52px;
+}
+.round + section{margin-top:0}
+.wrap > .round ~ .round{margin-top:44px}
 
 .lbl{
   font-size:11px;
@@ -39,31 +51,29 @@ section:last-child{margin-bottom:0}
 }
 .lbl-hi{color:var(--label-hi)}
 .lbl-key{color:var(--orange)}
+.sub{display:block;margin-top:5px;color:var(--label);letter-spacing:.10em}
 
 .scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:10px}
 .scroll:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
 .rail{display:table;width:max-content;border-spacing:0}
 
 .tile{display:block;background:var(--bg);box-shadow:0 0 0 1px rgba(255,255,255,.10)}
+.tile.circ{border-radius:50%}
 
-/* 1 */
 .hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
 .hero figure{margin:0}
 .hero .tile{width:100%;height:auto;aspect-ratio:1/1}
 .hero figcaption{margin-top:12px}
 
-/* 2 */
 .r{display:table-row}
 .r > div{display:table-cell;vertical-align:middle;padding:0 26px 26px 0}
 .r.head > div{vertical-align:bottom;padding-bottom:12px}
-.rowlbl{width:40px;min-width:40px;padding-right:14px !important}
+.rowlbl{width:56px;min-width:56px;padding-right:14px !important}
 .k{background:var(--panel);border-left:1px solid var(--rule);padding-left:26px !important;padding-right:26px !important}
 
-/* 3 */
 .g > div{display:table-cell;vertical-align:middle;padding:0 18px 18px 0}
 .g.head > div{vertical-align:bottom;padding-bottom:12px}
 
-/* 4 */
 .word{background:#0A0C0E;padding:38px 30px}
 .word svg{display:block;height:auto}
 .wordcap{margin:0 0 22px}
@@ -73,38 +83,44 @@ section:last-child{margin-bottom:0}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs>
-
-  <!-- A1  (w) with the play glyph at true superscript scale -->
+  <symbol id="bW1" viewBox="12.00 18.75 262.50 262.50"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/></symbol>
+  <symbol id="bW2" viewBox="11.81 17.56 264.88 264.88"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="13" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="13" stroke-linecap="round"/><polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/></symbol>
+  <symbol id="bW3" viewBox="11.62 16.37 267.26 267.26"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="17" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="17" stroke-linecap="round"/><polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/></symbol>
+  <symbol id="bA1" viewBox="12.00 18.75 262.50 262.50"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/></symbol>
+  <symbol id="bA2" viewBox="15.05 37.80 224.40 224.40"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M206 106 Q228 150 206 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="158,120 204,150 158,180" style="fill:var(--accent)"/></symbol>
+  <symbol id="bA3" viewBox="12.00 18.75 262.50 262.50"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="161.6,110 223,150 161.6,190" style="fill:var(--accent)"/></symbol>
+  <symbol id="bC" viewBox="14.80 36.25 227.50 227.50"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M145 106 Q123 150 145 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M208.6 106 Q230.6 150 208.6 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="152.9,114 208.1,150 152.9,186" style="fill:var(--accent)"/></symbol>
+  <symbol id="bR2" viewBox="12.00 18.75 262.50 262.50"><text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/></symbol>
+  <symbol id="bP" viewBox="125.36 80.36 139.29 139.29"><path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/><polygon points="161.6,110 223,150 161.6,190" style="fill:var(--accent)"/></symbol>
   <symbol id="mA1" viewBox="26.65 38.5 223 223">
-    <text x="121.7" y="188" text-anchor="middle" textLength="79.4" lengthAdjust="spacingAndGlyphs"
-          style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">w</text>
+    <text x="121.7" y="188" text-anchor="middle" textLength="79.4" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">w</text>
     <path d="M60 106 Q38 150 60 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
     <path d="M183.4 106 Q205.4 150 183.4 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
     <polygon points="205,103.5 231.8,121 205,138.5" style="fill:var(--accent)"/>
   </symbol>
-
-  <!-- A2  same, play glyph enlarged past superscript scale -->
   <symbol id="mA2" viewBox="24.95 27.7 244.6 244.6">
-    <text x="121.7" y="188" text-anchor="middle" textLength="79.4" lengthAdjust="spacingAndGlyphs"
-          style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">w</text>
+    <text x="121.7" y="188" text-anchor="middle" textLength="79.4" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">w</text>
     <path d="M60 106 Q38 150 60 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
     <path d="M183.4 106 Q205.4 150 183.4 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
     <polygon points="207,106 250,134 207,162" style="fill:var(--accent)"/>
   </symbol>
-
-  <!-- B  exact source geometry, concept c07 -->
   <symbol id="mB" viewBox="12 18.75 262.5 262.5">
-    <text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs"
-          style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text>
+    <text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text>
     <path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
     <path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
     <polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/>
   </symbol>
-
 </defs></svg>
 
 <div class="wrap">
 
+<div class="round">Round 2 &middot; 25 Aug</div>
+<section><div class="scroll"><div class="rail"><div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">55</div></div><div class="r"><div class="rowlbl lbl lbl-hi">1<span class="sub">9</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bW1"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bW1"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bW1"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">2<span class="sub">13</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bW2"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bW2"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bW2"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">3<span class="sub">17</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bW3"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bW3"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bW3"/></svg></div></div></div></div></section>
+<section><div class="scroll"><div class="rail"><div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">55</div></div><div class="r"><div class="rowlbl lbl lbl-hi">1<span class="sub">23</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bA1"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bA1"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bA1"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">2<span class="sub">7</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bA2"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bA2"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bA2"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">3<span class="sub">7</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bA3"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bA3"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bA3"/></svg></div></div></div></div></section>
+<section><div class="scroll"><div class="rail"><div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">55</div></div><div class="r"><div class="rowlbl lbl lbl-hi">1<span class="sub">2.27:1</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bA1"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bA1"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bA1"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">2<span class="sub">1.97:1</span></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bC"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bC"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#bC"/></svg></div></div></div></div></section>
+<section><div class="scroll"><div class="rail"><div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">98</div></div><div class="r"><div class="rowlbl lbl lbl-hi">1<span class="sub">2.27:1</span></div><div><svg class="tile circ" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bR2"/></svg></div><div><svg class="tile circ" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bR2"/></svg></div><div class="k"><svg class="tile circ" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="98" height="98"><use href="#bR2"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">2<span class="sub">1.21:1</span></div><div><svg class="tile circ" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#bP"/></svg></div><div><svg class="tile circ" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#bP"/></svg></div><div class="k"><svg class="tile circ" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="98" height="98"><use href="#bP"/></svg></div></div></div></div></section>
+
+<div class="round">Round 1 &middot; 25 Aug</div>
 <section class="hero">
   <figure>
     <svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA1"/></svg>
@@ -119,41 +135,21 @@ section:last-child{margin-bottom:0}
     <figcaption class="lbl lbl-hi">B</figcaption>
   </figure>
 </section>
-
-<section>
-  <div class="scroll"><div class="rail">
-    <div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">55</div></div>
-    <div class="r"><div class="rowlbl lbl lbl-hi">A1</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mA1"/></svg></div></div>
-    <div class="r"><div class="rowlbl lbl lbl-hi">A2</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mA2"/></svg></div></div>
-    <div class="r"><div class="rowlbl lbl lbl-hi">B</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mB"/></svg></div></div>
-  </div></div>
-</section>
-
-<section>
-  <div class="scroll"><div class="rail">
-    <div class="r g head"><div class="rowlbl"></div><div class="lbl">#0A0C0E</div><div class="lbl">#09092A</div><div class="lbl">#FAFAF8</div></div>
-    <div class="r g"><div class="rowlbl lbl lbl-hi">A1</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div></div>
-    <div class="r g"><div class="rowlbl lbl lbl-hi">A2</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div></div>
-    <div class="r g"><div class="rowlbl lbl lbl-hi">B</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div></div>
-  </div></div>
-</section>
-
-<section>
-  <div class="wordcap"><div class="word"><svg viewBox="-8 -84 999 100" style="width:94.7%" role="img" aria-label="W play LLNESS INDEX">
+<section><div class="scroll"><div class="rail"><div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">55</div></div><div class="r"><div class="rowlbl lbl lbl-hi">A1</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mA1"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">A2</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mA2"/></svg></div></div><div class="r"><div class="rowlbl lbl lbl-hi">B</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mB"/></svg></div></div></div></div></section>
+<section><div class="scroll"><div class="rail"><div class="r g head"><div class="rowlbl"></div><div class="lbl">#0A0C0E</div><div class="lbl">#09092A</div><div class="lbl">#FAFAF8</div></div><div class="r g"><div class="rowlbl lbl lbl-hi">A1</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div></div><div class="r g"><div class="rowlbl lbl lbl-hi">A2</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div></div><div class="r g"><div class="rowlbl lbl lbl-hi">B</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div></div></div></div></section>
+<section><div class="wordcap"><div class="word"><svg viewBox="-8 -84 999 100" style="width:94.7%" role="img" aria-label="W play LLNESS INDEX">
         <text x="0" y="0" textLength="85.45" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">W</text>
         <path d="M108 -74.5 Q88 -34.5 108 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
         <path d="M163.6 -74.5 Q183.6 -34.5 163.6 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
         <polygon points="116.7,-63.25 158.5,-36 116.7,-8.75" fill="#FF9500"/>
         <text x="186.3" y="0" textLength="797" lengthAdjust="spacing" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">LLNESS INDEX</text>
-      </svg></div><div class="lbl lbl-hi">W(&#9654;)LLNESS INDEX</div></div>
-  <div class="wordcap"><div class="word"><svg viewBox="-20 -84 1055 100" style="width:100%" role="img" aria-label="paren W paren play LLNESS INDEX">
+      </svg></div><div class="lbl lbl-hi">W(&#9654;)LLNESS INDEX</div></div><div class="wordcap"><div class="word"><svg viewBox="-20 -84 1055 100" style="width:100%" role="img" aria-label="paren W paren play LLNESS INDEX">
         <path d="M20 -74.5 Q0 -34.5 20 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
         <text x="42" y="0" textLength="85.45" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">W</text>
         <path d="M149.45 -74.5 Q169.45 -34.5 149.45 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
         <polygon points="170.55,-74.5 209.65,-49.05 170.55,-23.6" fill="#FF9500"/>
         <text x="218.65" y="0" textLength="797" lengthAdjust="spacing" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">LLNESS INDEX</text>
-      </svg></div><div class="lbl lbl-hi">(W)&#9654;LLNESS INDEX</div></div>
-</section>
+      </svg></div><div class="lbl lbl-hi">(W)&#9654;LLNESS INDEX</div></div></section>
 
 </div>
 </body>
