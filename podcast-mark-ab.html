@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcast Mark A/B</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=Merriweather:wght@900&display=swap');
+
+:root{
+  --page:#06070A;
+  --label:#7F858E;
+  --label-hi:#E8E9EB;
+  --orange:#FF9500;
+  --rule:#23272E;
+  --panel:#0E1115;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--page);
+  color:var(--label);
+  font-family:"DM Sans",ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-weight:500;
+  -webkit-font-smoothing:antialiased;
+  padding:40px 20px 120px;
+}
+.wrap{max-width:1120px;margin:0 auto}
+section{margin:0 0 96px}
+section:last-child{margin-bottom:0}
+
+.lbl{
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--label);
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.lbl-hi{color:var(--label-hi)}
+.lbl-key{color:var(--orange)}
+
+.scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:10px}
+.scroll:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
+.rail{display:table;width:max-content;border-spacing:0}
+
+.tile{display:block;background:var(--bg);box-shadow:0 0 0 1px rgba(255,255,255,.10)}
+
+/* 1 */
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.hero figure{margin:0}
+.hero .tile{width:100%;height:auto;aspect-ratio:1/1}
+.hero figcaption{margin-top:12px}
+
+/* 2 */
+.r{display:table-row}
+.r > div{display:table-cell;vertical-align:middle;padding:0 26px 26px 0}
+.r.head > div{vertical-align:bottom;padding-bottom:12px}
+.rowlbl{width:40px;min-width:40px;padding-right:14px !important}
+.k{background:var(--panel);border-left:1px solid var(--rule);padding-left:26px !important;padding-right:26px !important}
+
+/* 3 */
+.g > div{display:table-cell;vertical-align:middle;padding:0 18px 18px 0}
+.g.head > div{vertical-align:bottom;padding-bottom:12px}
+
+/* 4 */
+.word{background:#0A0C0E;padding:38px 30px}
+.word svg{display:block;height:auto}
+.wordcap{margin:0 0 22px}
+.wordcap .lbl{margin-top:12px}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs>
+
+  <!-- A1  (w) with the play glyph at true superscript scale -->
+  <symbol id="mA1" viewBox="26.65 38.5 223 223">
+    <text x="121.7" y="188" text-anchor="middle" textLength="79.4" lengthAdjust="spacingAndGlyphs"
+          style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">w</text>
+    <path d="M60 106 Q38 150 60 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M183.4 106 Q205.4 150 183.4 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="205,103.5 231.8,121 205,138.5" style="fill:var(--accent)"/>
+  </symbol>
+
+  <!-- A2  same, play glyph enlarged past superscript scale -->
+  <symbol id="mA2" viewBox="24.95 27.7 244.6 244.6">
+    <text x="121.7" y="188" text-anchor="middle" textLength="79.4" lengthAdjust="spacingAndGlyphs"
+          style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">w</text>
+    <path d="M60 106 Q38 150 60 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M183.4 106 Q205.4 150 183.4 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="207,106 250,134 207,162" style="fill:var(--accent)"/>
+  </symbol>
+
+  <!-- B  exact source geometry, concept c07 -->
+  <symbol id="mB" viewBox="12 18.75 262.5 262.5">
+    <text x="80" y="188" text-anchor="middle" textLength="94" lengthAdjust="spacingAndGlyphs"
+          style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:110px;fill:var(--letter)">W</text>
+    <path d="M152 106 Q130 150 152 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
+    <path d="M238 106 Q260 150 238 194" style="fill:none;stroke:var(--accent)" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="174,120 220,150 174,180" style="fill:var(--accent)"/>
+  </symbol>
+
+</defs></svg>
+
+<div class="wrap">
+
+<section class="hero">
+  <figure>
+    <svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA1"/></svg>
+    <figcaption class="lbl lbl-hi">A1</figcaption>
+  </figure>
+  <figure>
+    <svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA2"/></svg>
+    <figcaption class="lbl lbl-hi">A2</figcaption>
+  </figure>
+  <figure>
+    <svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mB"/></svg>
+    <figcaption class="lbl lbl-hi">B</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="scroll"><div class="rail">
+    <div class="r head"><div class="rowlbl"></div><div class="lbl">512</div><div class="lbl">128</div><div class="lbl lbl-key k">55</div></div>
+    <div class="r"><div class="rowlbl lbl lbl-hi">A1</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mA1"/></svg></div></div>
+    <div class="r"><div class="rowlbl lbl lbl-hi">A2</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mA2"/></svg></div></div>
+    <div class="r"><div class="rowlbl lbl lbl-hi">B</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="512" height="512"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div class="k"><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="55" height="55"><use href="#mB"/></svg></div></div>
+  </div></div>
+</section>
+
+<section>
+  <div class="scroll"><div class="rail">
+    <div class="r g head"><div class="rowlbl"></div><div class="lbl">#0A0C0E</div><div class="lbl">#09092A</div><div class="lbl">#FAFAF8</div></div>
+    <div class="r g"><div class="rowlbl lbl lbl-hi">A1</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mA1"/></svg></div></div>
+    <div class="r g"><div class="rowlbl lbl lbl-hi">A2</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mA2"/></svg></div></div>
+    <div class="r g"><div class="rowlbl lbl lbl-hi">B</div><div><svg class="tile" style="--bg:#0A0C0E;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#09092A;--letter:#FAFAF8;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div><div><svg class="tile" style="--bg:#FAFAF8;--letter:#16191D;--accent:#FF9500" width="128" height="128"><use href="#mB"/></svg></div></div>
+  </div></div>
+</section>
+
+<section>
+  <div class="wordcap"><div class="word"><svg viewBox="-8 -84 999 100" style="width:94.7%" role="img" aria-label="W play LLNESS INDEX">
+        <text x="0" y="0" textLength="85.45" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">W</text>
+        <path d="M108 -74.5 Q88 -34.5 108 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
+        <path d="M163.6 -74.5 Q183.6 -34.5 163.6 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
+        <polygon points="116.7,-63.25 158.5,-36 116.7,-8.75" fill="#FF9500"/>
+        <text x="186.3" y="0" textLength="797" lengthAdjust="spacing" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">LLNESS INDEX</text>
+      </svg></div><div class="lbl lbl-hi">W(&#9654;)LLNESS INDEX</div></div>
+  <div class="wordcap"><div class="word"><svg viewBox="-20 -84 1055 100" style="width:100%" role="img" aria-label="paren W paren play LLNESS INDEX">
+        <path d="M20 -74.5 Q0 -34.5 20 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
+        <text x="42" y="0" textLength="85.45" lengthAdjust="spacingAndGlyphs" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">W</text>
+        <path d="M149.45 -74.5 Q169.45 -34.5 149.45 5.45" fill="none" stroke="#FF9500" stroke-width="8.2" stroke-linecap="round"/>
+        <polygon points="170.55,-74.5 209.65,-49.05 170.55,-23.6" fill="#FF9500"/>
+        <text x="218.65" y="0" textLength="797" lengthAdjust="spacing" style="font-family:Merriweather,Georgia,serif;font-weight:900;font-size:100px;fill:#FAFAF8">LLNESS INDEX</text>
+      </svg></div><div class="lbl lbl-hi">(W)&#9654;LLNESS INDEX</div></div>
+</section>
+
+</div>
+</body>
+</html>
