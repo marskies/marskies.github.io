@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>The Wellness Index Report Podcast · wireframe</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#222;font:15px/1.5 -apple-system,"Segoe UI",system-ui,Helvetica,Arial,sans-serif;padding:36px 44px 90px}
+.filehead{max-width:1500px;margin:0 auto 8px}
+.filehead h1{font-size:21px;font-weight:650;margin:0 0 6px}
+.filehead p{color:#666;font-size:13px;margin:3px 0;max-width:1000px}
+.legend{display:flex;gap:26px;align-items:center;color:#999;font-size:12px;margin-top:14px;flex-wrap:wrap}
+.legend>span{display:flex;gap:8px;align-items:center}
+.legend .bar{width:64px;margin:0}
+.legend .miss{width:64px;margin:0}
+.legend .img{width:44px;height:28px}
+.legend .img span{display:none}
+.part{max-width:1500px;margin:0 auto;padding-top:40px}
+.parth{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#999;border-top:1px solid #ddd;padding-top:10px;margin:0 0 14px;font-weight:600}
+.frame{border:1px solid #ccc;position:relative;padding:26px 28px 22px;margin:26px 0 6px;background:#fff}
+.tag{position:absolute;top:-9px;left:14px;background:#fff;color:#999;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:0 7px;white-space:nowrap}
+.tagr{position:absolute;top:-10px;right:14px;background:#fff;padding:0 6px}
+.ann{color:#999;font-size:12.5px;margin:8px 6px 22px;line-height:1.5;max-width:1000px}
+.ann::before{content:"\25B8\00a0"}
+.ann.noarr{margin:8px 0 4px}
+.bar{height:11px;background:#eee;border-radius:3px;margin:8px 0}
+.b90{width:90%}.b75{width:75%}.b60{width:60%}.b45{width:45%}.b35{width:35%}.b25{width:25%}
+.miss{height:13px;background:repeating-linear-gradient(45deg,#f2f2f2 0 6px,#e2e2e2 6px 12px);border:1px dashed #bbb;border-radius:3px;margin:8px 0}
+.chip{display:inline-block;border:1px dashed #999;color:#666;background:#fff;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:2px 8px;border-radius:3px;vertical-align:middle;white-space:nowrap}
+.img{background:linear-gradient(to top right,transparent calc(50% - .5px),#ccc calc(50% - .5px),#ccc calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#ccc calc(50% - .5px),#ccc calc(50% + .5px),transparent calc(50% + .5px)),#eee;border:1px solid #ccc;color:#999;font-size:12px;display:flex;align-items:center;justify-content:center;text-align:center}
+.img span{background:#eee;padding:1px 7px;border-radius:2px}
+.btn{display:inline-block;background:#4a4a4a;color:#fff;font-size:13.5px;padding:10px 20px;border-radius:4px;white-space:nowrap}
+.btn.sec{background:#fff;color:#444;border:1px solid #999}
+.center{text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#666;margin:4px 0 14px}
+h1.wf{font-size:33px;line-height:1.16;font-weight:650;margin:0 auto 14px;max-width:780px}
+h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
+.sub{font-size:16.5px;color:#444;max-width:660px;margin:0 auto 20px;line-height:1.5}
+.trust{font-size:13px;color:#666;margin-top:16px}
+.ctarow{display:flex;gap:14px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.launchstrip{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.launchstrip .lab{color:#999;font-size:12px}
+.btnmiss{display:inline-block;width:210px;height:37px;background:repeating-linear-gradient(45deg,#f2f2f2 0 6px,#e2e2e2 6px 12px);border:1px dashed #aaa;border-radius:4px}
+.sticky{border:1px dashed #999;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 18px;margin:12px 0 6px;flex-wrap:wrap}
+.sticky .lab{color:#666;font-size:12px}
+.bigline{font-size:24px;font-weight:650;margin:16px 0 8px}
+.closing{font-size:15px;color:#444}
+.slabel{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#666;margin:2px 0 4px}
+.logorow{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:12px 0 6px}
+.logo{width:152px;height:54px;font-size:11.5px}
+.chan{width:120px;height:40px;font-size:11px}
+.outlettext{font-size:13px;color:#555}
+.copy{font-size:15px;color:#333;max-width:720px;margin:0 0 12px}
+.qlist{margin:14px 0 6px;padding:0;list-style:none;counter-reset:q;max-width:720px}
+.qlist li{counter-increment:q;padding:9px 0 9px 36px;position:relative;border-top:1px dotted #ddd;font-size:15px;color:#333}
+.qlist li::before{content:counter(q);position:absolute;left:2px;top:9px;width:22px;height:22px;border:1px solid #bbb;border-radius:50%;font-size:12px;color:#777;display:flex;align-items:center;justify-content:center}
+.pull{font-size:21px;font-weight:650;border-left:3px solid #ccc;padding:6px 0 6px 16px;margin:20px 0 16px}
+.discl{border:1px dashed #aaa;background:#fafafa;padding:14px 16px;font-size:13px;color:#555;position:relative;margin-top:16px;max-width:720px}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.card{border:1px solid #ccc;padding:14px 14px 10px;background:#fff}
+.card h4{font-size:14.5px;margin:0 0 6px;font-weight:650;line-height:1.3}
+.qualifier{font-size:13.5px;color:#555;text-align:center;margin-top:16px}
+.grid23{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.step{border:1px solid #ccc;padding:12px 14px}
+.stepn{width:24px;height:24px;border:1px solid #999;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12.5px;color:#555;margin-right:8px;vertical-align:middle}
+.step h4{display:inline;font-size:14.5px;font-weight:650;vertical-align:middle}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pcol{border:1px solid #ccc;padding:18px 18px 16px}
+.pcol h4{font-size:15px;font-weight:650;margin:0}
+.price{font-size:24px;font-weight:650;margin:8px 0 10px}
+.blt{display:flex;gap:9px;align-items:flex-start;margin:10px 0}
+.blt i{width:6px;height:6px;border-radius:50%;background:#bbb;flex:none;margin-top:5px}
+.blt div{flex:1}
+.blt .bar{margin:2px 0 4px}
+.micro{font-size:12.5px;color:#666;margin-top:10px}
+.wideblk{border:1px solid #ddd;padding:16px 18px;margin-top:16px}
+.wideblk.honest{border:2px solid #8a8a8a}
+.wideblk h4{font-size:15px;font-weight:650;margin:0 0 8px}
+.parasp{margin-top:16px}
+.narrow{max-width:620px}
+.attrib{font-size:13px;color:#666;margin-top:10px}
+.state{border:1px dashed #bbb;padding:18px 16px 12px;margin-top:18px;position:relative}
+.stag{position:absolute;top:-9px;left:12px;background:#fff;color:#777;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;padding:0 6px;font-weight:600}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.fchip{border:1px solid #bbb;border-radius:14px;padding:4px 12px;font-size:12.5px;color:#555;background:#fff;white-space:nowrap}
+.fchip.on{background:#4a4a4a;color:#fff;border-color:#4a4a4a}
+.epgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ep{border:1px solid #ccc;background:#fff;padding-bottom:10px}
+.ep .img{height:150px;border:none;border-bottom:1px solid #ccc}
+.ep .inner{padding:10px 12px 0}
+.flab{font-size:10.5px;color:#999;margin-top:6px}
+.eplinks{font-size:12.5px;color:#555;margin-top:8px}
+.eplinks u{margin-right:10px}
+.ghostrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.ghost{border:1px dashed #ccc;height:110px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:11px}
+.emailrow{display:flex;gap:10px;margin-top:14px;max-width:520px}
+.input{border:1px solid #ccc;background:#fff;height:38px;flex:1;border-radius:4px;color:#999;font-size:13px;display:flex;align-items:center;padding:0 12px}
+.acc{border:1px solid #ccc;margin-top:12px;max-width:780px}
+.qrow{border-top:1px solid #ddd;padding:12px 16px;font-size:14.5px;display:flex;justify-content:space-between;gap:12px;color:#333}
+.qrow:first-child{border-top:none}
+.qrow.open{background:#fafafa;display:block}
+.plus{color:#999;flex:none}
+.formfr{border:1px solid #999;max-width:680px;margin:20px auto 0;padding:20px 22px 18px;position:relative;background:#fff;text-align:left}
+.stepsbar{display:flex;gap:6px;align-items:center;font-size:12px;color:#999;flex-wrap:wrap;margin-bottom:14px}
+.snum{border:1px solid #bbb;border-radius:12px;padding:3px 10px;white-space:nowrap}
+.snum.on{background:#4a4a4a;border-color:#4a4a4a;color:#fff}
+.fld{margin:10px 0}
+.fld label{display:block;font-size:12px;color:#999;margin-bottom:4px}
+.fbox{border:1px solid #ccc;border-radius:4px;height:36px;background:#fff}
+.fbox.tall{height:60px}
+.cgrp{border:1px solid #ddd;border-radius:4px;padding:10px 14px;margin:8px 0;font-size:13px;color:#444;display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.cgrp .fn{color:#999;font-size:12px}
+.submitrow{text-align:center;margin-top:16px}
+.navbar{border:1px solid #ccc;background:#fff;display:flex;align-items:center;gap:24px;padding:13px 22px;max-width:1060px}
+.navlogo{width:92px;height:26px;flex:none;font-size:10px}
+.navi{font-size:13.5px;color:#444;white-space:nowrap}
+.navadd{outline:2px dashed #999;outline-offset:5px}
+.navlab{color:#666;font-size:12.5px;margin:18px 0 8px;font-weight:600}
+.renders{display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap}
+.dt{flex:1 1 860px;min-width:740px;max-width:1060px}
+.mbcol{flex:0 0 402px}
+.rendlab{color:#666;font-size:12.5px;margin:0 0 10px;font-weight:600}
+.browser{border:1px solid #ccc;border-bottom:none;background:#f7f7f7;padding:8px 14px;font-size:12px;color:#777;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.tab{background:#fff;border:1px solid #ddd;border-bottom:none;border-radius:4px 4px 0 0;padding:3px 12px;color:#555}
+.urlbox{border:1px solid #ccc;background:#fff;border-radius:3px;padding:3px 12px;color:#555;flex:1;min-width:220px}
+.pagenav{border:1px solid #ccc;display:flex;gap:22px;align-items:center;padding:12px 20px}
+.pagenav .chip{margin-left:auto}
+.decgrid{display:flex;gap:70px;flex-wrap:wrap;align-items:flex-start}
+.dectitle{font-size:13px;font-weight:650;color:#555;margin:0 0 12px}
+.mapwrap{display:flex;gap:28px}
+.mapcol{width:180px}
+.maplab{font-size:12px;color:#666;font-weight:600;margin-bottom:8px;height:34px}
+.mapblk{border:1px solid #ccc;background:#f6f6f6;margin:4px 0;padding:0 8px;font-size:10.5px;color:#777;display:flex;align-items:center;line-height:1.15}
+.mapblk.hot{background:#dcdcdc;border:1.5px solid #777;color:#333;font-weight:650}
+.marker{border:1px dashed #888;background:#fff;margin:5px 0;padding:4px 8px;font-size:10.5px;color:#444;line-height:1.35}
+.optnote{font-size:12.5px;color:#555;max-width:330px;margin:0 0 12px;line-height:1.5}
+.notes h3{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#777;margin:30px 0 10px;font-weight:650}
+.notes p,.notes li{font-size:13.5px;color:#444;max-width:1000px;line-height:1.55}
+.notes ul{padding-left:20px;margin:6px 0}
+.notes li{margin:6px 0}
+.reg{border-collapse:collapse;font-size:13px;max-width:1000px}
+.reg td,.reg th{border:1px solid #ddd;padding:9px 13px;text-align:left;vertical-align:top}
+.reg th{color:#777;font-size:11px;text-transform:uppercase;letter-spacing:.07em;background:#fafafa;font-weight:600}
+.reg td:first-child{white-space:nowrap}
+.mb .frame{padding:16px 13px 12px;margin:20px 0 4px}
+.mb .tag{font-size:9px;left:10px}
+.mb h1.wf{font-size:21px}
+.mb h2.wf{font-size:16.5px;margin-bottom:8px}
+.mb .sub{font-size:13px;margin-bottom:12px}
+.mb .copy{font-size:12.5px}
+.mb .trust{font-size:11px;margin-top:10px}
+.mb .eyebrow{font-size:10px;margin-bottom:10px}
+.mb .ctarow{flex-direction:column;gap:8px;align-items:stretch}
+.mb .btn{text-align:center;font-size:12.5px;padding:9px 14px}
+.mb .bigline{font-size:16px}
+.mb .closing{font-size:12.5px}
+.mb .row4,.mb .grid23,.mb .cols2,.mb .epgrid,.mb .ghostrow{grid-template-columns:1fr}
+.mb .logorow .logo{width:47%;height:44px;font-size:10px}
+.mb .logorow .chan{width:31%;height:34px;font-size:9px}
+.mb .outlettext{font-size:11px}
+.mb .qlist li{font-size:12.5px;padding-left:30px}
+.mb .qlist li::before{width:18px;height:18px;font-size:10px;top:10px}
+.mb .pull{font-size:15.5px;margin:14px 0 10px}
+.mb .discl{font-size:11px;padding:10px 24px 10px 12px}
+.mb .price{font-size:19px}
+.mb .micro{font-size:11px}
+.mb .wideblk{padding:12px 13px}
+.mb .wideblk h4,.mb .pcol h4,.mb .card h4,.mb .step h4{font-size:13px}
+.mb .pcol{padding:13px 13px 12px}
+.mb .qualifier{font-size:11.5px}
+.mb .chips{flex-wrap:nowrap;overflow:hidden}
+.mb .fchip{font-size:10.5px;padding:3px 9px}
+.mb .ep .img{height:140px}
+.mb .eplinks{font-size:11px}
+.mb .acc .qrow{font-size:11.5px;padding:10px 12px}
+.mb .attrib{font-size:11px}
+.mb .emailrow{flex-direction:column;max-width:none}
+.mb .formfr{padding:14px 13px 12px;margin-top:12px}
+.mb .snum{font-size:10px;padding:2px 7px}
+.mb .fbox{height:30px}
+.mb .fbox.tall{height:48px}
+.mb .cgrp{font-size:11.5px;padding:8px 10px}
+.mb .cgrp .fn{font-size:10.5px}
+.mb .launchstrip .lab{font-size:10.5px}
+.mb .btnmiss{width:160px;height:32px}
+.mb .sticky{padding:8px 12px}
+.mb .sticky .lab{font-size:10px}
+.mobfr{width:392px;border:1px solid #bbb;border-radius:16px;padding:14px 12px;background:#fff}
+.mobhead{display:flex;justify-content:space-between;align-items:center;border:1px solid #ccc;padding:9px 12px}
+.burger{width:32px;height:24px;border:1px solid #bbb;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#777;font-size:13px}
+@media (max-width:1330px){.renders{flex-direction:column}.dt{min-width:0}}
+.chip.prop{border:1px solid #777;border-style:solid;color:#333;font-weight:600;background:#f4f4f4}
+.propblk{border-left:3px dotted #999;padding-left:14px;margin:10px 0}
+.rlist{margin-top:6px}
+.rrow{border-top:1px solid #ddd;display:flex;gap:16px;padding:12px 4px;align-items:baseline}
+.rrow:first-child{border-top:none}
+.rnum{font-size:11.5px;color:#999;width:26px;flex:none;font-weight:650;letter-spacing:.04em}
+.rtitle{font-weight:650;font-size:14.5px;flex:none;min-width:210px}
+.rbody{font-size:13.5px;color:#555;flex:1}
+.stat{font-size:44px;font-weight:650;line-height:1;margin:2px 0 4px}
+.statlab{font-size:13px;color:#666;max-width:560px}
+.ticks{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.tick{border:1px solid #ccc;border-radius:15px;padding:5px 15px;font-size:13px;color:#444;background:#fafafa;white-space:nowrap}
+.seal{width:88px;height:88px;border-radius:50%;flex:none;font-size:10.5px}
+.pullrow{display:flex;gap:22px;align-items:center;margin:20px 0 16px}
+.ctaband{border-top:1px solid #ddd;margin-top:16px;padding-top:16px;text-align:center}
+.ctaband .echo{font-size:12px;color:#888;margin-top:8px}
+.drow{border:1px solid #ddd;border-radius:4px;padding:11px 14px;margin:8px 0;font-size:13.5px;color:#444;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.drow .plus{color:#999}
+.pband{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.pcell{border:1px solid #ddd;padding:14px 16px}
+.pcell h4{font-size:14px;font-weight:650;margin:0}
+.pcell .price{font-size:18px;margin:4px 0 8px}
+.belowdiv{border-top:1px solid #ddd;margin:34px 0 6px;padding-top:8px;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#999;font-weight:600}
+.maptag{font-size:9px;letter-spacing:.05em;color:#555;border:1px solid #bbb;padding:0 4px;border-radius:2px;margin-left:6px;text-transform:uppercase;white-space:nowrap}
+.changes{font-size:12.5px;color:#555;max-width:430px;line-height:1.6;margin-top:12px}
+.changes b{color:#333}
+.minipop{border:1px dashed #bbb;padding:14px 14px 10px;margin-top:16px;position:relative}
+.mb .rtitle{min-width:0;font-size:12.5px}
+.mb .rrow{flex-wrap:wrap;gap:6px 10px;padding:10px 2px}
+.mb .rbody{font-size:11.5px;flex-basis:100%}
+.mb .stat{font-size:30px}
+.mb .statlab{font-size:11px}
+.mb .tick{font-size:10.5px;padding:4px 10px}
+.mb .ticks{gap:6px}
+.mb .pband{grid-template-columns:1fr}
+.mb .drow{font-size:11.5px;padding:9px 11px}
+.mb .seal{width:64px;height:64px;font-size:8.5px}
+.mb .pullrow{gap:12px}
+.mb .ctaband .echo{font-size:10px}
+.alink{font-size:14px;color:#444;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.mb .alink{font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="filehead">
+  <h1>wellnessindexreport.com/podcast &middot; lo-fi wireframe, conversion cut</h1>
+  <p>v2, August 27, 2026. Round two: the page restructured for the reader who decides whether to be interviewed. Still gray on purpose; the family shows in the bones, not the color.</p>
+  <p>Deck copy is unmarked. Any line that is not verbatim from the deck carries a PROPOSED chip and is listed in the notes for line-by-line approval. The change map under decisions shows every move against the deck order.</p>
+  <div class="legend">
+    <span><span class="bar"></span> copy exists in the deck, greeked</span>
+    <span><span class="chip prop">Proposed</span> copy not verbatim from the deck</span>
+    <span><span class="chip">Flag</span> open decision, see register</span>
+    <span><span class="img"><span></span></span> image slot</span>
+  </div>
+</header>
+
+<section class="part">
+  <h2 class="parth">Nav, drawn both ways</h2>
+  <div class="navlab">6 items, current site</div>
+  <div class="navbar">
+    <div class="img navlogo"><span>logo</span></div>
+    <span class="navi">Home</span><span class="navi">About</span><span class="navi">Wellness Events</span><span class="navi">Inside the Index</span><span class="navi">Index Reports</span><span class="navi">Contact Us</span>
+  </div>
+  <div class="navlab">7 items, adds Podcast</div>
+  <div class="navbar">
+    <div class="img navlogo"><span>logo</span></div>
+    <span class="navi">Home</span><span class="navi">About</span><span class="navi">Wellness Events</span><span class="navi">Inside the Index</span><span class="navi">Index Reports</span><span class="navi navadd">Podcast</span><span class="navi">Contact Us</span>
+  </div>
+  <p class="ann">Unchanged from round one. A seventh item changes the global nav on every page of the site; that call has not been made.</p>
+</section>
+
+<section class="part">
+  <h2 class="parth">The page &middot; proposed order</h2>
+  <div class="renders">
+  <div class="dt">
+  <div class="rendlab">Desktop &middot; proposed order &middot; form placement Option A drawn in place</div>
+  <div class="browser">
+    <span class="tab">The Wellness Index Report Podcast</span>
+    <span class="urlbox">wellnessindexreport.com/podcast</span>
+  </div>
+  <div class="pagenav">
+    <div class="img navlogo"><span>logo</span></div>
+    <span class="navi">Home</span><span class="navi">About</span><span class="navi">Wellness Events</span><span class="navi">Inside the Index</span><span class="navi">Index Reports</span><span class="navi">Contact Us</span>
+    <span class="chip">nav: 2 options, drawn above</span>
+  </div>
+
+  <div class="frame center">
+    <span class="tag">P1 &middot; Hero &middot; from 1</span>
+    <div class="eyebrow">The Wellness Index Report Podcast</div>
+    <h1 class="wf">Fifteen minutes with the providers who know what actually works.</h1>
+    <p class="sub">Every week, one leading provider tells us what they are known for, which wellness solutions they use in practice, and what they are offering their community right now.</p>
+    <div class="ctarow">
+      <span class="btn">Apply to be interviewed</span>
+      <span class="alink">Where to listen &darr;</span>
+    </div>
+    <div style="margin-top:8px"><span class="chip prop">Proposed</span> <span style="font-size:11.5px;color:#999">launch label for the episode link; with episodes live it reads "Listen to the latest episode," the deck's label, same anchor</span></div>
+    <div class="ticks">
+      <span class="tick">Free to appear</span>
+      <span class="tick">Questions in advance</span>
+      <span class="tick">15-20 minutes, Tue-Thu</span>
+    </div>
+    <div style="margin-top:10px"><span class="chip prop">Proposed</span> <span style="font-size:11.5px;color:#999">trust line reformatted as ticks, same facts</span></div>
+  </div>
+  <p class="ann">One primary CTA, and episode access stays: a quiet link anchors down the page to P11, since this page is the podcast's only web presence. Launch label proposed; the deck's "Listen to the latest episode" returns once episodes exist, same anchor. Round one's NEW COPY NEEDED flag stays retired.</p>
+
+  <div class="sticky">
+    <span class="lab">FORM PLACEMENT OPTION A &middot; persistent apply bar. Overlays the viewport bottom from first scroll, not in the page flow. Drawn once here.</span>
+    <span class="btn">Apply to be interviewed</span>
+  </div>
+  <p class="ann">Kept from round one. Option B, in-flow anchors only, is mapped under decisions; note the page now has a mid-page CTA either way.</p>
+
+  <div class="frame">
+    <span class="tag">P2 &middot; Proof &middot; from 3</span>
+    <div class="slabel">Where our providers get heard</div>
+    <div class="stat">1.2B worldwide</div>
+    <p class="statlab">via hundreds of syndicated outlets <span class="chip prop" style="margin-left:8px">Proposed</span> <span style="font-size:11px;color:#999">stat pulled forward, deck fragments</span></p>
+    <div class="logorow">
+      <div class="img logo"><span>Business Insider</span></div>
+      <div class="img logo"><span>The Wall Street Journal</span></div>
+      <div class="img logo"><span>MarketWatch</span></div>
+      <div class="img logo"><span>Yahoo! Finance</span></div>
+      <div class="img logo"><span>Biohacker.news</span></div>
+    </div>
+    <div class="logorow">
+      <div class="img chan"><span>YouTube</span></div>
+      <div class="img chan"><span>Apple Podcasts</span></div>
+      <div class="img chan"><span>Spotify</span></div>
+      <div class="img chan"><span>Amazon Music</span></div>
+      <div class="img chan"><span>iHeartRadio</span></div>
+    </div>
+  </div>
+  <p class="ann">Number first, per the parent site's stat strip. Whether the outlet marks can be displayed is still open with the client; named gray boxes only.</p>
+
+  <div class="frame center">
+    <span class="tag">P3 &middot; Providers band &middot; merged from 2</span>
+    <div class="bigline">Providers nominate. Providers rate. Providers get amplified.</div>
+    <p class="closing">For providers, by providers.</p>
+  </div>
+  <p class="ann">Section 2 reduced to its two strongest lines, both verbatim. The mission H2 and body sentence are cut; the change map lists it.</p>
+
+  <div class="frame">
+    <span class="tag">P4 &middot; The show &middot; from 4</span>
+    <h2 class="wf" style="max-width:720px">The wellness industry is full of reviews. Almost none of them come from the people prescribing.</h2>
+    <p class="copy">The Wellness Index Report Podcast is a weekly, fifteen to twenty minute conversation with a single provider. No panels, no promotional monologues, no forty five minute detours.</p>
+    <p class="copy">We ask three questions. You get all three in advance.</p>
+    <div class="rlist" style="max-width:720px">
+      <div class="rrow"><span class="rnum">01</span><span class="rbody" style="font-size:15px;color:#333">What makes your approach different, and what are you known for?</span></div>
+      <div class="rrow"><span class="rnum">02</span><span class="rbody" style="font-size:15px;color:#333">Which wellness solutions do you actually use in practice, and what have you tried and moved away from?</span></div>
+      <div class="rrow"><span class="rnum">03</span><span class="rbody" style="font-size:15px;color:#333">What are you offering your community right now, and who is it right for?</span></div>
+    </div>
+    <div class="pullrow">
+      <div class="img seal"><span>verification seal</span></div>
+      <div class="pull" style="margin:0">First we verify, then we amplify.</div>
+    </div>
+    <div class="discl">
+      <span class="tagr"><span class="chip">Placement TBC</span></span>
+      *But this is NOT medical advice nor should you purchase a solution for your practice/business without due diligence.
+    </div>
+  </div>
+  <p class="ann">Copy unchanged. The questions become a ruled, numbered listing and the pull quote gets a seal slot, both borrowed from the Index Report's grammar. Disclaimer unchanged, still a compliance placement.</p>
+
+  <div class="frame">
+    <span class="tag">P5 &middot; Who we interview &middot; from 5</span>
+    <h2 class="wf">We interview four kinds of providers.</h2>
+    <div class="propblk">
+    <div class="rlist">
+      <div class="rrow"><span class="rnum">01</span><span class="rtitle">Physicians and clinicians</span><span class="rbody">MDs, DOs, NDs, DCs, NPs, and PAs in active practice.</span></div>
+      <div class="rrow"><span class="rnum">02</span><span class="rtitle">Wellness experts and practitioners</span><span class="rbody">Health coaches, nutritionists, and movement and recovery specialists with an established client base.</span></div>
+      <div class="rrow"><span class="rnum">03</span><span class="rtitle">Scientists and researchers</span><span class="rbody">Longevity, biomarkers, diagnostics, peptides, and regenerative medicine, in plain language.</span></div>
+      <div class="rrow"><span class="rnum">04</span><span class="rtitle">Clinic, health, and beauty business owners</span><span class="rbody">Founders and operators of medspas, IV lounges, recovery studios, and wellness clinics.</span></div>
+    </div>
+    <span class="chip prop">Proposed</span> <span style="font-size:11.5px;color:#999">card bodies trimmed to one line each, from deck copy</span>
+    </div>
+    <p class="qualifier">We look for providers with an active practice, a real patient or client base, and a point of view they are willing to put their name on.</p>
+  </div>
+  <p class="ann">Four cards become four ruled rows. Titles and qualifier verbatim; the one-line bodies are trims of the deck's card copy, listed in the notes.</p>
+
+  <div class="frame">
+    <span class="tag">P6 &middot; How it works &middot; from 6</span>
+    <h2 class="wf">From application to published episode.</h2>
+    <div class="propblk">
+    <div class="rlist">
+      <div class="rrow"><span class="rnum">01</span><span class="rtitle">Apply</span><span class="rbody">About five minutes. Our editorial team reviews every application.</span></div>
+      <div class="rrow"><span class="rnum">02</span><span class="rtitle">Get booked</span><span class="rbody">If it is a fit, you pick your slot, Tuesday through Thursday.</span></div>
+      <div class="rrow"><span class="rnum">03</span><span class="rtitle">Receive your questions</span><span class="rbody">All three arrive in advance, and anything you would prefer we not ask is honored without exception.</span></div>
+      <div class="rrow"><span class="rnum">04</span><span class="rtitle">Claim your Index profile</span><span class="rbody">Free or Premium, your choice. Either way you get the Index Survey.</span></div>
+      <div class="rrow"><span class="rnum">05</span><span class="rtitle">Record</span><span class="rbody">One remote conversation, fifteen to twenty minutes. We handle production.</span></div>
+      <div class="rrow"><span class="rnum">06</span><span class="rtitle">Publish and promote</span><span class="rbody">Your publish date, a full set of creatives, and a transcript. Live everywhere we publish.</span></div>
+    </div>
+    <span class="chip prop">Proposed</span> <span style="font-size:11.5px;color:#999">step bodies compressed to one line each, from deck copy</span>
+    </div>
+    <div class="ctaband">
+      <span class="btn">Apply to be interviewed</span>
+      <div class="echo">Free to appear &middot; Questions in advance</div>
+    </div>
+  </div>
+  <p class="ann">The 3x2 grid becomes a numbered ruled listing, and a repeat CTA follows the value block, both per the parent site's pattern. Step titles verbatim; one-liners tagged and listed for approval.</p>
+
+  <div class="frame">
+    <span class="tag">P7 &middot; FAQ &middot; from 11</span>
+    <h2 class="wf">Questions we get asked.</h2>
+    <div class="acc">
+      <div class="qrow open">How long does recording take?<div class="bar b90" style="margin-top:10px"></div><div class="bar" style="width:55%"></div></div>
+      <div class="qrow">Will I know the questions ahead of time?<span class="plus">+</span></div>
+      <div class="qrow">Do I have to pay to be interviewed?<span class="plus">+</span></div>
+      <div class="qrow">What is the difference between a free and a Premium profile?<span class="plus">+</span></div>
+      <div class="qrow">What if I do not want to publicly criticize a product?<span class="plus">+</span></div>
+      <div class="qrow">What does it mean to nominate a company?<span class="plus">+</span></div>
+      <div class="qrow">Can I use the episode on my own channels?<span class="plus">+</span></div>
+      <div class="qrow">Who do I talk to about scheduling?<span class="plus">+</span></div>
+    </div>
+  </div>
+  <p class="ann">Unchanged. Collapsed rows cost nothing and answer objections next to the form.</p>
+
+  <div class="frame center">
+    <span class="tag">P8 &middot; Apply &middot; from 12</span>
+    <h2 class="wf">Tell us what actually works.</h2>
+    <p class="copy" style="margin:0 auto">Applications are reviewed weekly. About five minutes to apply.</p>
+    <div class="formfr">
+      <span class="tagr"><span class="chip">Build method TBC</span></span>
+      <div class="stepsbar">
+        <span class="snum on">1 &middot; About you</span>
+        <span class="snum">2 &middot; Your expertise</span>
+        <span class="snum">3 &middot; Logistics</span>
+        <span class="snum">4 &middot; Agreement</span>
+      </div>
+      <div class="fld"><label>Full name</label><div class="fbox"></div></div>
+      <div class="fld"><label>Title</label><div class="fbox"></div></div>
+      <div class="fld"><label>Email</label><div class="fbox"></div></div>
+      <div class="fld"><label>Mobile</label><div class="fbox"></div></div>
+      <div class="fld"><label>Mailing address (optional)</label><div class="fbox tall"></div></div>
+      <div class="fld"><label>Practice, business, or organization name</label><div class="fbox"></div></div>
+      <div class="fld"><label>Website (optional)</label><div class="fbox"></div></div>
+      <div class="cgrp"><span>2 &middot; Your expertise</span><span class="fn">4 fields: specialty &middot; what you are known for &middot; solutions used in practice &middot; all your links (repeating)</span></div>
+      <div class="cgrp"><span>3 &middot; Logistics</span><span class="fn">3 fields: preferred time, Tue-Thu &middot; anything not to ask (optional) &middot; headshot upload</span></div>
+      <div class="cgrp"><span>4 &middot; Agreement</span><span class="fn">2 fields: signature (required) &middot; monthly Report opt-in (optional)</span></div>
+      <div class="submitrow"><span class="btn">Submit application</span></div>
+    </div>
+  </div>
+  <p class="ann">Unchanged from round one: four steps, inline drawn as default only, build method open.</p>
+
+  <div class="belowdiv">Below the ask &middot; for the reader who has applied, or will not</div>
+
+  <div class="frame">
+    <span class="tag">P9 &middot; Membership band &middot; demoted from 7</span>
+    <h2 class="wf">The Index is built by its members.</h2>
+    <div class="propblk">
+      <p class="copy" style="margin-bottom:4px">Members nominate the solutions they stand behind and rate what is already listed. Companies cannot nominate themselves and cannot buy a rating.</p>
+      <span class="chip prop">Proposed</span> <span style="font-size:11.5px;color:#999">two-line summary of the deck's intro paragraphs</span>
+    </div>
+    <div class="pband">
+      <div class="pcell">
+        <h4>Free Profile</h4>
+        <div class="price">Free</div>
+        <span class="btn sec">Create your free profile</span>
+      </div>
+      <div class="pcell">
+        <h4>Premium Expert Membership</h4>
+        <div class="price">$999 per year</div>
+        <span class="btn sec">Go Premium</span>
+        <p class="micro">Podcast guests receive a 50% member code with their survey invitation.</p>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="drow">Compare Free and Premium<span class="plus">+</span></div>
+      <div class="drow">What SEO, AEO, and GEO actually mean for your practice<span class="plus">+</span></div>
+      <div class="drow">How this stays honest<span class="plus">+</span></div>
+    </div>
+  </div>
+  <p class="ann">The full comparison, the SEO explainer, and the honesty statement keep their deck copy behind these three rows; nothing is deleted, it is demoted and collapsed. Both CTAs drop to secondary weight. Whether membership ultimately gets its own page is a scope call, recorded in notes.</p>
+
+  <div class="frame">
+    <span class="tag">P10 &middot; Thought leadership &middot; from 8</span>
+    <div class="narrow">
+      <h2 class="wf">Some providers want more than a platform.</h2>
+      <div class="bar b90"></div><div class="bar b90"></div><div class="bar b90"></div><div class="bar b45"></div>
+      <div style="margin-top:14px"><span class="btn sec">Book time with Lindsay</span></div>
+      <p class="attrib">Lindsay O'Neill-O'Keefe, Founder, Wellness Eternal</p>
+    </div>
+  </div>
+  <p class="ann">Unchanged, quiet by intent.</p>
+
+  <div class="frame">
+    <span class="tag">P11 &middot; Episodes and subscribe &middot; merged from 9 and 10 &middot; anchor target</span>
+    <h2 class="wf">Never miss an episode.</h2>
+    <p class="copy">New episodes publish every week. Subscribe to catch each one.</p>
+    <div class="logorow">
+      <div class="img chan"><span>YouTube</span></div>
+      <div class="img chan"><span>Apple Podcasts</span></div>
+      <div class="img chan"><span>Spotify</span></div>
+      <div class="img chan"><span>Amazon Music</span></div>
+      <div class="img chan"><span>iHeartRadio</span></div>
+    </div>
+    <div class="emailrow"><span class="input">Your email</span><span class="btn">Send me the Report</span></div>
+    <p class="micro">Monthly. Provider nominated. Unsubscribe anytime.</p>
+    <div class="minipop">
+      <span class="stag">Populated state &middot; the library returns</span>
+      <p class="copy" style="font-size:13.5px;margin-bottom:6px">Every episode. Every provider.</p>
+      <div class="chips">
+        <span class="fchip on">All</span>
+        <span class="fchip">Physicians and clinicians</span>
+        <span class="fchip">Wellness experts</span>
+        <span class="fchip">Scientists</span>
+        <span class="fchip">Clinic owners</span>
+      </div>
+      <div class="epgrid">
+        <div class="ep"><div class="img" style="height:110px"><span>Guest photo</span></div><div class="inner"><div class="bar b75"></div><div class="bar b90"></div><div class="eplinks"><u>Listen</u><u>View Index profile</u></div></div></div>
+        <div class="ep"><div class="img" style="height:110px"><span>Guest photo</span></div><div class="inner"><div class="bar b60"></div><div class="bar b90"></div><div class="eplinks"><u>Listen</u><u>View Index profile</u></div></div></div>
+        <div class="ep"><div class="img" style="height:110px"><span>Guest photo</span></div><div class="inner"><div class="bar b75"></div><div class="bar b75"></div><div class="eplinks"><u>Listen</u><u>View Index profile</u></div></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="ann">At launch, one band does both jobs using only deck copy: the section 9 early state line, the channel row, the email capture. That retires round one's second NEW COPY NEEDED flag. With episodes live, the library expands back to the round-one filtered grid as its own section and this band returns to subscribe only. Both H2s are deck copy. The hero's listen link lands here; keep the anchor id on the episodes block when the library splits back out to its own section.</p>
+  </div>
+
+  <div class="mbcol mb">
+  <div class="rendlab">Mobile &middot; 390 px &middot; proposed order</div>
+  <div class="mobfr">
+    <div class="mobhead">
+      <div class="img navlogo" style="width:78px;height:22px"><span>logo</span></div>
+      <div class="burger">&equiv;</div>
+    </div>
+
+    <div class="frame center">
+      <span class="tag">P1 &middot; Hero</span>
+      <div class="eyebrow">The Wellness Index Report Podcast</div>
+      <h1 class="wf">Fifteen minutes with the providers who know what actually works.</h1>
+      <p class="sub">Every week, one leading provider tells us what they are known for, which wellness solutions they use in practice, and what they are offering their community right now.</p>
+      <div class="ctarow">
+        <span class="btn">Apply to be interviewed</span>
+      </div>
+      <div style="margin-top:8px;text-align:center"><span class="alink">Where to listen &darr;</span></div>
+      <div class="ticks">
+        <span class="tick">Free to appear</span>
+        <span class="tick">Questions in advance</span>
+        <span class="tick">15-20 min, Tue-Thu</span>
+      </div>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P2 &middot; Proof</span>
+      <div class="slabel">Where our providers get heard</div>
+      <div class="stat">1.2B worldwide</div>
+      <p class="statlab">via hundreds of syndicated outlets</p>
+      <div class="logorow">
+        <div class="img logo"><span>Business Insider</span></div>
+        <div class="img logo"><span>The Wall Street Journal</span></div>
+        <div class="img logo"><span>MarketWatch</span></div>
+        <div class="img logo"><span>Yahoo! Finance</span></div>
+        <div class="img logo"><span>Biohacker.news</span></div>
+      </div>
+      <div class="logorow">
+        <div class="img chan"><span>YouTube</span></div>
+        <div class="img chan"><span>Apple Podcasts</span></div>
+        <div class="img chan"><span>Spotify</span></div>
+        <div class="img chan"><span>Amazon Music</span></div>
+        <div class="img chan"><span>iHeartRadio</span></div>
+      </div>
+    </div>
+
+    <div class="frame center">
+      <span class="tag">P3 &middot; Providers band</span>
+      <div class="bigline">Providers nominate. Providers rate. Providers get amplified.</div>
+      <p class="closing">For providers, by providers.</p>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P4 &middot; The show</span>
+      <h2 class="wf">The wellness industry is full of reviews. Almost none of them come from the people prescribing.</h2>
+      <p class="copy">The Wellness Index Report Podcast is a weekly, fifteen to twenty minute conversation with a single provider. No panels, no promotional monologues, no forty five minute detours.</p>
+      <p class="copy">We ask three questions. You get all three in advance.</p>
+      <div class="rlist">
+        <div class="rrow"><span class="rnum">01</span><span class="rbody">What makes your approach different, and what are you known for?</span></div>
+        <div class="rrow"><span class="rnum">02</span><span class="rbody">Which wellness solutions do you actually use in practice, and what have you tried and moved away from?</span></div>
+        <div class="rrow"><span class="rnum">03</span><span class="rbody">What are you offering your community right now, and who is it right for?</span></div>
+      </div>
+      <div class="pullrow">
+        <div class="img seal"><span>seal</span></div>
+        <div class="pull" style="margin:0">First we verify, then we amplify.</div>
+      </div>
+      <div class="discl"><span class="tagr"><span class="chip">Placement TBC</span></span>*But this is NOT medical advice nor should you purchase a solution for your practice/business without due diligence.</div>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P5 &middot; Who we interview</span>
+      <h2 class="wf">We interview four kinds of providers.</h2>
+      <div class="rlist">
+        <div class="rrow"><span class="rnum">01</span><span class="rtitle">Physicians and clinicians</span><span class="rbody">MDs, DOs, NDs, DCs, NPs, and PAs in active practice.</span></div>
+        <div class="rrow"><span class="rnum">02</span><span class="rtitle">Wellness experts and practitioners</span><span class="rbody">Health coaches, nutritionists, and movement and recovery specialists with an established client base.</span></div>
+        <div class="rrow"><span class="rnum">03</span><span class="rtitle">Scientists and researchers</span><span class="rbody">Longevity, biomarkers, diagnostics, peptides, and regenerative medicine, in plain language.</span></div>
+        <div class="rrow"><span class="rnum">04</span><span class="rtitle">Clinic, health, and beauty business owners</span><span class="rbody">Founders and operators of medspas, IV lounges, recovery studios, and wellness clinics.</span></div>
+      </div>
+      <p class="qualifier">We look for providers with an active practice, a real patient or client base, and a point of view they are willing to put their name on.</p>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P6 &middot; How it works</span>
+      <h2 class="wf">From application to published episode.</h2>
+      <div class="rlist">
+        <div class="rrow"><span class="rnum">01</span><span class="rtitle">Apply</span><span class="rbody">About five minutes. Our editorial team reviews every application.</span></div>
+        <div class="rrow"><span class="rnum">02</span><span class="rtitle">Get booked</span><span class="rbody">If it is a fit, you pick your slot, Tuesday through Thursday.</span></div>
+        <div class="rrow"><span class="rnum">03</span><span class="rtitle">Receive your questions</span><span class="rbody">All three arrive in advance, and anything you would prefer we not ask is honored without exception.</span></div>
+        <div class="rrow"><span class="rnum">04</span><span class="rtitle">Claim your Index profile</span><span class="rbody">Free or Premium, your choice. Either way you get the Index Survey.</span></div>
+        <div class="rrow"><span class="rnum">05</span><span class="rtitle">Record</span><span class="rbody">One remote conversation, fifteen to twenty minutes. We handle production.</span></div>
+        <div class="rrow"><span class="rnum">06</span><span class="rtitle">Publish and promote</span><span class="rbody">Your publish date, a full set of creatives, and a transcript. Live everywhere we publish.</span></div>
+      </div>
+      <div class="ctaband">
+        <span class="btn" style="display:block">Apply to be interviewed</span>
+        <div class="echo">Free to appear &middot; Questions in advance</div>
+      </div>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P7 &middot; FAQ</span>
+      <h2 class="wf">Questions we get asked.</h2>
+      <div class="acc">
+        <div class="qrow open">How long does recording take?<div class="bar b90" style="margin-top:8px"></div><div class="bar" style="width:55%"></div></div>
+        <div class="qrow">Will I know the questions ahead of time?<span class="plus">+</span></div>
+        <div class="qrow">Do I have to pay to be interviewed?<span class="plus">+</span></div>
+        <div class="qrow">What is the difference between a free and a Premium profile?<span class="plus">+</span></div>
+        <div class="qrow">What if I do not want to publicly criticize a product?<span class="plus">+</span></div>
+        <div class="qrow">What does it mean to nominate a company?<span class="plus">+</span></div>
+        <div class="qrow">Can I use the episode on my own channels?<span class="plus">+</span></div>
+        <div class="qrow">Who do I talk to about scheduling?<span class="plus">+</span></div>
+      </div>
+    </div>
+
+    <div class="frame center">
+      <span class="tag">P8 &middot; Apply</span>
+      <h2 class="wf">Tell us what actually works.</h2>
+      <p class="copy">Applications are reviewed weekly. About five minutes to apply.</p>
+      <div class="formfr">
+        <span class="tagr"><span class="chip">Build method TBC</span></span>
+        <div class="stepsbar">
+          <span class="snum on">1 &middot; About you</span><span class="snum">2</span><span class="snum">3</span><span class="snum">4</span>
+        </div>
+        <div class="fld"><label>Full name</label><div class="fbox"></div></div>
+        <div class="fld"><label>Title</label><div class="fbox"></div></div>
+        <div class="fld"><label>Email</label><div class="fbox"></div></div>
+        <div class="fld"><label>Mobile</label><div class="fbox"></div></div>
+        <div class="fld"><label>Mailing address (optional)</label><div class="fbox tall"></div></div>
+        <div class="fld"><label>Practice, business, or organization name</label><div class="fbox"></div></div>
+        <div class="fld"><label>Website (optional)</label><div class="fbox"></div></div>
+        <div class="cgrp"><span>2 &middot; Your expertise</span><span class="fn">4 fields</span></div>
+        <div class="cgrp"><span>3 &middot; Logistics</span><span class="fn">3 fields</span></div>
+        <div class="cgrp"><span>4 &middot; Agreement</span><span class="fn">2 fields</span></div>
+        <div class="submitrow"><span class="btn" style="display:block">Submit application</span></div>
+      </div>
+    </div>
+
+    <div class="belowdiv">Below the ask</div>
+
+    <div class="frame">
+      <span class="tag">P9 &middot; Membership band</span>
+      <h2 class="wf">The Index is built by its members.</h2>
+      <p class="copy">Members nominate the solutions they stand behind and rate what is already listed. Companies cannot nominate themselves and cannot buy a rating.</p>
+      <div class="pband">
+        <div class="pcell">
+          <h4>Free Profile</h4>
+          <div class="price">Free</div>
+          <span class="btn sec" style="display:block;text-align:center">Create your free profile</span>
+        </div>
+        <div class="pcell">
+          <h4>Premium Expert Membership</h4>
+          <div class="price">$999 per year</div>
+          <span class="btn sec" style="display:block;text-align:center">Go Premium</span>
+          <p class="micro">Podcast guests receive a 50% member code with their survey invitation.</p>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="drow">Compare Free and Premium<span class="plus">+</span></div>
+        <div class="drow">What SEO, AEO, and GEO actually mean for your practice<span class="plus">+</span></div>
+        <div class="drow">How this stays honest<span class="plus">+</span></div>
+      </div>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P10 &middot; Thought leadership</span>
+      <h2 class="wf">Some providers want more than a platform.</h2>
+      <div class="bar b90"></div><div class="bar b90"></div><div class="bar b45"></div>
+      <div style="margin-top:10px"><span class="btn sec" style="display:block;text-align:center">Book time with Lindsay</span></div>
+      <p class="attrib">Lindsay O'Neill-O'Keefe, Founder, Wellness Eternal</p>
+    </div>
+
+    <div class="frame">
+      <span class="tag">P11 &middot; Episodes and subscribe</span>
+      <h2 class="wf">Never miss an episode.</h2>
+      <p class="copy">New episodes publish every week. Subscribe to catch each one.</p>
+      <div class="logorow">
+        <div class="img chan"><span>YouTube</span></div>
+        <div class="img chan"><span>Apple Podcasts</span></div>
+        <div class="img chan"><span>Spotify</span></div>
+        <div class="img chan"><span>Amazon Music</span></div>
+        <div class="img chan"><span>iHeartRadio</span></div>
+      </div>
+      <div class="emailrow"><span class="input">Your email</span><span class="btn" style="text-align:center">Send me the Report</span></div>
+      <p class="micro">Monthly. Provider nominated. Unsubscribe anytime.</p>
+    </div>
+
+    <div class="sticky">
+      <span class="lab">OPTION A bar, pinned to bottom edge</span>
+      <span class="btn" style="font-size:11.5px;padding:8px 12px">Apply to be interviewed</span>
+    </div>
+  </div>
+  <p class="ann">One column, proposed order, launch state only; the populated library panel is drawn on desktop. Ruled listings carry the compression well at this width: titles wrap, one-liners sit under them.</p>
+  </div>
+  </div>
+</section>
+
+<section class="part">
+  <h2 class="parth">Decisions drawn</h2>
+  <div class="decgrid">
+
+    <div>
+      <div class="dectitle">The change map &middot; deck order to proposed order</div>
+      <div class="mapwrap">
+        <div class="mapcol">
+          <div class="maplab">Deck order, round one</div>
+          <div class="mapblk" style="height:40px">1 Hero</div>
+          <div class="mapblk" style="height:22px">2 Mission</div>
+          <div class="mapblk" style="height:22px">3 Distribution</div>
+          <div class="mapblk" style="height:38px">4 What the show is</div>
+          <div class="mapblk" style="height:34px">5 Who we interview</div>
+          <div class="mapblk" style="height:38px">6 How it works</div>
+          <div class="mapblk" style="height:80px">7 Membership</div>
+          <div class="mapblk" style="height:22px">8 Thought leadership</div>
+          <div class="mapblk" style="height:54px">9 Episode library</div>
+          <div class="mapblk" style="height:36px">10 Subscribe</div>
+          <div class="mapblk" style="height:46px">11 FAQ</div>
+          <div class="mapblk" style="height:64px">12 Closing CTA + form</div>
+        </div>
+        <div class="mapcol" style="width:230px">
+          <div class="maplab">Proposed</div>
+          <div class="mapblk" style="height:38px">P1 Hero &middot; from 1<span class="maptag">edit</span></div>
+          <div class="mapblk" style="height:30px">P2 Proof &middot; from 3<span class="maptag">moved</span></div>
+          <div class="mapblk" style="height:14px">P3 Providers &middot; from 2<span class="maptag">merged</span></div>
+          <div class="mapblk" style="height:46px">P4 The show &middot; from 4</div>
+          <div class="mapblk" style="height:30px">P5 Who &middot; from 5<span class="maptag">compressed</span></div>
+          <div class="mapblk" style="height:40px">P6 How it works &middot; from 6<span class="maptag">compressed</span></div>
+          <div class="mapblk" style="height:44px">P7 FAQ &middot; from 11<span class="maptag">moved</span></div>
+          <div class="mapblk hot" style="height:64px">P8 Apply &middot; from 12</div>
+          <div class="mapblk" style="height:34px">P9 Membership &middot; from 7<span class="maptag">demoted</span></div>
+          <div class="mapblk" style="height:22px">P10 Thought leadership &middot; from 8</div>
+          <div class="mapblk" style="height:38px">P11 Episodes + subscribe<span class="maptag">merged</span></div>
+        </div>
+      </div>
+      <div class="changes">
+        <b>Cut:</b> the mission H2 and body sentence. Nothing else is deleted.<br>
+        <b>Compressed:</b> card bodies in 5 and step bodies in 6 to one line each, tagged PROPOSED for line approval.<br>
+        <b>Demoted and collapsed:</b> the membership comparison, the SEO explainer, and the honesty statement sit below the form behind three disclosure rows, deck copy intact.<br>
+        <b>Merged:</b> 9 and 10 into one launch band on deck copy; the library expands back out once episodes exist.<br>
+        <b>Moved:</b> proof to position two; FAQ next to the form.<br>
+        <b>Anchored:</b> the hero keeps episode access as an in-page link to P11; launch label proposed, the deck's label returns with episodes.<br>
+        <b>Result:</b> eight blocks above the form instead of eleven, and both round-one NEW COPY NEEDED flags retire.
+      </div>
+      <p class="ann" style="max-width:430px">This map is the approval device: the client sees every move against her deck before agreeing to it. It supersedes round one's two-position map for section 7; the cut takes a position.</p>
+    </div>
+
+    <div>
+      <div class="dectitle">Form placement &middot; Option B callout, proposed order</div>
+      <p class="optnote">Option A, drawn in the page: the persistent bar. Option B: no bar, the in-flow CTAs carry it. The proposed page has a mid-page CTA after P6 either way.</p>
+      <div class="mapcol" style="width:210px">
+        <div class="mapblk" style="height:38px">P1 Hero</div>
+        <div class="marker">Apply CTA in hero &darr; anchors to P8</div>
+        <div class="marker">Listen link in hero &darr; anchors to P11</div>
+        <div class="mapblk" style="height:30px">P2 Proof</div>
+        <div class="mapblk" style="height:14px">P3 Providers</div>
+        <div class="mapblk" style="height:46px">P4 The show</div>
+        <div class="mapblk" style="height:30px">P5 Who</div>
+        <div class="mapblk" style="height:40px">P6 How it works</div>
+        <div class="marker">CTA band after P6, drawn in page &darr; anchors to P8</div>
+        <div class="mapblk" style="height:44px">P7 FAQ</div>
+        <div class="mapblk hot" style="height:64px">P8 Apply &middot; target</div>
+        <div class="mapblk" style="height:34px">P9 Membership</div>
+        <div class="mapblk" style="height:22px">P10 Thought leadership</div>
+        <div class="mapblk" style="height:38px">P11 Episodes + subscribe</div>
+      </div>
+      <p class="ann" style="max-width:340px">The shorter page needs fewer repeats: hero and the P6 band cover it. Round one's added slot after the FAQ is gone; the form sits directly under it now.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="part notes">
+  <h2 class="parth">Notes</h2>
+
+  <h3>Placeholder register</h3>
+  <table class="reg">
+    <tr><th>Flag</th><th>Where</th><th>What is open</th></tr>
+    <tr><td>PLACEMENT TBC</td><td>P4 &middot; Medical disclaimer</td><td>The asterisk anchors to nothing anywhere in the deck. Where the disclaimer sits on the page is a compliance decision, not a layout one.</td></tr>
+    <tr><td>BUILD METHOD TBC</td><td>P8 &middot; Application form</td><td>Inline, embedded, modal, or separate page. Constraints below.</td></tr>
+  </table>
+  <p>Both round-one NEW COPY NEEDED flags stay retired: the hero's episode link ships with a proposed launch label and returns to the deck's "Listen to the latest episode" once episodes exist, and the merged P11 band covers pre-launch subscribe with the deck's early state line.</p>
+
+  <h3>Proposed copy, for line approval</h3>
+  <p>Everything on the page not listed here is deck copy verbatim. Trims reuse the deck's own words; new lines are marked.</p>
+  <ul>
+    <li>P1 ticks: "Free to appear &middot; Questions in advance &middot; 15-20 minutes, Tue-Thu." Reformat of the trust line, same facts, no new words.</li>
+    <li>P1 launch link label: "Where to listen." New words. The populated label is the deck's "Listen to the latest episode," unchanged, and both point at the same in-page anchor.</li>
+    <li>P2 stat: "1.2B worldwide via hundreds of syndicated outlets." Deck fragments reordered, number pulled forward.</li>
+    <li>P5 one-liners: four trims of the deck's card bodies. Row 03 is the only rephrase ("in plain language" kept, framing shortened).</li>
+    <li>P6 one-liners: six compressions of the deck's step bodies. Rows 02, 03, and 06 are light rephrases; the rest are trims.</li>
+    <li>P9 intro: two-line summary of the deck's two intro paragraphs. New phrasing, built from the deck's claims only.</li>
+  </ul>
+
+  <h3>Family grammar borrowed</h3>
+  <p>From the parent site, verified by fetch: the stat strip, numbered 01/02 systems, ruled section rhythm, short blocks, and the repeated CTA after each value block. From the Index Report, per project records: the ruled listing, the verification seal, and the italic on Index. The report site itself blocks automated reading, so its grammar is taken from prior project work; verify against the live report before any visual comp.</p>
+
+  <h3>Form build constraints</h3>
+  <ul>
+    <li>Field 14 is a high-resolution file upload and field 15 is a signature. A plain inline form is unlikely to cover both, so this likely needs a form tool. Fields 11 and 12, a repeating link list and a Tue-Thu day and time-range picker with time zone, are also nonstandard for inline builders.</li>
+    <li>An embedded third-party form in an iframe arrives with its own styling that page CSS cannot reach. A previous build hit exactly this with an embedded HubSpot form that duplicated the page's branding and could not be restyled from outside.</li>
+    <li>Inline, embedded iframe, modal, and separate page each change what P8 actually looks like. The inline four-step version is drawn only so the block has a size and a place.</li>
+  </ul>
+
+  <h3>Layout patterns</h3>
+  <p>Platform assumed GoHighLevel, not confirmed. Every proposed block is a standard drag-in pattern: hero, stat and logo strip, text band, ruled list, accordion, stepped form, two-cell band with disclosure rows. Three carryover flags for the builder: the populated-era episode filter is a listing pattern, not a static section; the Option A sticky bar usually takes a few lines of custom CSS; the P9 disclosure rows are the same accordion element the FAQ uses. The hero's listen link is a plain in-page anchor; its id lives on the episodes block and travels with it when the library splits back out.</p>
+
+  <h3>Show name</h3>
+  <p>The page title, nav label, hero eyebrow, P4 opening, and the form's agreement line read "The Wellness Index Report Podcast." Deck H1 and H2 headlines are verbatim. "Wellness Index Report" in P9's collapsed content and P11's populated body names the monthly publication, a different product, and stays as written.</p>
+
+  <h3>Recorded, not drawn</h3>
+  <ul>
+    <li>Membership as its own page remains the cleaner endpoint for P9's collapsed content. Scope call the client has not been asked; the demoted band works either way.</li>
+    <li>Round one's file is unchanged and still holds the faithful deck-order page, the two-position section 7 map, and the full episode library states.</li>
+    <li>The live path is wellnessindexreport.com/podcast, with no "the." thewellnessindexreport.com redirects at the root only and its paths return 404, so nothing should print or link a path on that domain.</li>
+  </ul>
+</section>
+
+</body>
+</html>
