@@ -94,4 +94,58 @@
     document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1);});
     return {open:open};
   };
+
+  // ---- prequalify widget (verifiable income / pets / timeframe / household vs 2-per-bedroom) ----
+  window.parasolePrequalWidget=function(container,getProp){
+    container.innerHTML=
+      '<div class="q"><span class="ql">Can you provide verifiable income? <span style="color:var(--ink3);font-weight:400">(pay stubs, offer letter, etc.)</span></span><div class="yn" data-q="income"><button type="button" data-v="yes">Yes</button><button type="button" data-v="no">No</button></div></div>'+
+      '<div class="q"><span class="ql">Do you have any pets?</span><div class="yn" data-q="pets"><button type="button" data-v="yes">Yes</button><button type="button" data-v="no">No</button></div></div>'+
+      '<div class="q"><span class="ql">Are you looking to move within the next 30–45 days?</span><div class="yn" data-q="timeframe"><button type="button" data-v="yes">Yes</button><button type="button" data-v="no">No</button></div></div>'+
+      '<div class="q"><span class="ql">How many people will live in the home?</span><input class="txt" style="max-width:170px" data-q="household" type="text" inputmode="numeric" placeholder="e.g. 2"></div>'+
+      '<div class="result" data-res></div>'+
+      '<div data-actions style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"></div>';
+    var ans={income:null,pets:null,timeframe:null,household:null};
+    var res=container.querySelector('[data-res]'), actions=container.querySelector('[data-actions]');
+    function bindLocal(root){
+      root.querySelectorAll('.tx').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();window.parasolePing&&window.parasolePing('On the live site this opens your phone to text Parasole at (570) 343-2597.');});});
+      root.querySelectorAll('[data-demo]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();window.parasolePing&&window.parasolePing(el.getAttribute('data-demo'));});});
+    }
+    container.querySelectorAll('.yn').forEach(function(g){
+      g.querySelectorAll('button').forEach(function(b){
+        b.addEventListener('click',function(){
+          g.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');});
+          b.classList.add('sel'); ans[g.getAttribute('data-q')]=b.getAttribute('data-v'); evaluate();
+        });
+      });
+    });
+    var hh=container.querySelector('[data-q="household"]');
+    hh.addEventListener('input',function(){var n=parseInt((hh.value||'').replace(/[^0-9]/g,''),10);ans.household=n>0?n:null;evaluate();});
+    function evaluate(){
+      var p=getProp(); res.className='result'; res.innerHTML=''; actions.innerHTML='';
+      if(!p){res.className='result no';res.textContent='Pick a home first, then answer the questions.';return;}
+      if(ans.income===null||ans.pets===null||ans.timeframe===null||!ans.household)return;
+      var beds=parseInt(p.beds,10)||1, maxHH=2*beds, reasons=[];
+      if(ans.income==='no')reasons.push('verifiable income is required');
+      if(ans.timeframe==='no')reasons.push('we’re currently scheduling showings for move-ins within about 30–45 days');
+      if(ans.household>maxHH)reasons.push('PA occupancy guidelines allow up to '+maxHH+' people for this '+beds+'-bedroom home');
+      if(reasons.length){res.className='result no';res.innerHTML='Not quite a match right now — '+reasons.join('; ')+'. Text us and we’ll help or suggest another rental.';return;}
+      if(ans.pets==='yes'){
+        res.className='result warn';
+        res.innerHTML='You’re almost there! Because you have pets, we just need to confirm a couple of details before scheduling. Share your info and we’ll reach out to approve and book your showing.';
+        actions.innerHTML='<div style="width:100%"><div class="formgrid">'+
+          '<div><label class="fld">Name</label><input class="txt" type="text" placeholder="Your name"></div>'+
+          '<div><label class="fld">Phone (for text)</label><input class="txt" type="text" placeholder="(570) 000-0000"></div>'+
+          '<div><label class="fld">Email</label><input class="txt" type="text" placeholder="you@email.com"></div>'+
+          '<div><label class="fld">Tell us about your pet(s)</label><input class="txt" type="text" placeholder="e.g. 1 small dog, 25 lbs"></div>'+
+          '</div><div style="margin-top:14px"><a class="btn gold up" href="#" data-demo="On the live site this sends your details to Parasole for a quick review, and they text you back to approve and schedule your showing.">Request review &amp; showing</a></div></div>';
+        bindLocal(actions);return;
+      }
+      res.className='result ok';
+      res.textContent='You prequalify'+(p.addr?(' for '+p.addr):'')+'! Book your showing below.';
+      actions.innerHTML='<a class="btn gold up" href="#" data-demo="On the live site this opens the showing calendar to book a tour.">Book a showing</a>'+
+        '<a class="btn ghost tx" href="#"><svg><use href="#i-txt"/></svg> Text us instead</a>';
+      bindLocal(actions);
+    }
+    return {evaluate:evaluate};
+  };
 })();

@@ -243,3 +243,21 @@ select:focus,input.txt:focus{outline:2px solid color-mix(in srgb,var(--burgundy)
   .gallery{grid-template-columns:1fr}.gallery .side{grid-template-rows:none;grid-template-columns:1fr 1fr}
   .aside-card{position:static}
 }
+/* === prequal + rentals updates === */
+.gallery{height:440px;align-items:stretch}
+.gallery .main{aspect-ratio:auto;height:100%}
+.gallery .side{height:100%}
+.backlink{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--burgundy);text-decoration:none;font-size:15.5px;padding:16px 0 0}
+.backlink:hover{color:var(--burgundy-dk)}
+.backlink svg{width:18px;height:18px}
+.q{margin:0 0 20px}
+.q .ql{display:block;font-weight:700;font-size:15px;margin:0 0 9px;color:var(--ink)}
+.yn{display:inline-flex;gap:8px;flex-wrap:wrap}
+.yn button{font-family:inherit;font-size:14px;font-weight:700;color:var(--ink2);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:9px 22px;cursor:pointer}
+.yn button:hover{border-color:var(--burgundy)}
+.yn button.sel{background:var(--burgundy);border-color:var(--burgundy);color:#fff}
+.result.warn{display:block;background:#fdf3e0;border:1px solid #e7cd93;color:#8a5a12}
+@media(max-width:900px){
+  .gallery{height:auto}
+  .gallery .main{aspect-ratio:16/10;height:auto}
+}

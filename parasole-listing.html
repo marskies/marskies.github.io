@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="parasole-site.css?v=2">
+<link rel="stylesheet" href="parasole-site.css?v=3">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -42,28 +42,20 @@
   <a class="lead tx" href="#"><svg><use href="#i-txt"/></svg> 24/7 Maintenance Text Line <b>570-343-2597</b></a>
 </div></div></div>
 
-<div class="container"><p class="crumb"><a href="parasole-rentals.html">← All rentals</a></p></div>
+<div class="container"><a class="backlink" href="parasole-rentals.html"><svg><use href="#i-l"/></svg> All Rentals</a></div>
 
 <main class="container" id="listing" style="padding-bottom:70px"></main>
 
 <section class="sec warm" id="prequalWrap">
   <div class="container reveal">
     <p class="eyebrow" style="text-align:center">Before you tour</p>
-    <h2 class="center">See if you prequalify for this home.</h2>
-    <p class="sub-c">Enter your household's gross monthly income and we'll let you know right away if this home is a fit.</p>
+    <h2 class="center">Prequalify for a showing.</h2>
+    <p class="sub-c">A few quick questions. If you pass, you can book a showing right away — everything is verified later at the full application.</p>
     <div class="flow" style="margin-top:26px">
       <div class="step">
-        <div class="n"><span class="dot">1</span> This home</div>
-        <div style="margin-top:4px">
-          <label class="fld" for="inc">Your household gross monthly income</label>
-          <input class="txt" id="inc" type="text" inputmode="numeric" placeholder="e.g. 4000">
-        </div>
-        <div class="result" id="pqResult"></div>
-        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn gold up" id="bookBtn" href="#" data-demo="On the live site this opens the showing calendar to book a tour.">Book a showing</a>
-          <a class="btn ghost tx" href="#"><svg><use href="#i-txt"/></svg> Text a question</a>
-        </div>
-        <p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">This is a quick check only, not a decision. A full application with proof of income and a background/credit check confirms approval.</p>
+        <div class="n"><span class="dot">1</span> <span id="pqHome">This home</span></div>
+        <div id="pqBox" style="margin-top:8px"></div>
+        <p style="color:var(--ink3);font-size:12.5px;margin:18px 0 0">This is a quick check, not a lease decision. A full application (proof of income + a $30 per-applicant background/credit check) confirms approval.</p>
       </div>
     </div>
   </div>
@@ -87,7 +79,7 @@
 <div class="lb" id="lb"><span class="x">&times;</span><span class="nav-a prev"><svg><use href="#i-l"/></svg></span><img alt=""><span class="nav-a next"><svg><use href="#i-r"/></svg></span></div>
 
 <script src="parasole-data.js"></script>
-<script src="parasole-site.js?v=2"></script>
+<script src="parasole-site.js?v=3"></script>
 <script>
 (function(){
   var list=window.PARASOLE_RENTALS||[];
@@ -115,7 +107,6 @@
         +'<div class="factbar">'
           +'<div class="f"><span class="k">Bedrooms</span><span class="v">'+r.beds+'</span></div>'
           +'<div class="f"><span class="k">Bathrooms</span><span class="v">'+r.baths+'</span></div>'
-          +'<div class="f"><span class="k">Square feet</span><span class="v">'+r.sqft+'</span></div>'
           +'<div class="f"><span class="k">Type</span><span class="v" style="font-size:16px">'+r.tag+'</span></div>'
         +'</div>'
         +'<h2 style="font-size:22px">About this home</h2>'
@@ -125,10 +116,10 @@
       +'</div>'
       +'<aside><div class="aside-card">'
         +'<p class="p">'+r.price+'</p><p class="sm">'+r.beds+' bd · '+r.baths+' ba · '+r.tag+'</p>'
-        +'<a class="btn gold up" href="#prequalWrap">See if you prequalify</a>'
+        +'<a class="btn gold up" href="#prequalWrap">Prequalify for a Showing</a>'
         +'<a class="btn tx" href="#"><svg><use href="#i-txt"/></svg> Text us about this home</a>'
         +'<a class="btn ghost" href="'+r.live+'" target="_blank" rel="noopener">View on current site ↗</a>'
-        +'<p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">Application required before showing, so we can pre-approve you.</p>'
+        +'<p style="color:var(--ink3);font-size:12.5px;margin:14px 0 0">Prequalifications are required before showing.</p>'
       +'</div></aside>'
     +'</div>';
   document.getElementById('listing').innerHTML=html;
@@ -137,17 +128,9 @@
   var lb=window.parasoleLightbox(photos);
   document.querySelectorAll('[data-lb]').forEach(function(el){el.addEventListener('click',function(){lb.open(+el.getAttribute('data-lb'));});});
 
-  // prequal calc for this home
-  var need=Math.round(r.rent*40/12);
-  var inc=document.getElementById('inc'), res=document.getElementById('pqResult'), book=document.getElementById('bookBtn');
-  function evaluate(){
-    var v=parseInt((inc.value||'').replace(/[^0-9]/g,''),10);
-    res.className='result';book.style.display='none';
-    if(!v){return;}
-    if(v>=need){res.classList.add('ok');res.textContent='Looks good — this home fits your income. Book a showing below.';book.style.display='inline-flex';}
-    else{res.classList.add('no');res.textContent='This home may be above your range. Text us — we may have a better-fitting rental, or a co-applicant can help.';}
-  }
-  inc.addEventListener('input',evaluate);
+  // prequalify widget for this home
+  document.getElementById('pqHome').textContent=r.addr;
+  window.parasolePrequalWidget(document.getElementById('pqBox'), function(){return {beds:r.beds,rent:r.rent,addr:r.addr};});
 })();
 </script>
 </body>
