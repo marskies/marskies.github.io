@@ -260,4 +260,9 @@ select:focus,input.txt:focus{outline:2px solid color-mix(in srgb,var(--burgundy)
 @media(max-width:900px){
   .gallery{height:auto}
   .gallery .main{aspect-ratio:16/10;height:auto}
+  /* red contact bar: keep it a slim, tappable strip on phones (not full-height) */
+  .colorbar .row{gap:6px 14px;padding:8px 0;font-size:12.5px}
+  .colorbar a,.colorbar span{padding:5px 4px}
+  .colorbar .lead{padding:5px 11px}
+  .cbhide{display:none}
 }
