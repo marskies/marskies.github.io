@@ -191,7 +191,12 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
 .mobhead{display:flex;justify-content:space-between;align-items:center;border:1px solid #ccc;padding:9px 12px}
 .burger{width:32px;height:24px;border:1px solid #bbb;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#777;font-size:13px}
 @media (max-width:1330px){.renders{flex-direction:column}.dt{min-width:0}}
-.chip.prop{border:1px solid #777;border-style:solid;color:#333;font-weight:600;background:#f4f4f4}
+.chip.prop{border:1.5px solid #c0392b;border-style:solid;color:#c0392b;font-weight:650;background:#fff}
+.chip.ceo{border:1.5px solid #c0392b;border-style:solid;color:#c0392b;font-weight:650;background:#fff}
+.ceobox{border:2px solid #c0392b;padding:16px 20px;margin-top:18px;max-width:1000px}
+.ceobox h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#c0392b;margin:0 0 10px;font-weight:650}
+.ceobox ol{margin:0;padding-left:22px}
+.ceobox li{font-size:13px;color:#333;margin:6px 0;line-height:1.5}
 .propblk{border-left:3px dotted #999;padding-left:14px;margin:10px 0}
 .rlist{margin-top:6px}
 .rrow{border-top:1px solid #ddd;display:flex;gap:16px;padding:12px 4px;align-items:baseline}
@@ -232,36 +237,74 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
 .mb .ctaband .echo{font-size:10px}
 .alink{font-size:14px;color:#444;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .mb .alink{font-size:12px}
+.hdrband1{border:1px solid #ccc;border-bottom:none;background:#fff;display:flex;justify-content:space-between;align-items:flex-start;padding:14px 20px;gap:20px;flex-wrap:wrap}
+.dots{display:flex;gap:4px;margin-bottom:4px}
+.dot{width:8px;height:8px;border-radius:50%;background:#555}
+.dot.l{background:#999}
+.wordmark{letter-spacing:.32em;font-weight:650;font-size:15px}
+.wordmark2{letter-spacing:.18em;font-size:10.5px;color:#666;margin-top:2px}
+.hdrright{text-align:right}
+.icobox{display:inline-block;width:13px;height:13px;border:1px solid #bbb;border-radius:2px;margin-right:8px;flex:none}
+.srchf{display:inline-flex;align-items:center;border:1px solid #ccc;border-radius:4px;height:32px;font-size:12px;color:#999;padding:0 10px;background:#fff}
+.hdrband2{background:#3a3a3a;border:1px solid #ccc;border-top:none;display:flex;justify-content:space-evenly;align-items:center;padding:0 12px;height:50px}
+.hnavi{color:#ddd;font-size:13.5px;white-space:nowrap}
+.hnavi.act{color:#fff;font-weight:650;border-bottom:2px solid #fff;padding-bottom:3px}
+.foothead{font-size:10.5px;letter-spacing:.14em;color:#666;text-transform:uppercase}
+.footh4{font-size:14px;font-weight:650;margin:14px 0 6px}
+.footlink{font-size:13.5px;color:#444;text-decoration:underline;text-underline-offset:3px;margin:5px 0}
+.fdisc{font-size:11px;color:#777;border-top:1px solid #ddd;padding-top:10px;margin-top:16px;line-height:1.5}
+.mb .hdrband1{padding:10px 12px;border-bottom:1px solid #ccc}
+.mb .wordmark{font-size:11.5px}
+.mb .wordmark2{font-size:8.5px}
+.mb .footh4{font-size:12px}
+.mb .footlink{font-size:11.5px}
+.mb .fdisc{font-size:9.5px}
+.hscroll{display:flex;gap:14px;flex-wrap:nowrap;overflow:hidden;margin:12px 0 6px}
+.hscroll .logo{flex:none}
+.chanrow{display:flex;justify-content:center;gap:14px;flex-wrap:nowrap;margin-top:16px}
+.cwrap{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10.5px;color:#777;width:80px;text-align:center}
+.cicon{width:58px;height:58px;border-radius:50%;flex:none}
+.cicon span{font-size:8.5px;line-height:1.2;white-space:normal;max-width:46px;padding:1px 3px}
+.fsoc .cicon span{display:none}
+.pfstrip{display:flex;justify-content:center;align-items:center;gap:16px;border-top:1px solid #ddd;padding:12px 0 14px;font-size:13.5px;flex-wrap:wrap}
+.pfstrip .pby{font-size:10.5px;letter-spacing:.14em;color:#999;text-transform:uppercase}
+.pfstrip .vbar{color:#ccc}
+.blackbar{background:#3a3a3a;height:10px;margin:0 -28px 18px}
+.fsoc{display:flex;gap:10px;margin:16px 0 4px}
+.fsoc .cicon{width:34px;height:34px}
+.fsoclab{font-size:10px;color:#999;margin-bottom:4px}
+.crow{text-align:center;font-size:11.5px;color:#777;border-top:1px solid #eee;padding-top:12px;margin-top:12px}
+.fcols{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:760px}
+.mb .blackbar{margin:0 -13px 14px}
+.mb .fcols{grid-template-columns:1fr}
+.mb .cicon{width:48px;height:48px}
+.mb .cicon span{font-size:7px;max-width:40px}
+.mb .chanrow{gap:9px}
+.mb .fsoc .cicon{width:28px;height:28px}
 </style>
 </head>
 <body>
 
 <header class="filehead">
   <h1>wellnessindexreport.com/podcast &middot; lo-fi wireframe, conversion cut</h1>
-  <p>v2, August 27, 2026. Round two: the page restructured for the reader who decides whether to be interviewed. Still gray on purpose; the family shows in the bones, not the color.</p>
+  <p>v5, August 28, 2026. Change note: header and footer redrawn from live inspection of the parent site, including its round social icons, copyright row, and the footer disclaimer in full. The proof outlets become one scrolling row, the channel buttons become centered round icons here and in P11, and Title returns to the application. Mobile chrome verified from screenshots supplied in review, including the menu drawer, drawn as a state. Red markers R1 through R3 are Lindsay's review items, indexed in the red register above.</p>
   <p>Deck copy is unmarked. Any line that is not verbatim from the deck carries a PROPOSED chip and is listed in the notes for line-by-line approval. The change map under decisions shows every move against the deck order.</p>
   <div class="legend">
     <span><span class="bar"></span> copy exists in the deck, greeked</span>
-    <span><span class="chip prop">Proposed</span> copy not verbatim from the deck</span>
+    <span><span class="chip prop">Proposed</span> copy not verbatim from the deck, for Lindsay's line approval</span>
+    <span><span class="chip ceo">Lindsay &middot; R1</span> Lindsay review marker, indexed below</span>
     <span><span class="chip">Flag</span> open decision, see register</span>
     <span><span class="img"><span></span></span> image slot</span>
   </div>
+  <div class="ceobox">
+    <h2>For Lindsay's review &middot; three items, matched to red markers on the desktop column</h2>
+    <ol>
+      <li><b>R1 The restructure.</b> The page runs in conversion order for interviewees. The change map under decisions shows every move against the deck. Approve the order.</li>
+      <li><b>R2 Copy.</b> Six items are not verbatim from the deck; each carries a red PROPOSED chip and is listed in the notes. Approve or strike line by line.</li>
+      <li><b>R3 Membership.</b> The Free and Premium comparison sits below the application, compressed, full copy behind expandable rows. Confirm interview first, membership second.</li>
+    </ol>
+  </div>
 </header>
-
-<section class="part">
-  <h2 class="parth">Nav, drawn both ways</h2>
-  <div class="navlab">6 items, current site</div>
-  <div class="navbar">
-    <div class="img navlogo"><span>logo</span></div>
-    <span class="navi">Home</span><span class="navi">About</span><span class="navi">Wellness Events</span><span class="navi">Inside the Index</span><span class="navi">Index Reports</span><span class="navi">Contact Us</span>
-  </div>
-  <div class="navlab">7 items, adds Podcast</div>
-  <div class="navbar">
-    <div class="img navlogo"><span>logo</span></div>
-    <span class="navi">Home</span><span class="navi">About</span><span class="navi">Wellness Events</span><span class="navi">Inside the Index</span><span class="navi">Index Reports</span><span class="navi navadd">Podcast</span><span class="navi">Contact Us</span>
-  </div>
-  <p class="ann">Unchanged from round one. A seventh item changes the global nav on every page of the site; that call has not been made.</p>
-</section>
 
 <section class="part">
   <h2 class="parth">The page &middot; proposed order</h2>
@@ -272,11 +315,22 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
     <span class="tab">The Wellness Index Report Podcast</span>
     <span class="urlbox">wellnessindexreport.com/podcast</span>
   </div>
-  <div class="pagenav">
-    <div class="img navlogo"><span>logo</span></div>
-    <span class="navi">Home</span><span class="navi">About</span><span class="navi">Wellness Events</span><span class="navi">Inside the Index</span><span class="navi">Index Reports</span><span class="navi">Contact Us</span>
-    <span class="chip">nav: 2 options, drawn above</span>
+  <div class="hdrband1">
+    <div>
+      <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot l"></span></div>
+      <div class="wordmark">WELLNESS</div>
+      <div class="wordmark2">INDEX REPORT</div>
+    </div>
+    <div class="hdrright">
+      <div style="margin-bottom:9px"><span class="alink" style="font-size:13px;margin-right:16px">Index Login</span><span class="btn" style="font-size:12px;padding:8px 15px">JOIN US TODAY!</span></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end"><span class="srchf"><span class="icobox"></span>Name or Keyword</span><span class="srchf"><span class="icobox"></span>City or Post Code</span></div>
+      <div style="font-size:10px;letter-spacing:.16em;color:#666;margin-top:6px">SEARCH</div>
+    </div>
   </div>
+  <div class="hdrband2">
+    <span class="hnavi">Home</span><span class="hnavi">About</span><span class="hnavi">Wellness Events</span><span class="hnavi">Inside the Index</span><span class="hnavi">Index Reports</span><span class="hnavi">Contact Us</span><span class="hnavi act">Podcast</span>
+  </div>
+  <p class="ann">Parent site chrome, redrawn from live inspection at desktop width: utility band on white, nav band on black, drawn dark gray at lo-fi, links spaced evenly across the band as on the site. Podcast appended after the existing six and drawn active. Values for the build are in the notes.</p>
 
   <div class="frame center">
     <span class="tag">P1 &middot; Hero &middot; from 1</span>
@@ -308,22 +362,26 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
     <div class="slabel">Where our providers get heard</div>
     <div class="stat">1.2B worldwide</div>
     <p class="statlab">via hundreds of syndicated outlets <span class="chip prop" style="margin-left:8px">Proposed</span> <span style="font-size:11px;color:#999">stat pulled forward, deck fragments</span></p>
-    <div class="logorow">
+    <div class="hscroll">
       <div class="img logo"><span>Business Insider</span></div>
       <div class="img logo"><span>The Wall Street Journal</span></div>
       <div class="img logo"><span>MarketWatch</span></div>
       <div class="img logo"><span>Yahoo! Finance</span></div>
       <div class="img logo"><span>Biohacker.news</span></div>
+      <div class="img logo"><span>outlet</span></div>
+      <div class="img logo"><span>outlet</span></div>
+      <div class="img logo"><span>outlet</span></div>
+      <div class="img logo"><span>outlet</span></div>
     </div>
-    <div class="logorow">
-      <div class="img chan"><span>YouTube</span></div>
-      <div class="img chan"><span>Apple Podcasts</span></div>
-      <div class="img chan"><span>Spotify</span></div>
-      <div class="img chan"><span>Amazon Music</span></div>
-      <div class="img chan"><span>iHeartRadio</span></div>
+    <div class="chanrow">
+      <div class="img cicon"><span>YouTube</span></div>
+      <div class="img cicon"><span>Apple Podcasts</span></div>
+      <div class="img cicon"><span>Spotify</span></div>
+      <div class="img cicon"><span>Amazon Music</span></div>
+      <div class="img cicon"><span>iHeartRadio</span></div>
     </div>
   </div>
-  <p class="ann">Number first, per the parent site's stat strip. Whether the outlet marks can be displayed is still open with the client; named gray boxes only.</p>
+  <p class="ann">Number first, per the parent stat strip. The outlet wall is one row that scrolls sideways, clipped here on purpose; unnamed boxes stand in for the syndicated set. Channels drawn in the parent footer's round icon style, centered. Whether the outlet marks can be displayed is still open with the client; gray shapes only.</p>
 
   <div class="frame center">
     <span class="tag">P3 &middot; Providers band &middot; merged from 2</span>
@@ -351,7 +409,7 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
       *But this is NOT medical advice nor should you purchase a solution for your practice/business without due diligence.
     </div>
   </div>
-  <p class="ann">Copy unchanged. The questions become a ruled, numbered listing and the pull quote gets a seal slot, both borrowed from the Index Report's grammar. Disclaimer unchanged, still a compliance placement.</p>
+  <p class="ann">Copy unchanged. The questions become a ruled, numbered listing and the pull quote gets a seal slot, both borrowed from the Index Report's grammar. The disclaimer keeps its PLACEMENT TBC flag; the parent footer, drawn at the end of the page, already runs a site-wide medical disclaimer, so the open question is whether this section needs a second one or the footer covers it.</p>
 
   <div class="frame">
     <span class="tag">P5 &middot; Who we interview &middot; from 5</span>
@@ -412,31 +470,30 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
     <p class="copy" style="margin:0 auto">Applications are reviewed weekly. About five minutes to apply.</p>
     <div class="formfr">
       <span class="tagr"><span class="chip">Build method TBC</span></span>
-      <div class="stepsbar">
-        <span class="snum on">1 &middot; About you</span>
-        <span class="snum">2 &middot; Your expertise</span>
-        <span class="snum">3 &middot; Logistics</span>
-        <span class="snum">4 &middot; Agreement</span>
-      </div>
       <div class="fld"><label>Full name</label><div class="fbox"></div></div>
       <div class="fld"><label>Title</label><div class="fbox"></div></div>
       <div class="fld"><label>Email</label><div class="fbox"></div></div>
-      <div class="fld"><label>Mobile</label><div class="fbox"></div></div>
-      <div class="fld"><label>Mailing address (optional)</label><div class="fbox tall"></div></div>
       <div class="fld"><label>Practice, business, or organization name</label><div class="fbox"></div></div>
-      <div class="fld"><label>Website (optional)</label><div class="fbox"></div></div>
-      <div class="cgrp"><span>2 &middot; Your expertise</span><span class="fn">4 fields: specialty &middot; what you are known for &middot; solutions used in practice &middot; all your links (repeating)</span></div>
-      <div class="cgrp"><span>3 &middot; Logistics</span><span class="fn">3 fields: preferred time, Tue-Thu &middot; anything not to ask (optional) &middot; headshot upload</span></div>
-      <div class="cgrp"><span>4 &middot; Agreement</span><span class="fn">2 fields: signature (required) &middot; monthly Report opt-in (optional)</span></div>
+      <div class="fld"><label>Area of expertise or specialty</label><div class="fbox"></div></div>
+      <div class="fld"><label>What are you known for? Your key differentiator. <span style="color:#bbb">(long text, 400 characters)</span></label><div class="fbox tall"></div></div>
+      <div class="fld"><label>Which wellness solutions or products do you use in clinical practice? <span style="color:#bbb">(long text)</span></label><div class="fbox tall"></div></div>
+      <div class="fld"><label>All your links: social channels, books, YouTube, published work, anything else <span style="color:#bbb">(repeating, optional label)</span></label><div class="fbox"></div><div class="fbox" style="margin-top:6px"></div><div class="fbox" style="margin-top:6px;border-style:dashed;display:flex;align-items:center;justify-content:center;color:#bbb">+</div></div>
+      <div class="fld" style="display:flex;gap:9px;align-items:center"><span style="width:15px;height:15px;border:1px solid #aaa;border-radius:3px;flex:none"></span><span style="font-size:13px;color:#444">Send me the monthly Wellness Index Report. <span style="color:#999">(optional)</span></span></div>
       <div class="submitrow"><span class="btn">Submit application</span></div>
     </div>
+    <div class="state" style="max-width:680px;margin:18px auto 0;text-align:left">
+      <span class="stag">Post-submit state</span>
+      <p class="copy" style="margin-bottom:4px">Thank you. Our editorial team reviews every application. If it is a fit, Anne will be in touch with your booking link and your three questions.</p>
+    </div>
   </div>
-  <p class="ann">Unchanged from round one: four steps, inline drawn as default only, build method open.</p>
+  <p class="ann">Application reduced to the eight fields editorial needs to decide, Title restored per round five. Mobile, headshot, do-not-ask and the likeness release move into Anne's booking and pre-interview emails. Mailing address and preferred time removed as duplicative.</p>
+  <p class="ann">The signature and hi-res upload were the two highest-friction fields on mobile, and neither is on the page now. "About five minutes to apply" becomes accurate.</p>
 
   <div class="belowdiv">Below the ask &middot; for the reader who has applied, or will not</div>
 
   <div class="frame">
     <span class="tag">P9 &middot; Membership band &middot; demoted from 7</span>
+    <div style="margin-bottom:6px"><span class="chip ceo">Lindsay &middot; R3</span></div>
     <h2 class="wf">The Index is built by its members.</h2>
     <div class="propblk">
       <p class="copy" style="margin-bottom:4px">Members nominate the solutions they stand behind and rate what is already listed. Companies cannot nominate themselves and cannot buy a rating.</p>
@@ -478,14 +535,14 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
     <span class="tag">P11 &middot; Episodes and subscribe &middot; merged from 9 and 10 &middot; anchor target</span>
     <h2 class="wf">Never miss an episode.</h2>
     <p class="copy">New episodes publish every week. Subscribe to catch each one.</p>
-    <div class="logorow">
-      <div class="img chan"><span>YouTube</span></div>
-      <div class="img chan"><span>Apple Podcasts</span></div>
-      <div class="img chan"><span>Spotify</span></div>
-      <div class="img chan"><span>Amazon Music</span></div>
-      <div class="img chan"><span>iHeartRadio</span></div>
+    <div class="chanrow" style="margin-bottom:14px">
+      <div class="img cicon"><span>YouTube</span></div>
+      <div class="img cicon"><span>Apple Podcasts</span></div>
+      <div class="img cicon"><span>Spotify</span></div>
+      <div class="img cicon"><span>Amazon Music</span></div>
+      <div class="img cicon"><span>iHeartRadio</span></div>
     </div>
-    <div class="emailrow"><span class="input">Your email</span><span class="btn">Send me the Report</span></div>
+    <div class="emailrow" style="margin:14px auto 0"><span class="input">Your email</span><span class="btn">Send me the Report</span></div>
     <p class="micro">Monthly. Provider nominated. Unsubscribe anytime.</p>
     <div class="minipop">
       <span class="stag">Populated state &middot; the library returns</span>
@@ -504,15 +561,61 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
       </div>
     </div>
   </div>
-  <p class="ann">At launch, one band does both jobs using only deck copy: the section 9 early state line, the channel row, the email capture. That retires round one's second NEW COPY NEEDED flag. With episodes live, the library expands back to the round-one filtered grid as its own section and this band returns to subscribe only. Both H2s are deck copy. The hero's listen link lands here; keep the anchor id on the episodes block when the library splits back out to its own section.</p>
+  <p class="ann">At launch, one band does both jobs using only deck copy: the section 9 early state line, the channel row, the email capture. That retires round one's second NEW COPY NEEDED flag. With episodes live, the library expands back to the round-one filtered grid as its own section and this band returns to subscribe only. Both H2s are deck copy. The hero's listen link lands here; keep the anchor id on the episodes block when the library splits back out to its own section. The old Optimize W(e) feed is live on all five channels with roughly 25 episodes; renaming it in place makes launch day a populated state, a fresh feed makes it this empty one.</p>
+
+  <div class="frame">
+    <span class="tag">Footer &middot; parent site, verified live</span>
+    <div class="pfstrip"><span class="pby">Powered by</span><span>Wellness Index Report</span><span class="vbar">|</span><span>Wellness Eternal</span></div>
+    <div class="blackbar"></div>
+    <div class="fcols">
+      <div>
+        <div class="footh4" style="margin-top:0">About</div>
+        <div class="bar b90"></div><div class="bar b90"></div><div class="bar b35"></div>
+      </div>
+      <div>
+        <div class="footh4" style="margin-top:0">Support</div>
+        <div class="footlink">Member Login</div>
+        <div class="footlink">Contact Us</div>
+      </div>
+    </div>
+    <div class="fdisc">* DISCLAIMER Warning: We are not licensed physicians and cannot diagnose diseases, prescribe drugs, or recommend treatments for specific disease conditions and will not dispense medical advice. Any views and ideas expressed are opinions only and not intended to be a substitute for conventional medical advice or service. You agree that no responsibility or liability will be incurred to any person or entity with respect to any loss, damage, or injury caused or alleged to be caused directly or indirectly by the information contained within this email. If you have a severe medical condition, please see a licensed healthcare practitioner.</div>
+    <div class="fsoc">
+      <div class="img cicon"><span></span></div>
+      <div class="img cicon"><span></span></div>
+      <div class="img cicon"><span></span></div>
+      <div class="img cicon"><span></span></div>
+      <div class="img cicon"><span></span></div>
+    </div>
+    <div class="fsoclab">Email &middot; Facebook &middot; LinkedIn &middot; YouTube &middot; Instagram, round icons, left-aligned as on the site</div>
+    <div class="crow">&copy; 2026 &nbsp; Wellness Eternal LLC &nbsp; All Rights Reserved &nbsp; Terms of Use &nbsp; Privacy Policy</div>
+  </div>
+  <p class="ann">Redrawn from the live footer. On the site the POWERED BY strip sits in the navy closing band directly above the footer; drawn here so the sequence reads as it does live. Disclaimer set verbatim and in full: this is the site-wide medical disclaimer the P4 flag points at. Its text says "contained within this email," a carry-over from email copy, worth fixing site-side. No Podcast item anywhere in the footer.</p>
   </div>
 
   <div class="mbcol mb">
   <div class="rendlab">Mobile &middot; 390 px &middot; proposed order</div>
   <div class="mobfr">
-    <div class="mobhead">
-      <div class="img navlogo" style="width:78px;height:22px"><span>logo</span></div>
-      <div class="burger">&equiv;</div>
+    <div class="blackbar" style="margin:0;height:34px;display:flex;align-items:center;justify-content:flex-end;padding:0 12px"><span style="color:#ccc;font-size:15px">&equiv;</span></div>
+    <div class="hdrband1" style="display:block;text-align:center;border-top:none;padding:16px 12px 14px">
+      <div class="dots" style="justify-content:center"><span class="dot"></span><span class="dot"></span><span class="dot l"></span></div>
+      <div class="wordmark" style="font-size:14px">WELLNESS</div>
+      <div class="wordmark2">INDEX REPORT</div>
+      <div style="margin:12px 0 10px"><span class="alink" style="font-size:12px;margin-right:12px">Index Login</span><span class="btn" style="font-size:10.5px;padding:7px 12px">JOIN US TODAY!</span></div>
+      <div class="srchf" style="display:flex;margin-bottom:7px"><span class="icobox"></span>Name or Keyword</div>
+      <div class="srchf" style="display:flex"><span class="icobox"></span>City or Post Code</div>
+      <div style="font-size:9.5px;letter-spacing:.16em;color:#666;margin-top:8px">SEARCH</div>
+    </div>
+    <div class="state" style="margin:10px 0 4px;padding:12px 14px">
+      <span class="stag">Menu open</span>
+      <div style="display:flex;justify-content:flex-end"><div style="background:#3a3a3a;padding:12px 16px;min-width:170px">
+        <div style="color:#ddd;font-size:11.5px;margin:6px 0">Home</div>
+        <div style="color:#ddd;font-size:11.5px;margin:6px 0">About</div>
+        <div style="color:#ddd;font-size:11.5px;margin:6px 0">Wellness Events</div>
+        <div style="color:#ddd;font-size:11.5px;margin:6px 0">Inside the Index</div>
+        <div style="color:#ddd;font-size:11.5px;margin:6px 0">Index Reports</div>
+        <div style="color:#ddd;font-size:11.5px;margin:6px 0">Contact Us</div>
+        <div style="color:#fff;font-size:11.5px;margin:6px 0;font-weight:650;text-decoration:underline">Podcast</div>
+      </div></div>
     </div>
 
     <div class="frame center">
@@ -536,19 +639,20 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
       <div class="slabel">Where our providers get heard</div>
       <div class="stat">1.2B worldwide</div>
       <p class="statlab">via hundreds of syndicated outlets</p>
-      <div class="logorow">
-        <div class="img logo"><span>Business Insider</span></div>
-        <div class="img logo"><span>The Wall Street Journal</span></div>
-        <div class="img logo"><span>MarketWatch</span></div>
-        <div class="img logo"><span>Yahoo! Finance</span></div>
-        <div class="img logo"><span>Biohacker.news</span></div>
+      <div class="hscroll">
+        <div class="img logo" style="flex:none"><span>Business Insider</span></div>
+        <div class="img logo" style="flex:none"><span>The Wall Street Journal</span></div>
+        <div class="img logo" style="flex:none"><span>MarketWatch</span></div>
+        <div class="img logo" style="flex:none"><span>Yahoo! Finance</span></div>
+        <div class="img logo" style="flex:none"><span>Biohacker.news</span></div>
+        <div class="img logo" style="flex:none"><span>outlet</span></div>
       </div>
-      <div class="logorow">
-        <div class="img chan"><span>YouTube</span></div>
-        <div class="img chan"><span>Apple Podcasts</span></div>
-        <div class="img chan"><span>Spotify</span></div>
-        <div class="img chan"><span>Amazon Music</span></div>
-        <div class="img chan"><span>iHeartRadio</span></div>
+      <div class="chanrow">
+        <div class="img cicon"><span>YouTube</span></div>
+        <div class="img cicon"><span>Apple Podcasts</span></div>
+        <div class="img cicon"><span>Spotify</span></div>
+        <div class="img cicon"><span>Amazon Music</span></div>
+        <div class="img cicon"><span>iHeartRadio</span></div>
       </div>
     </div>
 
@@ -625,19 +729,15 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
       <p class="copy">Applications are reviewed weekly. About five minutes to apply.</p>
       <div class="formfr">
         <span class="tagr"><span class="chip">Build method TBC</span></span>
-        <div class="stepsbar">
-          <span class="snum on">1 &middot; About you</span><span class="snum">2</span><span class="snum">3</span><span class="snum">4</span>
-        </div>
         <div class="fld"><label>Full name</label><div class="fbox"></div></div>
         <div class="fld"><label>Title</label><div class="fbox"></div></div>
         <div class="fld"><label>Email</label><div class="fbox"></div></div>
-        <div class="fld"><label>Mobile</label><div class="fbox"></div></div>
-        <div class="fld"><label>Mailing address (optional)</label><div class="fbox tall"></div></div>
         <div class="fld"><label>Practice, business, or organization name</label><div class="fbox"></div></div>
-        <div class="fld"><label>Website (optional)</label><div class="fbox"></div></div>
-        <div class="cgrp"><span>2 &middot; Your expertise</span><span class="fn">4 fields</span></div>
-        <div class="cgrp"><span>3 &middot; Logistics</span><span class="fn">3 fields</span></div>
-        <div class="cgrp"><span>4 &middot; Agreement</span><span class="fn">2 fields</span></div>
+        <div class="fld"><label>Area of expertise or specialty</label><div class="fbox"></div></div>
+        <div class="fld"><label>What are you known for? Your key differentiator.</label><div class="fbox tall"></div></div>
+        <div class="fld"><label>Which wellness solutions or products do you use in clinical practice?</label><div class="fbox tall"></div></div>
+        <div class="fld"><label>All your links: social channels, books, YouTube, published work, anything else</label><div class="fbox"></div><div class="fbox" style="margin-top:5px"></div><div class="fbox" style="margin-top:5px;border-style:dashed;display:flex;align-items:center;justify-content:center;color:#bbb">+</div></div>
+        <div class="fld" style="display:flex;gap:8px;align-items:center"><span style="width:13px;height:13px;border:1px solid #aaa;border-radius:3px;flex:none"></span><span style="font-size:11.5px;color:#444">Send me the monthly Wellness Index Report.</span></div>
         <div class="submitrow"><span class="btn" style="display:block">Submit application</span></div>
       </div>
     </div>
@@ -680,15 +780,41 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
       <span class="tag">P11 &middot; Episodes and subscribe</span>
       <h2 class="wf">Never miss an episode.</h2>
       <p class="copy">New episodes publish every week. Subscribe to catch each one.</p>
-      <div class="logorow">
-        <div class="img chan"><span>YouTube</span></div>
-        <div class="img chan"><span>Apple Podcasts</span></div>
-        <div class="img chan"><span>Spotify</span></div>
-        <div class="img chan"><span>Amazon Music</span></div>
-        <div class="img chan"><span>iHeartRadio</span></div>
+      <div class="chanrow" style="margin-bottom:12px">
+        <div class="img cicon"><span>YouTube</span></div>
+        <div class="img cicon"><span>Apple Podcasts</span></div>
+        <div class="img cicon"><span>Spotify</span></div>
+        <div class="img cicon"><span>Amazon Music</span></div>
+        <div class="img cicon"><span>iHeartRadio</span></div>
       </div>
       <div class="emailrow"><span class="input">Your email</span><span class="btn" style="text-align:center">Send me the Report</span></div>
       <p class="micro">Monthly. Provider nominated. Unsubscribe anytime.</p>
+    </div>
+
+    <div class="frame">
+      <span class="tag">Footer &middot; parent site</span>
+      <div class="pfstrip" style="font-size:11px;gap:9px"><span class="pby">Powered by</span><span>Wellness Index Report</span><span class="vbar">|</span><span>Wellness Eternal</span></div>
+      <div class="blackbar"></div>
+      <div class="fcols">
+        <div>
+          <div class="footh4" style="margin-top:0">About</div>
+          <div class="bar b90"></div><div class="bar b90"></div><div class="bar b35"></div>
+        </div>
+        <div>
+          <div class="footh4">Support</div>
+          <div class="footlink">Member Login</div>
+          <div class="footlink">Contact Us</div>
+        </div>
+      </div>
+      <div class="fdisc">* DISCLAIMER Warning: We are not licensed physicians and cannot diagnose diseases, prescribe drugs, or recommend treatments for specific disease conditions and will not dispense medical advice. Any views and ideas expressed are opinions only and not intended to be a substitute for conventional medical advice or service. You agree that no responsibility or liability will be incurred to any person or entity with respect to any loss, damage, or injury caused or alleged to be caused directly or indirectly by the information contained within this email. If you have a severe medical condition, please see a licensed healthcare practitioner.</div>
+      <div class="fsoc">
+        <div class="img cicon"><span></span></div>
+        <div class="img cicon"><span></span></div>
+        <div class="img cicon"><span></span></div>
+        <div class="img cicon"><span></span></div>
+        <div class="img cicon"><span></span></div>
+      </div>
+      <div class="crow">&copy; 2026 &nbsp; Wellness Eternal LLC &nbsp; All Rights Reserved &nbsp; Terms of Use &nbsp; Privacy Policy</div>
     </div>
 
     <div class="sticky">
@@ -696,7 +822,7 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
       <span class="btn" style="font-size:11.5px;padding:8px 12px">Apply to be interviewed</span>
     </div>
   </div>
-  <p class="ann">One column, proposed order, launch state only; the populated library panel is drawn on desktop. Ruled listings carry the compression well at this width: titles wrap, one-liners sit under them.</p>
+  <p class="ann">One column, proposed order, launch state only; the populated library panel and the form's post-submit state are drawn on desktop. Ruled listings carry the compression well at this width: titles wrap, one-liners sit under them. Mobile chrome verified from live screenshots: a slim black bar with the menu control at top right, centered logo, login and join row, stacked search fields, and the menu opening as a right-side black drawer over the page, drawn once as a state with Podcast appended and active. Footer stacking to one column was not separately captured.</p>
   </div>
   </div>
 </section>
@@ -706,7 +832,7 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
   <div class="decgrid">
 
     <div>
-      <div class="dectitle">The change map &middot; deck order to proposed order</div>
+      <div class="dectitle"><span class="chip ceo">Lindsay &middot; R1</span> The change map &middot; deck order to proposed order</div>
       <div class="mapwrap">
         <div class="mapcol">
           <div class="maplab">Deck order, round one</div>
@@ -781,12 +907,12 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
   <h3>Placeholder register</h3>
   <table class="reg">
     <tr><th>Flag</th><th>Where</th><th>What is open</th></tr>
-    <tr><td>PLACEMENT TBC</td><td>P4 &middot; Medical disclaimer</td><td>The asterisk anchors to nothing anywhere in the deck. Where the disclaimer sits on the page is a compliance decision, not a layout one.</td></tr>
+    <tr><td>PLACEMENT TBC</td><td>P4 &middot; Medical disclaimer</td><td>The asterisk anchors to nothing anywhere in the deck. The parent footer, now drawn, already runs a site-wide medical disclaimer; the open question is whether P4 needs its own or the footer covers it. Compliance decision, not layout.</td></tr>
     <tr><td>BUILD METHOD TBC</td><td>P8 &middot; Application form</td><td>Inline, embedded, modal, or separate page. Constraints below.</td></tr>
   </table>
   <p>Both round-one NEW COPY NEEDED flags stay retired: the hero's episode link ships with a proposed launch label and returns to the deck's "Listen to the latest episode" once episodes exist, and the merged P11 band covers pre-launch subscribe with the deck's early state line.</p>
 
-  <h3>Proposed copy, for line approval</h3>
+  <h3>Proposed copy, for line approval <span class="chip ceo">Lindsay &middot; R2</span></h3>
   <p>Everything on the page not listed here is deck copy verbatim. Trims reuse the deck's own words; new lines are marked.</p>
   <ul>
     <li>P1 ticks: "Free to appear &middot; Questions in advance &middot; 15-20 minutes, Tue-Thu." Reformat of the trust line, same facts, no new words.</li>
@@ -800,18 +926,43 @@ h2.wf{font-size:22px;line-height:1.25;font-weight:650;margin:0 0 12px}
   <h3>Family grammar borrowed</h3>
   <p>From the parent site, verified by fetch: the stat strip, numbered 01/02 systems, ruled section rhythm, short blocks, and the repeated CTA after each value block. From the Index Report, per project records: the ruled listing, the verification seal, and the italic on Index. The report site itself blocks automated reading, so its grammar is taken from prior project work; verify against the live report before any visual comp.</p>
 
+  <h3>Header and footer, verified live</h3>
+  <p>The chrome is the parent site's, redrawn from live inspection at desktop width plus supplied mobile screenshots, with Podcast appended after the existing six nav items and drawn active. Values recorded for the build; the wireframe stays gray.</p>
+  <table class="reg">
+    <tr><th>Element</th><th>Verified</th></tr>
+    <tr><td>Nav band</td><td>#000000 background, 50px height, links spaced evenly across the band</td></tr>
+    <tr><td>Nav link</td><td>Merriweather Sans, 16px, weight 400, #FDFDFD</td></tr>
+    <tr><td>Utility band</td><td>Open Sans, 15px, weight 300; search icons sit inside the fields; SEARCH label beneath</td></tr>
+    <tr><td>Logo dots</td><td>two navy, one black</td></tr>
+    <tr><td>JOIN US TODAY! button</td><td>brand orange fill on the white utility band</td></tr>
+    <tr><td>Mobile header</td><td>slim black bar with menu at top right; centered logo; Index Login and JOIN US TODAY! row; search fields stacked full width with SEARCH beneath; menu opens as a right-side black drawer over the page, items stacked</td></tr>
+    <tr><td>POWERED BY strip</td><td>sits in the navy closing band directly above the footer, centered, bar-separated</td></tr>
+    <tr><td>Footer</td><td>About and Support in two columns, full-width disclaimer verbatim, round social icons (Email, Facebook, LinkedIn, YouTube, Instagram), centered copyright row with Terms of Use and Privacy Policy</td></tr>
+  </table>
+
+  <h3>Contrast, for the build</h3>
+  <p>Brand orange is text-safe on the navy and near-black grounds only. On light sections it works as shape rather than type: rules, fills, underlines, icons. Type on light grounds goes near-black.</p>
+  <table class="reg">
+    <tr><th>Foreground</th><th>Ground</th><th>Ratio</th><th>AA, normal text</th></tr>
+    <tr><td>#FF9500</td><td>#09092A navy</td><td>8.81:1</td><td>passes</td></tr>
+    <tr><td>#FF9500</td><td>#16191D near-black</td><td>8.02:1</td><td>passes</td></tr>
+    <tr><td>#FF9500</td><td>#FFFFFF white</td><td>2.20:1</td><td>fails</td></tr>
+    <tr><td>#FF9500</td><td>#FAFAF8 off-white</td><td>2.10:1</td><td>fails</td></tr>
+  </table>
+  <p>Orange fails on light grounds at every text size, large text included, which needs only 3.0:1. No block in this wireframe indicates orange type; every ground here is drawn light gray, so no block is marked.</p>
+
   <h3>Form build constraints</h3>
   <ul>
-    <li>Field 14 is a high-resolution file upload and field 15 is a signature. A plain inline form is unlikely to cover both, so this likely needs a form tool. Fields 11 and 12, a repeating link list and a Tue-Thu day and time-range picker with time zone, are also nonstandard for inline builders.</li>
+    <li>Eight fields, one screen. Every input is plain except the repeating links field, the one item to confirm against the chosen builder.</li>
     <li>An embedded third-party form in an iframe arrives with its own styling that page CSS cannot reach. A previous build hit exactly this with an embedded HubSpot form that duplicated the page's branding and could not be restyled from outside.</li>
-    <li>Inline, embedded iframe, modal, and separate page each change what P8 actually looks like. The inline four-step version is drawn only so the block has a size and a place.</li>
+    <li>Inline, embedded iframe, modal, and separate page each change what P8 actually looks like. The inline version is drawn only so the block has a size and a place.</li>
   </ul>
 
   <h3>Layout patterns</h3>
-  <p>Platform assumed GoHighLevel, not confirmed. Every proposed block is a standard drag-in pattern: hero, stat and logo strip, text band, ruled list, accordion, stepped form, two-cell band with disclosure rows. Three carryover flags for the builder: the populated-era episode filter is a listing pattern, not a static section; the Option A sticky bar usually takes a few lines of custom CSS; the P9 disclosure rows are the same accordion element the FAQ uses. The hero's listen link is a plain in-page anchor; its id lives on the episodes block and travels with it when the library splits back out.</p>
+  <p>Platform assumed GoHighLevel, not confirmed. Every proposed block is a standard drag-in pattern: hero, stat and logo strip, text band, ruled list, accordion, single-screen form, two-cell band with disclosure rows. Three carryover flags for the builder: the populated-era episode filter is a listing pattern, not a static section; the Option A sticky bar usually takes a few lines of custom CSS; the P9 disclosure rows are the same accordion element the FAQ uses. The hero's listen link is a plain in-page anchor; its id lives on the episodes block and travels with it when the library splits back out.</p>
 
   <h3>Show name</h3>
-  <p>The page title, nav label, hero eyebrow, P4 opening, and the form's agreement line read "The Wellness Index Report Podcast." Deck H1 and H2 headlines are verbatim. "Wellness Index Report" in P9's collapsed content and P11's populated body names the monthly publication, a different product, and stays as written.</p>
+  <p>The page title, nav label, hero eyebrow, and P4 opening read "The Wellness Index Report Podcast." Deck H1 and H2 headlines are verbatim. "Wellness Index Report" in P9's collapsed content and P11's populated body names the monthly publication, a different product, and stays as written.</p>
 
   <h3>Recorded, not drawn</h3>
   <ul>
