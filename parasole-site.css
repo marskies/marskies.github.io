@@ -244,9 +244,8 @@ select:focus,input.txt:focus{outline:2px solid color-mix(in srgb,var(--burgundy)
   .aside-card{position:static}
 }
 /* === prequal + rentals updates === */
-.gallery{height:440px;align-items:stretch}
-.gallery .main{aspect-ratio:auto;height:100%}
-.gallery .side{height:100%}
+.gallery .main{aspect-ratio:auto;height:440px}
+.gallery .side{grid-template-rows:214px 214px}
 .backlink{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--burgundy);text-decoration:none;font-size:15.5px;padding:16px 0 0}
 .backlink:hover{color:var(--burgundy-dk)}
 .backlink svg{width:18px;height:18px}
@@ -258,11 +257,14 @@ select:focus,input.txt:focus{outline:2px solid color-mix(in srgb,var(--burgundy)
 .yn button.sel{background:var(--burgundy);border-color:var(--burgundy);color:#fff}
 .result.warn{display:block;background:#fdf3e0;border:1px solid #e7cd93;color:#8a5a12}
 @media(max-width:900px){
-  .gallery{height:auto}
   .gallery .main{aspect-ratio:16/10;height:auto}
+  .gallery .side .thumb{aspect-ratio:3/2}
   /* red contact bar: keep it a slim, tappable strip on phones (not full-height) */
   .colorbar .row{gap:6px 14px;padding:8px 0;font-size:12.5px}
   .colorbar a,.colorbar span{padding:5px 4px}
   .colorbar .lead{padding:5px 11px}
-  .cbhide{display:none}
+  /* mobile home: hide the hero text + button, go straight to the cards */
+  .hero{min-height:230px;padding:34px 0 110px}
+  .hero .eyebrow,.hero h1,.hero p,.hero .cta{display:none}
+  .cards{margin-top:-84px}
 }
