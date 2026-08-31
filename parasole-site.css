@@ -258,6 +258,7 @@ select:focus,input.txt:focus{outline:2px solid color-mix(in srgb,var(--burgundy)
 .result.warn{display:block;background:#fdf3e0;border:1px solid #e7cd93;color:#8a5a12}
 @media(max-width:900px){
   .gallery .main{aspect-ratio:16/10;height:auto}
+  .gallery .side{grid-template-rows:auto}
   .gallery .side .thumb{aspect-ratio:3/2}
   /* red contact bar: keep it a slim, tappable strip on phones (not full-height) */
   .colorbar .row{gap:6px 14px;padding:8px 0;font-size:12.5px}
