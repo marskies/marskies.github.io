@@ -579,13 +579,13 @@ section.frame .side-stack,section.frame .rail,section.frame .about-left,section.
     <div class="pane">
       <h3>● On Deck</h3>
       <div class="ondeck-list">
-        <a href="https://ufdc.ufl.edu/AA00129396/00001" target="_blank" rel="noopener" class="ondeck-row"><div class="ondeck-meta"><span class="t">My thesis is out!</span><span class="c">Read it here →</span></div></a>
+        <a href="https://skymar.studio/" target="_blank" rel="noopener" class="ondeck-row"><div class="ondeck-meta"><span class="t">I run a web design studio</span><span class="c">Visit Sky &amp; Mar →</span></div></a>
       </div>
     </div>
     <div class="pane">
       <h3>Currently</h3>
       <p class="sub" style="line-height:1.55;color:var(--ink-dim);font-size:13px;margin:0">
-        Now in <strong style="color:var(--ink)">St. Augustine, Florida</strong>, growing my web design business and building new products with Claude. Just shipped <strong style="color:var(--ink)">Foreshore</strong>, a self-hosted budgeting app running on a home server I built myself. Up next: an ad blocker.
+        Now in <strong style="color:var(--ink)">St. Augustine, Florida</strong>, growing my web design business and building new products with Claude. Shipped <strong style="color:var(--ink)">Foreshore</strong>, a self-hosted budgeting app on a home server I built myself, then an <strong style="color:var(--ink)">ad blocker</strong> on a repurposed PC that now blocks thousands of trackers across my devices. Up next: a personalized habit tracker built on <em>Atomic Habits</em>.
       </p>
     </div>
   </aside>
@@ -739,7 +739,7 @@ section.frame .side-stack,section.frame .rail,section.frame .about-left,section.
 <div class="ab-section"><span class="ab-lbl">Choices as Artifact</span><p>The prototype was designed to be the artifact. Jump was intentionally mapped to “B” rather than space bar to neutralize prior muscle memory — a choice that surfaced in interviews as a design decision in its own right. Placeholder art was used throughout so visual polish wouldn’t introduce unintended differences between tutorial states.</p></div>
           </div>
       <div class="chapter-body" id="ll-outcome">
-<div class="ab-section"><span class="ab-lbl">Recognition</span><p>The project won “Outstanding Achievement in Experience Design” at Convergence 2026. The thesis now sits behind my senior capstone, alongside a full process gallery on Behance where you are invited to play it yourself!</p></div>
+<div class="ab-section"><span class="ab-lbl">Recognition</span><p>The project won “Outstanding Achievement in Experience Design” at Convergence 2026. The thesis is <a href="https://ufdc.ufl.edu/AA00129396/00001" target="_blank" rel="noopener">published in the UF Digital Collections</a>, alongside a full process gallery on Behance where you are invited to play it yourself!</p></div>
             <div class="ab-section"><span class="ab-lbl">Takeaway</span><p>The broader takeaway: adaptive tutorial systems built only on performance data — or only on stated preference — miss part of the picture. The most reliable signal across 11 participants wasn’t which mode they picked; it was that being allowed to pick at all mattered to every one of them.</p></div>
           </div>
     </div>
@@ -862,8 +862,8 @@ section.frame .side-stack,section.frame .rail,section.frame .about-left,section.
       </div>
     </div>
     <div class="about-body" id="ab-currently">
-<div class="ab-section"><span class="ab-lbl">Now</span><p>Just relocated from Gainesville to St. Augustine, Florida. These days I’m growing my web design business and building new products with Claude — I just shipped Foreshore, a self-hosted budgeting app for friends and family, and stood up my own home server to run it. Up next: an ad blocker.</p></div>
-<div class="ab-section"><span class="ab-lbl">Off the Clock</span><p>Just spent 2 weeks back home in Puerto Rico and I'm heading back to Florida to help my twin siblings move into college at UNF.</p></div>
+<div class="ab-section"><span class="ab-lbl">Now</span><p>Just relocated from Gainesville to St. Augustine, Florida. These days I’m growing my web design business and building new products with Claude. I shipped Foreshore, a self-hosted budgeting app for friends and family, and stood up my own home server to run it. Then I turned an old PC into an ad blocker — it now blocks thousands of trackers across every device I point at it. Up next: a personalized habit tracker, built off James Clear’s Atomic Habits.</p></div>
+<div class="ab-section"><span class="ab-lbl">Off the Clock</span><p>Settled into St. Augustine and building up the business. I recently picked up biking, and riding on the beach is easily the best part of it.</p></div>
 </div>
   </div>
 
@@ -1757,8 +1757,10 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   var t=frame.querySelector('.ondeck-meta .t, .ondeck-row .t');
   if(t&&t.textContent.trim())title=t.textContent.trim().slice(0,40);
   var subEl=frame.querySelector('.ondeck-meta .c'); var sub=subEl?subEl.textContent.trim():'';
-  var a=document.createElement('a'); a.className='mc-latest'; a.href='#frame-b';
-  a.addEventListener('click',function(e){e.preventDefault(); location.hash='#frame-b';});
+  var a=document.createElement('a'); a.className='mc-latest';
+  var ext = srcLink && srcLink.getAttribute && /^https?:/.test(srcLink.getAttribute('href')||'');
+  if(ext){ a.href=srcLink.getAttribute('href'); a.target='_blank'; a.rel='noopener'; }
+  else { a.href='#frame-b'; a.addEventListener('click',function(e){e.preventDefault(); location.hash='#frame-b';}); }
   var thumb=document.createElement('img'); thumb.className='mc-latest-thumb'; thumb.alt=''; if(img&&img.getAttribute('src'))thumb.src=img.getAttribute('src');
   var body=document.createElement('div'); body.className='mc-latest-body';
   body.innerHTML='<div class="mc-latest-kicker">Latest work</div><div class="mc-latest-title"></div><div class="mc-latest-sub"></div>';
