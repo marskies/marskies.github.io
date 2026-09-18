@@ -10,8 +10,9 @@ Session 2026-09-18: Wellness Eternal case study added. Built as four local commi
 2. New project page wellness-eternal.html, cloned from foreshore.html (only the title, rail, case pane and side stack differ). Five chapters: Overview / Identity / Podcast / Templates / Verification. 13 new images, all images/we-*.png.
 3. Wired in everywhere Foreshore was wired on 2026-07-17: index.html (Work shelf card after Foreshore + Frame C rail), mobile.html (DATA.work card after Foreshore + PROJECTS["wellness-eternal"]), projects.js (top entry), and the Project Index rail on all 11 project pages.
 4. Hard rule for anything Wellness Eternal: never name the agency's clients anywhere in this repo, including this file. That is the one condition of the permission. Client work is described generically ("a medical education client", "a six-figure medical device").
+5. Later the same day: Wellness Eternal became the featured Work item (desktop shelf slot 3, which the shelf opens on; mobile first card), and every project page's nav now points to index.html instead of mockup.html. Details in the last log entry.
 
-Standing rules still apply: plan before editing, don't add unrequested features, match the design system.
+Standing rules still apply: plan before editing, edit only index.html + mobile.html unless Marina approves more (adding a project also touches its page, projects.js and every project page's rail, as with Foreshore), don't add unrequested features, match the design system.
 
 # Submerged · Portfolio Mockup · Context Doc
 
@@ -1405,3 +1406,18 @@ Copy rules used: first person with Marina as the subject of every catch, no em d
 Design system: the page uses this site's Submerged system, not the Sky & Mar studio palette, because it lives inside this site. Wellness Eternal orange appears only inside the artwork.
 
 Verified locally before commit (served over http, 1440x900 desktop and 390x844 mobile): all 5 tabs switch, all 12 case images load, lightbox opens, Work shelf shows 11 cards and 11 dots, mobile detail opens from the Work card with 9 gallery dots, no console errors, every inline script passes node --check.
+
+
+## SESSION UPDATE 2026-09-18 (cont.) · Wellness Eternal featured + project nav to index.html (FEATURED-WE, NAV-TO-INDEX)
+
+Marina asked for Wellness Eternal to replace Learn To Leap as the featured item. Two local commits plus this log, pushed from GitHub Desktop.
+
+FEATURED-WE (index.html + mobile.html only):
+- Desktop: the Work shelf opens on centerIdx = 2, so the featured card is whatever sits third in #album-shelf. Moved the Wellness Eternal card into that slot, directly before Learn To Leap. Nothing else was reordered. At open, the shelf shows Cosmic Catch and Tick Tock Trivia on the left and Learn To Leap and Foreshore on the right.
+- Mobile: the Work carousel opens on its first card, so the Wellness Eternal item moved to the front of DATA.work.items. Learn To Leap is second. Nothing else was reordered.
+- Not changed: index.html #frame-c still holds the inline Learn To Leap case study with the "● Featured" badge. Nothing in index.html links to #frame-c, so it cannot be reached from the UI. Retiring it or swapping it is a separate decision. Home On Deck (Sky & Mar) and the mobile home hero line that mentions Learn To Leap are unchanged.
+
+NAV-TO-INDEX (the OPTION B cleanup parked in the URL migration notes, approved by Marina 2026-09-18):
+- All 12 project pages now point their brand logo and Home / Work / About / Contact links to index.html#frame-x instead of mockup.html#frame-x: 60 links, 5 per page. Before this, anyone clicking the nav on a project page landed on mockup.html, a stale copy with the old On Deck and without Foreshore or Wellness Eternal.
+- mockup.html itself is unchanged and nothing on the site links to it anymore. Its og:url still names mockup.html.
+- index.html already handles #frame-x on load (FRAME-SWITCH wire) and forwards phones to mobile.html with the hash, the same way mockup.html did.
