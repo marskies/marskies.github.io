@@ -2,6 +2,21 @@
 // Update this file to update project info across all category pages
 
 const PROJECTS = {
+    "wellness-eternal": {
+        id: "wellness-eternal",
+        title: "Wellness Eternal",
+        subtitle: "Brand, Podcast & Web Internship",
+        roles: ["uiux"],
+        timeline: "6 Weeks · Summer 2026",
+        teamSize: "Agency Team",
+        tools: ["Canva", "HTML & CSS", "SVG", "DevTools"],
+        links: {},
+        thumbnail: "images/we-card.png",
+        roleDescriptions: {
+            uiux: "Built a 73-file identity system with a README of usage rules, the full brand and landing page for the Wellness Index Report podcast (including an application cut from 16 fields to 8), and a social template system anyone on the team can use. Checked every document against the live product before building on it."
+        }
+    },
+
     "foreshore": {
         id: "foreshore",
         title: "Foreshore",

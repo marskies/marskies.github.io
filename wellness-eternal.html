@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Wellness Eternal · Marina DiPonio</title>
+<style>
+:root{
+  --bg-deep:#0a1f24;
+  --glass:rgba(18,42,48,0.55);
+  --glass-strong:rgba(20,48,55,0.72);
+  --glass-edge:rgba(255,255,255,0.10);
+  --ink:#eaf6f7;
+  --ink-dim:#b9d2d4;
+  --ink-quiet:#7fa2a5;
+  --teal:#8fd4d6;
+  --copper:#d18a5a;
+  --copper-dim:#a86a44;
+  --shadow:0 18px 60px rgba(0,0,0,0.45);
+  --radius:22px;
+  --radius-sm:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg-deep);color:var(--ink);font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{
+  background-image:url('images/background.jpg');
+  background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;
+  min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 50% 30%, rgba(10,40,46,0.25), rgba(4,16,20,0.65) 70%);
+  pointer-events:none;z-index:0;
+}
+a{color:inherit;text-decoration:none}
+/* ===== TOP BAR ===== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:grid;grid-template-rows:auto auto;gap:12px;pointer-events:none}
+.topbar .row{max-width:1400px;margin:0 auto;padding:0 36px;width:100%;display:flex;align-items:center;justify-content:space-between;pointer-events:auto}
+.topbar .row:first-child{padding-top:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:56px;width:auto;display:block;object-fit:contain;transform:translateY(-4px)}
+.brand .name{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;letter-spacing:0.01em;color:var(--ink);line-height:1}
+.brand .name b{color:var(--copper);font-weight:500;font-style:italic}
+.audio-pill{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--glass-edge);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);box-shadow:var(--shadow)}
+.audio-pill button{background:transparent;border:0;color:var(--copper);cursor:pointer;font-size:15px;line-height:1;padding:0}
+.audio-pill .wave{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
+.audio-pill .wave i{display:block;width:2px;background:var(--teal);border-radius:1px;height:40%}
+.audio-pill .wave i:nth-child(2){height:80%}
+.audio-pill .wave i:nth-child(3){height:55%}
+.audio-pill .wave i:nth-child(4){height:95%}
+.audio-pill .wave i:nth-child(5){height:35%}
+.topbar .nav-row{justify-content:center}
+.nav-pill{display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--glass-edge);box-shadow:var(--shadow)}
+.nav-pill a{padding:11px 20px;border-radius:999px;font-size:15px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);transition:background .15s,color .15s}
+.nav-pill a:hover{color:var(--ink);background:rgba(255,255,255,0.05)}
+.nav-pill a.active{background:var(--copper);color:#1a1108;font-weight:600}
+/* ===== FRAME SHELL ===== */
+.frame{position:relative;z-index:1;min-height:100vh;padding:140px 36px 60px 36px;display:flex;align-items:center;justify-content:center;gap:22px;max-width:1400px;margin:0 auto}
+.frame > *{flex-shrink:0}
+.pane{background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--glass-edge);border-radius:var(--radius);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);padding:22px;display:flex;flex-direction:column;overflow:hidden}
+.pane h3{margin:0 0 14px 0;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.side-stack{display:flex;flex-direction:column;gap:14px}
+/* ===== CASE-STUDY (mirrors mockup Frame C) ===== */
+.rail{width:260px;height:640px;padding:18px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
+.rail::-webkit-scrollbar{width:6px}
+.rail::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
+.rail-search{width:100%;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);color:var(--ink);font-size:13px;margin-bottom:14px;font-family:inherit}
+.rail-cat{font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:var(--copper);margin:16px 0 8px 0;font-weight:700}
+.rail-cat:first-of-type{margin-top:4px}
+.rail-item{padding:9px 10px;border-radius:10px;display:flex;flex-direction:column;gap:3px;cursor:pointer;border:1px solid transparent}
+.rail-item:hover{background:rgba(255,255,255,0.03)}
+.rail-item.active{background:rgba(209,138,90,0.10);border-color:rgba(209,138,90,0.4)}
+.rail-item .t{font-size:15px;color:var(--ink)}
+.rail-item .tags{display:flex;gap:4px;flex-wrap:wrap}
+.rail-item .tags span{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:rgba(143,212,214,0.10);color:var(--teal)}
+.case{width:640px;height:640px;padding:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--copper) transparent}
+.case-hero{height:180px;background:linear-gradient(160deg,#2a525c,#0f2c33);display:flex;align-items:center;justify-content:center;color:var(--ink-quiet);border-bottom:1px solid var(--glass-edge);position:relative}
+.case-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.case-hero .badge{position:absolute;top:14px;left:14px;padding:6px 12px;border-radius:999px;background:rgba(10,30,35,0.6);backdrop-filter:blur(10px);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper)}
+.case-body{padding:22px 26px;flex:1;display:flex;flex-direction:column;min-height:0}
+.case-title{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:34px;margin:0 0 4px 0}
+.case-title em{font-style:italic;color:var(--copper)}
+.case-sub{font-size:15px;color:var(--ink-dim);margin:0 0 16px 0}
+.chapters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.chapter-tab{padding:9px 18px;border-radius:999px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);color:var(--ink-dim);cursor:pointer;font-weight:600;font-family:inherit}
+.chapter-tab.on{background:var(--copper);color:#1a1108;border-color:var(--copper);font-weight:700;box-shadow:0 0 0 3px rgba(209,138,90,0.18)}
+.chapter-body{font-size:17px;line-height:1.65;color:var(--ink-dim);display:none}
+.chapter-body.on{display:block}
+.chapter-body::-webkit-scrollbar{width:6px}
+.chapter-body::-webkit-scrollbar-thumb{background:var(--copper);border-radius:3px}
+.chapter-body p{margin:0 0 12px 0}
+.chapter-body p strong{color:var(--ink)}
+.chapter-body .ab-section{margin-bottom:14px}
+.chapter-body .ab-section:last-child{margin-bottom:0}
+.chapter-body .ab-lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:6px;display:block}
+.chapter-body figure{margin:6px 0 14px 0}
+.chapter-body figure img{width:100%;border-radius:14px;border:1px solid var(--glass-edge);display:block}
+.chapter-body figcaption{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-quiet);margin-top:6px}
+.chapter-body .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px 0}
+.chapter-body .compare figure{margin:0}
+.chapter-body .compare figcaption{font-weight:700}
+.chapter-body .compare figcaption.before{color:#d99090}
+.chapter-body .compare figcaption.after{color:#9fd8a3}
+.chapter-body .stat-call{font-family:'Fraunces',Georgia,serif;font-size:42px;line-height:1;color:var(--copper);font-weight:500;margin:6px 0 4px 0}
+.chapter-body .stat-call span{display:block;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-quiet);margin-top:6px;font-weight:600}
+/* Right side-stack cards */
+.side-stack{width:300px}
+.stack-card{padding:16px;margin-bottom:0}
+.stack-card h4{margin:0 0 12px 0;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.stat-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:14px}
+.stat-row:last-child{border:0}
+.stat-row .k{color:var(--ink-quiet)}
+.stat-row .v{color:var(--ink);font-weight:600;text-align:right}
+.tool-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool-chips span{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);font-size:13px;letter-spacing:0.08em;color:var(--ink-dim)}
+/* Tablet scale */
+@media (max-width:1100px) and (min-width:768px){
+  .frame{gap:16px;padding-left:20px;padding-right:20px}
+  .rail{width:220px;height:600px}
+  .case{width:560px;height:600px}
+  .side-stack{width:260px}
+  .case-title{font-size:28px}
+}
+/* ===== CONTACT CHIP ===== */
+.contact-chip{position:fixed;bottom:24px;right:24px;z-index:60;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:10px;pointer-events:none}
+.contact-chip > *{pointer-events:auto}
+.contact-chip .chip-toggle{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:var(--copper);color:#1a1108;border:0;cursor:pointer;box-shadow:0 12px 32px rgba(209,138,90,0.4), 0 0 0 1px rgba(255,255,255,0.06) inset;transition:background .15s, transform .15s}
+.contact-chip .chip-toggle:hover{background:#e29867;transform:translateY(-1px)}
+.contact-chip .chip-toggle svg{width:24px;height:24px;display:block}
+.contact-chip .chip-panel{display:none;flex-direction:column;gap:6px;padding:12px;border-radius:16px;background:var(--glass-strong);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-edge);box-shadow:var(--shadow);min-width:260px}
+.contact-chip.open .chip-panel{display:flex}
+.contact-chip.open .chip-toggle{background:#1a1108;color:var(--copper)}
+.contact-chip.open .chip-toggle:hover{background:#241710}
+.chip-panel a{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);transition:border-color .15s, background .15s}
+.chip-panel a:hover{border-color:var(--copper);background:rgba(209,138,90,0.08)}
+.chip-panel a .lbl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.chip-panel a .val{font-size:14px;color:var(--ink)}
+@media (max-width:1100px){
+  .contact-chip{bottom:18px;right:18px}
+  .contact-chip .chip-toggle{width:48px;height:48px}
+  .contact-chip .chip-toggle svg{width:22px;height:22px}
+  .contact-chip .chip-panel{min-width:230px}
+}
+/* ===== CUSTOM CURSOR (reduced-motion guarded) ===== */
+@media (prefers-reduced-motion: no-preference){
+  body.cursor-hidden, body.cursor-hidden *{cursor:none !important}
+  #cursor-layer{position:fixed;inset:0;pointer-events:none;z-index:9999}
+  #cursor-layer .ck{position:absolute;top:0;left:0;transform:translate3d(-50%,-50%,0);will-change:transform;display:none}
+  #cursor-layer.active .ck-bb,
+  #cursor-layer.active .ck-bb-dot,
+  #cursor-layer.active .ck-bubble-trail{display:block}
+  .ck-bb{width:20px;height:20px;border-radius:50%;border:2px solid #e8a777;background:radial-gradient(circle at 35% 30%, rgba(143,212,214,0.55), rgba(143,212,214,0.12) 60%, transparent 85%);box-shadow:0 0 18px rgba(143,212,214,0.45), 0 0 6px rgba(209,138,90,0.35), inset 0 0 8px rgba(255,255,255,0.22);transition:width .15s ease,height .15s ease,border-color .15s ease}
+  .ck-bb-dot{width:4px;height:4px;border-radius:50%;background:var(--copper,#d18a5a);box-shadow:0 0 6px rgba(209,138,90,0.8)}
+  #cursor-layer.hot .ck-bb{width:30px;height:30px;border-color:#ffbb86}
+  .ck-bubble-trail{width:6px;height:6px;border-radius:50%;border:1px solid rgba(209,138,90,0.55);background:rgba(143,212,214,0.18)}
+  .ck-bubble-trail.t2{width:4px;height:4px;opacity:.7}
+  .ck-bubble-trail.t3{width:3px;height:3px;opacity:.5}
+  .ck-pop{position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;border:2px solid var(--copper,#d18a5a);transform:translate3d(-50%,-50%,0);pointer-events:none;animation:ckpop .35s ease-out forwards}
+  @keyframes ckpop{0%{opacity:1;width:20px;height:20px}100%{opacity:0;width:60px;height:60px}}
+}
+<!-- ===== Accessibility mode ===== -->
+<style>
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible,
+  select:focus-visible, [tabindex]:focus-visible{outline:3px solid var(--copper);outline-offset:2px;border-radius:6px}
+  .a11y-chip{position:fixed;bottom:88px;right:24px;z-index:61;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:10px;pointer-events:none}
+  .a11y-chip > *{pointer-events:auto}
+  .a11y-toggle{width:54px;height:54px;border-radius:50%;border:1px solid var(--glass-edge);background:var(--glass-strong);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:var(--shadow);color:var(--teal);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color .15s ease,border-color .15s ease,transform .15s ease}
+  .a11y-toggle:hover{color:var(--copper);border-color:var(--copper);transform:translateY(-1px)}
+  .a11y-chip.open .a11y-toggle{color:var(--copper);border-color:var(--copper)}
+  .a11y-panel{display:none;flex-direction:column;gap:4px;padding:14px;border-radius:16px;background:var(--glass-strong);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-edge);box-shadow:var(--shadow);min-width:240px}
+  .a11y-chip.open .a11y-panel{display:flex}
+  .a11y-panel .a11y-head{font-family:'Fraunces',serif;font-size:15px;color:var(--ink);margin:0 0 6px;letter-spacing:.01em}
+  .a11y-opt{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 8px;border-radius:10px;cursor:pointer}
+  .a11y-opt:hover{background:rgba(255,255,255,0.05)}
+  .a11y-opt .a11y-name{font-size:14px;color:var(--ink-dim)}
+  .a11y-opt input{width:16px;height:16px;accent-color:var(--copper);cursor:pointer;flex:0 0 auto}
+  body.a11y-normal-cursor #cursor-layer{display:none !important}
+  body.a11y-normal-cursor, body.a11y-normal-cursor *{cursor:auto !important}
+  body.a11y-normal-cursor a, body.a11y-normal-cursor button, body.a11y-normal-cursor label, body.a11y-normal-cursor .a11y-opt{cursor:pointer !important}
+  body.a11y-reduce-motion #cursor-layer{display:none !important}
+  body.a11y-reduce-motion *, body.a11y-reduce-motion *::before, body.a11y-reduce-motion *::after{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
+  /* Bigger text (+12%) */
+  body.a11y-large-text .brand .name{font-size:25px}
+  body.a11y-large-text .audio-pill{font-size:15px}
+  body.a11y-large-text .audio-pill button{font-size:17px}
+  body.a11y-large-text .nav-pill a{font-size:17px}
+  body.a11y-large-text .pane h3{font-size:16px}
+  body.a11y-large-text .rail-search{font-size:15px}
+  body.a11y-large-text .rail-cat{font-size:15px}
+  body.a11y-large-text .rail-item .t{font-size:17px}
+  body.a11y-large-text .rail-item .tags span{font-size:13px}
+  body.a11y-large-text .case-hero .badge{font-size:13px}
+  body.a11y-large-text .case-title{font-size:38px}
+  body.a11y-large-text .case-sub{font-size:17px}
+  body.a11y-large-text .chapter-tab{font-size:15px}
+  body.a11y-large-text .chapter-body{font-size:19px}
+  body.a11y-large-text .chapter-body .ab-lbl{font-size:12px}
+  body.a11y-large-text .chapter-body figcaption{font-size:13px}
+  body.a11y-large-text .chapter-body .stat-call{font-size:47px}
+  body.a11y-large-text .chapter-body .stat-call span{font-size:13px}
+  body.a11y-large-text .stack-card h4{font-size:15px}
+  body.a11y-large-text .stat-row{font-size:16px}
+  body.a11y-large-text .tool-chips span{font-size:15px}
+  body.a11y-large-text .chip-panel a .lbl{font-size:12px}
+  body.a11y-large-text .chip-panel a .val{font-size:16px}
+  body.a11y-contrast{--glass:rgba(6,20,24,0.94);--glass-strong:rgba(4,16,20,0.97);--glass-edge:rgba(255,255,255,0.42);--ink:#ffffff;--ink-dim:#eaf6f7;--ink-quiet:#cfe4e6;--teal:#aef0f2;--copper:#ffb27a}
+  body.a11y-contrast *{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+  body.a11y-contrast .pane, body.a11y-contrast [class*="card"], body.a11y-contrast .chip-panel, body.a11y-contrast .a11y-panel{border-width:1.5px !important}
+  @media (max-width:1100px){ .a11y-chip{bottom:80px;right:16px} }
+/* === image lightbox === */
+#img-lightbox{position:fixed;inset:0;z-index:9990;display:none;align-items:center;justify-content:center;background:rgba(5,16,19,0.88);backdrop-filter:blur(4px);padding:4vh 4vw;box-sizing:border-box;}
+#img-lightbox.open{display:flex;}
+#img-lightbox .lb-img{max-width:100%;max-height:92vh;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);border:1px solid var(--glass-edge,rgba(255,255,255,0.10));object-fit:contain;}
+#img-lightbox .lb-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid var(--glass-edge,rgba(255,255,255,0.18));background:var(--glass-strong,rgba(20,48,55,0.72));color:var(--ink,#eaf6f7);font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#img-lightbox .lb-close:hover{background:var(--teal,#8fd4d6);color:var(--bg-deep,#0a1f24);}
+#img-lightbox .lb-cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--ink-dim,#b9d2d4);font-size:14px;padding:0 16px;}
+img.lb-zoomable{cursor:zoom-in;}
+img.lb-zoomable:focus-visible{outline:3px solid var(--teal,#8fd4d6);outline-offset:3px;}
+body.a11y-reduce-motion #img-lightbox{backdrop-filter:none;}
+body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
+/* === /image lightbox === */
+
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.title-row .case-title{flex:1 1 auto}
+.title-links{display:flex;gap:8px;flex-shrink:0;margin-top:6px}
+.title-links a{display:inline-flex;align-items:center;gap:5px;font-family:'Inter',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--copper);text-decoration:none;padding:5px 11px;border:1px solid color-mix(in srgb,var(--copper) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--copper) 8%,transparent);transition:background .15s,border-color .15s}
+.title-links a:hover{background:color-mix(in srgb,var(--copper) 18%,transparent);border-color:var(--copper)}
+.title-links a .arr{font-size:11px;opacity:.8}
+
+/* ===== LOCK-PAGE PATCH: no page scroll / no overscroll bounce ===== */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+</style>
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="row">
+    <a href="mockup.html#frame-a" class="brand">
+      <img src="LOGO_white.png" alt="Marina DiPonio logo" />
+      <span class="name">Marina <b>DiPonio</b></span>
+    </a>
+    <div class="audio-pill">
+      <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
+      <button id="aud-toggle" aria-label="toggle ambient audio">▶</button>
+      <span>Ambient · Underwater</span>
+    </div>
+  </div>
+  <div class="row nav-row">
+    <nav class="nav-pill" aria-label="primary">
+      <a href="mockup.html#frame-a">Home</a>
+      <a href="mockup.html#frame-b" class="active">Work</a>
+      <a href="mockup.html#frame-d">About</a>
+      <a href="mockup.html#frame-e">Contact</a>
+    </nav>
+  </div>
+</header>
+<audio id="ambient" src="underwaterambiance.mp3" loop preload="auto"></audio>
+
+<section class="frame">
+  <aside class="pane rail">
+    <h3>Project Index</h3>
+    <input class="rail-search" placeholder="Search projects…" aria-label="Search projects" />
+    <div class="rail-cat">Research</div>
+    <a class="rail-item" href="learn-to-leap.html">
+      <div class="t">Learn To Leap</div>
+      <div class="tags"><span>PM</span><span>UI/UX</span></div>
+    </a>
+    <a class="rail-item" href="ice-accessibility.html">
+      <div class="t">ICE Accessibility Audit</div>
+      <div class="tags"><span>UI/UX</span></div>
+    </a>
+    <div class="rail-cat">Project Management</div>
+    <a class="rail-item" href="tick-tock-trivia.html">
+      <div class="t">Tick Tock Trivia</div>
+      <div class="tags"><span>UI/UX</span><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="cosmic-catch.html">
+      <div class="t">Cosmic Catch</div>
+      <div class="tags"><span>UI/UX</span></div>
+    </a>
+    <a class="rail-item" href="yuumi-chan.html">
+      <div class="t">Yuumi-Chan: Rent is Due!</div>
+      <div class="tags"><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="startea.html">
+      <div class="t">StarTea</div>
+      <div class="tags"><span>UI/UX</span><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="insane-wizard.html">
+      <div class="t">Insane Wizard Goes Crazy Everywhere</div>
+      <div class="tags"><span>UI/UX</span><span>Research</span></div>
+    </a>
+    <a class="rail-item" href="social-media-cys.html">
+      <div class="t">The Courtyards Apartments Social Media Campaign</div>
+      <div class="tags"></div>
+    </a>
+    <div class="rail-cat">UI / UX</div>
+    <a class="rail-item" href="foreshore.html">
+      <div class="t">Foreshore</div>
+      <div class="tags"><span>UI/UX</span></div>
+    </a>
+    <div class="rail-item active" aria-current="page">
+      <div class="t">Wellness Eternal</div>
+      <div class="tags"><span>UI/UX</span></div>
+    </div>
+    <a class="rail-item" href="nutrition-app.html">
+      <div class="t">Nutrition Tracking App</div>
+      <div class="tags"><span>PM</span></div>
+    </a>
+    <a class="rail-item" href="uf-club-software.html">
+      <div class="t">UF Anthology Engage</div>
+      <div class="tags"><span>Research</span></div>
+    </a>
+  </aside>
+  <div class="pane case">
+    <div class="case-hero">
+      <img src="images/we-hero.png" alt="The Wellness Eternal identity: the W(▶)LLNESS INDEX wordmark on near-black beside the W(e)LLNESS ETERNAL wordmark on off-white." />
+      <span class="badge">● Brand · Web · QA</span>
+    </div>
+    <div class="case-body">
+      <div class="title-row"><h2 class="case-title">Wellness <em>Eternal</em></h2><div class="title-links"><a href="podcast-mark-ab.html" target="_blank" rel="noopener">Mark A/B <span class="arr">↗</span></a><a href="wellness-index-report-podcast-page-wireframe.html" target="_blank" rel="noopener">Wireframe <span class="arr">↗</span></a></div></div>
+      <p class="case-sub">Brand identity, web design &amp; quality control · Creative &amp; Web Internship · Summer 2026</p>
+      <div class="chapters" data-chapters="we">
+        <button class="chapter-tab on" data-target="we-overview">Overview</button>
+        <button class="chapter-tab" data-target="we-identity">Identity</button>
+        <button class="chapter-tab" data-target="we-podcast">Podcast</button>
+        <button class="chapter-tab" data-target="we-templates">Templates</button>
+        <button class="chapter-tab" data-target="we-verification">Verification</button>
+      </div>
+      <div class="chapter-body on" id="we-overview">
+        <div class="ab-section"><span class="ab-lbl">The Role</span><p>I joined Wellness Eternal, a wellness marketing agency, as its Creative and Web/App Development Intern from July 21 to August 31, 2026: about 100 part-time hours over six weeks, reporting to the CEO, the CMO, the Head of Operations, and a project lead. The work covered brand identity, web design, wireframing, and quality control.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The Through-Line</span><p>Before I build on a document, I check it against what is actually live. Specs, names, and brand kits drift over time, so reconciling them first is where most of the work on this page started.</p></div>
+        <figure>
+          <img src="images/we-landing.png" alt="The approved landing page comp for the Wellness Index Report podcast, desktop and mobile hero sections." />
+          <figcaption>Wellness Index Report podcast · approved landing page comp</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">What Shipped</span><p>A 73-file identity system with rules for using it. The full brand for the Wellness Index Report podcast, including its landing page. A social template system anyone on the team can use.</p></div>
+      </div>
+      <div class="chapter-body" id="we-identity">
+        <div class="ab-section"><span class="ab-lbl">The Problem</span><p>A logo is only as good as the worst place someone else puts it. The goal was a set the team could use correctly without having to ask me.</p></div>
+        <div class="ab-section"><span class="ab-lbl">What I Built</span><p>Nine lockups: the W(▶) mark, square and circle versions for icons and avatars, a compact paren mark and its square, two wordmarks for the parent name, an Index wordmark for the podcast, and a stacked version. Each comes in four colorways, as SVG and 3000 px PNG, with every letterform converted to outlines so nothing depends on an installed font.</p></div>
+        <figure>
+          <img src="images/we-logo-set.png" alt="Grid of the nine Wellness Eternal lockups, each shown on dark, on light, mono white, and mono black." />
+          <figcaption>(w)e logo set · 9 lockups × 4 colorways · 73 files</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Rules That Travel</span><p>The set ships with a README. Minimum widths come from a 7 px cap-height threshold, the size where heavy serif type stops reading, so the mark holds down to 18 px wide and the longest wordmark needs 111 px. Clear space is half the cap height, so it scales with the type.</p></div>
+        <figure>
+          <img src="images/we-min-sizes.png" alt="The README minimum-size table, with each lockup drawn at its minimum width." />
+          <figcaption>README · minimum widths at a 7 px cap height</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Built on the Live Brand</span><p>Every mark sits on a brand spec I sampled from the live site’s rendered CSS (more under Verification), so the logos match what visitors actually see.</p></div>
+        <div class="ab-section"><span class="ab-lbl">What It Changed</span><p>Anyone on the team can pick the right lockup, check its minimum size, and use it correctly without guesswork. The README also flags the two decisions that belonged to the brand owner, not to me.</p></div>
+      </div>
+      <div class="chapter-body" id="we-podcast">
+        <div class="ab-section"><span class="ab-lbl">The Form</span><p>The interview application in the copy deck had 16 fields. I mapped each one against what the editorial team needs in order to decide, and kept those eight on the page. Four moved into the booking and pre-interview emails, three came off, and the newsletter opt-in became an optional checkbox. Title came back in the fifth review round.</p></div>
+        <div class="stat-call">16 → 8<span>Interview application fields</span></div>
+        <figure>
+          <img src="images/we-form.png" alt="The 16 fields from the copy deck, each marked kept, moved to email, cut, or optional, beside the eight-field form on the approved page." />
+          <figcaption>Copy deck to page · 16 fields to 8</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Why It Matters</span><p>The signature and the high-resolution upload were the two hardest fields to finish on a phone. Both now come by email after booking, once the provider has picked a slot.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The Page</span><p>I wireframed the landing page for desktop and mobile from the CEO’s copy deck, ordered for the provider deciding whether to apply. Every line that was not verbatim from the deck got a PROPOSED flag for her line-by-line approval. A journey map and a follow-up survey went with it.</p></div>
+        <figure>
+          <img src="images/we-wireframe.png" alt="Lo-fi wireframe of the podcast landing page, desktop and mobile columns, with red proposed-copy flags." />
+          <figcaption>Lo-fi wireframe · desktop and mobile</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">The Mark</span><p>I started with twenty concepts, judged every one at 55 px rather than at presentation size, and reworked all twenty when the show was renamed. W(▶), a play button held in the brand’s parentheses, won the A/B rounds that followed, and round three settled its geometry. The final system: W(▶) as a standalone mark, a W(▶)LLNESS INDEX wordmark, and a black-type version for light backgrounds.</p></div>
+        <figure>
+          <img src="images/we-concepts.png" alt="The twenty-concepts review sheet: review rules at the top and three index-form concepts, each shown large and at 55 px." />
+          <figcaption>Twenty concepts, reworked for the new name · judged at 55 px</figcaption>
+        </figure>
+        <figure>
+          <img src="images/we-mark-system.png" alt="The final podcast mark system: the W(▶) mark and wordmark on dark and on light, plus the app tile at 128 and 55 px." />
+          <figcaption>Final mark system · dark and light</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Built for 55 Pixels</span><p>Podcast apps list a show at about 55 px. I built every cover concept as a 3000 px master and in vector, then judged it at 55 px, the size a listener actually sees. At that size a long show name disappears, so the tile carries the mark and the name lives in the wordmark.</p></div>
+        <figure>
+          <img src="images/we-cover-art.png" alt="Four cover art concepts shown large and at 55 px: mark-led, Index Report, redaction, and medical editorial." />
+          <figcaption>Cover concepts · 3000 px masters, judged at 55 px</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">One Feed, Two Brands</span><p>The podcast posts to Wellness Eternal’s own Instagram feed, so it could not look like a separate company. The brand kit runs light and dark themes on the parent’s orange, type, and parentheses.</p></div>
+      </div>
+      <div class="chapter-body" id="we-templates">
+        <div class="ab-section"><span class="ab-lbl">The Goal</span><p>Consistent, on-brand social posts that anyone on the team can make.</p></div>
+        <div class="ab-section"><span class="ab-lbl">The System</span><p>Ten template families for Instagram, Facebook, and LinkedIn, covering features, the monthly Index Report, provider spotlights, podcast episodes, stats, and calls to action. Every master is 1080 × 1350 and resizes to Story and landscape by holding three things in place: the corner wordmark, the single orange element, and the crop.</p></div>
+        <figure>
+          <img src="images/we-templates.png" alt="Eight social templates from the (w)e system, shown with placeholder imagery and a placeholder name." />
+          <figcaption>(w)e social templates · placeholder imagery</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">Rules Anyone Can Follow</span><p>Four rules keep a post on brand in anyone’s hands. Lead with the artifact, not decoration. Orange goes on one element per board. Merriweather carries display; DM Sans carries anything measured. No more than five display words and one label.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Case Studies, Anonymized</span><p>The case-study carousel follows the project lead’s brief: two five-slide options that tell a client’s story without client creative, names, logos, or attributed quotes.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Why It Mattered</span><p>I was part time. The most useful thing I could build was something that kept producing on-brand work on the days I wasn’t there.</p></div>
+      </div>
+      <div class="chapter-body" id="we-verification">
+        <div class="ab-section"><span class="ab-lbl">How It Works</span><p>Every catch below started the same way: I opened the live product and compared it with the document it was supposed to match.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Brand Spec</span><p>I audited the brand kit against the live site’s computed styles and rebuilt the spec from what actually rendered: true black and white, a brighter signal orange, Merriweather and DM Sans. From then on, new work had an accurate base.</p></div>
+        <figure>
+          <img src="images/we-brand-spec.png" alt="Brand kit palettes compared: version one as specified, version two sampled from the live site’s rendered CSS." />
+          <figcaption>Brand kit · as specified vs. as rendered</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">One Name</span><p>I reconciled the Wellness Index Report name across the site, where it appeared four different ways, and against the podcast directories, which still listed the show’s old name. Doing it before the logo was final meant the mark only had to be built once.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Orange on Light</span><p>I contrast-tested the brand orange on the light ground: 2.10:1, against the 4.5:1 that text needs. I designed the light-mode variants around that result: near-black type, with orange kept to shapes.</p></div>
+        <figure>
+          <img src="images/we-contrast.png" alt="Contrast test of the brand orange: 2.10 to 1 on off-white, 8.02 to 1 on near-black, and the light-mode fix with near-black type." />
+          <figcaption>Brand orange · contrast on light and dark</figcaption>
+        </figure>
+        <div class="ab-section"><span class="ab-lbl">93 Ratings</span><p>I settled a rename-or-start-fresh question on the podcast feed that had been open for three days: the existing feed carried 93 five-star ratings, so it gets renamed in place and keeps them.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Course Material</span><p>For a medical education client, I ran a full accuracy review: 73 issues across 10 files and 199 panels, 31 of them unambiguous factual errors. I opened and confirmed every one by eye before it went into the report, which shipped as a branded PDF.</p></div>
+        <div class="ab-section"><span class="ab-lbl">For Physicians</span><p>The material was headed to practicing physicians. I caught a mitochondrion labeled as the nucleus in a course diagram, with the real nucleus left unlabeled, before it reached production slides. I also caught “Nitric Acid” written for nitric oxide in a biochemistry module: one is a signaling molecule, the other a corrosive acid.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Six-Figure Specs</span><p>For a medical device client, I checked every spec and price in the product materials against the source, and flagged errors on three separate review passes. On a six-figure device, a wrong spec is a sales problem, not a typo.</p></div>
+        <div class="ab-section"><span class="ab-lbl">Client Brand Kit</span><p>I rebuilt a client’s brand kit from their live site after finding its fonts no longer matched, so everything made from it would ship on brand.</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="side-stack">
+    <div class="pane stack-card">
+      <h4>Quick Stats</h4>
+      <div class="stat-row"><span class="k">Role</span><span class="v">Creative &amp; Web Intern</span></div>
+      <div class="stat-row"><span class="k">Timeline</span><span class="v">Jul 21 to Aug 31, 2026</span></div>
+      <div class="stat-row"><span class="k">Hours</span><span class="v">~100, part time</span></div>
+      <div class="stat-row"><span class="k">Application</span><span class="v">16 → 8 fields</span></div>
+    </div>
+    <div class="pane stack-card">
+      <h4>Methods</h4>
+      <div class="tool-chips">
+        <span>Brand Audit</span><span>Identity System</span><span>Contrast Testing</span><span>Wireframing</span><span>Journey Mapping</span><span>Survey Design</span><span>Template System</span><span>Content QA</span>
+      </div>
+    </div>
+    <div class="pane stack-card">
+      <h4>Tools</h4>
+      <div class="tool-chips">
+        <span>Canva</span><span>HTML &amp; CSS</span><span>SVG</span><span>DevTools</span>
+      </div>
+    </div>
+  </aside>
+</section>
+<!-- Accessibility options chip -->
+<div class="a11y-chip" id="a11y-chip">
+<div class="a11y-panel" role="menu" aria-label="Accessibility options">
+<p class="a11y-head">Accessibility</p>
+<label class="a11y-opt"><span class="a11y-name">Normal cursor</span><input type="checkbox" id="a11y-normal-cursor"></label>
+<label class="a11y-opt"><span class="a11y-name">Reduce motion</span><input type="checkbox" id="a11y-reduce-motion"></label>
+<label class="a11y-opt"><span class="a11y-name">Bigger text</span><input type="checkbox" id="a11y-large-text"></label>
+<label class="a11y-opt"><span class="a11y-name">High contrast</span><input type="checkbox" id="a11y-contrast"></label>
+</div>
+<button class="a11y-toggle" id="a11y-toggle" aria-expanded="false" aria-controls="a11y-chip" aria-label="Accessibility options" title="Accessibility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true"><circle cx="12" cy="4" r="1.6"></circle><path d="M4 7.5h16"></path><path d="M9 7v4l-1.5 8"></path><path d="M15 7v4l1.5 8"></path></svg></button>
+</div>
+<div class="contact-chip" id="contact-chip">
+  <div class="chip-panel">
+    <a href="mailto:marinadiponio@proton.me"><span class="lbl">Email</span><span class="val">marinadiponio@proton.me</span></a>
+    <a href="https://www.linkedin.com/in/marinadiponio" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span><span class="val">/in/marinadiponio</span></a>
+    <a href="https://www.behance.net/marinadiponio" target="_blank" rel="noopener"><span class="lbl">Behance</span><span class="val">/marinadiponio</span></a>
+    <a href="https://calendly.com/marinadiponio-proton/30min" target="_blank" rel="noopener"><span class="lbl">Calendly</span><span class="val">marinadiponio-proton/30min</span></a>
+  </div>
+  <button class="chip-toggle" id="chip-toggle" aria-expanded="false" aria-controls="contact-chip" aria-label="Open contact options" title="Get in touch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+</div>
+
+<div id="cursor-layer" aria-hidden="true">
+  <div class="ck ck-bubble-trail t3" data-trail="3"></div>
+  <div class="ck ck-bubble-trail t2" data-trail="2"></div>
+  <div class="ck ck-bubble-trail t1" data-trail="1"></div>
+  <div class="ck ck-bb"></div>
+  <div class="ck ck-bb-dot"></div>
+</div>
+<script>
+// Audio toggle
+(function(){
+  var btn = document.getElementById('aud-toggle');
+  var aud = document.getElementById('ambient');
+  if(!btn || !aud) return;
+  btn.addEventListener('click', function(){
+    if(aud.paused){ aud.play().then(function(){btn.textContent='⏸';}).catch(function(){}); }
+    else { aud.pause(); btn.textContent='▶'; }
+  });
+})();
+// Chapter tabs
+(function(){
+  var groups = document.querySelectorAll('[data-chapters]');
+  groups.forEach(function(g){
+    var tabs = g.querySelectorAll('.chapter-tab');
+    var key = g.getAttribute('data-chapters');
+    tabs.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var targetId = btn.getAttribute('data-target');
+        if (!targetId) return;
+        tabs.forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        var siblings = document.querySelectorAll('[id^="'+key+'-"]');
+        siblings.forEach(function(p){ p.classList.remove('on'); });
+        var target = document.getElementById(targetId);
+        if (target){ target.classList.add('on'); target.scrollTop = 0; }
+      });
+    });
+  });
+})();
+// Contact chip
+(function(){
+  var chip = document.getElementById("contact-chip");
+  var btn = document.getElementById("chip-toggle");
+  if(!chip || !btn) return;
+  btn.addEventListener("click", function(e){
+    e.stopPropagation();
+    var open = chip.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.addEventListener("click", function(e){
+    if(!chip.contains(e.target)){
+      chip.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+    }
+  });
+})();
+// Cursor (reduced-motion guarded)
+(() => {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layer = document.getElementById('cursor-layer');
+  if (!layer) return;
+  layer.classList.add('active');
+  document.body.classList.add('cursor-hidden');
+  const t1 = layer.querySelector('[data-trail="1"]');
+  const t2 = layer.querySelector('[data-trail="2"]');
+  const t3 = layer.querySelector('[data-trail="3"]');
+  const bb = layer.querySelector('.ck-bb');
+  const bbDot = layer.querySelector('.ck-bb-dot');
+  let mx = -100, my = -100;
+  const hist = new Array(80).fill(0).map(() => ({x:mx,y:my}));
+  let head = 0;
+  function sample(n){ return hist[(head - n + hist.length) % hist.length]; }
+  window.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; });
+  const HOT = 'a, button, input, textarea, select, [role="button"], label';
+  function tick(){
+    hist[head] = {x: mx, y: my};
+    head = (head + 1) % hist.length;
+    const base = 'translate3d(' + mx + 'px, ' + my + 'px, 0) translate3d(-50%,-50%,0)';
+    bb.style.transform = base;
+    bbDot.style.transform = base;
+    const b1 = sample(2), b2 = sample(5), b3 = sample(9);
+    t1.style.transform = 'translate3d(' + b1.x + 'px, ' + b1.y + 'px, 0) translate3d(-50%,-50%,0)';
+    t2.style.transform = 'translate3d(' + b2.x + 'px, ' + b2.y + 'px, 0) translate3d(-50%,-50%,0)';
+    t3.style.transform = 'translate3d(' + b3.x + 'px, ' + b3.y + 'px, 0) translate3d(-50%,-50%,0)';
+    const el = document.elementFromPoint(mx, my);
+    const hot = !!(el && el.closest && el.closest(HOT));
+    layer.classList.toggle('hot', hot);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  window.addEventListener('pointerdown', (e) => {
+    const pop = document.createElement('div');
+    pop.className = 'ck-pop';
+    pop.style.left = e.clientX + 'px';
+    pop.style.top = e.clientY + 'px';
+    layer.appendChild(pop);
+    setTimeout(() => pop.remove(), 500);
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var KEY = "marskies_rail_scroll";
+  function getRail(){ return document.querySelector(".rail"); }
+  function save(){ var r=getRail(); if(r) sessionStorage.setItem(KEY, r.scrollTop); }
+  function restore(){
+    var r=getRail(); if(!r) return;
+    var v = sessionStorage.getItem(KEY);
+    if(v!==null){ r.scrollTop = parseInt(v,10)||0; }
+    else { var a=r.querySelector(".rail-item.active"); if(a && a.scrollIntoView) a.scrollIntoView({block:"center"}); }
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", restore); else restore();
+  document.addEventListener("DOMContentLoaded", function(){ var r=getRail(); if(r){ r.addEventListener("scroll", save, {passive:true}); r.addEventListener("click", save, true); } });
+  window.addEventListener("beforeunload", save);
+})();
+</script>
+<script>
+(function(){
+  var chip=document.getElementById("a11y-chip"),btn=document.getElementById("a11y-toggle");
+  if(!chip||!btn)return;
+  btn.addEventListener("click",function(e){e.stopPropagation();var o=chip.classList.toggle("open");btn.setAttribute("aria-expanded",o?"true":"false");});
+  document.addEventListener("click",function(e){if(chip.classList.contains("open")&&!chip.contains(e.target)){chip.classList.remove("open");btn.setAttribute("aria-expanded","false");}});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&chip.classList.contains("open")){chip.classList.remove("open");btn.setAttribute("aria-expanded","false");btn.focus();}});
+  var MAP={"a11y-normal-cursor":"a11y-normal-cursor","a11y-reduce-motion":"a11y-reduce-motion","a11y-large-text":"a11y-large-text","a11y-contrast":"a11y-contrast"},STORE="marskies_a11y";
+  function load(){try{return JSON.parse(localStorage.getItem(STORE))||{};}catch(_){return {};}}
+  function save(s){try{localStorage.setItem(STORE,JSON.stringify(s));}catch(_){}}
+  var state=load();
+  Object.keys(MAP).forEach(function(id){var cb=document.getElementById(id);if(!cb)return;cb.checked=!!state[id];document.body.classList.toggle(MAP[id],!!state[id]);cb.addEventListener("change",function(){document.body.classList.toggle(MAP[id],cb.checked);var s=load();s[id]=cb.checked;save(s);});});
+})();
+</script>
+
+<div id="img-lightbox" role="dialog" aria-modal="true" aria-label="Expanded image">
+  <button class="lb-close" type="button" aria-label="Close image">×</button>
+  <img class="lb-img" src="" alt="" />
+  <div class="lb-cap"></div>
+</div>
+<script>
+(function(){
+  if(window.__lbInit) return; window.__lbInit=true;
+  function ready(fn){if(document.readyState!=="loading")fn();else document.addEventListener("DOMContentLoaded",fn);}
+  ready(function(){
+    var box=document.getElementById("img-lightbox");
+    if(!box) return;
+    var bImg=box.querySelector(".lb-img"), bCap=box.querySelector(".lb-cap"), bClose=box.querySelector(".lb-close");
+    var lastFocus=null;
+    function open(src,alt){lastFocus=document.activeElement;bImg.src=src;bImg.alt=alt||"";bCap.textContent=alt||"";box.classList.add("open");document.body.style.overflow="hidden";bClose.focus();}
+    function close(){box.classList.remove("open");bImg.src="";document.body.style.overflow="";if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+    function excluded(img){return img.closest(".topbar")||img.closest(".brand")||img.closest(".contact-chip")||img.closest("#a11y-chip")||img.closest("#img-lightbox")||img.classList.contains("cursor-bubble");}
+    Array.prototype.forEach.call(document.images,function(img){
+      if(excluded(img)) return;
+      img.classList.add("lb-zoomable");
+      img.setAttribute("role","button");
+      img.setAttribute("tabindex","0");
+      if(!img.getAttribute("aria-label"))img.setAttribute("aria-label","Expand image"+(img.alt?": "+img.alt:""));
+      img.addEventListener("click",function(){open(img.currentSrc||img.src,img.alt);});
+      img.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();open(img.currentSrc||img.src,img.alt);}});
+    });
+    bClose.addEventListener("click",close);
+    box.addEventListener("click",function(e){if(e.target===box)close();});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&box.classList.contains("open"))close();});
+  });
+})();
+</script>
+</body>
+</html>
