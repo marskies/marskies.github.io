@@ -4,19 +4,16 @@
 
 ## END-OF-SESSION SUMMARY (for next Claude)
 
-This session's work, all committed to main and live-verified:
+Session 2026-09-18: Wellness Eternal case study added. Built as four local commits that Marina pushes from GitHub Desktop (nothing is live until she pushes).
 
-1. Off the Clock copy now consistent on BOTH desktop and mobile: "Just spent 2 weeks back home in Puerto Rico and I'm heading back to Florida to help my twin siblings move into college at UNF." (desktop index.html line 864 commit 964240b last session; mobile.html updated this session.)
-2.
-3. 2. Light rays (ANIM-1) are now actually VISIBLE on desktop AND mobile (they were rendering but buried). Desktop: #mk-rays-wrap z-index -1 -> 0 (commit d7f1665). Mobile: html,body background set to transparent so the body::before image + rays show through (committed). Rays are position:fixed body children, so they play continuously behind moving content (the "video background" Marina wanted) and persist across all sections.
-   3.
-   4. 3. ANIM-2 page-to-page bento morph: still DESKTOP ONLY (unchanged, per Marina).
-      4.
-      5. 4. ANIM-3 in-panel tab transition: ported to mobile (commit d2f3984) - on accordion (<details.b-acc>) open, .b-acc-body fades + slides up with the same params as desktop (420ms, cubic-bezier(0.33,0.9,0.3,1)). Respects reduced-motion.
-         5.
-         6. 5. Desktop audio pill: removed the "Ambient · Underwater" text; label now reads SOUND OFF / SOUND ON based on play state (commit b14a8e0). Icons kept. Driven by a small script hooking the <audio id="ambient"> play/pause events.
-            6.
-            7. Files touched: index.html, mobile.html, CONTEXT.md. mockup.html left untouched (unused). Standing rules still apply: plan before editing, edit only index.html + mobile.html, don't add unrequested features, match the design system.# Submerged · Portfolio Mockup · Context Doc
+1. Removed two older internship review pages. What Wellness Eternal cleared in writing on 2026-09-18: artwork from three pieces may be shown (the (w)e logo set and identity system, the Wellness Index Report podcast branding and landing page, the (w)e social template system), and client work may be described in text without identifying the client. Nothing else from the internship goes on this site.
+2. New project page wellness-eternal.html, cloned from foreshore.html (only the title, rail, case pane and side stack differ). Five chapters: Overview / Identity / Podcast / Templates / Verification. 13 new images, all images/we-*.png.
+3. Wired in everywhere Foreshore was wired on 2026-07-17: index.html (Work shelf card after Foreshore + Frame C rail), mobile.html (DATA.work card after Foreshore + PROJECTS["wellness-eternal"]), projects.js (top entry), and the Project Index rail on all 11 project pages.
+4. Hard rule for anything Wellness Eternal: never name the agency's clients anywhere in this repo, including this file. That is the one condition of the permission. Client work is described generically ("a medical education client", "a six-figure medical device").
+
+Standing rules still apply: plan before editing, don't add unrequested features, match the design system.
+
+# Submerged · Portfolio Mockup · Context Doc
 
 > Handoff doc for resuming work on the Submerged portfolio mockup with Claude.
 > Last updated: session that added the site-wide image lightbox (v5.3) and fixed the cursor z-index so it shows above the overlay.
@@ -1387,3 +1384,24 @@ DESKTOP (index.html, commit b14a8e0):
     - - Verified live: shows SOUND OFF on load, flips to SOUND ON on play, back to SOUND OFF on pause. Icons unchanged.
      
       - Note: this change was made to the desktop site only (index.html), per the request. mobile.html audio UI was not touched.
+
+
+## SESSION UPDATE 2026-09-18 · Wellness Eternal case study (WELLNESS-ETERNAL)
+
+Four local commits, in this order, pushed by Marina from GitHub Desktop:
+1. Remove internship review pages (two unlinked pages).
+2. feat: add Wellness Eternal case study: wellness-eternal.html, images/we-*.png, index.html, mobile.html, projects.js.
+3. Add Wellness Eternal to Project Index rail on all project pages (the same 4-line block Foreshore got, placed right after Foreshore under UI / UX; tag UI/UX to match Foreshore).
+4. This log.
+
+Page: wellness-eternal.html = foreshore.html template byte for byte outside the frame section. data-chapters="we"; tab ids we-overview, we-identity, we-podcast, we-templates, we-verification. Title links: Mark A/B (podcast-mark-ab.html) and Wireframe (wellness-index-report-podcast-page-wireframe.html), both existing pages in this repo. One .stat-call (16 → 8) in the Podcast chapter, placed between The Form and its figure because .stat-call has only 4px bottom margin and crowds a following .ab-lbl.
+
+Images (1180 px wide = 2x the 588 px figure column, except we-hero 1600x450 and we-card 1000x1000): we-hero (hero banner), we-card (Work card, mobile card, first mobile gallery slide), we-landing, we-logo-set, we-min-sizes, we-form, we-wireframe, we-concepts, we-mark-system, we-cover-art, we-templates, we-brand-spec, we-contrast. Logo and mark art is rendered from the outlined SVG masters, so no font substitution. Page screenshots use the real Merriweather / DM Sans / IBM Plex Mono files. No photos of people. Template boards were picked so none shows a reach number or the show's old name.
+
+Mobile: PROJECTS["wellness-eternal"] follows the detail template (role eyebrow, 9-image gallery, text-only chapters; the stat becomes a "16 → 8" sub-label). The hero banner is left out of the mobile gallery because the 230px cover crop cuts both wordmarks.
+
+Copy rules used: first person with Marina as the subject of every catch, no em dashes, no performance metrics, no client names or identifying detail. The form count is 16 → 8 (8 kept, 4 moved to email, 3 cut, newsletter opt-in kept as an optional checkbox), matching the approved hi-fi and the linked wireframe ("reduced to the eight fields"). 7 was the round-four count before Title was restored.
+
+Design system: the page uses this site's Submerged system, not the Sky & Mar studio palette, because it lives inside this site. Wellness Eternal orange appears only inside the artwork.
+
+Verified locally before commit (served over http, 1440x900 desktop and 390x844 mobile): all 5 tabs switch, all 12 case images load, lightbox opens, Work shelf shows 11 cards and 11 dots, mobile detail opens from the Work card with 9 gallery dots, no console errors, every inline script passes node --check.
