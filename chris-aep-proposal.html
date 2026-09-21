@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>AEP Proposal for Chris Conflitti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=DM+Sans:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #ffffff;
+    --muted: #5f6b6e;
+    --rule: #e8e3da;
+    --wash: #f6f4ef;
+    --note: #2a2622;
+    --sand: #c4a882;
+    --sea: #7ba3b3;
+    --sage: #9bb87a;
+    --grad: linear-gradient(135deg, #c4a882, #7ba3b3, #9bb87a);
+    --display: "Outfit", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --body: "DM Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --hand: "Kalam", "Bradley Hand", "Segoe Print", cursive;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding-inline: 20px; }
+  a { color: inherit; }
+  p { margin: 0; }
+  p + p { margin-top: 12px; }
+
+  /* Header */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: 52px 46px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #bbb 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: .35;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: -30%;
+    right: -15%;
+    width: 70%;
+    height: 150%;
+    background:
+      radial-gradient(closest-side, rgba(123,163,179,.32), transparent),
+      radial-gradient(closest-side at 25% 75%, rgba(196,168,130,.26), transparent);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+  .eyebrow span:first-child { color: var(--ink); }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(36px, 7vw, 56px);
+    line-height: 1.04;
+    letter-spacing: -1.5px;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  .ul {
+    background-image: var(--grad);
+    background-repeat: no-repeat;
+    background-size: 100% .15em;
+    background-position: 0 94%;
+  }
+  .lead {
+    font-weight: 300;
+    font-size: clamp(18px, 2.4vw, 21px);
+    line-height: 1.45;
+    max-width: 34em;
+  }
+
+  /* Sections */
+  section { padding-block: 44px; border-bottom: 1px solid var(--rule); }
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(25px, 3.6vw, 31px);
+    line-height: 1.15;
+    letter-spacing: -.6px;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .sub { color: var(--muted); max-width: 36em; }
+
+  /* His words */
+  .quotes { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 10px; }
+  .quotes li {
+    font-family: var(--hand);
+    color: var(--note);
+    font-size: clamp(21px, 3vw, 26px);
+    line-height: 1.3;
+  }
+  .quotes li:nth-child(1) { transform: rotate(-1.2deg); }
+  .quotes li:nth-child(2) { transform: rotate(.7deg); padding-left: 1.2em; }
+  .quotes li:nth-child(3) { transform: rotate(-.5deg); padding-left: .4em; }
+  .answer { font-weight: 500; font-size: 19px; }
+
+  /* The offer */
+  .price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 18px;
+    margin: 4px 0 26px;
+  }
+  .amt {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(56px, 11vw, 80px);
+    letter-spacing: -2.5px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .terms { font-size: 18px; color: var(--muted); }
+  .hand {
+    font-family: var(--hand);
+    color: var(--note);
+    font-size: 21px;
+    display: inline-block;
+    transform: rotate(-2deg);
+    flex-basis: 100%;
+    line-height: 1.25;
+  }
+  .incl { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .incl li { position: relative; padding-left: 24px; }
+  .incl li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: .6em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--grad);
+  }
+  .fine { font-size: 14px; color: var(--muted); margin-top: 18px; max-width: 40em; }
+
+  /* Two options */
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 34px; }
+  .opt {
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 22px 22px 24px;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+  }
+  .opt.first { border: 1.5px solid var(--ink); }
+  .opt .tag {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .opt h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -.4px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+  .opt .amt { font-size: clamp(44px, 7vw, 54px); letter-spacing: -1.8px; display: block; }
+  .opt .terms { display: block; font-size: 15px; margin-top: 6px; }
+  .opt .hand { font-size: 19px; margin-top: 8px; }
+  .opt .desc { margin: 16px 0 12px; font-size: 16px; font-weight: 500; }
+  .opt .incl { gap: 8px; font-size: 15.5px; line-height: 1.45; }
+  h3.both {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: -.3px;
+    margin: 0 0 12px;
+  }
+  .new {
+    display: inline-block;
+    margin-right: 4px;
+    padding: 1px 8px;
+    border-radius: 100px;
+    border: 1px solid var(--sea);
+    color: #3f6b7a;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    vertical-align: 2px;
+  }
+
+  /* Measurement flow */
+  .flow { display: flex; align-items: stretch; gap: 8px; margin: 26px 0; }
+  .step {
+    flex: 1 1 0;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 14px 14px 16px;
+    font-size: 15px;
+    line-height: 1.35;
+    background: var(--paper);
+  }
+  .step b { display: block; font-family: var(--display); font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+  .arrow {
+    flex: 0 0 18px;
+    align-self: center;
+    height: 2px;
+    background: var(--grad);
+    position: relative;
+  }
+  .arrow::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid var(--sage);
+    border-right: 2px solid var(--sage);
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  /* Timeline */
+  .tl {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0 0 0 30px;
+    position: relative;
+    display: grid;
+    gap: 20px;
+  }
+  .tl::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #c4a882, #7ba3b3, #9bb87a);
+  }
+  .tl li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2px 18px;
+  }
+  .tl li::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: .3em;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--sea);
+  }
+  .tl time {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .03em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+  .tl .key::before { background: var(--ink); border-color: var(--ink); }
+  .tl .key time { color: var(--ink); }
+  .tl .key strong { font-family: var(--display); font-size: 21px; letter-spacing: -.3px; }
+  .deadline {
+    margin-top: 28px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  /* Needs + aside */
+  .needs { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .needs strong { display: block; }
+  .aside {
+    background: var(--wash);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-top: 26px;
+  }
+  .aside h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -.2px;
+    margin: 0 0 6px;
+  }
+  .cite { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+  /* After */
+  .next { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .next li {
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  /* CTA */
+  .cta { border-bottom: 0; padding-bottom: 28px; }
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 30px;
+    border-radius: 100px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .btn:hover { background: #333; transform: translateY(-1px); }
+  .btn:focus-visible, a:focus-visible { outline: 3px solid var(--sea); outline-offset: 3px; border-radius: 6px; }
+  .contact { margin-top: 18px; color: var(--muted); font-size: 15px; }
+  footer {
+    padding-block: 22px 40px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 640px) {
+    .options { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .arrow { flex: 0 0 16px; width: 2px; height: 16px; }
+    .arrow::after { right: auto; top: auto; left: 50%; bottom: -1px; transform: translateX(-50%) rotate(135deg); }
+    .tl li { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .btn:hover { transform: none; }
+  }
+  @media print {
+    .hero::before, .hero::after { display: none; }
+    body { font-size: 11.5pt; }
+    section { padding-block: 16pt; break-inside: avoid; }
+    .btn { background: none; color: var(--ink); border: 1.5px solid var(--ink); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span>Sky &amp; Mar Studio</span>
+      <span>Prepared for Chris Conflitti</span>
+      <span>September 21, 2026</span>
+    </div>
+    <h1>Start small. <span class="ul">See the numbers.</span> Then decide.</h1>
+    <p class="lead">Two ways to be live before October 15, the smaller one first. Both count every call and form from the first day.</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>What you told me</h2>
+      <ul class="quotes">
+        <li>&ldquo;Money out and nothing to show for it.&rdquo;</li>
+        <li>&ldquo;I just need a return on investment.&rdquo;</li>
+        <li>&ldquo;I&rsquo;d rather start now on the smaller side and build up.&rdquo;</li>
+      </ul>
+      <p class="answer">So this starts small, pays in halves, and counts everything.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Two ways to start</h2>
+      <p class="sub" style="margin-bottom:22px">You asked to start smaller, so the smaller one comes first. Step 1 is everything in the Baby Boomer Agent proposal, at the same price.</p>
+      <div class="options">
+        <article class="opt first">
+          <div class="tag">The smaller start</div>
+          <h3>The Season Page</h3>
+          <span class="amt">$1,000</span>
+          <span class="terms">fixed &middot; $500 to start, $500 at launch</span>
+          <span class="hand">never more than $500 out with nothing to show for it</span>
+          <p class="desc">One focused enrollment-season page. Its whole job is turning a visitor into a callback.</p>
+          <ul class="incl">
+            <li>One page on your domain, built mobile first</li>
+            <li>The enrollment dates and a four-field callback form</li>
+            <li>An automatic text the moment someone sends the form</li>
+            <li>Click-to-call</li>
+            <li>The CMS disclaimer, drafted for your upline to approve</li>
+          </ul>
+        </article>
+        <article class="opt">
+          <div class="tag">As quoted</div>
+          <h3>Step 1 &middot; The front door</h3>
+          <span class="amt">$1,800</span>
+          <span class="terms">fixed &middot; $900 to start, $900 at launch</span>
+          <p class="desc">The full Medicare guide on babyboomeragent.com. Everything in the Season Page, plus:</p>
+          <ul class="incl">
+            <li>A plain-English guide to the four parts of Medicare</li>
+            <li>Your enrollment timeline, with the penalty window shown clearly</li>
+            <li>2026 premium and deductible figures, sourced from CMS</li>
+            <li>Readability work for older eyes</li>
+            <li>Google Business Profile set up for Cedar Springs and nearby towns</li>
+          </ul>
+        </article>
+      </div>
+      <h3 class="both">Both include</h3>
+      <ul class="incl">
+        <li><span class="new">new</span> A tracking number that rings your phone, so every call from the page is counted</li>
+        <li><span class="new">new</span> Every form tagged with where the visitor came from</li>
+        <li><span class="new">new</span> A numbers report a month after launch, and a full end-of-season report after AEP closes</li>
+        <li><span class="new">new</span> A live preview link from the first draft on, so you can check progress any time</li>
+        <li>Two rounds of revisions</li>
+        <li>Your first month of Essential care, so nothing lapses at launch</li>
+      </ul>
+      <p class="fine">The four marked new are there because of what you told me: that return on investment is what matters, and that you were nervous about me not being local. They&rsquo;re in both options, and Step 1&rsquo;s price didn&rsquo;t change.</p>
+      <p class="fine">The tracking number comes from a call-tracking provider that bills a small monthly fee directly to you. We&rsquo;ll pick one together on the kickoff call. After the first month, Essential care is $150 a month: hosting, backups, updates, small edits, and a two-line note each month with your visitor and call numbers. It&rsquo;s optional. Change levels or stop any month. You won&rsquo;t need to leave your current quoting platform.</p>
+      <p class="fine">Two timing notes. The automatic text goes out through whatever you already use to text clients, if it can. A new texting number needs carrier approval first, which takes about two weeks right now, so I&rsquo;d start that paperwork the day you say yes. If it clears after launch, the page still goes live on time and the text switches on when it does. And if you pick Step 1, Google verifies business profiles on its own schedule, so your listing may appear a little after the page does.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>How you&rsquo;ll know it&rsquo;s working</h2>
+      <p class="sub">I can&rsquo;t promise you a number. Anyone who does is guessing. What I can promise is that you&rsquo;ll always know exactly what the page is doing.</p>
+      <div class="flow" role="list">
+        <div class="step" role="listitem"><b>Someone finds your page</b>From a search, a mailer, or a referral</div>
+        <span class="arrow" aria-hidden="true"></span>
+        <div class="step" role="listitem"><b>They call or send the form</b>Every one of them is recorded</div>
+        <span class="arrow" aria-hidden="true"></span>
+        <div class="step" role="listitem"><b>It&rsquo;s counted by source</b>So you see which channel is working</div>
+        <span class="arrow" aria-hidden="true"></span>
+        <div class="step" role="listitem"><b>You get the numbers</b>A short email from me, two minutes to read</div>
+      </div>
+      <p>Before we build, we write down where you are today: how many calls and web leads you get in a month, and from where. That&rsquo;s the line everything gets measured against. If the honest answer is &ldquo;no idea,&rdquo; that&rsquo;s the first thing we fix, and it costs you nothing.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>The road to October 15</h2>
+      <ol class="tl">
+        <li><time datetime="2026-09-28">By Mon, Sep 28</time><div><strong>You pick a starting point and say yes.</strong> We do a kickoff call, then I invoice the first half.</div></li>
+        <li><time datetime="2026-09-28">Week of Sep 28</time><div><strong>First draft.</strong> On a live preview link you can open whenever you like.</div></li>
+        <li><time datetime="2026-10-05">Week of Oct 5</time><div><strong>Two rounds of your changes.</strong> Tracking and the automatic text wired and tested. Disclaimer finalized with your numbers and your upline&rsquo;s sign-off.</div></li>
+        <li><time datetime="2026-10-12">Mon, Oct 12</time><div><strong>Live.</strong> Second half due.</div></li>
+        <li class="key"><time datetime="2026-10-15">Thu, Oct 15</time><div><strong>AEP opens.</strong> Your page is already working.</div></li>
+        <li><time datetime="2026-11-12">Thu, Nov 12</time><div><strong>First numbers report.</strong> Calls, forms, and where they came from.</div></li>
+        <li><time datetime="2026-12-07">Mon, Dec 7</time><div><strong>AEP closes.</strong> Your end-of-season report, and we decide the next step together.</div></li>
+      </ol>
+      <p class="deadline">To be live before October 15, I need a yes by Monday, September 28.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>What I need from you</h2>
+      <ul class="needs">
+        <li><strong>Your baseline.</strong> Roughly how many calls and web leads you get in a month, and where they come from. Rough is fine.</li>
+        <li><strong>Two numbers for the disclaimer.</strong> How many insurance organizations you represent, and how many Medicare plans they offer in your area. Then your upline&rsquo;s sign-off on the final wording.</li>
+        <li><strong>Your starting point.</strong> The Season Page or Step 1. If it&rsquo;s the Season Page, whether it lives on fourseasonsagency.com or babyboomeragent.com. We can settle that on the call.</li>
+        <li><strong>A callback inside the hour.</strong> The automatic text buys you that hour. After it, leads go cold, and no page can fix that. This is the one part of the numbers that&rsquo;s yours, not mine.</li>
+      </ul>
+      <div class="aside">
+        <h3>About that disclaimer</h3>
+        <p>Agents&rsquo; Medicare lead sites are generally required to show a specific CMS disclaimer, prominently. The current wording states how many organizations and plans you represent, which is why I&rsquo;m asking for those two numbers. I&rsquo;ll draft it, your upline approves it. Your current site doesn&rsquo;t carry it yet. This page will, from day one.</p>
+        <p class="cite">42 CFR 423.2267. I&rsquo;m not a compliance attorney, so please confirm with your upline or your carrier&rsquo;s compliance team.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>After this</h2>
+      <p class="sub" style="margin-bottom:16px">If the numbers are good, the rest of the plan is still there:</p>
+      <ul class="next">
+        <li>Step 1 &middot; The front door</li>
+        <li>Step 2 &middot; The article engine</li>
+        <li>Your other sites</li>
+      </ul>
+      <p>If you start with the Season Page, Step 1 is the natural next move. Step 2 is the article library that keeps bringing people in after AEP. Your other sites are where home and auto and real estate get pages of their own. We decide what comes next once you&rsquo;ve seen the numbers. That&rsquo;s the whole point of starting here.</p>
+      <p>And if you send me someone who becomes a client, you get 10% off your next project with me.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>If this looks right</h2>
+      <p>Reply with a yes and I&rsquo;ll set up our kickoff call this week.</p>
+      <a class="btn" href="mailto:marina@skymar.studio?subject=Yes%20to%20the%20AEP%20page">Say yes</a>
+      <p class="contact">marina@skymar.studio &middot; <a href="https://www.skymar.studio">skymar.studio</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Sky &amp; Mar Studio LLC &middot; Florida</div>
+</footer>
+
+</body>
+</html>
