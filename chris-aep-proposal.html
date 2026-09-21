@@ -129,6 +129,7 @@
   .quotes li:nth-child(2) { transform: rotate(.7deg); padding-left: 1.2em; }
   .quotes li:nth-child(3) { transform: rotate(-.5deg); padding-left: .4em; }
   .answer { font-weight: 500; font-size: 19px; }
+  .remote { margin-top: 16px; font-size: 16px; max-width: 40em; }
 
   /* The offer */
   .price {
@@ -312,6 +313,7 @@
   /* Needs + aside */
   .needs { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
   .needs strong { display: block; }
+  #needs .needs { margin: 14px 0 20px; }
   .aside {
     background: var(--wash);
     border-radius: 14px;
@@ -588,6 +590,8 @@
   .rung .hand { font-size: 19px; margin-top: 6px; }
   .rung .desc { margin: 14px 0 10px; font-size: 16px; font-weight: 500; }
   .rung .incl { gap: 8px; font-size: 15.5px; line-height: 1.45; }
+  .grp { margin: 18px 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .rung .desc + .grp { margin-top: 14px; }
   .plus {
     justify-self: center;
     position: relative;
@@ -656,8 +660,8 @@
       <span>Prepared for Chris Conflitti</span>
       <span>September 21, 2026</span>
     </div>
-    <h1>How you&rsquo;ll get found, and <span class="ul">what it costs.</span></h1>
-    <p class="lead">In this order: how people will find your page and how we&rsquo;ll count what it brings in, then what each piece costs, starting with the base.</p>
+    <h1>Start with one page, and <span class="ul">see what it brings in.</span></h1>
+    <p class="lead">In this order: how people will find your page and how we&rsquo;ll count what it brings in, then what each piece costs, starting with the Starter Page.</p>
     <ol class="toc">
       <li><a href="#found">How you&rsquo;ll get found</a></li>
       <li><a href="#working">How you&rsquo;ll know it&rsquo;s working</a></li>
@@ -678,6 +682,7 @@
         <li>&ldquo;I&rsquo;d rather start now on the smaller side and build up.&rdquo;</li>
       </ul>
       <p class="answer">So you start with one page for $1,000, pay for it in two parts, and add more only after you&rsquo;ve seen what the page brings in.</p>
+      <p class="remote">You also said you were nervous about me not being local. You&rsquo;ll get a preview link from the first draft on, and a short call with me every week while I build. I&rsquo;ve built sites remotely before: <a href="https://under65healthplans.com" target="_blank" rel="noopener">under65healthplans.com</a> in Michigan and <a href="https://milessummit.com" target="_blank" rel="noopener">milessummit.com</a> in Pennsylvania. I&rsquo;ve never met the Pennsylvania owner in person, and he&rsquo;s since hired me for a second site, with two more planned.</p>
     </div>
   </section>
 
@@ -720,7 +725,7 @@
       <h3 class="both">When each one starts working</h3>
       <div class="ramp">
         <div class="row">
-          <div class="lbl"><b>People you already reach</b>Mailers, referrals, texts. From launch day. Comes with the base.</div>
+          <div class="lbl"><b>People you already reach</b>Mailers, referrals, texts. From launch day. Comes with the Starter Page.</div>
           <div class="track" aria-hidden="true"><span class="bar b1"></span></div>
         </div>
         <div class="row">
@@ -771,24 +776,40 @@
     <div class="wrap">
       <p class="kicker">3 of 5</p>
       <h2>What it costs</h2>
-      <p class="sub">Start with the base. Add Step 1 and Step 2 when you&rsquo;re ready. Each piece is a fixed price that won&rsquo;t change after you say yes, paid half when you say yes and half when it goes live.</p>
+      <p class="sub">Start with the Starter Page. Add Step 1 and Step 2 when you&rsquo;re ready. Each piece is a fixed price that won&rsquo;t change after you say yes, paid half when you say yes and half when it goes live.</p>
 
       <div class="ladder">
         <article class="rung base">
           <div class="rung-head">
-            <div><div class="tag">The base</div><h3>The Season Page</h3></div>
+            <div><div class="tag">Start here</div><h3>The Starter Page</h3></div>
             <div class="price"><span class="amt">$1,000</span><span class="run">Total: $1,000</span></div>
           </div>
           <span class="terms">$500 when you say yes &middot; $500 when it goes live</span>
           <span class="hand">you see it live before you pay the second half</span>
-          <p class="desc">One page on babyboomeragent.com, built as the top of your full site, so nothing gets rebuilt if you add Step 1. It&rsquo;s for the people you send to it: mailers, referrals, texts. Google can find it, but don&rsquo;t count on it for search traffic this enrollment season.</p>
+          <p class="desc">One page on babyboomeragent.com, built as the top of your full site, so nothing gets rebuilt if you add Step 1. It&rsquo;s for the people you already reach: your mailers, referrals and texts. Google can find it, but don&rsquo;t count on it for search traffic this enrollment season.</p>
+          <p class="grp">The page</p>
           <ul class="incl">
-            <li>Designed for phones first</li>
-            <li>The AEP dates: October 15 to December 7</li>
-            <li>A callback form with four fields: first name, ZIP, phone, best time to call</li>
+            <li>Designed for phones first, with your photo and a few of your client reviews</li>
+            <li>The AEP dates, plus a reason to call now: help reading the plan-change letter Medicare Advantage and drug plan members get every fall</li>
+            <li>A callback form with four fields (first name, ZIP, phone, best time to call) and a consent box for texts that&rsquo;s never pre-checked</li>
             <li>An automatic text to each person who sends the form, telling them you&rsquo;ll call</li>
             <li>A call button that dials you from a phone</li>
-            <li>The Medicare disclaimer CMS requires, drafted for you to confirm</li>
+            <li>The Medicare disclaimer CMS requires, on the page and in your texts, emails and mailers, drafted for you to confirm</li>
+            <li>A privacy policy page, which texting requires</li>
+          </ul>
+          <p class="grp">The proof</p>
+          <ul class="incl">
+            <li><span class="new">new</span> A tracking phone number on the page that rings your phone, so every call from the page is counted</li>
+            <li><span class="new">new</span> A separate link or QR code for each mailer, text and email you send, and a separate tracking number for printed pieces, so you can see which one worked</li>
+            <li><span class="new">new</span> Every form request labeled with where it came from</li>
+            <li><span class="new">new</span> A link where you can check your numbers any time</li>
+            <li><span class="new">new</span> Reports on November 12 and after December 7: calls and form requests by source, and what each new client cost you, once you tell me what each mailer costs and which leads enrolled</li>
+          </ul>
+          <p class="grp">Launch and support</p>
+          <ul class="incl">
+            <li><span class="new">new</span> A ready-to-send text and email for your current clients on launch day</li>
+            <li><span class="new">new</span> A preview link from the first draft on, and a short call with me every week while I build</li>
+            <li>Care included through December 7, so your page stays up all enrollment season</li>
           </ul>
         </article>
         <div class="plus" aria-hidden="true">+</div>
@@ -798,13 +819,13 @@
             <div class="price"><span class="amt">$800</span><span class="run">Total: $1,800</span></div>
           </div>
           <span class="terms">$400 when you say yes &middot; $400 when it goes live</span>
-          <p class="desc">Turns the base into the mockup you&rsquo;ve seen, and starts your Google search presence. $1,800 is the total I quoted on September 9, whether you add Step 1 now or later.</p>
+          <p class="desc">Turns the Starter Page into the mockup you&rsquo;ve seen, and starts your Google search presence. The library guides shown in the mockup come with Step 2. $1,800 is the total I quoted on September 9, whether you add Step 1 now or any time through March 31, 2027.</p>
           <ul class="incl">
             <li>A plain-English guide to the four parts of Medicare</li>
             <li>Your enrollment timeline, with the late-penalty window shown clearly</li>
             <li>2026 premium and deductible figures from CMS</li>
             <li>Larger text, strong contrast, and a text-size control for older readers</li>
-            <li>The mockup&rsquo;s &ldquo;Where are you right now?&rdquo; picker, common questions, and your testimonials</li>
+            <li>The mockup&rsquo;s &ldquo;Where are you right now?&rdquo; picker and common questions</li>
             <li>The library section, ready for Step 2&rsquo;s articles</li>
             <li>Your Google Business Profile, set up or updated for Cedar Springs and nearby towns</li>
           </ul>
@@ -826,17 +847,14 @@
         </article>
       </div>
 
-      <h3 class="both">Included with the base</h3>
-      <ul class="incl">
-        <li><span class="new">new</span> A tracking phone number on the page that forwards to your phone, so calls from the page are counted</li>
-        <li><span class="new">new</span> Each form request labeled with where the visitor came from</li>
-        <li><span class="new">new</span> Reports on November 12 and after December 7: calls, form requests, and where they came from</li>
-        <li><span class="new">new</span> A preview link from the first draft on, so you can check progress whenever you like</li>
-        <li>Your first month of Essential care</li>
-      </ul>
-      <p class="fine">The four marked new were added after your messages. Every piece, including Step 1 and Step 2, comes with two rounds of changes: you send me a list of edits, I make them, and we do that twice. More rounds are quoted first.</p>
+      <p class="fine">Items marked new were added after your messages. Every piece comes with two rounds of changes: you send me a list of edits, I make them, and we do that twice. More rounds are quoted first. You approve every page and article before it goes live.</p>
 
-      <h3 class="both">Care after launch</h3>
+      <aside class="aside">
+        <h3>What you own</h3>
+        <p>Your domain, your Google Business Profile, and the call-tracking and texting accounts are in your name from day one. Once each piece is paid for, the page and its files are yours, whatever you decide next.</p>
+      </aside>
+
+      <h3 class="both">Care after December 7</h3>
       <table class="care">
         <thead>
           <tr><th scope="col">Each month</th><th scope="col">Essential<b>$150</b></th><th scope="col">Standard<b>$375</b></th><th scope="col">Premium<b>$500</b></th></tr>
@@ -845,21 +863,21 @@
           <tr><td>Hosting, backups and updates</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
           <tr><td>Small edits</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
           <tr><td>The yearly Medicare figure update</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
-          <tr><td>A two-line note with your visitor and call numbers</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+          <tr><td>A two-line note: your visitors, and your calls by source</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
           <tr><td>A full rundown: what people read, what they searched, and what I&rsquo;d do next</td><td class="n">No</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
           <tr><td>New researched articles</td><td class="n">No</td><td>2</td><td>5</td></tr>
           <tr><td>A review call together every quarter</td><td class="n">No</td><td class="n">No</td><td class="y">&#10003;</td></tr>
         </tbody>
       </table>
-      <p class="fine">Your first month of Essential comes with the base. After that, every level is optional: change levels or stop any month. Articles in Standard and Premium go into the Step 2 library and are researched the same way. <strong>Small edits</strong> means changes to wording, photos, dates or figures on pages that already exist; new pages or features are quoted first. <strong>The yearly Medicare figure update</strong> means swapping in next year&rsquo;s premiums and deductibles when CMS publishes them, usually in November. <strong>If you stop care,</strong> hosting stops with it, and I&rsquo;ll send you the site&rsquo;s files so you can host it wherever you like.</p>
+      <p class="fine">Care is included through December 7. After that, every level is optional: change levels or stop any month. Articles in Standard and Premium go into the Step 2 library and are researched the same way. <strong>Small edits</strong> means changes to wording, photos, dates or figures on pages that already exist; new pages or features are quoted first. <strong>The yearly Medicare figure update</strong> means swapping in next year&rsquo;s premiums and deductibles when CMS publishes them, usually in November. <strong>If you stop care,</strong> hosting stops with it, and I&rsquo;ll send you the site&rsquo;s files so you can host it wherever you like.</p>
 
       <h3 class="both">Other costs, and who you pay</h3>
       <table class="costs">
         <thead><tr><th scope="col">What</th><th scope="col">Cost</th><th scope="col">Who you pay</th></tr></thead>
         <tbody>
           <tr>
-            <td><strong>Call-tracking number</strong></td>
-            <td data-label="Cost">About $50 a month. Cancel any month</td>
+            <td><strong>Call tracking</strong></td>
+            <td data-label="Cost">About $50 a month. Cancel any month. If you cancel, any tracking number printed on a mailer stops ringing, unless we move it to your own phone account first</td>
             <td data-label="Who you pay">The call-tracking company, directly</td>
           </tr>
           <tr>
@@ -875,8 +893,7 @@
         </tbody>
       </table>
       <p class="fine">The tracking and texting amounts are those companies&rsquo; published prices as of September 2026. I&rsquo;ll confirm the exact amounts before anything is set up, and nothing is set up without your OK. You won&rsquo;t need to leave your current quoting platform.</p>
-      <p class="fine"><strong>Two timing notes.</strong> A new texting number needs carrier approval, which takes about two weeks right now, so I&rsquo;d start that paperwork the day you say yes. If approval comes after launch, the page still goes live on time and the automatic text starts when it clears. And with Step 1, Google verifies business profiles on its own schedule, so your listing may appear after the page goes live.</p>
-      <p class="fine"><strong>Referrals.</strong> For each person you refer who becomes a paying client, you get a credit worth 10% of their first project, to use on anything with me, including care. For example, $100 if they start with the base, or $180 if they start with the base and Step 1. There&rsquo;s no limit on how many.</p>
+      <p class="fine"><strong>Two timing notes.</strong> A new texting number needs carrier approval, and the carriers review the live page, so expect the automatic text to start a week or two after launch. The page itself still goes live on time. And with Step 1, Google verifies business profiles on its own schedule, so your listing may appear after the page goes live.</p>
     </div>
   </section>
 
@@ -885,13 +902,14 @@
       <p class="kicker">4 of 5</p>
       <h2>The road to October 15</h2>
       <ol class="tl">
-        <li><time datetime="2026-09-28">By Mon, Sep 28</time><div><strong>You tell me your starting point:</strong> the base, or the base and Step 1 together. We have a kickoff call, then I send the invoice for the first half: $500, or $900 for both.</div></li>
+        <li><time datetime="2026-09-28">By Mon, Sep 28</time><div><strong>You tell me your starting point:</strong> the Starter Page, or the Starter Page and Step 1 together. We have a kickoff call, then I send the invoice for the first half: $500, or $900 for both.</div></li>
         <li><time datetime="2026-09-28">Week of Sep 28</time><div>I send the first draft as a preview link you can open any time.</div></li>
-        <li><time datetime="2026-10-05">Week of Oct 5</time><div>Your two rounds of changes. I set up and test the tracking number and the automatic text. You confirm the disclaimer wording.</div></li>
+        <li><time datetime="2026-10-02">By Fri, Oct 2</time><div>You send me the things listed under &ldquo;What I need from you.&rdquo; The October 12 date depends on having them by then.</div></li>
+        <li><time datetime="2026-10-05">Week of Oct 5</time><div>Your two rounds of changes, and you approve the page. I set up and test the tracking. You confirm the disclaimer wording.</div></li>
         <li><time datetime="2026-10-12">Mon, Oct 12</time><div><strong>The page goes live.</strong> I send the invoice for the second half: $500, or $900 for both.</div></li>
         <li class="key"><time datetime="2026-10-15">Thu, Oct 15</time><div><strong>AEP opens.</strong> Your page is already live.</div></li>
-        <li><time datetime="2026-11-12">Thu, Nov 12</time><div>First report: calls, form requests, and where they came from. Your included month of care ends. Essential care continues only if you choose it.</div></li>
-        <li><time datetime="2026-12-07">Mon, Dec 7</time><div>AEP closes. End-of-season report. If you started with the base, this is when you decide on Step 1.</div></li>
+        <li><time datetime="2026-11-12">Thu, Nov 12</time><div>First report: calls, form requests, and where they came from.</div></li>
+        <li><time datetime="2026-12-07">Mon, Dec 7</time><div>AEP closes. End-of-season report. Included care ends here; it continues only if you choose it. If you started with the Starter Page, this is also when you decide on Step 1.</div></li>
       </ol>
       <p class="deadline">To be live before October 15, I need your answer by Monday, September 28.</p>
     </div>
@@ -901,17 +919,21 @@
     <div class="wrap">
       <p class="kicker">5 of 5</p>
       <h2>What I need from you</h2>
+      <p>To launch on October 12, I need these by Friday, October 2:</p>
       <ul class="needs">
-        <li><strong>Your starting point.</strong> The base, or the base and Step 1 together.</li>
+        <li><strong>Your starting point.</strong> The Starter Page, or the Starter Page and Step 1 together.</li>
         <li><strong>Your current numbers.</strong> Roughly how many calls and web requests you get in a month, and where they come from. An estimate is fine.</li>
         <li><strong>Two numbers for the disclaimer.</strong> How many insurance companies you represent, and how many Medicare plans they offer in your area. Then you confirm the final wording.</li>
         <li><strong>Access to the domain settings for babyboomeragent.com,</strong> so I can connect the page to it.</li>
+        <li><strong>A photo of you, and the client reviews you&rsquo;d like shown.</strong></li>
+        <li><strong>What you send out now,</strong> like mailers or ads, and roughly what each costs, so the reports can show what each new client cost you.</li>
+        <li><strong>The texting tool you use now,</strong> if any, so the automatic text can go out through it.</li>
         <li><strong>Your Google profile, if you add Step 1.</strong> If Four Seasons already has one, add me as a manager so Medicare can be added to it. If not, you&rsquo;ll verify a new one with Google.</li>
-        <li><strong>Callbacks within an hour.</strong> The automatic text tells people to expect your call. The page can bring requests in, but only you can call them back.</li>
       </ul>
+      <p><strong>And one thing that&rsquo;s all yours: callbacks within an hour.</strong> The automatic text tells people to expect your call. The page can bring requests in, but only you can call them back.</p>
       <aside class="aside">
         <h3>About the disclaimer</h3>
-        <p>Medicare agents&rsquo; websites are generally required to show a specific CMS disclaimer where visitors can clearly see it. The current wording states how many insurance companies and plans you represent, which is why I need those two numbers. I&rsquo;ll draft it, and you confirm it. Your current site doesn&rsquo;t have it yet. The new page will have it from launch day.</p>
+        <p>Medicare agents&rsquo; websites are generally required to show a specific CMS disclaimer where visitors can clearly see it. The current wording states how many insurance companies and plans you represent, which is why I need those two numbers. I&rsquo;ll draft it, and you confirm it. The new page will have it from launch day, and so will your texts, emails and mailers.</p>
         <p class="cite">42 CFR 422.2267 and 423.2267. I&rsquo;m not a compliance attorney, so please confirm with the insurance companies you&rsquo;re appointed with.</p>
       </aside>
     </div>
