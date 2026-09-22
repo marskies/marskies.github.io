@@ -133,7 +133,7 @@ const PROJECTS = {
         title: "Nutrition Tracking App",
         subtitle: "AI-Powered Food Logging",
         roles: ["uiux"],
-        timeline: "In Development",
+        timeline: "October 2025 · 1 month",
         teamSize: "Solo Project",
         tools: ["Figma", "Lovable", "n8n", "AI Image Analysis"],
         links: {},
