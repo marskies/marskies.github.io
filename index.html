@@ -1897,12 +1897,12 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 <style id="sm-quick-style">
 .sm-open-btn{margin-left:auto;margin-right:10px;padding:7px 14px;border-radius:999px;font:inherit;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);background:rgba(255,255,255,0.05);border:1px solid var(--glass-edge);cursor:pointer;transition:color .15s,border-color .15s}
 .sm-open-btn:hover{color:var(--ink);border-color:var(--copper)}
-#sm-quick{position:fixed;inset:0;z-index:9995;display:none;overflow-y:auto;background:var(--bg-deep);background-image:radial-gradient(1200px 600px at 20% -10%,rgba(143,212,214,0.10),transparent 60%),radial-gradient(900px 500px at 90% 110%,rgba(209,138,90,0.10),transparent 60%)}
+#sm-quick{position:fixed;inset:0;z-index:9995;display:none;overflow:hidden;background:var(--bg-deep);background-image:radial-gradient(1200px 600px at 20% -10%,rgba(143,212,214,0.10),transparent 60%),radial-gradient(900px 500px at 90% 110%,rgba(209,138,90,0.10),transparent 60%)}
 #sm-quick.on{display:block}
 body.sm-quick-open{overflow:hidden}
 body.sm-quick-open .a11y-chip{z-index:9996}
-.sm-inner{max-width:1280px;margin:0 auto;padding:28px 24px 150px}
-.sm-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--glass-edge);margin-bottom:26px}
+.sm-inner{max-width:1280px;margin:0 auto;padding:26px 24px 22px;height:100%;display:flex;flex-direction:column}
+.sm-top{flex:0 0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--glass-edge);margin-bottom:20px}
 .sm-brand{display:flex;align-items:center;gap:10px}
 .sm-brand img{height:34px;width:auto;display:block}
 .sm-brand span{font-size:17px;color:var(--ink);letter-spacing:0.02em}
@@ -1910,20 +1910,26 @@ body.sm-quick-open .a11y-chip{z-index:9996}
 .sm-role{font-size:13px;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase}
 .sm-exit{margin-left:auto;padding:10px 18px;border-radius:999px;font:inherit;font-size:13px;color:#1a1108;background:var(--copper);border:1px solid var(--copper);cursor:pointer;font-weight:700}
 .sm-exit:hover{background:var(--copper-dim);border-color:var(--copper-dim)}
-.sm-grid{display:grid;grid-template-columns:300px minmax(0,1fr) 260px;gap:20px;align-items:start}
-.sm-col{background:var(--glass);border:1px solid var(--glass-edge);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.sm-grid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:300px minmax(0,1fr) 260px;gap:20px;align-items:start}
+.sm-col{min-height:0;max-height:100%;overflow-y:auto;scrollbar-width:thin;background:var(--glass);border:1px solid var(--glass-edge);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.sm-grid > .sm-col:last-child{padding-bottom:20px}
 .sm-col h3{margin:0 0 4px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-quiet);font-weight:600}
 .sm-lede{margin:0 0 16px;font-size:14px;line-height:1.5;color:var(--ink-dim)}
-.sm-row{display:flex;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,0.06)}
-.sm-col > .sm-row:first-of-type{border-top:0}
+.sm-row{display:flex;gap:10px;padding:6px 0;border-top:1px solid rgba(255,255,255,0.06)}
+.sm-col > .sm-row:first-of-type,
+.sm-pane > .sm-row:first-of-type{border-top:0}
 .sm-k{flex:0 0 58px;font-size:11px;color:var(--ink-quiet);letter-spacing:0.06em;padding-top:2px}
 .sm-t{font-size:13.5px;color:var(--ink);line-height:1.35}
 .sm-d{font-size:12px;color:var(--ink-dim);line-height:1.4;margin-top:2px}
-.sm-more{margin-top:10px}
-.sm-more summary{list-style:none;cursor:pointer;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);padding:8px 0}
-.sm-more summary::-webkit-details-marker{display:none}
-.sm-more summary:hover{color:var(--ink)}
-.sm-pdf{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.sm-tabs{display:flex;gap:6px;margin:0 0 12px}
+.sm-tab{padding:6px 11px;border-radius:999px;font:inherit;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-dim);background:rgba(255,255,255,0.04);border:1px solid var(--glass-edge);cursor:pointer}
+.sm-tab:hover{color:var(--ink);border-color:var(--copper)}
+.sm-tab.on{background:var(--copper);color:#1a1108;border-color:var(--copper);font-weight:700}
+.sm-panes{display:grid}
+.sm-pane{grid-area:1 / 1;visibility:hidden;opacity:0}
+.sm-pane.on{visibility:visible;opacity:1}
+.sm-pdf{display:flex;flex-direction:row;gap:8px;margin-top:16px}
+.sm-pdf a{flex:1 1 0;min-width:0}
 .sm-pdf a{display:block;text-align:center;padding:10px;border-radius:var(--radius-sm);font-size:13px;text-decoration:none;color:var(--ink);background:rgba(255,255,255,0.05);border:1px solid var(--glass-edge)}
 .sm-pdf a:hover{border-color:var(--copper);color:var(--ink)}
 .sm-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
@@ -1945,9 +1951,12 @@ body.sm-quick-open .a11y-chip{z-index:9996}
   .sm-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:1080px){
-  .sm-grid{grid-template-columns:1fr}
+  #sm-quick{overflow-y:auto}
+  .sm-inner{height:auto;display:block;padding:20px 16px 150px}
+  .sm-grid{display:block}
+  .sm-col{max-height:none;overflow:visible;margin-bottom:16px}
+  .sm-grid > .sm-col:last-child{padding-bottom:20px}
   .sm-cards{grid-template-columns:1fr}
-  .sm-inner{padding:20px 16px 150px}
   .sm-exit{margin-left:0;width:100%}
 }
 </style>
@@ -1962,7 +1971,7 @@ body.a11y-large-text .sm-lede{font-size:16px}
 body.a11y-large-text .sm-k{font-size:12px;flex-basis:68px}
 body.a11y-large-text .sm-t{font-size:15px}
 body.a11y-large-text .sm-d{font-size:13px}
-body.a11y-large-text .sm-more summary{font-size:13px}
+body.a11y-large-text .sm-tab{font-size:12px}
 body.a11y-large-text .sm-pdf a{font-size:15px}
 body.a11y-large-text .sm-card .sm-tag{font-size:12px}
 body.a11y-large-text .sm-card .sm-name{font-size:21px}
@@ -1983,25 +1992,31 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
     <div class="sm-grid">
       <aside class="sm-col">
         <h3>R&eacute;sum&eacute;</h3>
-        <p class="sm-lede">BA, Digital Arts &amp; Sciences, University of Florida, Summa Cum Laude 2026. Based in St. Augustine, Florida. Open to remote.</p>
-        <div class="sm-row"><div class="sm-k">2026&ndash;</div><div><div class="sm-t">Founder, Sky &amp; Mar Studio</div><div class="sm-d">Web design and development for small businesses</div></div></div>
-        <div class="sm-row"><div class="sm-k">2026</div><div><div class="sm-t">Creative &amp; Web/App Development, Wellness Eternal</div><div class="sm-d">Brand systems, landing pages, content QA</div></div></div>
-        <div class="sm-row"><div class="sm-k">2026</div><div><div class="sm-t">Senior Capstone, Learn To Leap</div><div class="sm-d">Convergence 2026, award winner</div></div></div>
-        <div class="sm-row"><div class="sm-k">2025</div><div><div class="sm-t">UX Research Intern, University of Florida</div><div class="sm-d">Platform usability and accessibility study</div></div></div>
-        <details class="sm-more">
-          <summary>More history + skills</summary>
-          <div class="sm-row"><div class="sm-k">2024</div><div><div class="sm-t">Customer Experience Intern, ICE Mortgage Technology</div><div class="sm-d">WCAG 2.1 audit, research synthesis</div></div></div>
-          <div class="sm-row"><div class="sm-k">2025</div><div><div class="sm-t">Leasing Consultant, Contemporary Management Concepts</div><div class="sm-d">Top performer, social campaigns, CRM</div></div></div>
-          <div class="sm-row"><div class="sm-k">2021</div><div><div class="sm-t">IT Consultant, Abeytu Naturals</div><div class="sm-d">Ongoing technical support and training</div></div></div>
-          <div class="sm-row"><div class="sm-k">Research</div><div class="sm-t">Usability testing, WCAG 2.1 audits, interviews, thematic analysis</div></div>
-          <div class="sm-row"><div class="sm-k">Design</div><div class="sm-t">Figma, Adobe Creative Suite, design systems</div></div>
-          <div class="sm-row"><div class="sm-k">Build</div><div class="sm-t">HTML, CSS, JavaScript, Node, WordPress, Docker</div></div>
-          <div class="sm-row"><div class="sm-k">AI</div><div class="sm-t">Claude, GPT API, Lovable, n8n</div></div>
-          <div class="sm-row"><div class="sm-k">Awards</div><div class="sm-t">Outstanding Achievement in Experience Design &middot; Best in Show, Tick Tock Trivia &middot; Most Innovative, Cosmic Catch</div></div>
-        </details>
+        <p class="sm-lede">BA, Digital Arts &amp; Sciences, University of Florida. Summa Cum Laude, 2026.</p>
+        <div class="sm-tabs">
+          <button type="button" class="sm-tab on" aria-pressed="true" data-pane="sm-p1">Recent</button>
+          <button type="button" class="sm-tab" aria-pressed="false" data-pane="sm-p2">History &amp; skills</button>
+        </div>
+        <div class="sm-panes">
+          <div class="sm-pane on" id="sm-p1">
+            <div class="sm-row"><div class="sm-k">2026&ndash;</div><div><div class="sm-t">Founder, Sky &amp; Mar Studio</div><div class="sm-d">Web design and development for small businesses</div></div></div>
+            <div class="sm-row"><div class="sm-k">2026</div><div><div class="sm-t">Creative &amp; Web/App Development, Wellness Eternal</div><div class="sm-d">Brand systems, landing pages, content QA</div></div></div>
+            <div class="sm-row"><div class="sm-k">2026</div><div><div class="sm-t">Senior Capstone, Learn To Leap</div><div class="sm-d">Convergence 2026, award winner</div></div></div>
+            <div class="sm-row"><div class="sm-k">2025</div><div><div class="sm-t">UX Research Intern, University of Florida</div><div class="sm-d">Platform usability and accessibility study</div></div></div>
+            <div class="sm-row"><div class="sm-k">2024</div><div><div class="sm-t">Customer Experience Intern, ICE Mortgage Technology</div><div class="sm-d">WCAG 2.1 audit, research synthesis</div></div></div>
+          </div>
+          <div class="sm-pane" id="sm-p2">
+            <div class="sm-row"><div class="sm-k">2025</div><div><div class="sm-t">Leasing Consultant, Contemporary Management Concepts</div><div class="sm-d">Top performer, social campaigns, CRM</div></div></div>
+            <div class="sm-row"><div class="sm-k">2021</div><div><div class="sm-t">IT Consultant, Abeytu Naturals</div><div class="sm-d">Ongoing technical support and training</div></div></div>
+            <div class="sm-row"><div class="sm-k">Research</div><div class="sm-t">Usability testing, WCAG 2.1 audits, interviews, thematic analysis</div></div>
+            <div class="sm-row"><div class="sm-k">Design</div><div class="sm-t">Figma, Adobe Creative Suite, design systems</div></div>
+            <div class="sm-row"><div class="sm-k">Build</div><div class="sm-t">HTML, CSS, JavaScript, Node, WordPress, Docker</div></div>
+            <div class="sm-row"><div class="sm-k">AI</div><div class="sm-t">Claude, GPT API, Lovable, n8n</div></div>
+          </div>
+        </div>
         <div class="sm-pdf">
-          <a href="Marina_DiPonio_Resume.pdf" target="_blank" rel="noopener">Download r&eacute;sum&eacute; (PDF)</a>
-          <a href="Marina_DiPonio_Resume_ATS.pdf" target="_blank" rel="noopener">ATS-friendly version</a>
+          <a href="Marina_DiPonio_Resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute; (PDF)</a>
+          <a href="Marina_DiPonio_Resume_ATS.pdf" target="_blank" rel="noopener">ATS version</a>
         </div>
       </aside>
 
@@ -2014,7 +2029,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
             <span class="sm-name">Foreshore</span>
             <ul>
               <li>Self-hosted budgeting app, designed and built end to end</li>
-              <li>Rebuilt the main screen after a real user could not find the primary action</li>
+              <li>Rebuilt key features to communicate better after watching a real user</li>
               <li>Live and in daily use on a Linux server I set up myself</li>
             </ul>
             <span class="sm-go">Read the case study &rarr;</span>
@@ -2044,7 +2059,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
 
       <aside class="sm-col">
         <h3>Contact</h3>
-        <p class="sm-lede">Open to UX research, UI/UX, and web design roles, full-time or contract.</p>
+        <p class="sm-lede">St. Augustine, Florida, remote friendly. Open to UX research, UI/UX, and web design roles, full-time or contract.</p>
         <a class="sm-ch" href="mailto:marinadiponio@proton.me"><span><span class="l">Email</span><span class="v">marinadiponio@proton.me</span></span><span>&rarr;</span></a>
         <a class="sm-ch" href="https://www.linkedin.com/in/marinadiponio" target="_blank" rel="noopener"><span><span class="l">LinkedIn</span><span class="v">/marinadiponio</span></span><span>&rarr;</span></a>
         <a class="sm-ch" href="https://calendly.com/marinadiponio-proton/30min" target="_blank" rel="noopener"><span><span class="l">Calendly</span><span class="v">Book a 30 min chat</span></span><span>&rarr;</span></a>
@@ -2083,6 +2098,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
     el.setAttribute("aria-modal","true");
     document.body.classList.add("sm-quick-open");
     el.scrollTop=0;
+    Array.prototype.forEach.call(el.querySelectorAll(".sm-col"),function(c){ c.scrollTop=0; });
     setInert(true);
     if(exitBtn) exitBtn.focus();
   }
@@ -2096,6 +2112,20 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
     if(lastFocus && lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} }
     lastFocus=null;
   }
+  var tabs=el.querySelectorAll(".sm-tab");
+  Array.prototype.forEach.call(tabs,function(t){
+    t.addEventListener("click",function(){
+      var id=t.getAttribute("data-pane");
+      Array.prototype.forEach.call(tabs,function(o){
+        var on=(o===t);
+        o.classList.toggle("on",on);
+        o.setAttribute("aria-pressed",on?"true":"false");
+      });
+      Array.prototype.forEach.call(el.querySelectorAll(".sm-pane"),function(pn){
+        pn.classList.toggle("on",pn.id===id);
+      });
+    });
+  });
   if(openBtn) openBtn.addEventListener("click",function(){ open(); });
   if(exitBtn) exitBtn.addEventListener("click",function(){ close(true); });
   document.addEventListener("keydown",function(e){
