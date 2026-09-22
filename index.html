@@ -556,6 +556,7 @@ section.frame .side-stack,section.frame .rail,section.frame .about-left,section.
       <img src="LOGO_white.png" alt="Marina DiPonio logo" />
       <span class="name">Marina <b>DiPonio</b></span>
     </a>
+    <button id="sm-open" type="button" class="sm-open-btn">Quick look</button>
     <div class="audio-pill">
       <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
       <button id="aud-toggle" aria-label="toggle ambient audio">▶</button>
@@ -1198,14 +1199,24 @@ applySizes();
   .a11y-opt input{width:16px;height:16px;accent-color:var(--copper);cursor:pointer;flex:0 0 auto}
 
   body.a11y-normal-cursor #cursor-layer{display:none !important}
-  body.a11y-normal-cursor, body.a11y-normal-cursor *{cursor:auto !important}
-  body.a11y-normal-cursor .album-card,
-  body.a11y-normal-cursor a,
-  body.a11y-normal-cursor button,
-  body.a11y-normal-cursor label,
-  body.a11y-normal-cursor .a11y-opt{cursor:pointer !important}
+  body.a11y-normal-cursor.a11y-normal-cursor, body.a11y-normal-cursor.a11y-normal-cursor *{cursor:auto !important}
+  body.a11y-normal-cursor.a11y-normal-cursor .album-card,
+  body.a11y-normal-cursor.a11y-normal-cursor a,
+  body.a11y-normal-cursor.a11y-normal-cursor button,
+  body.a11y-normal-cursor.a11y-normal-cursor label,
+  body.a11y-normal-cursor.a11y-normal-cursor input,
+  body.a11y-normal-cursor.a11y-normal-cursor summary,
+  body.a11y-normal-cursor.a11y-normal-cursor .a11y-opt{cursor:pointer !important}
 
   body.a11y-reduce-motion #cursor-layer{display:none !important}
+  body.a11y-reduce-motion.a11y-reduce-motion, body.a11y-reduce-motion.a11y-reduce-motion *{cursor:auto !important}
+  body.a11y-reduce-motion.a11y-reduce-motion .album-card,
+  body.a11y-reduce-motion.a11y-reduce-motion a,
+  body.a11y-reduce-motion.a11y-reduce-motion button,
+  body.a11y-reduce-motion.a11y-reduce-motion label,
+  body.a11y-reduce-motion.a11y-reduce-motion input,
+  body.a11y-reduce-motion.a11y-reduce-motion summary,
+  body.a11y-reduce-motion.a11y-reduce-motion .a11y-opt{cursor:pointer !important}
   body.a11y-reduce-motion *,
   body.a11y-reduce-motion *::before,
   body.a11y-reduce-motion *::after{
@@ -1357,6 +1368,7 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 @media (max-width:700px){ html:not(.no-mobile) body{ }
  .topbar .nav-row{display:none}
  .topbar .audio-pill{display:none}
+ .topbar .sm-open-btn{display:none}
  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:10px 16px;background:linear-gradient(180deg,rgba(7,18,26,.55),rgba(7,18,26,0));pointer-events:none}
  .topbar .brand{pointer-events:auto}
  #mc-stage{position:fixed;inset:0;overflow:hidden;z-index:5}
@@ -1615,7 +1627,7 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
     var lastFocus=null;
     function open(src,alt){lastFocus=document.activeElement;bImg.src=src;bImg.alt=alt||"";bCap.textContent=alt||"";box.classList.add("open");document.body.style.overflow="hidden";bClose.focus();}
     function close(){box.classList.remove("open");bImg.src="";document.body.style.overflow="";if(lastFocus&&lastFocus.focus)lastFocus.focus();}
-    function excluded(img){return img.closest(".topbar")||img.closest(".brand")||img.closest(".contact-chip")||img.closest("#a11y-chip")||img.closest("#img-lightbox")||img.closest(".album-card")||img.classList.contains("cursor-bubble");}
+    function excluded(img){return img.closest("#sm-quick")||img.closest(".topbar")||img.closest(".brand")||img.closest(".contact-chip")||img.closest("#a11y-chip")||img.closest("#img-lightbox")||img.closest(".album-card")||img.classList.contains("cursor-bubble");}
     Array.prototype.forEach.call(document.images,function(img){
       if(excluded(img)) return;
       img.classList.add("lb-zoomable");
@@ -1881,5 +1893,225 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
   if(document.readyState!=="loading"){ start(); } else { window.addEventListener("DOMContentLoaded", start); }
 })();
 </script>
-<script>/* Ambient audio label: reflect on/off state */(function(){var a=document.getElementById('ambient'),l=document.getElementById('aud-label');if(!a||!l)return;function sync(){l.textContent=a.paused?'SOUND OFF':'SOUND ON';}a.addEventListener('play',sync);a.addEventListener('pause',sync);sync();})();</script></body>
+<script>/* Ambient audio label: reflect on/off state */(function(){var a=document.getElementById('ambient'),l=document.getElementById('aud-label');if(!a||!l)return;function sync(){l.textContent=a.paused?'SOUND OFF':'SOUND ON';}a.addEventListener('play',sync);a.addEventListener('pause',sync);sync();})();</script>
+<style id="sm-quick-style">
+.sm-open-btn{margin-left:auto;margin-right:10px;padding:7px 14px;border-radius:999px;font:inherit;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);background:rgba(255,255,255,0.05);border:1px solid var(--glass-edge);cursor:pointer;transition:color .15s,border-color .15s}
+.sm-open-btn:hover{color:var(--ink);border-color:var(--copper)}
+#sm-quick{position:fixed;inset:0;z-index:9995;display:none;overflow-y:auto;background:var(--bg-deep);background-image:radial-gradient(1200px 600px at 20% -10%,rgba(143,212,214,0.10),transparent 60%),radial-gradient(900px 500px at 90% 110%,rgba(209,138,90,0.10),transparent 60%)}
+#sm-quick.on{display:block}
+body.sm-quick-open{overflow:hidden}
+body.sm-quick-open .a11y-chip{z-index:9996}
+.sm-inner{max-width:1280px;margin:0 auto;padding:28px 24px 150px}
+.sm-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--glass-edge);margin-bottom:26px}
+.sm-brand{display:flex;align-items:center;gap:10px}
+.sm-brand img{height:34px;width:auto;display:block}
+.sm-brand span{font-size:17px;color:var(--ink);letter-spacing:0.02em}
+.sm-brand b{font-weight:700}
+.sm-role{font-size:13px;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase}
+.sm-exit{margin-left:auto;padding:10px 18px;border-radius:999px;font:inherit;font-size:13px;color:#1a1108;background:var(--copper);border:1px solid var(--copper);cursor:pointer;font-weight:700}
+.sm-exit:hover{background:var(--copper-dim);border-color:var(--copper-dim)}
+.sm-grid{display:grid;grid-template-columns:300px minmax(0,1fr) 260px;gap:20px;align-items:start}
+.sm-col{background:var(--glass);border:1px solid var(--glass-edge);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.sm-col h3{margin:0 0 4px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-quiet);font-weight:600}
+.sm-lede{margin:0 0 16px;font-size:14px;line-height:1.5;color:var(--ink-dim)}
+.sm-row{display:flex;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,0.06)}
+.sm-col > .sm-row:first-of-type{border-top:0}
+.sm-k{flex:0 0 58px;font-size:11px;color:var(--ink-quiet);letter-spacing:0.06em;padding-top:2px}
+.sm-t{font-size:13.5px;color:var(--ink);line-height:1.35}
+.sm-d{font-size:12px;color:var(--ink-dim);line-height:1.4;margin-top:2px}
+.sm-more{margin-top:10px}
+.sm-more summary{list-style:none;cursor:pointer;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);padding:8px 0}
+.sm-more summary::-webkit-details-marker{display:none}
+.sm-more summary:hover{color:var(--ink)}
+.sm-pdf{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.sm-pdf a{display:block;text-align:center;padding:10px;border-radius:var(--radius-sm);font-size:13px;text-decoration:none;color:var(--ink);background:rgba(255,255,255,0.05);border:1px solid var(--glass-edge)}
+.sm-pdf a:hover{border-color:var(--copper);color:var(--ink)}
+.sm-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (min-width:1081px) and (max-width:1280px){.sm-cards > .sm-card:last-child{grid-column:1 / -1}}
+.sm-card{display:flex;flex-direction:column;background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:var(--radius-sm);padding:16px;text-decoration:none;transition:border-color .15s,transform .15s}
+.sm-card:hover{border-color:var(--copper);transform:translateY(-2px)}
+.sm-card .sm-tag{font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--copper);margin-bottom:6px}
+.sm-card .sm-name{font-size:19px;color:var(--ink);line-height:1.2;margin-bottom:10px}
+.sm-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;flex:1}
+.sm-card li{position:relative;padding-left:14px;font-size:13px;line-height:1.45;color:var(--ink-dim)}
+.sm-card li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
+.sm-card .sm-go{margin-top:14px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal)}
+.sm-ch{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-top:1px solid rgba(255,255,255,0.06);text-decoration:none}
+.sm-ch:first-of-type{border-top:0}
+.sm-ch .l{font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-quiet);display:block}
+.sm-ch .v{font-size:13px;color:var(--ink);display:block;margin-top:2px;word-break:break-word}
+.sm-ch:hover .v{color:var(--teal)}
+@media (max-width:1280px){
+  .sm-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:1080px){
+  .sm-grid{grid-template-columns:1fr}
+  .sm-cards{grid-template-columns:1fr}
+  .sm-inner{padding:20px 16px 150px}
+  .sm-exit{margin-left:0;width:100%}
+}
+</style>
+
+<style id="sm-quick-a11y">
+body.a11y-large-text .sm-open-btn{font-size:12px}
+body.a11y-large-text .sm-brand span{font-size:19px}
+body.a11y-large-text .sm-role{font-size:15px}
+body.a11y-large-text .sm-exit{font-size:15px}
+body.a11y-large-text .sm-col h3{font-size:12px}
+body.a11y-large-text .sm-lede{font-size:16px}
+body.a11y-large-text .sm-k{font-size:12px;flex-basis:68px}
+body.a11y-large-text .sm-t{font-size:15px}
+body.a11y-large-text .sm-d{font-size:13px}
+body.a11y-large-text .sm-more summary{font-size:13px}
+body.a11y-large-text .sm-pdf a{font-size:15px}
+body.a11y-large-text .sm-card .sm-tag{font-size:12px}
+body.a11y-large-text .sm-card .sm-name{font-size:21px}
+body.a11y-large-text .sm-card li{font-size:15px}
+body.a11y-large-text .sm-card .sm-go{font-size:13px}
+body.a11y-large-text .sm-ch .l{font-size:12px}
+body.a11y-large-text .sm-ch .v{font-size:15px}
+</style>
+
+<div id="sm-quick" role="dialog" aria-label="Quick look" aria-hidden="true">
+  <div class="sm-inner">
+    <div class="sm-top">
+      <div class="sm-brand"><img src="LOGO_white.png" alt="" /><span>Marina <b>DiPonio</b></span></div>
+      <div class="sm-role">UX Researcher &amp; Web Designer</div>
+      <button type="button" class="sm-exit" id="sm-exit">Explore the full site &rarr;</button>
+    </div>
+
+    <div class="sm-grid">
+      <aside class="sm-col">
+        <h3>R&eacute;sum&eacute;</h3>
+        <p class="sm-lede">BA, Digital Arts &amp; Sciences, University of Florida, Summa Cum Laude 2026. Based in St. Augustine, Florida. Open to remote.</p>
+        <div class="sm-row"><div class="sm-k">2026&ndash;</div><div><div class="sm-t">Founder, Sky &amp; Mar Studio</div><div class="sm-d">Web design and development for small businesses</div></div></div>
+        <div class="sm-row"><div class="sm-k">2026</div><div><div class="sm-t">Creative &amp; Web/App Development, Wellness Eternal</div><div class="sm-d">Brand systems, landing pages, content QA</div></div></div>
+        <div class="sm-row"><div class="sm-k">2026</div><div><div class="sm-t">Senior Capstone, Learn To Leap</div><div class="sm-d">Convergence 2026, award winner</div></div></div>
+        <div class="sm-row"><div class="sm-k">2025</div><div><div class="sm-t">UX Research Intern, University of Florida</div><div class="sm-d">Platform usability and accessibility study</div></div></div>
+        <details class="sm-more">
+          <summary>More history + skills</summary>
+          <div class="sm-row"><div class="sm-k">2024</div><div><div class="sm-t">Customer Experience Intern, ICE Mortgage Technology</div><div class="sm-d">WCAG 2.1 audit, research synthesis</div></div></div>
+          <div class="sm-row"><div class="sm-k">2025</div><div><div class="sm-t">Leasing Consultant, Contemporary Management Concepts</div><div class="sm-d">Top performer, social campaigns, CRM</div></div></div>
+          <div class="sm-row"><div class="sm-k">2021</div><div><div class="sm-t">IT Consultant, Abeytu Naturals</div><div class="sm-d">Ongoing technical support and training</div></div></div>
+          <div class="sm-row"><div class="sm-k">Research</div><div class="sm-t">Usability testing, WCAG 2.1 audits, interviews, thematic analysis</div></div>
+          <div class="sm-row"><div class="sm-k">Design</div><div class="sm-t">Figma, Adobe Creative Suite, design systems</div></div>
+          <div class="sm-row"><div class="sm-k">Build</div><div class="sm-t">HTML, CSS, JavaScript, Node, WordPress, Docker</div></div>
+          <div class="sm-row"><div class="sm-k">AI</div><div class="sm-t">Claude, GPT API, Lovable, n8n</div></div>
+          <div class="sm-row"><div class="sm-k">Awards</div><div class="sm-t">Outstanding Achievement in Experience Design &middot; Best in Show, Tick Tock Trivia &middot; Most Innovative, Cosmic Catch</div></div>
+        </details>
+        <div class="sm-pdf">
+          <a href="Marina_DiPonio_Resume.pdf" target="_blank" rel="noopener">Download r&eacute;sum&eacute; (PDF)</a>
+          <a href="Marina_DiPonio_Resume_ATS.pdf" target="_blank" rel="noopener">ATS-friendly version</a>
+        </div>
+      </aside>
+
+      <section class="sm-col">
+        <h3>Three projects</h3>
+        <p class="sm-lede">Product design, research, and client web work. Each one opens the full case study.</p>
+        <div class="sm-cards">
+          <a class="sm-card" href="foreshore.html">
+            <span class="sm-tag">Product Design &amp; Build</span>
+            <span class="sm-name">Foreshore</span>
+            <ul>
+              <li>Self-hosted budgeting app, designed and built end to end</li>
+              <li>Rebuilt the main screen after a real user could not find the primary action</li>
+              <li>Live and in daily use on a Linux server I set up myself</li>
+            </ul>
+            <span class="sm-go">Read the case study &rarr;</span>
+          </a>
+          <a class="sm-card" href="learn-to-leap.html">
+            <span class="sm-tag">UX Research</span>
+            <span class="sm-name">Learn To Leap</span>
+            <ul>
+              <li>Mixed-methods study on tutorial design, in a Unity game I built as the instrument</li>
+              <li>11 participants, thematic analysis, behavioral logs against stated preference</li>
+              <li>Outstanding Achievement in Experience Design, Convergence 2026</li>
+            </ul>
+            <span class="sm-go">Read the case study &rarr;</span>
+          </a>
+          <a class="sm-card" href="https://skymar.studio/" target="_blank" rel="noopener">
+            <span class="sm-tag">Web Design</span>
+            <span class="sm-name">Sky &amp; Mar Studio</span>
+            <ul>
+              <li>My studio: websites designed, built, and shipped for small businesses</li>
+              <li>Hand-coded HTML, CSS, and JavaScript, plus brand and accessibility</li>
+              <li>Client sites live in production today</li>
+            </ul>
+            <span class="sm-go">Visit the studio &rarr;</span>
+          </a>
+        </div>
+      </section>
+
+      <aside class="sm-col">
+        <h3>Contact</h3>
+        <p class="sm-lede">Open to UX research, UI/UX, and web design roles, full-time or contract.</p>
+        <a class="sm-ch" href="mailto:marinadiponio@proton.me"><span><span class="l">Email</span><span class="v">marinadiponio@proton.me</span></span><span>&rarr;</span></a>
+        <a class="sm-ch" href="https://www.linkedin.com/in/marinadiponio" target="_blank" rel="noopener"><span><span class="l">LinkedIn</span><span class="v">/marinadiponio</span></span><span>&rarr;</span></a>
+        <a class="sm-ch" href="https://calendly.com/marinadiponio-proton/30min" target="_blank" rel="noopener"><span><span class="l">Calendly</span><span class="v">Book a 30 min chat</span></span><span>&rarr;</span></a>
+        <a class="sm-ch" href="https://www.behance.net/marinadiponio" target="_blank" rel="noopener"><span><span class="l">Behance</span><span class="v">/marinadiponio</span></span><span>&rarr;</span></a>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script id="sm-quick-js">
+(function(){
+  var KEY="mk_quicklook";
+  // Captured at parse time: a later DOMContentLoaded handler replaceState()s "#frame-a" in.
+  var H0=(location.hash||"").replace("#","");
+  var lastFocus=null;
+  var INERT=["header.topbar","#frame-a","#frame-b","#frame-c","#frame-d","#frame-e",".contact-chip","#mc-hotbar"];
+  function setInert(on){
+    INERT.forEach(function(sel){
+      var n=document.querySelector(sel);
+      if(!n) return;
+      if("inert" in n){ try{ n.inert=on; }catch(e){} }
+      else { try{ n.setAttribute("aria-hidden", on ? "true" : "false"); }catch(e){} }
+    });
+  }
+  var el=document.getElementById("sm-quick");
+  var openBtn=document.getElementById("sm-open");
+  var exitBtn=document.getElementById("sm-exit");
+  if(!el) return;
+  function read(){ try{ return localStorage.getItem(KEY); }catch(e){ return null; } }
+  function write(v){ try{ localStorage.setItem(KEY,v); }catch(e){} }
+  function open(){
+    if(el.classList.contains("on")) return;
+    lastFocus=document.activeElement;
+    el.classList.add("on");
+    el.setAttribute("aria-hidden","false");
+    el.setAttribute("aria-modal","true");
+    document.body.classList.add("sm-quick-open");
+    el.scrollTop=0;
+    setInert(true);
+    if(exitBtn) exitBtn.focus();
+  }
+  function close(remember){
+    el.classList.remove("on");
+    el.setAttribute("aria-hidden","true");
+    el.removeAttribute("aria-modal");
+    document.body.classList.remove("sm-quick-open");
+    setInert(false);
+    if(remember) write("off");
+    if(lastFocus && lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} }
+    lastFocus=null;
+  }
+  if(openBtn) openBtn.addEventListener("click",function(){ open(); });
+  if(exitBtn) exitBtn.addEventListener("click",function(){ close(true); });
+  document.addEventListener("keydown",function(e){
+    if(e.key!=="Escape" || !el.classList.contains("on")) return;
+    // Let whatever is layered on top of us take Escape first.
+    if(document.querySelector("#img-lightbox.open")) return;
+    if(document.querySelector(".a11y-chip.open, #a11y-chip.open")) return;
+    close(true);
+  });
+  // First visit on a wide screen opens the quick view; the choice is remembered.
+  function init(){
+    var w=Math.min(window.innerWidth||0,document.documentElement.clientWidth||0);
+    if(read()!=="off" && w>720 && (H0==="" || H0==="frame-a")) open();
+  }
+  if(document.readyState!=="loading") init(); else document.addEventListener("DOMContentLoaded",init);
+})();
+</script>
+</body>
 </html>
