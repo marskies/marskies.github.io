@@ -19,6 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <title>Marina DiPonio's Portfolio</title>
+<script>try{if(localStorage.getItem("mk_quicklook")!=="off" && !location.hash && (window.innerWidth||0)>720){[["qs-bg",""],["qs-foreshore","low"],["qs-learntoleap","low"],["qs-skymar","low"]].forEach(function(e){var l=document.createElement("link");l.rel="preload";l.as="image";l.href="images/"+e[0]+".jpg";if(e[1])l.setAttribute("fetchpriority",e[1]);document.head.appendChild(l);});}}catch(e){}</script>
 <style>
   :root{
     --bg-deep:#0a1f24;
@@ -1361,7 +1362,7 @@ applySizes();
 img.lb-zoomable{cursor:zoom-in;}
 img.lb-zoomable:focus-visible{outline:3px solid var(--teal,#8fd4d6);outline-offset:3px;}
 body.a11y-reduce-motion #img-lightbox{backdrop-filter:none;}
-body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
+body.a11y-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 /* === /image lightbox === */
 
 /* ===== MOBILE-CAROUSEL PATCH: vertical swipe carousel + right hotbar (mobile) ===== */
@@ -1897,7 +1898,8 @@ body.a11y-high-contrast #img-lightbox{background:rgba(0,0,0,0.96);}
 <style id="sm-quick-style">
 .sm-open-btn{margin-left:auto;margin-right:10px;padding:7px 14px;border-radius:999px;font:inherit;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-dim);background:rgba(255,255,255,0.05);border:1px solid var(--glass-edge);cursor:pointer;transition:color .15s,border-color .15s}
 .sm-open-btn:hover{color:var(--ink);border-color:var(--copper)}
-#sm-quick{position:fixed;inset:0;z-index:9995;display:none;overflow:hidden;background:var(--bg-deep);background-image:radial-gradient(1200px 600px at 20% -10%,rgba(143,212,214,0.10),transparent 60%),radial-gradient(900px 500px at 90% 110%,rgba(209,138,90,0.10),transparent 60%)}
+#sm-quick{position:fixed;inset:0;z-index:9995;display:none;overflow:hidden;background:linear-gradient(rgba(10,31,36,0.86),rgba(10,31,36,0.86)),url(images/qs-bg.jpg) center / cover no-repeat,var(--bg-deep)}
+body.a11y-contrast #sm-quick{background:linear-gradient(rgba(0,0,0,0.94),rgba(0,0,0,0.94)),url(images/qs-bg.jpg) center / cover no-repeat,#000}
 #sm-quick.on{display:block}
 body.sm-quick-open{overflow:hidden}
 body.sm-quick-open .a11y-chip{z-index:9996}
@@ -1933,15 +1935,17 @@ body.sm-quick-open .a11y-chip{z-index:9996}
 .sm-pdf a{display:block;text-align:center;padding:10px;border-radius:var(--radius-sm);font-size:13px;text-decoration:none;color:var(--ink);background:rgba(255,255,255,0.05);border:1px solid var(--glass-edge)}
 .sm-pdf a:hover{border-color:var(--copper);color:var(--ink)}
 .sm-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-@media (min-width:1081px) and (max-width:1280px){.sm-cards > .sm-card:last-child{grid-column:1 / -1}}
+.sm-grid > .sm-work{align-self:auto;display:flex;flex-direction:column}
+.sm-shot{display:block;flex:0 0 auto;aspect-ratio:3 / 4;min-height:0;max-height:180px;margin-top:12px;border-radius:10px;background-color:rgba(255,255,255,0.04);background-size:cover;background-position:center;background-repeat:no-repeat}
+@media (min-width:1080.99px) and (max-width:1280px){.sm-cards > .sm-card:last-child{grid-column:1 / -1}}
 .sm-card{display:flex;flex-direction:column;background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:var(--radius-sm);padding:16px;text-decoration:none;transition:border-color .15s,transform .15s}
 .sm-card:hover{border-color:var(--copper);transform:translateY(-2px)}
 .sm-card .sm-tag{font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--copper);margin-bottom:6px}
 .sm-card .sm-name{font-size:19px;color:var(--ink);line-height:1.2;margin-bottom:10px}
-.sm-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;flex:1}
+.sm-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;flex:0 0 auto}
 .sm-card li{position:relative;padding-left:14px;font-size:13px;line-height:1.45;color:var(--ink-dim)}
 .sm-card li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
-.sm-card .sm-go{margin-top:14px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal)}
+.sm-card .sm-go{margin-top:12px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal)}
 .sm-ch{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-top:1px solid rgba(255,255,255,0.06);text-decoration:none}
 .sm-ch:first-of-type{border-top:0}
 .sm-ch .l{font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-quiet);display:block}
@@ -1950,6 +1954,9 @@ body.sm-quick-open .a11y-chip{z-index:9996}
 @media (max-width:1280px){
   .sm-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+@media (min-width:1080.99px) and (max-width:1280px){
+  .sm-shot{display:none}
+}
 @media (max-width:1080px){
   #sm-quick{overflow-y:auto}
   .sm-inner{height:auto;display:block;padding:20px 16px 150px}
@@ -1957,6 +1964,8 @@ body.sm-quick-open .a11y-chip{z-index:9996}
   .sm-col{max-height:none;overflow:visible;margin-bottom:16px}
   .sm-grid > .sm-col:last-child{padding-bottom:20px}
   .sm-cards{grid-template-columns:1fr}
+  .sm-grid > .sm-work{align-self:auto;display:block}
+  .sm-shot{flex:0 0 auto;aspect-ratio:auto;height:150px;max-height:none}
   .sm-exit{margin-left:0;width:100%}
 }
 </style>
@@ -2020,7 +2029,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
         </div>
       </aside>
 
-      <section class="sm-col">
+      <section class="sm-col sm-work">
         <h3>Three projects</h3>
         <p class="sm-lede">Product design, research, and client web work. Each one opens the full case study.</p>
         <div class="sm-cards">
@@ -2032,6 +2041,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
               <li>Rebuilt key features to communicate better after watching a real user</li>
               <li>Live and in daily use on a Linux server I set up myself</li>
             </ul>
+            <span class="sm-shot" style="background-image:url(images/qs-foreshore.jpg)" aria-hidden="true"></span>
             <span class="sm-go">Read the case study &rarr;</span>
           </a>
           <a class="sm-card" href="learn-to-leap.html">
@@ -2042,6 +2052,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
               <li>11 participants, thematic analysis, behavioral logs against stated preference</li>
               <li>Outstanding Achievement in Experience Design, Convergence 2026</li>
             </ul>
+            <span class="sm-shot" style="background-image:url(images/qs-learntoleap.jpg)" aria-hidden="true"></span>
             <span class="sm-go">Read the case study &rarr;</span>
           </a>
           <a class="sm-card" href="https://skymar.studio/" target="_blank" rel="noopener">
@@ -2052,6 +2063,7 @@ body.a11y-large-text .sm-ch .v{font-size:15px}
               <li>Hand-coded HTML, CSS, and JavaScript, plus brand and accessibility</li>
               <li>Client sites live in production today</li>
             </ul>
+            <span class="sm-shot" style="background-image:url(images/qs-skymar.jpg)" aria-hidden="true"></span>
             <span class="sm-go">Visit the studio &rarr;</span>
           </a>
         </div>
